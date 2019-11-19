@@ -14,7 +14,10 @@ import Statistics: mean, std, var
 import PhysicalConstants: CODATA2018, @constant
 
 export
-    AbstractNonUnitVector
+    AbstractNonUnitVector,
+        AbstractNonUnitVector2D, AbstractNonUnitVector3D,
+
+    Point2D
 
 
 ## Include files

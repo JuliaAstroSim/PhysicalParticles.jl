@@ -1,6 +1,11 @@
 name = "PhysicalParticles"
 uuid = "78724250-4eb2-11e9-0f34-13a7aab864c5"
 authors = ["islent <leoislent@gmail.com>"]
+license = "GPLv3"
+repository = "https://github.com/JuliaAstroSim/PhysicalParticles.jl"
+description = "Support for physical vectors and particles (Astrophysics for now)"
+
+
 version = "0.1.0"
 
 [compat]
