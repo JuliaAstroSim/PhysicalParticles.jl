@@ -2,28 +2,28 @@ name: CI
 
 on: [push, pull_request]
 
+# 64-bit Julia only
 jobs:
   test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }}
+    name: Julia ${{ matrix.version }} - ${{ matrix.os }} #- ${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         version:
-          - '1.2'
+          - '1.2.0'
         os:
-          - ubuntu-18.04
-          #- macOS-latest
-          #- windows-latest
-        arch:
-          - x64
+          - ubuntu-latest
+          - macOS-latest
+          - windows-latest
+        #arch:
+        #  - x64
     steps:
-      - uses: actions/checkout@v1
-      - uses: julia-actions/setup-julia@latest
+      - uses: actions/checkout@v1.0.0
+      - name: "Set up Julia"
+        uses: julia-actions/setup-julia@v0.2
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
-      - uses: julia-actions/julia-buildpkg@latest
+      - run: julia -e 'println("Running test!")'
+      #- uses: julia-actions/julia-buildpkg@latest
       - uses: julia-actions/julia-runtest@latest
-      - name: Test
-        run: |
-          echo Test finished!
