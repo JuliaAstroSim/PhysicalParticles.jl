@@ -24,9 +24,14 @@ export
 
 ### Top level data structure
 
-abstract type AbstractNonUnitVector end
-abstract type AbstractNonUnitVector2D <: AbstractNonUnitVector end
-abstract type AbstractNonUnitVector3D <: AbstractNonUnitVector end
+"""
+    AbstractPoint
+
+It is named to distinguish from the built-in type `AbstractVector`
+"""
+abstract type AbstractPoint end
+abstract type AbstractPoint2D <: AbstractPoint end
+abstract type AbstractPoint3D <: AbstractPoint end
 
 ### Main files
 
@@ -40,14 +45,12 @@ Basic mathematical algorithms should be implemented in type definition files,
 in the following order:
     - get, set
     - +, -, *
-    - Linear Algebra
-        - norm, normalize
-        - rotate
-    - Conversion from and to array
 
 Other operations would be implemented in seperate files:
     - Neighbours.jl ==> Nearest neighbour searching
     - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
+    - Conversion.jl ==> Conversion from and to array, conversion between inner types
+    - LinearAlgebra.jl ==> General linear algebra methods
 """
 
 include("Neighbours.jl")
