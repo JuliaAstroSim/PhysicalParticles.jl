@@ -11,9 +11,9 @@ jobs:
         version:
           - '1.2'
         os:
-          - ubuntu-latest
-          - macOS-latest
-          - windows-latest
+          - ubuntu-18.04
+          #- macOS-latest
+          #- windows-latest
         arch:
           - x64
     steps:
