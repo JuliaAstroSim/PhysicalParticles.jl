@@ -18,12 +18,14 @@ jobs:
         arch:
           - x64
     steps:
+      - run: echo ACTIONS_RUNNER_DEBUG true
       - uses: actions/checkout@v1
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@latest
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
-      - run: julia -e 'println("Running test!")'
       #- uses: julia-actions/julia-buildpkg@latest
       - uses: julia-actions/julia-runtest@latest
+        env: 
+          ACTIONS_RUNNER_DEBUG: true

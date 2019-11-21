@@ -17,7 +17,15 @@ export
     AbstractNonUnitVector,
         AbstractNonUnitVector2D, AbstractNonUnitVector3D,
 
-    Point2D
+    Point, Point2D, Point3D,
+
+    # Base functions
+    +, -, *, /, zero, length, iterate,
+
+    # LinearAlgebra
+    norm, normalize, dot, cross,
+
+    rotate, rotate_x, rotate_y, rotate_z
 
 
 ## Include files
@@ -47,12 +55,14 @@ in the following order:
     - +, -, *
 
 Other operations would be implemented in seperate files:
-    - Neighbours.jl ==> Nearest neighbour searching
-    - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
     - Conversion.jl ==> Conversion from and to array, conversion between inner types
     - LinearAlgebra.jl ==> General linear algebra methods
+    - Neighbours.jl ==> Nearest neighbour searching
+    - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
 """
 
+include("Conversion.jl")
+include("LinearAlgebra.jl")
 include("Neighbours.jl")
 include("Clustering.jl")
 
