@@ -29,9 +29,9 @@ export
 
 It is named to distinguish from the built-in type `AbstractVector`
 """
-abstract type AbstractPoint end
-abstract type AbstractPoint2D <: AbstractPoint end
-abstract type AbstractPoint3D <: AbstractPoint end
+abstract type AbstractPoint{T} end
+abstract type AbstractPoint2D{T} <: AbstractPoint{T} end
+abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 
 ### Main files
 

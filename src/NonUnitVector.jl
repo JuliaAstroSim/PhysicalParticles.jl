@@ -1,12 +1,14 @@
-struct Point2D <: AbstractPoint2D
-    x::Float64
-    y::Float64
-    Point2D(x::Float64,y::Float64) = new(x, y)
+struct Point2D{T<:AbstractFloat} <: AbstractPoint2D{T}
+    x::T
+    y::T
 end
 
-struct Point3D <: AbstractPoint3D
-    x::Float64
-    y::Float64
-    z::Float64
-    Point3D(x::Float64,y::Float64,z::Float64) = new(x, y, z)
+abstractpoint2d(::Type{<:AbstractFloat}, ::Type{<:AbstractFloat}) = Point2D()
+
+struct Point3D{T<:AbstractFloat} <: AbstractPoint3D{T}
+    x::T
+    y::T
+    z::T
 end
+
+abstractpoint3d(::Type{<:AbstractFloat}, ::Type{<:AbstractFloat}, ::Type{<:AbstractFloat}) = Point3D()
