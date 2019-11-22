@@ -26,6 +26,15 @@ end
 
 ## PhysicalVector2D
 
+@inline rotate_z(p::PhysicalVector2D, theta::AbstractFloat) = PhysicalVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
+@inline rotate(p::PhysicalVector2D, theta::AbstractFloat) = rotate_z(p, theta)
+
+@inline rotate_z(p::PhysicalVector2D, theta::Quantity) = PhysicalVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
+@inline rotate(p::PhysicalVector2D, theta::Quantity) = rotate_z(p, theta)
+
+@inline norm(p::PhysicalVector2D) = sqrt(upreferred(p * p))
+@inline normalize(p::PhysicalVector2D) = (n = ustrip(norm(p)); return PhysicalVector2D(upreferred(p.x/n), upreferred(p.y/n)))
+
 ## Point3D
 
 @inline rotate_x(p::Point3D, theta::AbstractFloat) = Point3D(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))

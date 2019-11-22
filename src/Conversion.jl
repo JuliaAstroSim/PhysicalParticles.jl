@@ -73,6 +73,43 @@ function npconvert(a::Array{T,2}) where T<:AbstractFloat
     end
 end
 
+"""
+function npconvert(a::Array{T,1}) where T<:Quantity
+"""
+function npconvert(a::Array{T,1}) where T<:Quantity
+    if length(a) == 3
+        return PhysicalVector3D(a[1], a[2], a[3])
+    elseif length(a) == 2
+        return PhysicalVector2D(a[1], a[2])
+    else
+        error("Not supported dimension!")
+    end
+end
+
+"""
+function npconvert(a::Array{T,2}) where T<:Quantity
+
+convert 2xN Array to Array{PhysicalVector2D,1}, 3xN Array to Array{PhysicalVector3D,1}
+"""
+function npconvert(a::Array{T,2}) where T<:Quantity
+    row, col = size(a)
+    if row == 3
+        p = rand(PhysicalVector3D,0)
+        for i in 1:col
+            @inbounds append!(p, PhysicalVector3D(a[1,i], a[2,i], a[3,i]))
+        end
+        return p
+    elseif row == 2
+        p = rand(PhysicalVector2D,0)
+        for i in 1:col
+            @inbounds append!(p, PhysicalVector2D(a[1,i], a[2,i]))
+        end
+        return p
+    else
+        error("Not supported dimension!")
+    end
+end
+
 ## Point2D
 
 

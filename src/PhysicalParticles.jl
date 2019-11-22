@@ -14,8 +14,8 @@ import Statistics: mean, std, var
 import PhysicalConstants: CODATA2018, @constant
 
 export
-    AbstractNonUnitVector,
-        AbstractNonUnitVector2D, AbstractNonUnitVector3D,
+    AbstractPoint,
+        AbstractPoint2D, AbstractPoint3D,
 
     Point, Point2D, Point3D,
 
@@ -32,7 +32,10 @@ export
     mean,
 
     # Conversion
-    npconvert
+    npconvert,
+
+    # Trait functions
+    abstractpoint
 
 
 ## Include files
