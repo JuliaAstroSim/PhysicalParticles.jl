@@ -3,7 +3,7 @@ module PhysicalParticles
 using Unitful, UnitfulAstro, PhysicalConstants
 
 ## Explicitly overload functions and import types
-import Unitful: Units
+import Unitful: Units, AbstractQuantity
 
 import Base: +,-,*,/,zero,length,iterate,to_index, rand
 
@@ -18,6 +18,8 @@ export
         AbstractNonUnitVector2D, AbstractNonUnitVector3D,
 
     Point, Point2D, Point3D,
+
+    PhysicalVector, PhysicalVector2D, PhysicalVector3D,
 
     # Base functions
     +, -, *, /, zero, length, iterate,

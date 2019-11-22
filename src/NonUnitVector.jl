@@ -1,3 +1,8 @@
+# NonUnitVector
+#     Types and functions in this file are self-documented
+
+## Point 2D
+
 struct Point2D{T<:AbstractFloat} <: AbstractPoint2D{T}
     x::T
     y::T
@@ -18,6 +23,10 @@ abstractpoint2d(::Type{<:BigFloat}, ::Type{<:BigFloat}) = Point2D{BigFloat}
 
 @inline /(p::Point2D, h::Real) = Point2D(p.x / h, p.y / h)
 
+
+
+## Point 3D
+
 struct Point3D{T<:AbstractFloat} <: AbstractPoint3D{T}
     x::T
     y::T
@@ -29,9 +38,9 @@ abstractpoint3d(::Type{<:Float32}, ::Type{<:Float32}, ::Type{<:Float32}) = Point
 abstractpoint3d(::Type{<:Float64}, ::Type{<:Float64}, ::Type{<:Float64}) = Point3D{Float64}
 abstractpoint3d(::Type{<:BigFloat}, ::Type{<:BigFloat}, ::Type{<:BigFloat}) = Point3D{BigFloat}
 
-@inline +(a::Point3D, b::Point3D, c::Point3D) = Point3D(a.x + b.x, a.y + b.y, a.z + b.z)
+@inline +(a::Point3D, b::Point3D) = Point3D(a.x + b.x, a.y + b.y, a.z + b.z)
 
-@inline -(a::Point3D, b::Point3D, c::Point3D) = Point3D(a.x - b.x, a.y - b.y, a.z - b.z)
+@inline -(a::Point3D, b::Point3D) = Point3D(a.x - b.x, a.y - b.y, a.z - b.z)
 
 @inline *(a::Point3D, b::Point3D) = a.x * b.x + a.y * b.y + a.z * b.z
 @inline *(p::Point3D, h::Real) = Point3D(p.x * h, p.y * h, p.z * h)
@@ -39,6 +48,9 @@ abstractpoint3d(::Type{<:BigFloat}, ::Type{<:BigFloat}, ::Type{<:BigFloat}) = Po
 
 @inline /(p::Point3D, h::Real) = Point3D(p.x / h, p.y / h, p.z / h)
 
-# General Point function
+
+
+## General Point constructor
+
 Point(x::AbstractFloat, y::AbstractFloat) = Point2D(x, y)
 Point(x::AbstractFloat, y::AbstractFloat, z::AbstractFloat) = Point3D(x, y, z)
