@@ -25,6 +25,8 @@ array3d = [1.0 2.0 3.0 4.0 5.0;
     end
 
     @testset "Linear Algebra" begin
+        p = [Point2D(1.0, 1.0) for i = 1:5]
+
         @test norm(Point2D(3.0f0, 4.0f0)) == 5.0f0
         @test norm(Point2D(3.0, 4.0)) == 5.0
         #@test norm(Point2D(3.0, 4.0)) == BigFloat(5.0)
@@ -33,8 +35,16 @@ array3d = [1.0 2.0 3.0 4.0 5.0;
 
         @test dot(a,a) == 5.0f0
 
+        @test mean(p) == Point2D(1.0, 1.0)
+
         @test rotate(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
         @test rotate_z(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
+    end
+
+    @testset "Conversion" begin
+        @test npconvert([1.0, 2.0]) == Point2D(1.0, 2.0)
+
+        @test npconvert([1.0 3.0; 2.0 4.0]) == [Point2D(1.0, 2.0), Point2D(3.0, 4.0)]
     end
 end
 
@@ -54,6 +64,8 @@ end
     end
 
     @testset "Linear Algebra" begin
+        p = [Point3D(1.0, 1.0, 1.0) for i = 1:5]
+
         @test norm(Point3D(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
         @test norm(Point(3.0, 4.0, 12.0)) == 13.0
 
@@ -61,10 +73,20 @@ end
 
         @test dot(a,a) == 14.0f0
 
+        @test mean(p) == Point3D(1.0, 1.0, 1.0)
+
         @test norm(rotate_x(Point(0.0, 1.0, 0.0), 0.5pi) - Point(0.0, 0.0, 1.0)) < 1.0e-10
         @test norm(rotate_y(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 0.0, -1.0)) < 1.0e-10
         @test norm(rotate_z(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 1.0, 0.0)) < 1.0e-10
 
         @test cross(Point(1.0, 0.0, 0.0), Point(0.0, 1.0, 0.0)) == Point(0.0, 0.0, 1.0)
+    end
+
+    @testset "Conversion" begin
+        @test npconvert([1.0, 2.0, 3.0]) == Point3D(1.0, 2.0, 3.0)
+
+        @test npconvert([1.0 4.0;
+                         2.0 5.0;
+                         3.0 6.0]) == [Point(1.0, 2.0, 3.0), Point(4.0, 5.0, 6.0)]
     end
 end

@@ -27,7 +27,12 @@ export
     # LinearAlgebra
     norm, normalize, dot, cross,
 
-    rotate, rotate_x, rotate_y, rotate_z
+    rotate, rotate_x, rotate_y, rotate_z,
+
+    mean,
+
+    # Conversion
+    npconvert
 
 
 ## Include files
@@ -43,6 +48,11 @@ abstract type AbstractPoint{T} end
 abstract type AbstractPoint2D{T} <: AbstractPoint{T} end
 abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 
+@inline length(p::T) where T <: AbstractPoint = 1
+@inline iterate(p::T) where T <: AbstractPoint = (p,nothing)
+@inline iterate(p::T,st) where T <: AbstractPoint = nothing
+@inline real(p::T) where T <: AbstractPoint = p
+
 ### Main files
 
 include("NonUnitVector.jl")
@@ -57,7 +67,7 @@ in the following order:
     - +, -, *
 
 Other operations would be implemented in seperate files:
-    - Conversion.jl ==> Conversion from and to array, conversion between inner types
+    - Conversion.jl ==> Conversions from and to array, conversions between inner types
     - LinearAlgebra.jl ==> General linear algebra methods
     - Neighbours.jl ==> Nearest neighbour searching
     - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours

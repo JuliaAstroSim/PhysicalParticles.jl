@@ -8,7 +8,14 @@
 
 dot(a::AbstractPoint, b::AbstractPoint) = *(a,b)
 
-
+function mean(a::Array{AbstractPoint})
+    len = length(a)
+    p = a[1]
+    for i in 2:len
+        @inbounds p += a[i]
+    end
+    return p/len
+end
 
 ## Point2D
 
