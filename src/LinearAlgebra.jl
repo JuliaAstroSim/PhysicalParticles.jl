@@ -47,3 +47,17 @@ cross(a::Point3D, b::Point3D) = Point3D(a.y * b.z - a.z * b.y,
 
 ## PhysicalVector3D
 
+@inline rotate_x(p::PhysicalVector3D, theta::AbstractFloat) = PhysicalVector3D(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
+@inline rotate_y(p::PhysicalVector3D, theta::AbstractFloat) = PhysicalVector3D(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
+@inline rotate_z(p::PhysicalVector3D, theta::AbstractFloat) = PhysicalVector3D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
+
+@inline rotate_x(p::PhysicalVector3D, theta::Quantity) = PhysicalVector3D(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
+@inline rotate_y(p::PhysicalVector3D, theta::Quantity) = PhysicalVector3D(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
+@inline rotate_z(p::PhysicalVector3D, theta::Quantity) = PhysicalVector3D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
+
+@inline norm(p::PhysicalVector3D) = sqrt(upreferred(p * p))
+@inline normalize(p::PhysicalVector3D) = (n = ustrip(norm(p)); return PhysicalVector3D(upreferred(p.x/n), upreferred(p.y/n), upreferred(p.z/n)))
+
+cross(a::PhysicalVector3D, b::PhysicalVector3D) = PhysicalVector3D(a.y * b.z - a.z * b.y, 
+                                                                   a.z * b.x - a.x * b.z, 
+                                                                   a.x * b.y - a.y * b.x)

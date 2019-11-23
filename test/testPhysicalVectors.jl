@@ -47,7 +47,7 @@
     end
 end
 
-"""
+
 @testset "3D Physical Vectors" begin
     a = PhysicalVector3D(1.0f0u"m", 2.0f0u"m", 3.0f0u"m")
     b = PhysicalVector(4.0u"m", 5.0u"m", 6.0u"m")
@@ -56,11 +56,17 @@ end
         @test a + b == PhysicalVector3D(5.0u"m", 7.0u"m", 9.0u"m")
         @test b - a == PhysicalVector3D(3.0u"m", 3.0u"m", 3.0u"m")
 
-        @test a * b == 32.0u"m"
-        @test 3.0u"m" * b == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
-        @test b * 3.0u"m" == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
+        @test a * b == 32.0u"m^2"
+        @test 3.0 * b == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
+        @test b * 3.0 == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
 
-        @test b / 2.0u"m" == PhysicalVector(2.0u"m", 2.5, 3.0u"m")
+        @test b / 2.0 == PhysicalVector(2.0u"m", 2.5u"m", 3.0u"m")
+
+        # Quantity multiplication and division
+        @test 3.0u"s" * b == PhysicalVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
+        @test b * 3.0u"s" == PhysicalVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
+
+        @test b / 2.0u"s" == PhysicalVector(2.0u"m / s", 2.5u"m / s", 3.0u"m / s")
     end
 
     @testset "Linear Algebra" begin
@@ -69,17 +75,21 @@ end
         @test norm(PhysicalVector3D(3.0f0u"m", 4.0f0u"m", 12.0f0u"m")) == 13.0f0u"m"
         @test norm(PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")) == 13.0u"m"
 
-        @test normalize(PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")) == PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m") / 13.0u"m"
+        @test normalize(PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")) == PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m") / 13.0
 
-        @test dot(a,a) == 14.0f0u"m"
+        @test dot(a,a) == 14.0f0u"m^2"
 
         @test mean(p) == PhysicalVector3D(1.0u"m", 1.0u"m", 1.0u"m")
 
-        @test norm(rotate_x(PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0u"m"e-10u"m"
-        @test norm(rotate_y(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0u"m"e-10u"m"
-        @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0u"m"e-10u"m"
+        @test norm(rotate_x(PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
 
-        @test cross(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) == PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")
+        @test norm(rotate_x(PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+
+        @test cross(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) == PhysicalVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
     end
 
     @testset "Conversion" begin
@@ -90,4 +100,3 @@ end
                         3.0u"m" 6.0u"m"]) == [PhysicalVector(1.0u"m", 2.0u"m", 3.0u"m"), PhysicalVector(4.0u"m", 5.0u"m", 6.0u"m")]
     end
 end
-"""
