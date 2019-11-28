@@ -59,3 +59,20 @@ abstractpoint(::Type{<:Quantity}, ::Type{<:Quantity}, ::Type{<:Quantity}) = Phys
 @inline *(h::Quantity, p::PhysicalVector3D) = PhysicalVector3D(p.x * h, p.y * h, p.z * h)
 
 @inline /(p::PhysicalVector3D, h::Quantity) = PhysicalVector3D(p.x / h, p.y / h, p.z / h)
+
+
+
+## Useful constructors
+
+### For safty, you have to explicitly provide units. No default units any more
+### And to be brief, Position, Velocity, Acceleration, etc. functions are deprecated
+
+PhysicalVector(u::Units) = PhysicalVector3D(0.0u, 0.0u, 0.0u)
+PhysicalVector(x::AbstractFloat, y::AbstractFloat, u::Units) = PhysicalVector2D(x*u, y*u)
+PhysicalVector(x::AbstractFloat, y::AbstractFloat, z::AbstractFloat, u::Units) = PhysicalVector3D(x*u, y*u, z*u)
+
+PhysicalVector2D(u::Units) = PhysicalVector2D(0.0u, 0.0u)
+PhysicalVector2D(x::AbstractFloat, y::AbstractFloat, u::Units) = PhysicalVector2D(x*u, y*u)
+
+PhysicalVector3D(u::Units) = PhysicalVector3D(0.0u, 0.0u, 0.0u)
+PhysicalVector3D(x::AbstractFloat, y::AbstractFloat, z::AbstractFloat, u::Units) = PhysicalVector3D(x*u, y*u, z*u)

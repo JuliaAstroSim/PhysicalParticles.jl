@@ -5,6 +5,9 @@
     b = PhysicalVector2D(3.0u"m", 4.0u"m")
 
     @testset "Basic" begin
+        @test PhysicalVector(0.0, 0.0, u"m") == PhysicalVector2D(u"m")
+        @test PhysicalVector(1.0, 2.0, u"m") == PhysicalVector2D(1.0, 2.0, u"m")
+
         @test a + b == PhysicalVector2D(4.0u"m", 6.0u"m")
         @test b - a == PhysicalVector(2.0u"m", 2.0u"m")
         
@@ -53,6 +56,9 @@ end
     b = PhysicalVector(4.0u"m", 5.0u"m", 6.0u"m")
 
     @testset "Basic" begin
+        @test PhysicalVector(u"m") == PhysicalVector3D(u"m")
+        @test PhysicalVector(1.0, 2.0, 3.0, u"m") == PhysicalVector3D(1.0, 2.0, 3.0, u"m")
+
         @test a + b == PhysicalVector3D(5.0u"m", 7.0u"m", 9.0u"m")
         @test b - a == PhysicalVector3D(3.0u"m", 3.0u"m", 3.0u"m")
 
