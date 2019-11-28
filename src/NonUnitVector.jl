@@ -54,3 +54,7 @@ abstractpoint(::Type{<:BigFloat}, ::Type{<:BigFloat}, ::Type{<:BigFloat}) = Poin
 
 Point(x::AbstractFloat, y::AbstractFloat) = Point2D(x, y)
 Point(x::AbstractFloat, y::AbstractFloat, z::AbstractFloat) = Point3D(x, y, z)
+Point() = Point3D(0.0, 0.0, 0.0)
+
+Point2D() = Point2D(0.0, 0.0)
+Point3D() = Point3D(0.0, 0.0, 0.0)

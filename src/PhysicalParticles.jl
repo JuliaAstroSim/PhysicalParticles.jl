@@ -43,8 +43,9 @@ export
 ### Top level data structure
 
 """
-    AbstractPoint
+AbstractPoint
 
+Top level mathematical vector type defined in PhysicalParticles.jl
 It is named to distinguish from the built-in type `AbstractVector`
 """
 abstract type AbstractPoint{T} end
@@ -55,6 +56,22 @@ abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 @inline iterate(p::T) where T <: AbstractPoint = (p,nothing)
 @inline iterate(p::T,st) where T <: AbstractPoint = nothing
 @inline real(p::T) where T <: AbstractPoint = p
+
+
+"""
+AbstractParticle
+
+Top level particle type defined in PhysicalParticles.jl
+"""
+abstract type AbstractParticle{T} end
+abstract type AbstractParticle2D{T} <: AbstractParticle{T} end
+abstract type AbstractParticle3D{T} <: AbstractParticle{T} end
+
+@inline length(p::T) where T <: AbstractParticle = 1
+@inline iterate(p::T) where T <: AbstractParticle = (p,nothing)
+@inline iterate(p::T,st) where T <: AbstractParticle = nothing
+@inline real(p::T) where T <: AbstractParticle = p
+
 
 ### Main files
 
