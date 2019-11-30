@@ -45,6 +45,10 @@ export
     max_x, max_y, max_z,
     center_x, center_y, center_z, center,
 
+    # Extent
+    Extent, Extent2D,
+    mass_center,
+
     # Conversion
     npconvert,
 
@@ -93,6 +97,11 @@ abstract type AbstractParticle3D <: AbstractParticle end
 @inline real(p::T) where T <: AbstractParticle = p
 
 
+
+abstract type AbstractExtent end
+abstract type AbstractExtent2D <: AbstractExtent end
+abstract type AbstractExtent3D <: AbstractExtent end
+
 ### Main files
 
 include("NonUnitVector.jl")
@@ -111,6 +120,7 @@ Other operations would be implemented in seperate files:
     - Random.jl ==> Generate random points and assign to particles
     - LinearAlgebra.jl ==> General linear algebra methods
     - Center.jl ==> Compute maximum, minimum, center
+    - Extent.jl ==> Compute extent for array of points and particles
     - Neighbours.jl ==> Nearest neighbour searching
     - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
 """
@@ -119,6 +129,7 @@ include("Conversion.jl")
 include("Random.jl")
 include("LinearAlgebra.jl")
 include("Center.jl")
+include("Extent.jl")
 include("Neighbours.jl")
 include("Clustering.jl")
 
