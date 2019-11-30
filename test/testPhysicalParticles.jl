@@ -23,6 +23,55 @@
         b_SPHGas2D.Pos = PhysicalVector2D(3.0u"m", 4.0u"m")
         @test distance(a_SPHGas2D, b_SPHGas2D) == 5.0u"m"
     end
+
+    @testset "Random" begin
+        # Non-unit
+        a_non = rand_point2D(5)
+        p_Massless2D = [Massless2D() for i=1:5]
+        assign_points(p_Massless2D, :Pos, a_non)
+        @test p_Massless2D[1].Pos == a_non[1]
+
+        # Unitful
+        a = rand_point2D(5, u"m")
+
+        p_Ball2D = [Ball2D() for i=1:5]
+        assign_points(p_Ball2D, :Pos, a)
+        @test p_Ball2D[1].Pos == a[1]
+
+        p_Star2D = [Star2D() for i=1:5]
+        assign_points(p_Star2D, :Pos, a)
+        @test p_Star2D[1].Pos == a[1]
+
+        p_SPHGas2D = [SPHGas2D() for i=1:5]
+        assign_points(p_SPHGas2D, :Pos, a)
+        @test p_SPHGas2D[1].Pos == a[1]
+    end
+
+    # Do not repeat on all particle types here 
+    # since the Random section has already tested basic constructions.
+    @testset "Center" begin
+        p_non = [Massless2D(Point2D(-1.0, 1.0), Point2D(), 1), 
+                 Massless2D(Point2D(1.0, -1.0), Point2D(), 2)]
+
+        @test min_x(p_non) == -1.0
+        @test min_y(p_non) == -1.0
+        @test max_x(p_non) == 1.0
+        @test max_y(p_non) == 1.0
+        @test center_x(p_non) == 0.0
+        @test center_y(p_non) == 0.0
+        @test center(p_non) == Point2D(0.0, 0.0)
+
+        p = [Ball2D(PhysicalVector2D(-1.0u"m", 1.0u"m"), PhysicalVector2D(u"m"), 0.0u"kg", 1), 
+             Ball2D(PhysicalVector2D(1.0u"m", -1.0u"m"), PhysicalVector2D(u"m"), 0.0u"kg", 2)]
+
+        @test min_x(p) == -1.0u"m"
+        @test min_y(p) == -1.0u"m"
+        @test max_x(p) == 1.0u"m"
+        @test max_y(p) == 1.0u"m"
+        @test center_x(p) == 0.0u"m"
+        @test center_y(p) == 0.0u"m"
+        @test center(p) == PhysicalVector2D(0.0u"m", 0.0u"m")
+    end
 end
 
 @testset "3D particles" begin
@@ -50,12 +99,57 @@ end
         b_SPHGas.Pos = PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")
         @test distance(a_SPHGas, b_SPHGas) == 13.0u"m"
     end
-end
 
-@testset "Random" begin
-    a = rand_point3D(5, u"m")
-    p = [Star() for i=1:5]
+    @testset "Random" begin
+        # Non-unit
+        a_non = rand_point3D(5)
+        p_Massless = [Massless() for i=1:5]
+        assign_points(p_Massless, :Pos, a_non)
+        @test p_Massless[1].Pos == a_non[1]
 
-    assign_points(p, :Pos, a)
-    @test p[1].Pos == a[1]
+        # Unitful
+        a = rand_point3D(5, u"m")
+
+        p_Ball = [Ball() for i=1:5]
+        assign_points(p_Ball, :Pos, a)
+        @test p_Ball[1].Pos == a[1]
+
+        p_Star = [Star() for i=1:5]
+        assign_points(p_Star, :Pos, a)
+        @test p_Star[1].Pos == a[1]
+
+        p_SPHGas = [SPHGas() for i=1:5]
+        assign_points(p_SPHGas, :Pos, a)
+        @test p_SPHGas[1].Pos == a[1]
+    end
+
+    @testset "Center" begin
+        p = [Massless(Point3D(-1.0, 1.0, 1.0), Point3D(), 1), 
+             Massless(Point3D(1.0, -1.0, -1.0), Point3D(), 2)]
+
+        @test min_x(p) == -1.0
+        @test min_y(p) == -1.0
+        @test min_z(p) == -1.0
+        @test max_x(p) == 1.0
+        @test max_y(p) == 1.0
+        @test max_z(p) == 1.0
+        @test center_x(p) == 0.0
+        @test center_y(p) == 0.0
+        @test center_z(p) == 0.0
+        @test center(p) == Point3D(0.0, 0.0, 0.0)
+
+        p = [Ball(PhysicalVector3D(-1.0u"m", 1.0u"m", 1.0u"m"), PhysicalVector3D(u"m"), 0.0u"kg", 1), 
+             Ball(PhysicalVector3D(1.0u"m", -1.0u"m", -1.0u"m"), PhysicalVector3D(u"m"), 0.0u"kg", 2)]
+
+        @test min_x(p) == -1.0u"m"
+        @test min_y(p) == -1.0u"m"
+        @test min_z(p) == -1.0u"m"
+        @test max_x(p) == 1.0u"m"
+        @test max_y(p) == 1.0u"m"
+        @test max_z(p) == 1.0u"m"
+        @test center_x(p) == 0.0u"m"
+        @test center_y(p) == 0.0u"m"
+        @test center_z(p) == 0.0u"m"
+        @test center(p) == PhysicalVector3D(0.0u"m", 0.0u"m", 0.0u"m")
+    end
 end

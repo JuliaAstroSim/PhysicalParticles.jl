@@ -40,6 +40,11 @@ export
 
     mean, distance,
 
+    # Center
+    min_x, min_y, min_z,
+    max_x, max_y, max_z,
+    center_x, center_y, center_z, center,
+
     # Conversion
     npconvert,
 
@@ -103,7 +108,9 @@ in the following order:
 
 Other operations would be implemented in seperate files:
     - Conversion.jl ==> Conversions from and to array, conversions between inner types
+    - Random.jl ==> Generate random points and assign to particles
     - LinearAlgebra.jl ==> General linear algebra methods
+    - Center.jl ==> Compute maximum, minimum, center
     - Neighbours.jl ==> Nearest neighbour searching
     - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
 """
@@ -111,6 +118,7 @@ Other operations would be implemented in seperate files:
 include("Conversion.jl")
 include("Random.jl")
 include("LinearAlgebra.jl")
+include("Center.jl")
 include("Neighbours.jl")
 include("Clustering.jl")
 

@@ -42,6 +42,18 @@
         @test rotate(PhysicalVector(1.0u"m", 0.0u"m"), 90.0u"°") * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
         @test rotate_z(PhysicalVector(1.0u"m", 0.0u"m"), 90.0u"°") * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
     end
+
+    @testset "Center" begin
+        p = [PhysicalVector2D(-1.0u"m", 1.0u"m"), PhysicalVector2D(1.0u"m", -1.0u"m")]
+
+        @test min_x(p) == -1.0u"m"
+        @test min_y(p) == -1.0u"m"
+        @test max_x(p) == 1.0u"m"
+        @test max_y(p) == 1.0u"m"
+        @test center_x(p) == 0.0u"m"
+        @test center_y(p) == 0.0u"m"
+        @test center(p) == PhysicalVector2D(0.0u"m", 0.0u"m")
+    end
     
     @testset "Conversion" begin
         @test npconvert([1.0u"m", 2.0u"m"]) == PhysicalVector2D(1.0u"m", 2.0u"m")
@@ -96,6 +108,21 @@ end
         @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
 
         @test cross(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) == PhysicalVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
+    end
+
+    @testset "Center" begin
+        p = [PhysicalVector3D(-1.0u"m", 1.0u"m", 1.0u"m"), PhysicalVector3D(1.0u"m", -1.0u"m", -1.0u"m")]
+
+        @test min_x(p) == -1.0u"m"
+        @test min_y(p) == -1.0u"m"
+        @test min_z(p) == -1.0u"m"
+        @test max_x(p) == 1.0u"m"
+        @test max_y(p) == 1.0u"m"
+        @test max_z(p) == 1.0u"m"
+        @test center_x(p) == 0.0u"m"
+        @test center_y(p) == 0.0u"m"
+        @test center_z(p) == 0.0u"m"
+        @test center(p) == PhysicalVector3D(0.0u"m", 0.0u"m", 0.0u"m")
     end
 
     @testset "Conversion" begin

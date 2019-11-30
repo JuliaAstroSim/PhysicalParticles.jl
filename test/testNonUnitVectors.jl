@@ -39,6 +39,18 @@
         @test rotate_z(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
     end
 
+    @testset "Center" begin
+        p = [Point2D(-1.0, 1.0), Point2D(1.0, -1.0)]
+
+        @test min_x(p) == -1.0
+        @test min_y(p) == -1.0
+        @test max_x(p) == 1.0
+        @test max_y(p) == 1.0
+        @test center_x(p) == 0.0
+        @test center_y(p) == 0.0
+        @test center(p) == Point2D(0.0, 0.0)
+    end
+
     @testset "Conversion" begin
         @test npconvert([1.0, 2.0]) == Point2D(1.0, 2.0)
 
@@ -81,6 +93,21 @@ end
         @test norm(rotate_z(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 1.0, 0.0)) < 1.0e-10
 
         @test cross(Point(1.0, 0.0, 0.0), Point(0.0, 1.0, 0.0)) == Point(0.0, 0.0, 1.0)
+    end
+
+    @testset "Center" begin
+        p = [Point3D(-1.0, 1.0, 1.0), Point3D(1.0, -1.0, -1.0)]
+
+        @test min_x(p) == -1.0
+        @test min_y(p) == -1.0
+        @test min_z(p) == -1.0
+        @test max_x(p) == 1.0
+        @test max_y(p) == 1.0
+        @test max_z(p) == 1.0
+        @test center_x(p) == 0.0
+        @test center_y(p) == 0.0
+        @test center_z(p) == 0.0
+        @test center(p) == Point3D(0.0, 0.0, 0.0)
     end
 
     @testset "Conversion" begin
