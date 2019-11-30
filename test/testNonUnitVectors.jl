@@ -32,6 +32,9 @@
 
         @test mean(p) == Point2D(1.0, 1.0)
 
+        @test distance(Point2D(0.0f0, 0.0f0), Point2D(3.0f0, 4.0f0)) == 5.0f0
+        @test distance(Point2D(0.0, 0.0), Point2D(3.0, 4.0)) == 5.0
+
         @test rotate(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
         @test rotate_z(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
     end
@@ -69,6 +72,9 @@ end
         @test dot(a,a) == 14.0f0
 
         @test mean(p) == Point3D(1.0, 1.0, 1.0)
+
+        @test distance(Point3D(0.0f0, 0.0f0, 0.0f0), Point3D(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
+        @test distance(Point3D(0.0, 0.0, 0.0), Point3D(3.0, 4.0, 12.0)) == 13.0
 
         @test norm(rotate_x(Point(0.0, 1.0, 0.0), 0.5pi) - Point(0.0, 0.0, 1.0)) < 1.0e-10
         @test norm(rotate_y(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 0.0, -1.0)) < 1.0e-10

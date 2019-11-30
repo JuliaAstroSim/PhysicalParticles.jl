@@ -2,50 +2,50 @@
 
 ## Non-unit particles
 
-mutable struct Massless2D <: AbstractParticle2D
-    Pos::Point2D
-    Vel::Point2D
-    ID::Integer
+mutable struct Massless2D{F<:AbstractFloat, I<:Integer} <: AbstractParticle2D
+    Pos::Point2D{F}
+    Vel::Point2D{F}
+    ID::I
 end
 Massless2D() = Massless2D(Point2D(), Point2D(), 0)
 
-mutable struct Massless <: AbstractParticle3D
-    Pos::Point3D
-    Vel::Point3D
-    ID::Integer
+mutable struct Massless{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
+    Pos::Point3D{F}
+    Vel::Point3D{F}
+    ID::I
 end
 Massless() = Massless(Point3D(), Point3D(), 0)
 
 ## Physical particles
 
-mutable struct Ball2D <: AbstractParticle2D
+mutable struct Ball2D{I<:Integer} <: AbstractParticle2D
     Pos::PhysicalVector2D
     Vel::PhysicalVector2D
     Mass::Quantity
-    ID::Integer
+    ID::I
 end
 Ball2D() = Ball2D(PhysicalVector2D(u"m"), PhysicalVector2D(u"m/s"), 0.0u"kg", 0)
 
-mutable struct Ball <: AbstractParticle3D
+mutable struct Ball{I<:Integer} <: AbstractParticle3D
     Pos::PhysicalVector3D
     Vel::PhysicalVector3D
     Mass::Quantity
-    ID::Integer
+    ID::I
 end
 Ball() = Ball(PhysicalVector3D(u"m"), PhysicalVector3D(u"m/s"), 0.0u"kg", 0)
 
 ## Astrophysical particles
 
-mutable struct Star2D <: AbstractParticle2D
-    Pos:::PhysicalVector2D
+mutable struct Star2D{F<:AbstractFloat, I<:Integer} <: AbstractParticle2D
+    Pos::PhysicalVector2D
     Vel::PhysicalVector2D
     Acc::PhysicalVector2D
     Mass::Quantity
-    ID::Integer
+    ID::I
 
-    Ti_endstep::Integer
-    Ti_begstep::Integer
-    GravCost::AbstractFloat
+    Ti_endstep::I
+    Ti_begstep::I
+    GravCost::F
 
     Potential::Quantity
     OldAcc::Quantity
@@ -56,16 +56,16 @@ Star2D() = Star2D(
     0.0u"J", 0.0u"kpc/Gyr^2"
 )
 
-mutable struct Star <: AbstractParticle3D
-    Pos:::PhysicalVector3D
+mutable struct Star{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
+    Pos::PhysicalVector3D
     Vel::PhysicalVector3D
     Acc::PhysicalVector3D
     Mass::Quantity
-    ID::Integer
+    ID::I
 
-    Ti_endstep::Integer
-    Ti_begstep::Integer
-    GravCost::AbstractFloat
+    Ti_endstep::I
+    Ti_begstep::I
+    GravCost::F
 
     Potential::Quantity
     OldAcc::Quantity
@@ -76,16 +76,16 @@ Star() = Star(
     0.0u"J", 0.0u"kpc/Gyr^2"
 )
 
-mutable struct SPHGas2D <: AbstractParticle2D
-    Pos:::PhysicalVector2D
+mutable struct SPHGas2D{F<:AbstractFloat, I<:Integer} <: AbstractParticle2D
+    Pos::PhysicalVector2D
     Vel::PhysicalVector2D
     Acc::PhysicalVector2D
     Mass::Quantity
-    ID::Integer
+    ID::I
 
-    Ti_endstep::Integer
-    Ti_begstep::Integer
-    GravCost::AbstractFloat
+    Ti_endstep::I
+    Ti_begstep::I
+    GravCost::F
 
     Potential::Quantity
     OldAcc::Quantity
@@ -95,14 +95,14 @@ mutable struct SPHGas2D <: AbstractParticle2D
     Density::Quantity
     Hsml::Quantity
 
-    Left::AbstractFloat
-    Right::AbstractFloat
-    NumNgbFound::Integer
+    Left::F
+    Right::F
+    NumNgbFound::I
 
     RotVel::PhysicalVector2D
     DivVel::Quantity
     CurlVel::Quantity
-    dHsmlRho::AbstractFloat
+    dHsmlRho::F
 
     Pressure::Quantity
     DtEntropy::Quantity
@@ -119,16 +119,16 @@ SPHGas2D() = SPHGas2D(
     0.0u"N/m", 0.0u"J/K/s", 0.0u"kpc/Gyr"
 )
 
-mutable struct SPHGas <: AbstractParticle3D
-    Pos:::PhysicalVector3D
+mutable struct SPHGas{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
+    Pos::PhysicalVector3D
     Vel::PhysicalVector3D
     Acc::PhysicalVector3D
     Mass::Quantity
-    ID::Integer
+    ID::I
 
-    Ti_endstep::Integer
-    Ti_begstep::Integer
-    GravCost::AbstractFloat
+    Ti_endstep::I
+    Ti_begstep::I
+    GravCost::F
 
     Potential::Quantity
     OldAcc::Quantity
@@ -138,14 +138,14 @@ mutable struct SPHGas <: AbstractParticle3D
     Density::Quantity
     Hsml::Quantity
 
-    Left::AbstractFloat
-    Right::AbstractFloat
-    NumNgbFound::Integer
+    Left::F
+    Right::F
+    NumNgbFound::I
 
     RotVel::PhysicalVector3D
     DivVel::Quantity
     CurlVel::Quantity
-    dHsmlRho::AbstractFloat
+    dHsmlRho::F
 
     Pressure::Quantity
     DtEntropy::Quantity

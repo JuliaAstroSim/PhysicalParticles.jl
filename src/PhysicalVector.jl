@@ -3,7 +3,7 @@
 
 ## Physical Vector 2D
 
-struct PhysicalVector2D{T<:AbstractQuantity} <: AbstractPoint2D{T}
+struct PhysicalVector2D{T<:Quantity} <: AbstractPoint2D{T}
     x::T
     y::T
 end
@@ -32,7 +32,7 @@ abstractpoint(::Type{<:Quantity}, ::Type{<:Quantity}) = PhysicalVector2D{Quantit
 
 ## Physical Vector 3D
 
-struct PhysicalVector3D{T<:AbstractQuantity} <: AbstractPoint3D{T}
+struct PhysicalVector3D{T<:Quantity} <: AbstractPoint3D{T}
     x::T
     y::T
     z::T

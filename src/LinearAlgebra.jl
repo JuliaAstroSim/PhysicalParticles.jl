@@ -17,6 +17,9 @@ function mean(a::Array{AbstractPoint})
     return p/len
 end
 
+@inline distance(a::AbstractPoint, b::AbstractPoint) = norm(a - b)
+@inline distance(a::AbstractParticle, b::AbstractParticle) = norm(a.Pos - b.Pos)
+
 ## Point2D
 
 @inline rotate_z(p::Point2D, theta::AbstractFloat) = Point2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))

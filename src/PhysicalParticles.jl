@@ -21,6 +21,15 @@ export
 
     PhysicalVector, PhysicalVector2D, PhysicalVector3D,
 
+
+    AbstractParticle,
+        AbstractParticle2D, AbstractParticle3D,
+
+    Massless, Massless2D,
+    Ball, Ball2D,
+    Star, Star2D,
+    SPHGas, SPHGas2D,
+
     # Base functions
     +, -, *, /, zero, length, iterate,
 
@@ -29,7 +38,7 @@ export
 
     rotate, rotate_x, rotate_y, rotate_z,
 
-    mean,
+    mean, distance,
 
     # Conversion
     npconvert,
@@ -63,9 +72,9 @@ AbstractParticle
 
 Top level particle type defined in PhysicalParticles.jl
 """
-abstract type AbstractParticle{T} end
-abstract type AbstractParticle2D{T} <: AbstractParticle{T} end
-abstract type AbstractParticle3D{T} <: AbstractParticle{T} end
+abstract type AbstractParticle end
+abstract type AbstractParticle2D <: AbstractParticle end
+abstract type AbstractParticle3D <: AbstractParticle end
 
 @inline length(p::T) where T <: AbstractParticle = 1
 @inline iterate(p::T) where T <: AbstractParticle = (p,nothing)
