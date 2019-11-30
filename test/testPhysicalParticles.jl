@@ -51,3 +51,11 @@ end
         @test distance(a_SPHGas, b_SPHGas) == 13.0u"m"
     end
 end
+
+@testset "Random" begin
+    a = rand_point3D(5, u"m")
+    p = [Star() for i=1:5]
+
+    assign_points(p, :Pos, a)
+    @test p[1].Pos == a[1]
+end

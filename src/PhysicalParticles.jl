@@ -43,6 +43,12 @@ export
     # Conversion
     npconvert,
 
+    # Random
+    rand_point2D, rand_point3D,
+    randn_point2D, randn_point3D,
+
+    assign_points,
+
     # Trait functions
     abstractpoint
 
@@ -103,6 +109,7 @@ Other operations would be implemented in seperate files:
 """
 
 include("Conversion.jl")
+include("Random.jl")
 include("LinearAlgebra.jl")
 include("Neighbours.jl")
 include("Clustering.jl")
