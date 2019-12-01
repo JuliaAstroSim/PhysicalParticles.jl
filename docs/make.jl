@@ -1,3 +1,8 @@
+"""
+Compile with:
+julia --project=docs/ --color=yes docs/make.jl
+"""
+
 using Documenter
 
 using PhysicalParticles
@@ -17,7 +22,7 @@ makedocs(
         # Use clean URLs, unless built as a "local" build
         prettyurls = !("local" in ARGS),
         #canonical = "https://juliadocs.github.io/Documenter.jl/stable/",
-        #assets = ["assets/favicon.ico"],
+        assets = ["assets/alpha_small.ico"],
         #analytics = "UA-136089579-2",
         #highlights = ["yaml"],
     ),
@@ -29,7 +34,7 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "Guide" => "manual/guide.md",
-                       "manual/examples.md",
+                    "manual/examples.md",
             #hide("man/hosting.md", [
             #    "man/hosting/walkthrough.md"
             #]),
@@ -45,8 +50,8 @@ makedocs(
         #],
         #"contributing.md",
     ],
-    strict = !("strict=false" in ARGS),
-    doctest = ("doctest=only" in ARGS) ? :only : true,
+    #strict = !("strict=false" in ARGS),
+    #doctest = ("doctest=only" in ARGS) ? :only : true,
 )
 
 #deploydocs(
