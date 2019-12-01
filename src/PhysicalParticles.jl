@@ -130,7 +130,7 @@ include("Random.jl")
 include("LinearAlgebra.jl")
 include("Center.jl")
 include("Extent.jl")
-include("Neighbours.jl")
+include("Neighbors.jl")
 include("Clustering.jl")
 
 end  # module PhysicalParticles

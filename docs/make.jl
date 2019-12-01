@@ -33,21 +33,20 @@ makedocs(
     pages = [
         "Home" => "index.md",
         "Manual" => Any[
-            "Guide" => "manual/guide.md",
-                    "manual/examples.md",
-            #hide("man/hosting.md", [
-            #    "man/hosting/walkthrough.md"
-            #]),
-            #"man/other-formats.md",
+            "manual/guide.md",
+            "manual/examples.md",
+            "manual/PVector.md",
+            "manual/LinearAlgebra.md",
+            "manual/Conversion.md",
+            "manual/Random.md",
+            "manual/Extent.md",
+            "manual/Neighbors.md",
+            "manual/Clustering.md",
         ],
-        #"showcase.md",
-        #"Library" => Any[
-        #    #"Public" => "lib/public.md",
-        #    "Internals" => map(
-        #        s -> "lib/internals/$(s)",
-        #        sort(readdir(joinpath(@__DIR__, "src/lib/internals")))
-        #    ),
-        #],
+        "Library" => Any[
+            "lib/Types.md",
+            "lib/Methods.md",
+        ],
         #"contributing.md",
     ],
     #strict = !("strict=false" in ARGS),
