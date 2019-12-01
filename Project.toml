@@ -15,5 +15,5 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 UnitfulAstro = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
 
-[compat]
-julia = "1.2"
+[compat]    
+julia = "1.2.0, 1.3.0"

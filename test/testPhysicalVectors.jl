@@ -1,50 +1,50 @@
-# Test PhysicalVector2D, PhysicalVector3D
+# Test PVector2D, PVector
 
 @testset "2D Physical Vectors" begin
-    a = PhysicalVector2D(1.0f0u"m", 2.0f0u"m")
-    b = PhysicalVector2D(3.0u"m", 4.0u"m")
+    a = PVector2D(1.0f0u"m", 2.0f0u"m")
+    b = PVector2D(3.0u"m", 4.0u"m")
 
     @testset "Basic" begin
-        @test PhysicalVector(0.0, 0.0, u"m") == PhysicalVector2D(u"m")
-        @test PhysicalVector(1.0, 2.0, u"m") == PhysicalVector2D(1.0, 2.0, u"m")
+        @test PVector(0.0, 0.0, u"m") == PVector2D(u"m")
+        @test PVector(1.0, 2.0, u"m") == PVector2D(1.0, 2.0, u"m")
 
-        @test a + b == PhysicalVector2D(4.0u"m", 6.0u"m")
-        @test b - a == PhysicalVector(2.0u"m", 2.0u"m")
+        @test a + b == PVector2D(4.0u"m", 6.0u"m")
+        @test b - a == PVector(2.0u"m", 2.0u"m")
         
         @test a * b == 11.0u"m^2"
-        @test 3.0 * b == PhysicalVector2D(9.0u"m", 12.0u"m")
-        @test b * 3.0 == PhysicalVector2D(9.0u"m", 12.0u"m")
+        @test 3.0 * b == PVector2D(9.0u"m", 12.0u"m")
+        @test b * 3.0 == PVector2D(9.0u"m", 12.0u"m")
         
-        @test b / 2.0 == PhysicalVector2D(1.5u"m", 2.0u"m")
+        @test b / 2.0 == PVector2D(1.5u"m", 2.0u"m")
 
         # Quantity multiplication and division
-        @test 3.0u"s" * b == PhysicalVector2D(9.0u"m * s", 12.0u"m * s")
-        @test b * 3.0u"s" == PhysicalVector2D(9.0u"m * s", 12.0u"m * s")
+        @test 3.0u"s" * b == PVector2D(9.0u"m * s", 12.0u"m * s")
+        @test b * 3.0u"s" == PVector2D(9.0u"m * s", 12.0u"m * s")
         
-        @test b / 2.0u"s" == PhysicalVector2D(1.5u"m / s", 2.0u"m / s")
+        @test b / 2.0u"s" == PVector2D(1.5u"m / s", 2.0u"m / s")
     end
 
     @testset "Linear Algebra" begin
-        p = [PhysicalVector2D(1.0u"m", 1.0u"m") for i = 1:5]
+        p = [PVector2D(1.0u"m", 1.0u"m") for i = 1:5]
         
-        @test norm(PhysicalVector2D(3.0f0u"m", 4.0f0u"m")) == 5.0f0u"m"
-        @test norm(PhysicalVector2D(3.0u"m", 4.0u"m")) == 5.0u"m"
+        @test norm(PVector2D(3.0f0u"m", 4.0f0u"m")) == 5.0f0u"m"
+        @test norm(PVector2D(3.0u"m", 4.0u"m")) == 5.0u"m"
         
-        @test normalize(PhysicalVector2D(3.0u"m", 4.0u"m")) == PhysicalVector2D(0.6u"m", 0.8u"m")
+        @test normalize(PVector2D(3.0u"m", 4.0u"m")) == PVector2D(0.6u"m", 0.8u"m")
         
         @test dot(a,a) == 5.0f0u"m^2"
         
-        @test mean(p) == PhysicalVector2D(1.0u"m", 1.0u"m")
+        @test mean(p) == PVector2D(1.0u"m", 1.0u"m")
         
-        @test rotate(PhysicalVector(1.0u"m", 0.0u"m"), 0.5pi) * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
-        @test rotate_z(PhysicalVector(1.0u"m", 0.0u"m"), 0.5pi) * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
+        @test rotate(PVector(1.0u"m", 0.0u"m"), 0.5pi) * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
+        @test rotate_z(PVector(1.0u"m", 0.0u"m"), 0.5pi) * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
 
-        @test rotate(PhysicalVector(1.0u"m", 0.0u"m"), 90.0u"°") * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
-        @test rotate_z(PhysicalVector(1.0u"m", 0.0u"m"), 90.0u"°") * PhysicalVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
+        @test rotate(PVector(1.0u"m", 0.0u"m"), 90.0u"°") * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
+        @test rotate_z(PVector(1.0u"m", 0.0u"m"), 90.0u"°") * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
     end
 
     @testset "Center" begin
-        p = [PhysicalVector2D(-1.0u"m", 1.0u"m"), PhysicalVector2D(1.0u"m", -1.0u"m")]
+        p = [PVector2D(-1.0u"m", 1.0u"m"), PVector2D(1.0u"m", -1.0u"m")]
 
         @test min_x(p) == -1.0u"m"
         @test min_y(p) == -1.0u"m"
@@ -52,66 +52,66 @@
         @test max_y(p) == 1.0u"m"
         @test center_x(p) == 0.0u"m"
         @test center_y(p) == 0.0u"m"
-        @test center(p) == PhysicalVector2D(0.0u"m", 0.0u"m")
+        @test center(p) == PVector2D(0.0u"m", 0.0u"m")
     end
     
     @testset "Conversion" begin
-        @test npconvert([1.0u"m", 2.0u"m"]) == PhysicalVector2D(1.0u"m", 2.0u"m")
+        @test npconvert([1.0u"m", 2.0u"m"]) == PVector2D(1.0u"m", 2.0u"m")
         
-        @test npconvert([1.0u"m" 3.0u"m"; 2.0u"m" 4.0u"m"]) == [PhysicalVector2D(1.0u"m", 2.0u"m"), PhysicalVector2D(3.0u"m", 4.0u"m")]
+        @test npconvert([1.0u"m" 3.0u"m"; 2.0u"m" 4.0u"m"]) == [PVector2D(1.0u"m", 2.0u"m"), PVector2D(3.0u"m", 4.0u"m")]
     end
 end
 
 
 @testset "3D Physical Vectors" begin
-    a = PhysicalVector3D(1.0f0u"m", 2.0f0u"m", 3.0f0u"m")
-    b = PhysicalVector(4.0u"m", 5.0u"m", 6.0u"m")
+    a = PVector(1.0f0u"m", 2.0f0u"m", 3.0f0u"m")
+    b = PVector(4.0u"m", 5.0u"m", 6.0u"m")
 
     @testset "Basic" begin
-        @test PhysicalVector(u"m") == PhysicalVector3D(u"m")
-        @test PhysicalVector(1.0, 2.0, 3.0, u"m") == PhysicalVector3D(1.0, 2.0, 3.0, u"m")
+        @test PVector(u"m") == PVector(u"m")
+        @test PVector(1.0, 2.0, 3.0, u"m") == PVector(1.0, 2.0, 3.0, u"m")
 
-        @test a + b == PhysicalVector3D(5.0u"m", 7.0u"m", 9.0u"m")
-        @test b - a == PhysicalVector3D(3.0u"m", 3.0u"m", 3.0u"m")
+        @test a + b == PVector(5.0u"m", 7.0u"m", 9.0u"m")
+        @test b - a == PVector(3.0u"m", 3.0u"m", 3.0u"m")
 
         @test a * b == 32.0u"m^2"
-        @test 3.0 * b == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
-        @test b * 3.0 == PhysicalVector(12.0u"m", 15.0u"m", 18.0u"m")
+        @test 3.0 * b == PVector(12.0u"m", 15.0u"m", 18.0u"m")
+        @test b * 3.0 == PVector(12.0u"m", 15.0u"m", 18.0u"m")
 
-        @test b / 2.0 == PhysicalVector(2.0u"m", 2.5u"m", 3.0u"m")
+        @test b / 2.0 == PVector(2.0u"m", 2.5u"m", 3.0u"m")
 
         # Quantity multiplication and division
-        @test 3.0u"s" * b == PhysicalVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
-        @test b * 3.0u"s" == PhysicalVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
+        @test 3.0u"s" * b == PVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
+        @test b * 3.0u"s" == PVector(12.0u"m * s", 15.0u"m * s", 18.0u"m * s")
 
-        @test b / 2.0u"s" == PhysicalVector(2.0u"m / s", 2.5u"m / s", 3.0u"m / s")
+        @test b / 2.0u"s" == PVector(2.0u"m / s", 2.5u"m / s", 3.0u"m / s")
     end
 
     @testset "Linear Algebra" begin
-        p = [PhysicalVector3D(1.0u"m", 1.0u"m", 1.0u"m") for i = 1:5]
+        p = [PVector(1.0u"m", 1.0u"m", 1.0u"m") for i = 1:5]
 
-        @test norm(PhysicalVector3D(3.0f0u"m", 4.0f0u"m", 12.0f0u"m")) == 13.0f0u"m"
-        @test norm(PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")) == 13.0u"m"
+        @test norm(PVector(3.0f0u"m", 4.0f0u"m", 12.0f0u"m")) == 13.0f0u"m"
+        @test norm(PVector(3.0u"m", 4.0u"m", 12.0u"m")) == 13.0u"m"
 
-        @test normalize(PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m")) == PhysicalVector(3.0u"m", 4.0u"m", 12.0u"m") / 13.0
+        @test normalize(PVector(3.0u"m", 4.0u"m", 12.0u"m")) == PVector(3.0u"m", 4.0u"m", 12.0u"m") / 13.0
 
         @test dot(a,a) == 14.0f0u"m^2"
 
-        @test mean(p) == PhysicalVector3D(1.0u"m", 1.0u"m", 1.0u"m")
+        @test mean(p) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
 
-        @test norm(rotate_x(PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_y(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_x(PVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
 
-        @test norm(rotate_x(PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_y(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_z(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_x(PVector(0.0u"m", 1.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
 
-        @test cross(PhysicalVector(1.0u"m", 0.0u"m", 0.0u"m"), PhysicalVector(0.0u"m", 1.0u"m", 0.0u"m")) == PhysicalVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
+        @test cross(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(0.0u"m", 1.0u"m", 0.0u"m")) == PVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
     end
 
     @testset "Center" begin
-        p = [PhysicalVector3D(-1.0u"m", 1.0u"m", 1.0u"m"), PhysicalVector3D(1.0u"m", -1.0u"m", -1.0u"m")]
+        p = [PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(1.0u"m", -1.0u"m", -1.0u"m")]
 
         @test min_x(p) == -1.0u"m"
         @test min_y(p) == -1.0u"m"
@@ -122,14 +122,14 @@ end
         @test center_x(p) == 0.0u"m"
         @test center_y(p) == 0.0u"m"
         @test center_z(p) == 0.0u"m"
-        @test center(p) == PhysicalVector3D(0.0u"m", 0.0u"m", 0.0u"m")
+        @test center(p) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0u"m", 2.0u"m", 3.0u"m"]) == PhysicalVector3D(1.0u"m", 2.0u"m", 3.0u"m")
+        @test npconvert([1.0u"m", 2.0u"m", 3.0u"m"]) == PVector(1.0u"m", 2.0u"m", 3.0u"m")
 
         @test npconvert([1.0u"m" 4.0u"m";
                         2.0u"m" 5.0u"m";
-                        3.0u"m" 6.0u"m"]) == [PhysicalVector(1.0u"m", 2.0u"m", 3.0u"m"), PhysicalVector(4.0u"m", 5.0u"m", 6.0u"m")]
+                        3.0u"m" 6.0u"m"]) == [PVector(1.0u"m", 2.0u"m", 3.0u"m"), PVector(4.0u"m", 5.0u"m", 6.0u"m")]
     end
 end

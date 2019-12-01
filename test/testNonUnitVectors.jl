@@ -1,46 +1,46 @@
-# test Point2D, Point3D
+# test PVector2D, PVector
 
 @testset "2D Points" begin
-    a = Point2D(1.0f0, 2.0f0)
-    b = Point2D(3.0, 4.0)
-    #c = Point2D(BigFloat(5.0), BigFloat(6.0))
+    a = PVector2D(1.0f0, 2.0f0)
+    b = PVector2D(3.0, 4.0)
+    #c = PVector2D(BigFloat(5.0), BigFloat(6.0))
 
     @testset "Basic" begin
-        @test a + b == Point2D(4.0, 6.0)
-        @test b - a == Point(2.0, 2.0)
-        #@test b + c == Point2D(BigFloat(8.0), BigFloat(10.0))
-        #@test c - a == Point2D(BigFloat(4.0), BigFloat(4.0))
+        @test a + b == PVector2D(4.0, 6.0)
+        @test b - a == PVector(2.0, 2.0)
+        #@test b + c == PVector2D(BigFloat(8.0), BigFloat(10.0))
+        #@test c - a == PVector2D(BigFloat(4.0), BigFloat(4.0))
 
         @test a * b == 11.0
-        @test 3.0 * b == Point2D(9.0, 12.0)
-        @test b * 3.0 == Point2D(9.0, 12.0)
-        #@test c * 2.0 == Point2D(BigFloat(10.0), BigFloat(12.0))
+        @test 3.0 * b == PVector2D(9.0, 12.0)
+        @test b * 3.0 == PVector2D(9.0, 12.0)
+        #@test c * 2.0 == PVector2D(BigFloat(10.0), BigFloat(12.0))
 
-        @test b / 2.0 == Point2D(1.5, 2.0)
+        @test b / 2.0 == PVector2D(1.5, 2.0)
     end
 
     @testset "Linear Algebra" begin
-        p = [Point2D(1.0, 1.0) for i = 1:5]
+        p = [PVector2D(1.0, 1.0) for i = 1:5]
 
-        @test norm(Point2D(3.0f0, 4.0f0)) == 5.0f0
-        @test norm(Point2D(3.0, 4.0)) == 5.0
-        #@test norm(Point2D(3.0, 4.0)) == BigFloat(5.0)
+        @test norm(PVector2D(3.0f0, 4.0f0)) == 5.0f0
+        @test norm(PVector2D(3.0, 4.0)) == 5.0
+        #@test norm(PVector2D(3.0, 4.0)) == BigFloat(5.0)
 
-        @test normalize(Point2D(3.0, 4.0)) == Point2D(0.6, 0.8)
+        @test normalize(PVector2D(3.0, 4.0)) == PVector2D(0.6, 0.8)
 
         @test dot(a,a) == 5.0f0
 
-        @test mean(p) == Point2D(1.0, 1.0)
+        @test mean(p) == PVector2D(1.0, 1.0)
 
-        @test distance(Point2D(0.0f0, 0.0f0), Point2D(3.0f0, 4.0f0)) == 5.0f0
-        @test distance(Point2D(0.0, 0.0), Point2D(3.0, 4.0)) == 5.0
+        @test distance(PVector2D(0.0f0, 0.0f0), PVector2D(3.0f0, 4.0f0)) == 5.0f0
+        @test distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0)) == 5.0
 
-        @test rotate(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
-        @test rotate_z(Point(1.0, 0.0), 0.5pi) * Point(1.0, 0.0) < 1.0e-10
+        @test rotate(PVector(1.0, 0.0), 0.5pi) * PVector(1.0, 0.0) < 1.0e-10
+        @test rotate_z(PVector(1.0, 0.0), 0.5pi) * PVector(1.0, 0.0) < 1.0e-10
     end
 
     @testset "Center" begin
-        p = [Point2D(-1.0, 1.0), Point2D(1.0, -1.0)]
+        p = [PVector2D(-1.0, 1.0), PVector2D(1.0, -1.0)]
 
         @test min_x(p) == -1.0
         @test min_y(p) == -1.0
@@ -48,55 +48,55 @@
         @test max_y(p) == 1.0
         @test center_x(p) == 0.0
         @test center_y(p) == 0.0
-        @test center(p) == Point2D(0.0, 0.0)
+        @test center(p) == PVector2D(0.0, 0.0)
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0, 2.0]) == Point2D(1.0, 2.0)
+        @test npconvert([1.0, 2.0]) == PVector2D(1.0, 2.0)
 
-        @test npconvert([1.0 3.0; 2.0 4.0]) == [Point2D(1.0, 2.0), Point2D(3.0, 4.0)]
+        @test npconvert([1.0 3.0; 2.0 4.0]) == [PVector2D(1.0, 2.0), PVector2D(3.0, 4.0)]
     end
 end
 
 @testset "3D Points" begin
-    a = Point3D(1.0f0, 2.0f0, 3.0f0)
-    b = Point(4.0, 5.0, 6.0)
+    a = PVector(1.0f0, 2.0f0, 3.0f0)
+    b = PVector(4.0, 5.0, 6.0)
 
     @testset "Basic" begin
-        @test a + b == Point3D(5.0, 7.0, 9.0)
-        @test b - a == Point3D(3.0, 3.0, 3.0)
+        @test a + b == PVector(5.0, 7.0, 9.0)
+        @test b - a == PVector(3.0, 3.0, 3.0)
 
         @test a * b == 32.0
-        @test 3.0 * b == Point(12.0, 15.0, 18.0)
-        @test b * 3.0 == Point(12.0, 15.0, 18.0)
+        @test 3.0 * b == PVector(12.0, 15.0, 18.0)
+        @test b * 3.0 == PVector(12.0, 15.0, 18.0)
 
-        @test b / 2.0 == Point(2.0, 2.5, 3.0)
+        @test b / 2.0 == PVector(2.0, 2.5, 3.0)
     end
 
     @testset "Linear Algebra" begin
-        p = [Point3D(1.0, 1.0, 1.0) for i = 1:5]
+        p = [PVector(1.0, 1.0, 1.0) for i = 1:5]
 
-        @test norm(Point3D(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
-        @test norm(Point(3.0, 4.0, 12.0)) == 13.0
+        @test norm(PVector(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
+        @test norm(PVector(3.0, 4.0, 12.0)) == 13.0
 
-        @test normalize(Point(3.0, 4.0, 12.0)) == Point(3.0, 4.0, 12.0) / 13.0
+        @test normalize(PVector(3.0, 4.0, 12.0)) == PVector(3.0, 4.0, 12.0) / 13.0
 
         @test dot(a,a) == 14.0f0
 
-        @test mean(p) == Point3D(1.0, 1.0, 1.0)
+        @test mean(p) == PVector(1.0, 1.0, 1.0)
 
-        @test distance(Point3D(0.0f0, 0.0f0, 0.0f0), Point3D(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
-        @test distance(Point3D(0.0, 0.0, 0.0), Point3D(3.0, 4.0, 12.0)) == 13.0
+        @test distance(PVector(0.0f0, 0.0f0, 0.0f0), PVector(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
+        @test distance(PVector(0.0, 0.0, 0.0), PVector(3.0, 4.0, 12.0)) == 13.0
 
-        @test norm(rotate_x(Point(0.0, 1.0, 0.0), 0.5pi) - Point(0.0, 0.0, 1.0)) < 1.0e-10
-        @test norm(rotate_y(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 0.0, -1.0)) < 1.0e-10
-        @test norm(rotate_z(Point(1.0, 0.0, 0.0), 0.5pi) - Point(0.0, 1.0, 0.0)) < 1.0e-10
+        @test norm(rotate_x(PVector(0.0, 1.0, 0.0), 0.5pi) - PVector(0.0, 0.0, 1.0)) < 1.0e-10
+        @test norm(rotate_y(PVector(1.0, 0.0, 0.0), 0.5pi) - PVector(0.0, 0.0, -1.0)) < 1.0e-10
+        @test norm(rotate_z(PVector(1.0, 0.0, 0.0), 0.5pi) - PVector(0.0, 1.0, 0.0)) < 1.0e-10
 
-        @test cross(Point(1.0, 0.0, 0.0), Point(0.0, 1.0, 0.0)) == Point(0.0, 0.0, 1.0)
+        @test cross(PVector(1.0, 0.0, 0.0), PVector(0.0, 1.0, 0.0)) == PVector(0.0, 0.0, 1.0)
     end
 
     @testset "Center" begin
-        p = [Point3D(-1.0, 1.0, 1.0), Point3D(1.0, -1.0, -1.0)]
+        p = [PVector(-1.0, 1.0, 1.0), PVector(1.0, -1.0, -1.0)]
 
         @test min_x(p) == -1.0
         @test min_y(p) == -1.0
@@ -107,14 +107,14 @@ end
         @test center_x(p) == 0.0
         @test center_y(p) == 0.0
         @test center_z(p) == 0.0
-        @test center(p) == Point3D(0.0, 0.0, 0.0)
+        @test center(p) == PVector(0.0, 0.0, 0.0)
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0, 2.0, 3.0]) == Point3D(1.0, 2.0, 3.0)
+        @test npconvert([1.0, 2.0, 3.0]) == PVector(1.0, 2.0, 3.0)
 
         @test npconvert([1.0 4.0;
                          2.0 5.0;
-                         3.0 6.0]) == [Point(1.0, 2.0, 3.0), Point(4.0, 5.0, 6.0)]
+                         3.0 6.0]) == [PVector(1.0, 2.0, 3.0), PVector(4.0, 5.0, 6.0)]
     end
 end

@@ -17,9 +17,7 @@ export
     AbstractPoint,
         AbstractPoint2D, AbstractPoint3D,
 
-    Point, Point2D, Point3D,
-
-    PhysicalVector, PhysicalVector2D, PhysicalVector3D,
+    PVector, PVector2D,
 
 
     AbstractParticle,
@@ -29,6 +27,13 @@ export
     Ball, Ball2D,
     Star, Star2D,
     SPHGas, SPHGas2D,
+
+
+    AbstractExtent,
+        AbstractExtent2D, AbstractExtent3D,
+
+    Extent, Extent2D,
+    mass_center,
 
     # Base functions
     +, -, *, /, zero, length, iterate,
@@ -45,21 +50,16 @@ export
     max_x, max_y, max_z,
     center_x, center_y, center_z, center,
 
-    # Extent
-    Extent, Extent2D,
-    mass_center,
-
     # Conversion
     npconvert,
 
     # Random
-    rand_point2D, rand_point3D,
-    randn_point2D, randn_point3D,
+    rand_pvector, rand_pvector2d,
 
-    assign_points,
+    assign_points
 
     # Trait functions
-    abstractpoint
+    
 
 
 ## Include files
@@ -82,11 +82,7 @@ abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 @inline real(p::T) where T <: AbstractPoint = p
 
 
-"""
-AbstractParticle
 
-Top level particle type defined in PhysicalParticles.jl
-"""
 abstract type AbstractParticle end
 abstract type AbstractParticle2D <: AbstractParticle end
 abstract type AbstractParticle3D <: AbstractParticle end
@@ -98,14 +94,18 @@ abstract type AbstractParticle3D <: AbstractParticle end
 
 
 
-abstract type AbstractExtent end
-abstract type AbstractExtent2D <: AbstractExtent end
-abstract type AbstractExtent3D <: AbstractExtent end
+abstract type AbstractExtent{T} end
+abstract type AbstractExtent2D{T} <: AbstractExtent{T} end
+abstract type AbstractExtent3D{T} <: AbstractExtent{T} end
+
+@inline length(p::T) where T <: AbstractExtent = 1
+@inline iterate(p::T) where T <: AbstractExtent = (p,nothing)
+@inline iterate(p::T,st) where T <: AbstractExtent = nothing
+@inline real(p::T) where T <: AbstractExtent = p
 
 ### Main files
 
-include("NonUnitVector.jl")
-include("PhysicalVector.jl")
+include("PVector.jl")
 include("PhysicalParticle.jl")
 
 ### Numerics
