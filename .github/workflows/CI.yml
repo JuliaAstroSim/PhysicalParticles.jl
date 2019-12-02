@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         version:
-          - ['1.3.0']
+          - '1.3.0'
         os:
           - ubuntu-latest
           - macOS-latest
@@ -19,7 +19,7 @@ jobs:
           - x64
     steps:
       - run: echo ACTIONS_RUNNER_DEBUG true
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@latest
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@latest
         with:
