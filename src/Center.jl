@@ -1,6 +1,6 @@
 #####  Points and vectors  #####
 
-function min_x(a::Array{T,1}) where T <: AbstractPoint
+function min_x(a::Array{T,N}) where T <: AbstractPoint where N
     min = a[1].x
     for p in a
         if min > p.x
@@ -10,7 +10,7 @@ function min_x(a::Array{T,1}) where T <: AbstractPoint
     return min
 end
 
-function min_y(a::Array{T,1}) where T <: AbstractPoint
+function min_y(a::Array{T,N}) where T <: AbstractPoint where N
     min = a[1].y
     for p in a
         if min > p.y
@@ -20,7 +20,7 @@ function min_y(a::Array{T,1}) where T <: AbstractPoint
     return min
 end
 
-function min_z(a::Array{T,1}) where T <: AbstractPoint3D
+function min_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     min = a[1].z
     for p in a
         if min > p.z
@@ -30,7 +30,7 @@ function min_z(a::Array{T,1}) where T <: AbstractPoint3D
     return min
 end
 
-function max_x(a::Array{T,1}) where T <: AbstractPoint
+function max_x(a::Array{T,N}) where T <: AbstractPoint where N
     max = a[1].x
     for p in a
         if max < p.x
@@ -40,7 +40,7 @@ function max_x(a::Array{T,1}) where T <: AbstractPoint
     return max
 end
 
-function max_y(a::Array{T,1}) where T <: AbstractPoint
+function max_y(a::Array{T,N}) where T <: AbstractPoint where N
     max = a[1].y
     for p in a
         if max < p.y
@@ -50,7 +50,7 @@ function max_y(a::Array{T,1}) where T <: AbstractPoint
     return max
 end
 
-function max_z(a::Array{T,1}) where T <: AbstractPoint3D
+function max_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     max = a[1].z
     for p in a
         if max < p.z
@@ -60,31 +60,31 @@ function max_z(a::Array{T,1}) where T <: AbstractPoint3D
     return max
 end
 
-function center_x(a::Array{T,1}) where T <: AbstractPoint
+function center_x(a::Array{T,N}) where T <: AbstractPoint where N
     left = min_x(a)
     right = max_x(a)
     return (left + right) / 2.0
 end
 
-function center_y(a::Array{T,1}) where T <: AbstractPoint
+function center_y(a::Array{T,N}) where T <: AbstractPoint where N
     left = min_y(a)
     right = max_y(a)
     return (left + right) / 2.0
 end
 
-function center_z(a::Array{T,1}) where T <: AbstractPoint3D
+function center_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     left = min_z(a)
     right = max_z(a)
     return (left + right) / 2.0
 end
 
-function center(a::Array{T,1}) where T <: AbstractPoint2D
+function center(a::Array{T,N}) where T <: AbstractPoint2D where N
     x = center_x(a)
     y = center_y(a)
     return typeof(a[1])(x,y)
 end
 
-function center(a::Array{T,1}) where T <: AbstractPoint3D
+function center(a::Array{T,N}) where T <: AbstractPoint3D where N
     x = center_x(a)
     y = center_y(a)
     z = center_z(a)
@@ -93,7 +93,7 @@ end
 
 #####  Particles  #####
 
-function min_x(a::Array{T,1}) where T <: AbstractParticle
+function min_x(a::Array{T,N}) where T <: AbstractParticle where N
     min = a[1].Pos.x
     for p in a
         if min > p.Pos.x
@@ -103,7 +103,7 @@ function min_x(a::Array{T,1}) where T <: AbstractParticle
     return min
 end
 
-function min_y(a::Array{T,1}) where T <: AbstractParticle
+function min_y(a::Array{T,N}) where T <: AbstractParticle where N
     min = a[1].Pos.y
     for p in a
         if min > p.Pos.y
@@ -113,7 +113,7 @@ function min_y(a::Array{T,1}) where T <: AbstractParticle
     return min
 end
 
-function min_z(a::Array{T,1}) where T <: AbstractParticle3D
+function min_z(a::Array{T,N}) where T <: AbstractParticle3D where N
     min = a[1].Pos.z
     for p in a
         if min > p.Pos.z
@@ -123,7 +123,7 @@ function min_z(a::Array{T,1}) where T <: AbstractParticle3D
     return min
 end
 
-function max_x(a::Array{T,1}) where T <: AbstractParticle
+function max_x(a::Array{T,N}) where T <: AbstractParticle where N
     max = a[1].Pos.x
     for p in a
         if max < p.Pos.x
@@ -133,7 +133,7 @@ function max_x(a::Array{T,1}) where T <: AbstractParticle
     return max
 end
 
-function max_y(a::Array{T,1}) where T <: AbstractParticle
+function max_y(a::Array{T,N}) where T <: AbstractParticle where N
     max = a[1].Pos.y
     for p in a
         if max < p.Pos.y
@@ -143,7 +143,7 @@ function max_y(a::Array{T,1}) where T <: AbstractParticle
     return max
 end
 
-function max_z(a::Array{T,1}) where T <: AbstractParticle3D
+function max_z(a::Array{T,N}) where T <: AbstractParticle3D where N
     max = a[1].Pos.z
     for p in a
         if max < p.Pos.z
@@ -153,31 +153,31 @@ function max_z(a::Array{T,1}) where T <: AbstractParticle3D
     return max
 end
 
-function center_x(a::Array{T,1}) where T <: AbstractParticle
+function center_x(a::Array{T,N}) where T <: AbstractParticle where N
     left = min_x(a)
     right = max_x(a)
     return (left + right) / 2.0
 end
 
-function center_y(a::Array{T,1}) where T <: AbstractParticle
+function center_y(a::Array{T,N}) where T <: AbstractParticle where N
     left = min_y(a)
     right = max_y(a)
     return (left + right) / 2.0
 end
 
-function center_z(a::Array{T,1}) where T <: AbstractParticle3D
+function center_z(a::Array{T,N}) where T <: AbstractParticle3D where N
     left = min_z(a)
     right = max_z(a)
     return (left + right) / 2.0
 end
 
-function center(a::Array{T,1}) where T <: AbstractParticle2D
+function center(a::Array{T,N}) where T <: AbstractParticle2D where N
     x = center_x(a)
     y = center_y(a)
     return typeof(a[1].Pos)(x,y)
 end
 
-function center(a::Array{T,1}) where T <: AbstractParticle3D
+function center(a::Array{T,N}) where T <: AbstractParticle3D where N
     x = center_x(a)
     y = center_y(a)
     z = center_z(a)

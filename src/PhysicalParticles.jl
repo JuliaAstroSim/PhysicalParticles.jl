@@ -1,5 +1,7 @@
 module PhysicalParticles
 
+__precompile__(true)
+
 using Unitful, UnitfulAstro, PhysicalConstants
 
 ## Explicitly overload functions and import types
@@ -33,7 +35,7 @@ export
         AbstractExtent2D, AbstractExtent3D,
 
     Extent, Extent2D,
-    mass_center,
+    mass_center, extent,
 
     # Base functions
     +, -, *, /, zero, length, iterate,
@@ -55,6 +57,7 @@ export
 
     # Random
     rand_pvector, rand_pvector2d,
+    randn_pvector, randn_pvector2d,
 
     assign_points
 
