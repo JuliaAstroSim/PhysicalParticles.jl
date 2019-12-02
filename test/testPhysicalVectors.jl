@@ -56,9 +56,9 @@
     end
     
     @testset "Conversion" begin
-        @test npconvert([1.0u"m", 2.0u"m"]) == PVector2D(1.0u"m", 2.0u"m")
+        @test pconvert([1.0u"m", 2.0u"m"]) == PVector2D(1.0u"m", 2.0u"m")
         
-        @test npconvert([1.0u"m" 3.0u"m"; 2.0u"m" 4.0u"m"]) == [PVector2D(1.0u"m", 2.0u"m"), PVector2D(3.0u"m", 4.0u"m")]
+        @test pconvert([1.0u"m" 3.0u"m"; 2.0u"m" 4.0u"m"]) == [PVector2D(1.0u"m", 2.0u"m"), PVector2D(3.0u"m", 4.0u"m")]
     end
 end
 
@@ -126,9 +126,9 @@ end
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0u"m", 2.0u"m", 3.0u"m"]) == PVector(1.0u"m", 2.0u"m", 3.0u"m")
+        @test pconvert([1.0u"m", 2.0u"m", 3.0u"m"]) == PVector(1.0u"m", 2.0u"m", 3.0u"m")
 
-        @test npconvert([1.0u"m" 4.0u"m";
+        @test pconvert([1.0u"m" 4.0u"m";
                         2.0u"m" 5.0u"m";
                         3.0u"m" 6.0u"m"]) == [PVector(1.0u"m", 2.0u"m", 3.0u"m"), PVector(4.0u"m", 5.0u"m", 6.0u"m")]
     end

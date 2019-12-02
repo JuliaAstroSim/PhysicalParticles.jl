@@ -14,7 +14,6 @@
 Pages = [
     "manual/guide.md",
     "manual/PVector.md",
-    "manual/LinearAlgebra.md",
     "manual/Conversion.md",
     "manual/Random.md",
     "manual/Extent.md",

@@ -52,9 +52,9 @@
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0, 2.0]) == PVector2D(1.0, 2.0)
+        @test pconvert([1.0, 2.0]) == PVector2D(1.0, 2.0)
 
-        @test npconvert([1.0 3.0; 2.0 4.0]) == [PVector2D(1.0, 2.0), PVector2D(3.0, 4.0)]
+        @test pconvert([1.0 3.0; 2.0 4.0]) == [PVector2D(1.0, 2.0), PVector2D(3.0, 4.0)]
     end
 end
 
@@ -111,9 +111,9 @@ end
     end
 
     @testset "Conversion" begin
-        @test npconvert([1.0, 2.0, 3.0]) == PVector(1.0, 2.0, 3.0)
+        @test pconvert([1.0, 2.0, 3.0]) == PVector(1.0, 2.0, 3.0)
 
-        @test npconvert([1.0 4.0;
+        @test pconvert([1.0 4.0;
                          2.0 5.0;
                          3.0 6.0]) == [PVector(1.0, 2.0, 3.0), PVector(4.0, 5.0, 6.0)]
     end

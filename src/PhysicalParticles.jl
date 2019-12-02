@@ -53,7 +53,7 @@ export
     center_x, center_y, center_z, center,
 
     # Conversion
-    npconvert,
+    pconvert,
 
     # Random
     rand_pvector, rand_pvector2d,

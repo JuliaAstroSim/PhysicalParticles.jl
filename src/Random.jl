@@ -1,38 +1,38 @@
 # Generate random distributed points and particles
 
 function rand_pvector2d(n::Integer, T::DataType = Float64)
-    return [npconvert(rand(T,2)) for i=1:n]
+    return [pconvert(rand(T,2)) for i=1:n]
 end
 
 function rand_pvector(n::Integer, T::DataType = Float64)
-    return [npconvert(rand(T,3)) for i=1:n]
+    return [pconvert(rand(T,3)) for i=1:n]
 end
 
 function randn_pvector2d(n::Integer, T::DataType = Float64)
-    return [npconvert(randn(T,2)) for i=1:n]
+    return [pconvert(randn(T,2)) for i=1:n]
 end
 
 function randn_pvector(n::Integer, T::DataType = Float64)
-    return [npconvert(randn(T,3)) for i=1:n]
+    return [pconvert(randn(T,3)) for i=1:n]
 end
 
 
 # With Units
 
 function rand_pvector2d(n::Integer, u::Units, T::DataType = Float64)
-    return [npconvert(rand(T,2) * u) for i=1:n]
+    return [pconvert(rand(T,2) * u) for i=1:n]
 end
 
 function rand_pvector(n::Integer, u::Units, T::DataType = Float64)
-    return [npconvert(rand(T,3) * u) for i=1:n]
+    return [pconvert(rand(T,3) * u) for i=1:n]
 end
 
 function randn_pvector2d(n::Integer, u::Units, T::DataType = Float64)
-    return [npconvert(randn(T,2) * u) for i=1:n]
+    return [pconvert(randn(T,2) * u) for i=1:n]
 end
 
 function randn_pvector(n::Integer, u::Units, T::DataType = Float64)
-    return [npconvert(randn(T,3) * u) for i=1:n]
+    return [pconvert(randn(T,3) * u) for i=1:n]
 end
 
 

@@ -42,4 +42,89 @@ end
 
 ## PVector and PVector2D
 
-It is assumed that 3D vectors are used more often, so we choose `PVector` to represent 3D vectors and provide user-friendly 
+### Constructor
+
+It is assumed that 3D vectors are used more often, so we choose `PVector` to represent 3D vectors and provide user-friendly functions to avoid errors in case you missed suffix `2D`:
+```julia
+julia> PVector(1.0, 2.0)
+PVector2D{Float64}(1.0, 2.0)
+
+julia> PVector(2.0, 3.0, u"m")
+PVector2D{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(2.0 m, 3.0 m)
+```
+
+The default constructors of `PVector` are still 3d-version:
+```julia
+julia> PVector()
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia> PVector(u"m")
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+```
+
+### Basic Operators
+
+Basic maths are well support by overriding `Base: +, -, *, /`, and array operations are supported by overriding `Base: length, iterate, to_index`
+
+```julia
+julia> a = npconvert(ones(3))
+PVector{Float64}(1.0, 1.0, 1.0)
+
+julia> b = npconvert(ones(3)) * 2
+PVector{Float64}(2.0, 2.0, 2.0)
+
+julia> a + b
+PVector{Float64}(3.0, 3.0, 3.0)
+
+julia> a * b
+6.0
+
+julia> norm(a)
+1.7320508075688772
+
+julia> norm(a) == sqrt(3)
+true
+
+julia> normalize(a)
+PVector{Float64}(0.5773502691896258, 0.5773502691896258, 0.5773502691896258)
+
+julia> normalize(a) == a / sqrt(3)
+true
+
+julia> cross(a, b)
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia> dot(a,b) == *(a,b)
+true
+
+julia> c = pconvert(ones(3)) * 1.0u"m"
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(1.0 m, 1.0 m, 1.0 m)
+
+julia> c * a
+3.0 m
+```
+
+### More types, more possibilities
+
+`T<:Union{Number, Quantity}` gives us a whole world to try out new vector operations. As we mentioned above, the build-in type operation and promotion schemes have guaranteed most of operations would be correct:
+```julia
+julia> a = PVector(1.0, 1.0, 1.0) * im
+PVector{Complex{Float64}}(0.0 + 1.0im, 0.0 + 1.0im, 0.0 + 1.0im)
+
+julia> a * PVector(1, 2, 3)
+0.0 + 6.0im
+
+julia> norm(a)
+0.0 + 1.7320508075688772im
+
+
+julia> b = PVector(1.0f0, 2.0f0)
+PVector2D{Float32}(1.0f0, 2.0f0)
+
+julia> b * 2
+PVector2D{Float32}(2.0f0, 4.0f0)
+
+julia> b * 2.0
+PVector2D{Float64}(2.0, 4.0)
+```
+We did not cover all combinations in auto-test, but fortunately everything worked well in daily usage! When it comes to `Quantity`, the computed `Units` may causes some issues, so we handled them in particular as documented in LinearAlgebra section.
