@@ -37,7 +37,6 @@ makedocs(
         "Home" => "index.md",
         "Manual" => Any[
             "manual/guide.md",
-            "manual/examples.md",
             "manual/PVector.md",
             "manual/LinearAlgebra.md",
             "manual/Conversion.md",
