@@ -19,7 +19,7 @@ jobs:
           - x64
     steps:
       - run: echo ACTIONS_RUNNER_DEBUG true
-      - uses: actions/checkout@latest
+      - uses: actions/checkout@v1.0.0
       - name: "Set up Julia"
         uses: julia-actions/setup-julia@latest
         with:
