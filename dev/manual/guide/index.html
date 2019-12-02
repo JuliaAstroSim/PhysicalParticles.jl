@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Package Guide · PhysicalParticles.jl</title><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-153693590-1', 'auto');
+ga('send', 'pageview', {'page': location.pathname + location.search + location.hash});
+</script><link rel="canonical" href="https://juliaastrosims.github.io/PhysicalParticles.jl/dev/manual/guide/index.html"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link href="../../assets/alpha_small.ico" rel="icon" type="image/x-icon"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../"><img src="../../assets/logo.svg" alt="PhysicalParticles.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit">PhysicalParticles.jl</span></div><form class="docs-search" action="../../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">Manual</span><ul><li class="is-active"><a class="tocitem" href>Package Guide</a><ul class="internal"><li><a class="tocitem" href="#Installation-1"><span>Installation</span></a></li><li><a class="tocitem" href="#Basic-Usage-1"><span>Basic Usage</span></a></li></ul></li><li><a class="tocitem" href="../PVector/">PVector</a></li><li><a class="tocitem" href="../Conversion/">Conversion</a></li><li><a class="tocitem" href="../Random/">Random</a></li><li><a class="tocitem" href="../Extent/">Extent</a></li><li><a class="tocitem" href="../Neighbors/">Neighbors</a></li><li><a class="tocitem" href="../Clustering/">Clustering</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../lib/Types/">Types</a></li><li><a class="tocitem" href="../../lib/Methods/">Methods</a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Manual</a></li><li class="is-active"><a href>Package Guide</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Package Guide</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaAstroSim/PhysicalParticles.jl/blob/master/docs/src/manual/guide.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Package-Guide-1"><a class="docs-heading-anchor" href="#Package-Guide-1">Package Guide</a><a class="docs-heading-anchor-permalink" href="#Package-Guide-1" title="Permalink"></a></h1><p>PhysicalParticles.jl is useful for particle based scientific simulations</p><h2 id="Installation-1"><a class="docs-heading-anchor" href="#Installation-1">Installation</a><a class="docs-heading-anchor-permalink" href="#Installation-1" title="Permalink"></a></h2><p>From the Julia REPL, type <code>]</code> to enter the Pkg REPL mode and run</p><pre><code class="language-julia">pkg&gt; add PhysicalParticles</code></pre><p>or add from git repository</p><pre><code class="language-julia">pkg&gt; add https://github.com/JuliaAstroSim/PhysicalParticles.jl</code></pre><p>Test the package by</p><pre><code class="language-julia">pkg&gt; test PhysicalParticles</code></pre><h2 id="Basic-Usage-1"><a class="docs-heading-anchor" href="#Basic-Usage-1">Basic Usage</a><a class="docs-heading-anchor-permalink" href="#Basic-Usage-1" title="Permalink"></a></h2><h3 id="Vectors-1"><a class="docs-heading-anchor" href="#Vectors-1">Vectors</a><a class="docs-heading-anchor-permalink" href="#Vectors-1" title="Permalink"></a></h3><pre><code class="language-julia">julia&gt; using PhysicalParticles, Unitful, UnitfulAstro
+
+julia&gt; a = PVector()
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia&gt; b = PVector(1.0u&quot;m&quot;, 2.0u&quot;m&quot;, 3.0u&quot;m&quot;)
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(1.0 m, 2.0 m, 3.0 m)
+
+julia&gt; c = PVector2D(u&quot;m/s&quot;)
+PVector2D{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1)
+
+
+
+julia&gt; PVector(1.0, 1.0) * im
+PVector2D{Complex{Float64}}(0.0 + 1.0im, 0.0 + 1.0im)
+
+julia&gt; b * 2.0u&quot;s&quot;
+PVector{Quantity{Float64,𝐋*𝐓,Unitful.FreeUnits{(m, s),𝐋*𝐓,nothing}}}(2.0 m s, 4.0 m s, 6.0 m s)
+
+julia&gt; b + PVector(2.0, 2.0, 2.0, u&quot;m&quot;) / 2
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(2.0 m, 3.0 m, 4.0 m)
+
+julia&gt; norm(PVector2D(3.0f0,4.0f0))
+5.0f0
+
+julia&gt; normalize(PVector(3.0, 4.0))
+PVector2D{Float64}(0.6, 0.8)
+
+julia&gt; d = PVector(3u&quot;kpc&quot;, 4u&quot;kpc&quot;)
+PVector2D{Quantity{Int64,𝐋,Unitful.FreeUnits{(kpc,),𝐋,nothing}}}(3 kpc, 4 kpc)
+
+julia&gt; norm(d)
+1.5428387907456837e20 m
+
+
+
+julia&gt; distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0))
+5.0
+
+julia&gt; rotate(PVector(1.0, 0.0), 0.5pi)
+PVector2D{Float64}(6.123233995736766e-17, 1.0)</code></pre><h3 id="Particles-1"><a class="docs-heading-anchor" href="#Particles-1">Particles</a><a class="docs-heading-anchor-permalink" href="#Particles-1" title="Permalink"></a></h3><p>We provide 2D version for each type below, for example, the 2D version of <code>Ball</code> is <code>Ball2D</code>:</p><pre><code class="language-julia">julia&gt; Massless(PVector(0.0, 0.0, 0.0), PVector(), 1)
+Massless{Float64,Int64}(PVector{Float64}(0.0, 0.0, 0.0), PVector{Float64}(0.0, 0.0, 0.0), 1)
+
+julia&gt; Ball(PVector(0.0u&quot;m&quot;, 0.0u&quot;m&quot;, 0.0u&quot;m&quot;), PVector(u&quot;m&quot;), 0.0u&quot;kg&quot;, 1)
+Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), 0.0 kg, 1)
+
+julia&gt; a = Star()
+Star{Float64,Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(kpc,),𝐋,nothing}}}(0.0 kpc, 0.0 kpc, 0.0 kpc), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(Gyr^-1, kpc),𝐋*𝐓^-1,nothing}}}(0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1), PVector{Quantity{Float64,𝐋*𝐓^-2,Unitful.FreeUnits{(Gyr^-2, kpc),𝐋*𝐓^-2,nothing}}}(0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2), 0.0 M⊙, 0, 0, 0, 0.0, 0.0 J, 0.0 kpc Gyr^-2)
+
+julia&gt; b = SPHGas()
+SPHGas{Float64,Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(kpc,),𝐋,nothing}}}(0.0 kpc, 0.0 kpc, 0.0 kpc), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(Gyr^-1, kpc),𝐋*𝐓^-1,nothing}}}(0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1), PVector{Quantity{Float64,𝐋*𝐓^-2,Unitful.FreeUnits{(Gyr^-2, kpc),𝐋*𝐓^-2,nothing}}}(0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2), 0.0 M⊙, 0, 0, 0, 0.0, 0.0 J, 0.0 kpc Gyr^-2, 0.0 J K^-1, 0.0 M⊙ kpc^-3, 0.0 kpc, 0.0, 0.0, 0, PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(Gyr^-1, kpc),𝐋*𝐓^-1,nothing}}}(0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1), 0.0 Gyr^-1, 0.0 Gyr^-1, 0.0, 0.0 N m^-1, 0.0 J K^-1 s^-1, 0.0 kpc Gyr^-1)
+
+julia&gt; distance(a,b)
+0.0 m</code></pre><h3 id="Random-and-Conversion-1"><a class="docs-heading-anchor" href="#Random-and-Conversion-1">Random and Conversion</a><a class="docs-heading-anchor-permalink" href="#Random-and-Conversion-1" title="Permalink"></a></h3><pre><code class="language-julia">julia&gt; p = rand_pvector(3)
+3-element Array{PVector{Float64},1}:
+ PVector{Float64}(0.899541890819791, 0.49609709458549345, 0.22817220536717397)
+ PVector{Float64}(0.21907343513386301, 0.39110699072427035, 0.3502946880565312)
+ PVector{Float64}(0.8107782153679699, 0.20218167820102884, 0.94236923352867)
+
+julia&gt; pu = rand_pvector(3, u&quot;m&quot;)
+3-element Array{PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}},1}:
+ PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m)
+ PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m)
+ PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m)
+
+julia&gt; p_Ball = [Ball() for i=1:3]
+3-element Array{Ball{Int64},1}:
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+
+julia&gt; assign_points(p_Ball, :Pos, pu)
+
+julia&gt; p_Ball
+3-element Array{Ball{Int64},1}:
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+
+
+julia&gt; npconvert([1.0, 2.0, 3.0])
+PVector{Float64}(1.0, 2.0, 3.0)
+
+julia&gt; npconvert([1.0u&quot;m&quot; 4.0u&quot;m&quot;;
+                  2.0u&quot;m&quot; 5.0u&quot;m&quot;;
+                  3.0u&quot;m&quot; 6.0u&quot;m&quot;])
+2-element Array{PVector,1}:
+ PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(1.0 m, 2.0 m, 3.0 m)
+ PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(4.0 m, 5.0 m, 6.0 m)</code></pre><h3 id="Extent-1"><a class="docs-heading-anchor" href="#Extent-1">Extent</a><a class="docs-heading-anchor-permalink" href="#Extent-1" title="Permalink"></a></h3><pre><code class="language-julia">julia&gt; p = [Ball(PVector(-1.0u&quot;m&quot;, 1.0u&quot;m&quot;, 1.0u&quot;m&quot;), PVector(u&quot;m&quot;), 1.0u&quot;kg&quot;, 1),
+            Ball(PVector(1.0u&quot;m&quot;, -1.0u&quot;m&quot;, -1.0u&quot;m&quot;), PVector(u&quot;m&quot;), 1000.0u&quot;g&quot;, 2)]
+2-element Array{Ball{Int64},1}:
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 m, 1.0 m), PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), 1.0 kg, 1)
+ Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(1.0 m, -1.0 m, -1.0 m), PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), 1000.0 g, 2)
+
+julia&gt; min_x(p)
+-1.0 m
+
+julia&gt; max_z(p)
+1.0 m
+
+julia&gt; center(p)
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+
+julia&gt; mass_center(p)
+PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+
+julia&gt; extent(p)
+Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 m, -1.0 m, 1.0 m, -1.0 m, 1.0 m, 2.0 m, PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« Home</a><a class="docs-footer-nextpage" href="../PVector/">PVector »</a></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Monday 2 December 2019 14:29">Monday 2 December 2019</span>. Using Julia version 1.3.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
