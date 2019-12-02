@@ -1,6 +1,9 @@
 """
 Compile with:
 julia --project=docs/ --color=yes docs/make.jl
+
+Generate key:
+DocumenterTools.genkeys(user="JuliaAstroSim", repo="git@github.com:JuliaAstroSim/PhysicalParticles.jl.git")
 """
 
 using Documenter
@@ -21,10 +24,10 @@ makedocs(
     format = Documenter.HTML(
         # Use clean URLs, unless built as a "local" build
         prettyurls = !("local" in ARGS),
-        #canonical = "https://juliadocs.github.io/Documenter.jl/stable/",
+        canonical = "https://juliaastrosims.github.io/PhysicalParticles.jl/dev/",
         assets = ["assets/alpha_small.ico"],
-        #analytics = "UA-136089579-2",
-        #highlights = ["yaml"],
+        analytics = "UA-153693590-1",
+        highlights = ["llvm", "yaml"],
     ),
     clean = false,
     sitename = "PhysicalParticles.jl",
@@ -53,8 +56,7 @@ makedocs(
     #doctest = ("doctest=only" in ARGS) ? :only : true,
 )
 
-#deploydocs(
-#    repo = "github.com/JuliaAstroSim/PhysicalParticles.jl.git",
-#    target = "build",
-#    push_preview = true,
-#)
+deploydocs(
+    repo = "github.com/JuliaAstroSim/PhysicalParticles.jl.git",
+    target = "build",
+)
