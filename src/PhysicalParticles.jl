@@ -1,7 +1,14 @@
+"""
+Main module for `PhysicalParticles.jl` -- Physical vector and particle types for Julia.
+
+# Exports
+$(EXPORTS)
+"""
 module PhysicalParticles
 
 __precompile__(true)
 
+using DocStringExtensions
 using Unitful, UnitfulAstro, PhysicalConstants
 
 ## Explicitly overload functions and import types

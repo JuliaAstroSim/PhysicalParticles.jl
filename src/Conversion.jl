@@ -72,3 +72,29 @@ function pconvert(a::Array{T,2}) where T<:Union{Number, Quantity}
         error("Not supported dimension!")
     end
 end
+
+# Assign arrays
+
+"""
+    function assign_points(particles::Array{P, N} where P<:AbstractParticle where N, symbol::Symbol, points::Array{P, N} where P<:AbstractPoint where N)
+
+Assign the symbol of particles through array of mathical vectors iteratively
+
+## Examples
+
+```julia
+julia> pu = rand_pvector(3, u"m")
+julia> p_Ball = [Ball() for i=1:3]
+julia> assign_points(p_Ball, :Pos, pu)
+```
+"""
+function assign_points(particles::Array{P, N} where P<:AbstractParticle where N, symbol::Symbol, points::Array{P, N} where P<:AbstractPoint where N)
+    len = length(particles)
+    if len != length(points)
+        @error "Length does not match!"
+    end
+
+    for i in 1:len
+        @inbounds setfield!(particles[i], symbol, points[i])
+    end
+end

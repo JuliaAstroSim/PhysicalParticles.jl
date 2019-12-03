@@ -1,5 +1,10 @@
 #####  Points and vectors  #####
 
+"""
+$(SIGNATURES)
+
+Compute minimum x coordinate of points or particles
+"""
 function min_x(a::Array{T,N}) where T <: AbstractPoint where N
     min = a[1].x
     for p in a
@@ -10,6 +15,11 @@ function min_x(a::Array{T,N}) where T <: AbstractPoint where N
     return min
 end
 
+"""
+$(SIGNATURES)
+
+Compute minimum y coordinate of points or particles
+"""
 function min_y(a::Array{T,N}) where T <: AbstractPoint where N
     min = a[1].y
     for p in a
@@ -20,6 +30,11 @@ function min_y(a::Array{T,N}) where T <: AbstractPoint where N
     return min
 end
 
+"""
+$(SIGNATURES)
+
+Compute minimum z coordinate of points or particles
+"""
 function min_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     min = a[1].z
     for p in a
@@ -30,6 +45,11 @@ function min_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     return min
 end
 
+"""
+$(SIGNATURES)
+
+Compute maximum x coordinate of points or particles
+"""
 function max_x(a::Array{T,N}) where T <: AbstractPoint where N
     max = a[1].x
     for p in a
@@ -40,6 +60,11 @@ function max_x(a::Array{T,N}) where T <: AbstractPoint where N
     return max
 end
 
+"""
+$(SIGNATURES)
+
+Compute maximum y coordinate of points or particles
+"""
 function max_y(a::Array{T,N}) where T <: AbstractPoint where N
     max = a[1].y
     for p in a
@@ -50,6 +75,11 @@ function max_y(a::Array{T,N}) where T <: AbstractPoint where N
     return max
 end
 
+"""
+$(SIGNATURES)
+
+Compute maximum z coordinate of points or particles
+"""
 function max_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     max = a[1].z
     for p in a
@@ -60,24 +90,44 @@ function max_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     return max
 end
 
+"""
+$(SIGNATURES)
+
+Compute center of x direction of points or particles
+"""
 function center_x(a::Array{T,N}) where T <: AbstractPoint where N
     left = min_x(a)
     right = max_x(a)
     return (left + right) / 2.0
 end
 
+"""
+$(SIGNATURES)
+
+Compute center of y direction of points or particles
+"""
 function center_y(a::Array{T,N}) where T <: AbstractPoint where N
     left = min_y(a)
     right = max_y(a)
     return (left + right) / 2.0
 end
 
+"""
+$(SIGNATURES)
+
+Compute center of z direction of points or particles
+"""
 function center_z(a::Array{T,N}) where T <: AbstractPoint3D where N
     left = min_z(a)
     right = max_z(a)
     return (left + right) / 2.0
 end
 
+"""
+$(SIGNATURES)
+
+Compute center of points or particles
+"""
 function center(a::Array{T,N}) where T <: AbstractPoint2D where N
     x = center_x(a)
     y = center_y(a)

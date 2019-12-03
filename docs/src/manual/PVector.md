@@ -2,24 +2,28 @@
 
 All of the sub-types of `Number` and `Quantity` are supported. In general it works as we expected whereas there are too many possibilities to foresee. Mathematically vector operations, linear algebra, array conversions, neighbor searching, etc. are well documented in coreesponding sections.
 
-The vector types are unmutable out of performance reason, and the coordinate members must be identical types:
-```julia
-julia> PVector2D(1.0, 1.0f0)
-ERROR: MethodError: no method matching PVector2D(::Float64, ::Float32)
-Closest candidates are:
-  PVector2D(::Number, ::Number, ::Unitful.Units) at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:45
-  PVector2D(::T, ::T) where T<:Number at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:2
-Stacktrace:
- [1] top-level scope at REPL[27]:1
+The vector types are unmutable out of performance reason. 
 
-julia> PVector2D(1.0u"m", 1.0u"km")
-ERROR: MethodError: no method matching PVector2D(::Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}, ::Quantity{Float64,𝐋,Unitful.FreeUnits{(km,),𝐋,nothing}})
-Closest candidates are:
-  PVector2D(::Number, ::Number, ::Unitful.Units) at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:45
-  PVector2D(::T, ::T) where T<:Number at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:2
-Stacktrace:
- [1] top-level scope at REPL[28]:1
-```
+!!! note
+
+    Coordinate components must be identical types:
+    ```julia
+    julia> PVector2D(1.0, 1.0f0)
+    ERROR: MethodError: no method matching PVector2D(::Float64, ::Float32)
+    Closest candidates are:
+      PVector2D(::Number, ::Number, ::Unitful.Units) at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:45
+      PVector2D(::T, ::T) where T<:Number at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:2
+    Stacktrace:
+    [1] top-level scope at REPL[27]:1
+    
+    julia> PVector2D(1.0u"m", 1.0u"km")
+      ERROR: MethodError: no method matching PVector2D(::Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}, ::Quantity{Float64,𝐋,Unitful.FreeUnits{(km,),𝐋,nothing}})
+    Closest candidates are:
+      PVector2D(::Number, ::Number, ::Unitful.Units) at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:45
+      PVector2D(::T, ::T) where T<:Number at C:\Users\islent\.julia\packages\PhysicalParticles\oFZmG\src\PVector.jl:2
+    Stacktrace:
+    [1] top-level scope at REPL[28]:1
+    ```
 
 ## Type Hierarchy
 
@@ -127,4 +131,7 @@ PVector2D{Float32}(2.0f0, 4.0f0)
 julia> b * 2.0
 PVector2D{Float64}(2.0, 4.0)
 ```
-We did not cover all combinations in auto-test, but fortunately everything worked well in daily usage! When it comes to `Quantity`, the computed `Units` may causes some issues, so we handled them in particular as documented in LinearAlgebra section.
+
+!!! note
+
+    We did not cover all combinations in auto-test, but fortunately everything worked well in daily usage! When it comes to `Quantity`, the computed `Units` may causes some issues, so we handled them in particular as documented in LinearAlgebra section.

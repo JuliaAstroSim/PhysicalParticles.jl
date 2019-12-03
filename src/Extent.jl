@@ -20,7 +20,22 @@ mutable struct Extent{T<:Union{Number, Quantity}} <: AbstractExtent3D{T}
     Corner::PVector{T}
 end
 
+"""
+$(SIGNATURES)
 
+Get `Extent` of an array of mathical vectors or particles, or by comparing two `Extent`s and even array of `Extent`s
+
+## Examples
+
+```julia
+julia> p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m"), 1.0u"kg", 1),
+            Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m"), 1000.0u"g", 2)]
+julia> extent(p)
+Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 m, -1.0 m, 1.0 m, -1.0 m, 1.0 m, 2.0 m, 
+  PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), 
+  PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))
+```
+"""
 extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N = (xMin=min_x(a); xMax=max_x(a); yMin=min_y(a); yMax=max_y(a);
                                                             len=max(xMax-xMin, yMax-yMin);
                                                             Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
