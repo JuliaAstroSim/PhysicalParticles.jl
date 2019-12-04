@@ -18,5 +18,6 @@ UnitfulAstro = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
 
 [compat]
 
+Unitful = "0.18"
 PhysicalConstants = "0.2"
 DocStringExtensions = "0.8"
