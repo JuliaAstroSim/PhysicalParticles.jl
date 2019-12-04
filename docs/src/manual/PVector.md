@@ -135,3 +135,28 @@ PVector2D{Float64}(2.0, 4.0)
 !!! note
 
     We did not cover all combinations in auto-test, but fortunately everything worked well in daily usage! When it comes to `Quantity`, the computed `Units` may causes some issues, so we handled them in particular as documented in LinearAlgebra section.
+
+### LinearAlgebra
+
+`norm`, `normalize`, `dot`, `cross` from `LinearAlgebra` module are overloaded.
+
+However, when it comes to `Quantity`, some wierd things would happen:
+```julia
+julia> sqrt(1.0u"km" * 1000.0u"m")
+31.622776601683793 m^1/2 km^1/2
+
+julia> sqrt(upreferred(1.0u"km" * 1000.0u"m"))
+1000.0 m
+
+julia> 1.0u"km" / sqrt(upreferred(1.0u"km" * 1.0u"km"))
+0.001 km m^-1
+```
+
+To avoid this, we have to use `upreferred` in both `norm` and `normalize`:
+```julia
+@inline norm(p::PVector2D) = sqrt(upreferred(p * p))
+@inline normalize(p::PVector2D) = (n = ustrip(norm(p)); return PVector2D(upreferred(p.x/n), upreferred(p.y/n)))
+
+@inline norm(p::PVector) = sqrt(upreferred(p * p))
+@inline normalize(p::PVector) = (n = ustrip(norm(p)); return PVector(upreferred(p.x/n), upreferred(p.y/n), upreferred(p.z/n)))
+```
