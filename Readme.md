@@ -1,10 +1,11 @@
 # PhysicalParticles.jl
 
-*Physical particle types for scientific simulation. Manipulate vectors as simple as numbers!*
+![](https://github.com/JuliaAstroSim/PhysicalParticles.jl/workflows/.github/workflows/CI.yml/badge.svg)
+![](https://github.com/JuliaAstroSim/PhysicalParticles.jl/workflows/.github/workflows/doc.yml/badge.svg)
+[![codecov](https://codecov.io/gh/JuliaAstroSim/PhysicalParticles.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaAstroSim/PhysicalParticles.jl)
+[![][docs-dev-img]][docs-dev-url]
 
-| **Documentation** | **Build Status** |
-|:-----------------:|:----------------:|
-|[![][docs-dev-img]][docs-dev-url] | |
+*Physical particle types for scientific simulation. Manipulate vectors as simple as numbers!*
 
 ## Installation
 

@@ -21,18 +21,20 @@ Massless() = Massless(PVector(), PVector(), 0)
 mutable struct Ball2D{I<:Integer} <: AbstractParticle2D
     Pos::PVector2D
     Vel::PVector2D
+    Acc::PVector2D
     Mass::Quantity
     ID::I
 end
-Ball2D() = Ball2D(PVector2D(u"m"), PVector2D(u"m/s"), 0.0u"kg", 0)
+Ball2D() = Ball2D(PVector2D(u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 0)
 
 mutable struct Ball{I<:Integer} <: AbstractParticle3D
     Pos::PVector
     Vel::PVector
+    Acc::PVector
     Mass::Quantity
     ID::I
 end
-Ball() = Ball(PVector(u"m"), PVector(u"m/s"), 0.0u"kg", 0)
+Ball() = Ball(PVector(u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 0)
 
 ## Astrophysical particles
 

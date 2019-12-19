@@ -6,8 +6,8 @@
         @test distance(a_Massless2D, b_Massless2D) == 5.0
 
 
-        a_Ball2D = Ball2D(PVector2D(0.0u"m", 0.0u"m"), PVector2D(u"m"), 0.0u"kg", 1)
-        b_Ball2D = Ball2D(PVector2D(3.0u"m", 4.0u"m"), PVector2D(u"m"), 0.0u"kg", 2)
+        a_Ball2D = Ball2D(PVector2D(0.0u"m", 0.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 1)
+        b_Ball2D = Ball2D(PVector2D(3.0u"m", 4.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 2)
 
         @test distance(a_Ball2D, b_Ball2D) == 5.0u"m"
 
@@ -66,8 +66,8 @@
         #@test Extent(p_non) == Extent2D(-1.0, 1.0, -1.0, 1.0, 
         #                             2.0, PVector2D(), PVector(-1.0, -1.0))
 
-        p = [Ball2D(PVector2D(-1.0u"m", 1.0u"m"), PVector2D(u"m"), 1.0u"kg", 1), 
-             Ball2D(PVector2D(1.0u"m", -1.0u"m"), PVector2D(u"m"), 1000.0u"g", 2)]
+        p = [Ball2D(PVector2D(-1.0u"m", 1.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 1), 
+             Ball2D(PVector2D(1.0u"m", -1.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 2)]
 
         @test min_x(p) == -1.0u"m"
         @test min_y(p) == -1.0u"m"
@@ -91,8 +91,8 @@ end
         @test distance(a_Massless, b_Massless) == 13.0
 
 
-        a_Ball = Ball(PVector(0.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m"), 0.0u"kg", 1)
-        b_Ball = Ball(PVector(3.0u"m", 4.0u"m", 12.0u"m"), PVector(u"m"), 0.0u"kg", 2)
+        a_Ball = Ball(PVector(0.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 1)
+        b_Ball = Ball(PVector(3.0u"m", 4.0u"m", 12.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 2)
 
         @test distance(a_Ball, b_Ball) == 13.0u"m"
 
@@ -153,8 +153,8 @@ end
         #                           2.0, PVector(), PVector(-1.0, -1.0, -1.0))
 
 
-        p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m"), 1.0u"kg", 1), 
-             Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m"), 1000.0u"g", 2)]
+        p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1), 
+             Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)]
 
         @test min_x(p) == -1.0u"m"
         @test min_y(p) == -1.0u"m"

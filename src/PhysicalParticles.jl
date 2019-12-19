@@ -14,7 +14,7 @@ using Unitful, UnitfulAstro, PhysicalConstants
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity
 
-import Base: +,-,*,/,zero,length,iterate,to_index, rand
+import Base: +,-,*,/,zero,length,iterate,to_index, rand, show
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -46,6 +46,8 @@ export
 
     # Base functions
     +, -, *, /, zero, length, iterate,
+
+    show, display,
 
     # LinearAlgebra
     norm, normalize, dot, cross,
@@ -142,5 +144,6 @@ include("Center.jl")
 include("Extent.jl")
 include("Neighbors.jl")
 include("Clustering.jl")
+include("PrettyPrinting.jl")
 
 end  # module PhysicalParticles

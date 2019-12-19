@@ -1,6 +1,6 @@
 # PVector
 
-All of the sub-types of `Number` and `Quantity` are supported. In general it works as we expected whereas there are too many possibilities to foresee. Mathematically vector operations, linear algebra, array conversions, neighbor searching, etc. are well documented in coreesponding sections.
+All of the sub-types of `Number` and `Quantity` are supported. In general it works as we expected whereas there are too many possibilities to foresee. Mathematically vector operations, linear algebra, array conversions, neighbor searching, etc. are well documented in corresponding sections.
 
 The vector types are unmutable out of performance reason. 
 
