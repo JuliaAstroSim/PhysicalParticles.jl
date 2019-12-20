@@ -14,7 +14,7 @@ using Unitful, UnitfulAstro, PhysicalConstants
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity
 
-import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==
+import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==, getproperty
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -45,10 +45,11 @@ export
     mass_center, extent,
 
     # Base functions
-    +, -, *, /, zero, length, iterate, real
+    +, -, *, /, zero, length, iterate, real,
 
     show, display,
     ==,
+    getproperty,
 
     # LinearAlgebra
     norm, normalize, dot, cross,
@@ -64,6 +65,9 @@ export
 
     # Conversion
     pconvert,
+
+    # Peano
+    peanokey, hilbertsort!, mssort!,
 
     # Random
     rand_pvector, rand_pvector2d,
@@ -127,6 +131,9 @@ function Base.:(==)(x::T, y::T) where T<:Union{AbstractPoint, AbstractParticle, 
     return true
 end
 
+### Enable Symbol indexing of Dict
+Base.getproperty(d::Dict, s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d, s) : getindex(d, s)
+
 ### Main files
 
 include("PVector.jl")
@@ -157,5 +164,6 @@ include("Extent.jl")
 include("Neighbors.jl")
 include("Clustering.jl")
 include("PrettyPrinting.jl")
+include("Peano.jl")
 
 end  # module PhysicalParticles

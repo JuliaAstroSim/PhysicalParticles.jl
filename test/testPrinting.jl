@@ -35,4 +35,6 @@
 
     a = show(Extent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, PVector(), PVector()))
     @test a == nothing
+
+    println()
 end
