@@ -12,12 +12,6 @@ end
 
 
 # Particles
-function Base.show(io::IO, a::Array{T}) where T<:AbstractParticle
-    for i in a
-        println(i)
-    end
-end
-
 function Base.show(io::IO, p::T) where T<:Union{Massless, Massless2D}
     print(io, "Massless ", p.ID, ": Pos = ", p.Pos, ", Vel = ", p.Vel)
 end

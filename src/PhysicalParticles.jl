@@ -14,7 +14,7 @@ using Unitful, UnitfulAstro, PhysicalConstants
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity
 
-import Base: +,-,*,/,zero,length,iterate,to_index, rand, show
+import Base: +,-,*,/,zero,length,iterate,to_index, rand, show, ==
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -48,6 +48,7 @@ export
     +, -, *, /, zero, length, iterate,
 
     show, display,
+    ==,
 
     # LinearAlgebra
     norm, normalize, dot, cross,
