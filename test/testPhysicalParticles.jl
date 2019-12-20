@@ -3,6 +3,9 @@
         a_Massless2D = Massless2D(PVector2D(0.0, 0.0), PVector2D(), 1)
         b_Massless2D = Massless2D(PVector2D(3.0, 4.0), PVector2D(), 2)
 
+        @test Massless2D() == Massless2D(PVector2D(), PVector2D(), 0)
+        @test Ball2D() == Ball2D(PVector2D(u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 0)
+
         @test distance(a_Massless2D, b_Massless2D) == 5.0
 
 
@@ -45,6 +48,13 @@
         p_SPHGas2D = [SPHGas2D() for i=1:5]
         assign_points(p_SPHGas2D, :Pos, a)
         @test p_SPHGas2D[1].Pos == a[1]
+
+        # randn
+        a_randn = randn_pvector2d(5)
+        @test length(a_randn) == 5
+
+        a_randn = randn_pvector2d(5, u"m")
+        @test length(a_randn) == 5
     end
 
     # Do not repeat on all particle types here 
@@ -83,6 +93,9 @@ end
     @testset "Linear Algebra" begin
         a_Massless = Massless(PVector(0.0, 0.0, 0.0), PVector(), 1)
         b_Massless = Massless(PVector(3.0, 4.0, 12.0), PVector(), 2)
+
+        @test Massless() == Massless(PVector(), PVector(), 0)
+        @test Ball() == Ball(PVector(u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 0)
 
         @test distance(a_Massless, b_Massless) == 13.0
 
@@ -126,6 +139,13 @@ end
         p_SPHGas = [SPHGas() for i=1:5]
         assign_points(p_SPHGas, :Pos, a)
         @test p_SPHGas[1].Pos == a[1]
+
+        # randn
+        a_randn = randn_pvector(5)
+        @test length(a_randn) == 5
+
+        a_randn = randn_pvector(5)
+        @test length(a_randn) == 5
     end
 
     # Do not repeat on all particle types here 

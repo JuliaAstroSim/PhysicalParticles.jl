@@ -14,7 +14,7 @@ using Unitful, UnitfulAstro, PhysicalConstants
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity
 
-import Base: +,-,*,/,zero,length,iterate,to_index, rand, show, ==
+import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -45,7 +45,7 @@ export
     mass_center, extent,
 
     # Base functions
-    +, -, *, /, zero, length, iterate,
+    +, -, *, /, zero, length, iterate, real
 
     show, display,
     ==,
@@ -115,6 +115,17 @@ abstract type AbstractExtent3D{T} <: AbstractExtent{T} end
 @inline iterate(p::T) where T <: AbstractExtent = (p,nothing)
 @inline iterate(p::T,st) where T <: AbstractExtent = nothing
 @inline real(p::T) where T <: AbstractExtent = p
+
+### overload Base.:(==)
+
+function Base.:(==)(x::T, y::T) where T<:Union{AbstractPoint, AbstractParticle, AbstractExtent}
+    for field in fieldnames(T)
+        if getfield(x, field) != getfield(y, field)
+            return false
+        end
+    end
+    return true
+end
 
 ### Main files
 

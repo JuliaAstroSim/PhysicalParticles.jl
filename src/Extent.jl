@@ -72,17 +72,6 @@ function extent(a::Array{T}) where T <: AbstractExtent
     return e
 end
 
-##### overload Base.:(==) #####
-
-function Base.:(==)(x::T, y::T) where T<:Union{Extent, Extent2D}
-    for field in fieldnames(T)
-        if getfield(x, field) != getfield(y, field)
-            return false
-        end
-    end
-    return true
-end
-
 #####  Mass center  #####
 
 function mass_center(a::Array{T}) where T <: AbstractParticle

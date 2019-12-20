@@ -28,22 +28,7 @@ cross(a::PVector, b::PVector) = PVector(a.y * b.z - a.z * b.y,
 
 ## Generic functions
 
-@inline norm(p::AbstractPoint) = sqrt(p * p)
-# This is same with the following expression on the compiled level:
-# @inline norm(p::PVector2D) = sqrt(p.x * p.x + p.y * p.y)
-
-@inline normalize(p::AbstractPoint) = p / norm(p)
-
 dot(a::AbstractPoint, b::AbstractPoint) = *(a,b)
-
-function mean(a::Array{AbstractPoint})
-    len = length(a)
-    p = a[1]
-    for i in 2:len
-        @inbounds p += a[i]
-    end
-    return p/len
-end
 
 @inline distance(a::AbstractPoint, b::AbstractPoint) = norm(a - b)
 @inline distance(a::AbstractParticle, b::AbstractParticle) = norm(a.Pos - b.Pos)
