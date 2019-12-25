@@ -118,7 +118,7 @@ SPHGas2D() = SPHGas2D(
     0.0u"J/K", 0.0u"Msun/kpc^2", 0.0u"kpc",
     0.0, 0.0, 0,
     PVector2D(u"kpc/Gyr"), 0.0u"Gyr^-1", 0.0u"Gyr^-1", 0.0,
-    0.0u"N/m", 0.0u"J/K/s", 0.0u"kpc/Gyr"
+    0.0u"N/m^2", 0.0u"J/K/s", 0.0u"kpc/Gyr"
 )
 
 mutable struct SPHGas{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
@@ -161,5 +161,5 @@ SPHGas() = SPHGas(
     0.0u"J/K", 0.0u"Msun/kpc^3", 0.0u"kpc",
     0.0, 0.0, 0,
     PVector(u"kpc/Gyr"), 0.0u"Gyr^-1", 0.0u"Gyr^-1", 0.0,
-    0.0u"N/m", 0.0u"J/K/s", 0.0u"kpc/Gyr"
+    0.0u"N/m^2", 0.0u"J/K/s", 0.0u"kpc/Gyr"
 )
