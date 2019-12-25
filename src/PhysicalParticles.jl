@@ -66,9 +66,6 @@ export
     # Conversion
     pconvert,
 
-    # Peano
-    peanokey, hilbertsort!, mssort!,
-
     # Random
     rand_pvector, rand_pvector2d,
     randn_pvector, randn_pvector2d,
@@ -154,6 +151,7 @@ Other operations would be implemented in seperate files:
     - Extent.jl ==> Compute extent for array of points and particles
     - Neighbours.jl ==> Nearest neighbour searching
     - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
+    - PrettyPrinting.jl ==> Custom printing of vectors and particles
 """
 
 include("Conversion.jl")
@@ -164,6 +162,5 @@ include("Extent.jl")
 include("Neighbors.jl")
 include("Clustering.jl")
 include("PrettyPrinting.jl")
-include("Peano.jl")
 
 end  # module PhysicalParticles
