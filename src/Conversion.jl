@@ -25,7 +25,7 @@ function pconvert(a::Array{T,1}) where T<:Union{Number, Quantity}
     elseif length(a) == 2
         return PVector2D(a[1], a[2])
     else
-        error("Not supported dimension!")
+        error(a, "\n       Not supported dimension! Use 2D and 3D vectors")
     end
 end
 
@@ -69,7 +69,7 @@ function pconvert(a::Array{T,2}) where T<:Union{Number, Quantity}
         end
         return p
     else
-        error("Not supported dimension!")
+        error(a, "\n       Not supported dimension! Use 2D and 3D vectors")
     end
 end
 
@@ -91,7 +91,7 @@ julia> assign_points(p_Ball, :Pos, pu)
 function assign_points(particles::Array{P, N} where P<:AbstractParticle where N, symbol::Symbol, points::Array{P, N} where P<:AbstractPoint where N)
     len = length(particles)
     if len != length(points)
-        @error "Length does not match!"
+        error("Length of particles (", len, ") and vectors (", length(points), ") does not match!")
     end
 
     for i in 1:len

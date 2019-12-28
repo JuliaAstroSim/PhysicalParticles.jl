@@ -3,7 +3,13 @@
     a = show(PVector2D())
     @test a == nothing
 
+    a = show(PVector2D(u"m"))
+    @test a == nothing
+
     a = show(PVector())
+    @test a == nothing
+
+    a = show(PVector(u"m"))
     @test a == nothing
 
     a = show(Massless2D())

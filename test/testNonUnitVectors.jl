@@ -55,6 +55,10 @@
         @test pconvert([1.0, 2.0]) == PVector2D(1.0, 2.0)
 
         @test pconvert([1.0 3.0; 2.0 4.0]) == [PVector2D(1.0, 2.0), PVector2D(3.0, 4.0)]
+
+        @test_throws ErrorException pconvert([1.0, 2.0, 3.0, 4.0])
+
+        @test_throws ErrorException pconvert([1.0; 2.0; 3.0; 4.0])
     end
 end
 

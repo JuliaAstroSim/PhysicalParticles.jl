@@ -61,7 +61,7 @@ extent(a::Extent, b::Extent) = (xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b
                                     len=max(xMax-xMin, yMax-yMin, zMax-zMin);
                                     Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
                                     Corner=PVector(xMin,yMin,zMin);
-                                    return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center))
+                                    return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner))
 
 
 function extent(a::Array{T}) where T <: AbstractExtent
@@ -76,7 +76,7 @@ end
 
 function mass_center(a::Array{T}) where T <: AbstractParticle
     if length(a) == 1
-        return a.Pos
+        return a[1].Pos
     end
     sum_mass = a[1].Mass
     sum_center = a[1].Pos * a[1].Mass

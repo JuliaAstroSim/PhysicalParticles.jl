@@ -84,8 +84,16 @@
         @test center_y(p) == 0.0u"m"
         @test center(p) == PVector2D(0.0u"m", 0.0u"m")
 
-        @test extent(p) == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
+        e = extent(p)
+        @test e == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
         @test mass_center(p) == PVector2D(u"m")
+        @test mass_center([Star2D()]) == PVector2D(u"kpc")
+
+        p2 = [Ball2D(PVector2D(-2.0u"m", 2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 3), 
+              Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
+        e2 = extent(p2)
+        @test extent(e, e2) == e2
+        @test extent([e, e2]) == e2
     end
 end
 
@@ -125,6 +133,9 @@ end
         assign_points(p_Massless, :Pos, a_non)
         @test p_Massless[1].Pos == a_non[1]
 
+        append!(p_Massless, Massless())
+        @test_throws ErrorException assign_points(p_Massless, :Pos, a_non)
+
         # Unitful
         a = rand_pvector(5, u"m")
 
@@ -144,7 +155,7 @@ end
         a_randn = randn_pvector(5)
         @test length(a_randn) == 5
 
-        a_randn = randn_pvector(5)
+        a_randn = randn_pvector(5, u"m")
         @test length(a_randn) == 5
     end
 
@@ -182,7 +193,15 @@ end
         @test center_z(p) == 0.0u"m"
         @test center(p) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 
-        @test extent(p) == Extent(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector(u"m"), PVector(-1.0, -1.0, -1.0, u"m"))
+        e = extent(p)
+        @test e == Extent(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector(u"m"), PVector(-1.0, -1.0, -1.0, u"m"))
         @test mass_center(p) == PVector(u"m")
+        @test mass_center([Star()]) == PVector(u"kpc")
+
+        p2 = [Ball(PVector(-2.0u"m", 2.0u"m", 2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 3), 
+              Ball(PVector(2.0u"m", -2.0u"m", -2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 4)]
+        e2 = extent(p2)
+        @test extent(e, e2) == e2
+        @test extent([e, e2]) == e2
     end
 end
