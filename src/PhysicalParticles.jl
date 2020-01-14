@@ -20,7 +20,7 @@ import LinearAlgebra: norm, normalize, dot, cross
 
 import Statistics: mean, std, var
 
-import PhysicalConstants: CODATA2018, @constant
+import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 
 export
     AbstractPoint,
@@ -65,6 +65,15 @@ export
 
     # Conversion
     pconvert,
+
+    # Unit setting
+    uAstro, uSI, uCGS, uDefaults,
+    astro, si, cgs,
+    preferunits,
+    getunits,
+
+    # Constant
+    Constants,
 
     # Random
     rand_pvector, rand_pvector2d,
@@ -133,10 +142,11 @@ Base.getproperty(d::Dict, s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d, s) :
 
 ### Main files
 
+include("Unit.jl")
+include("Constants.jl")
 include("PVector.jl")
 include("PhysicalParticle.jl")
 
-### Numerics
 """
 Basic mathematical algorithms should be implemented in type definition files,
 in the following order:

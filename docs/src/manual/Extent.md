@@ -34,10 +34,10 @@ end
 
 You can get `Extent` of an array of mathical vectors or particles by calling `extent` functions:
 ```julia
-julia> p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m"), 1.0u"kg", 1),
-            Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m"), 1000.0u"g", 2)]
+julia> p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1),
+            Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)]
 julia> extent(p)
-Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 m, -1.0 m, 1.0 m, -1.0 m, 1.0 m, 2.0 m, PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))
+Extent: , xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 m, zMax = 1.0 m, SideLength = 2.0 m, Center = PVector(0.0 m, 0.0 m, 0.0 m), Corner = PVector(-1.0 m, -1.0 m, -1.0 m)
 ```
 or by comparing two `Extent`s and even array of `Extent`s:
 ```julia
@@ -53,7 +53,7 @@ or by comparing two `Extent`s and even array of `Extent`s:
 For particles with masses, compute the mass center with:
 ```julia
 julia> mass_center(p)
-PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+PVector(0.0 m, 0.0 m, 0.0 m)
 ```
 
 ## Minimum, maximum and center
@@ -67,7 +67,7 @@ julia> max_z(p)
 1.0 m
 
 julia> center(p)
-PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+PVector(0.0 m, 0.0 m, 0.0 m)
 ```
 
 We have implemented `max_x`, `max_y`, `max_z`, `min_x`, `min_y`, `min_z`, `center`, `center_x`, `center_y`, `center_z` for both points and particles. You could simply infer their functions by name.

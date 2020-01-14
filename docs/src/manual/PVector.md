@@ -54,7 +54,7 @@ julia> PVector(1.0, 2.0)
 PVector2D{Float64}(1.0, 2.0)
 
 julia> PVector(2.0, 3.0, u"m")
-PVector2D{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(2.0 m, 3.0 m)
+PVector2D(2.0 m, 3.0 m)
 ```
 
 The default constructors of `PVector` are still 3d-version:
@@ -63,7 +63,7 @@ julia> PVector()
 PVector{Float64}(0.0, 0.0, 0.0)
 
 julia> PVector(u"m")
-PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m)
+PVector(0.0 m, 0.0 m, 0.0 m)
 ```
 
 ### Basic Operators
@@ -102,7 +102,7 @@ julia> dot(a,b) == *(a,b)
 true
 
 julia> c = pconvert(ones(3)) * 1.0u"m"
-PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(1.0 m, 1.0 m, 1.0 m)
+PVector(1.0 m, 1.0 m, 1.0 m)
 
 julia> c * a
 3.0 m

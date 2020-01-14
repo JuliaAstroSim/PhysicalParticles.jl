@@ -39,6 +39,7 @@ makedocs(
             "manual/guide.md",
             "manual/PVector.md",
             "manual/Conversion.md",
+            "manual/Units.md",
             "manual/Random.md",
             "manual/Extent.md",
             "manual/Neighbors.md",

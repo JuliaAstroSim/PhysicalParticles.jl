@@ -10,9 +10,9 @@ julia> p = rand_pvector(3)
 
 julia> pu = rand_pvector(3, u"m")
 3-element Array{PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}},1}:
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m)
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m)
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m)
+ PVector(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m)
+ PVector(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m)
+ PVector(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m)
 ```
 
 Here is the list of supported generators:

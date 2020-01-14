@@ -34,21 +34,24 @@ julia> pconvert([1.0 4.0;
 ```julia
 julia> pu = rand_pvector(3, u"m")
 3-element Array{PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}},1}:
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m)
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m)
- PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m)
+ PVector(0.6389443475740613 m, 0.44709006743714474 m, 0.8206187491039008 m)        
+ PVector(0.3281027103774252 m, 0.3802229116391327 m, 0.8588849154796518 m)
+ PVector(0.6249940272414733 m, 0.19047258781660226 m, 0.6575298981932443 m) 
 
 julia> p_Ball = [Ball() for i=1:3]
 3-element Array{Ball{Int64},1}:
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball 0: Pos = PVector(0.0 m, 0.0 m, 0.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 
+0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg      
+ Ball 0: Pos = PVector(0.0 m, 0.0 m, 0.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 
+0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg      
+ Ball 0: Pos = PVector(0.0 m, 0.0 m, 0.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 
+0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
 
 julia> assign_points(p_Ball, :Pos, pu)
 
 julia> p_Ball
 3-element Array{Ball{Int64},1}:
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.6477898102542425 m, 0.4373299903072585 m, 0.7049677138795583 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.8651944634833202 m, 0.5480460857713867 m, 0.5620548650425954 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
- Ball{Int64}(PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.28164175368241895 m, 0.1673360850328498 m, 0.31321825771349987 m), PVector{Quantity{Float64,𝐋*𝐓^-1,Unitful.FreeUnits{(m, s^-1),𝐋*𝐓^-1,nothing}}}(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), 0.0 kg, 0)
+ Ball 0: Pos = PVector(0.6389443475740613 m, 0.44709006743714474 m, 0.8206187491039008 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
+ Ball 0: Pos = PVector(0.3281027103774252 m, 0.3802229116391327 m, 0.8588849154796518 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg 
+ Ball 0: Pos = PVector(0.6249940272414733 m, 0.19047258781660226 m, 0.6575298981932443 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
 ```

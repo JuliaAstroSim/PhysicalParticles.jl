@@ -68,7 +68,7 @@ end
 function Base.show(io::IO, p::Extent2D)
     print(
         io, "Extent: ",
-        ", xMin = ", p.xMin,
+        "xMin = ", p.xMin,
         ", xMax = ", p.xMax,
         ", yMin = ", p.yMin,
         ", yMax = ", p.yMax,
@@ -81,7 +81,7 @@ end
 function Base.show(io::IO, p::Extent)
     print(
         io, "Extent: ",
-        ", xMin = ", p.xMin,
+        "xMin = ", p.xMin,
         ", xMax = ", p.xMax,
         ", yMin = ", p.yMin,
         ", yMax = ", p.yMax,
