@@ -32,12 +32,12 @@ abstract type AbstractPoint{T} end
 abstract type AbstractPoint2D{T} <: AbstractPoint{T} end
 abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 
-struct PVector2D{T<:Union{Number, Quantity}} <: AbstractPoint2D{T}
+struct PVector2D{T<:Number} <: AbstractPoint2D{T}
     x::T
     y::T
 end
 
-struct PVector{T<:Union{Number, Quantity}} <: AbstractPoint3D{T}
+struct PVector{T<:Number} <: AbstractPoint3D{T}
     x::T
     y::T
     z::T
@@ -110,7 +110,7 @@ julia> c * a
 
 ### More types, more possibilities
 
-`T<:Union{Number, Quantity}` gives us a whole world to try out new vector operations. As we mentioned above, the build-in type operation and promotion schemes have guaranteed most of operations would be correct:
+`T<:Number` gives us a whole world to try out new vector operations. As we mentioned above, the build-in type operation and promotion schemes have guaranteed most of operations would be correct:
 ```julia
 julia> a = PVector(1.0, 1.0, 1.0) * im
 PVector{Complex{Float64}}(0.0 + 1.0im, 0.0 + 1.0im, 0.0 + 1.0im)

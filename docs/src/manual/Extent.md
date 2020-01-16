@@ -7,7 +7,7 @@ abstract type AbstractExtent{T} end
 abstract type AbstractExtent2D{T} <: AbstractExtent{T} end
 abstract type AbstractExtent3D{T} <: AbstractExtent{T} end
 
-mutable struct Extent2D{T<:Union{Number, Quantity}} <: AbstractExtent2D{T}
+mutable struct Extent2D{T<:Number} <: AbstractExtent2D{T}
     xMin::T
     xMax::T
     yMin::T
@@ -17,7 +17,7 @@ mutable struct Extent2D{T<:Union{Number, Quantity}} <: AbstractExtent2D{T}
     Corner::PVector2D{T}
 end
 
-mutable struct Extent{T<:Union{Number, Quantity}} <: AbstractExtent3D{T}
+mutable struct Extent{T<:Number} <: AbstractExtent3D{T}
     xMin::T
     xMax::T
     yMin::T

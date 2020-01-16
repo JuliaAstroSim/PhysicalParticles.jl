@@ -2,7 +2,7 @@
 
 
 """
-function pconvert(a::Array{T,1}) where T<:Union{Number, Quantity}
+function pconvert(a::Array{T,1}) where T<:Number
 
 convert two-element array to PVector2D, and three-element array to PVector
 
@@ -19,7 +19,7 @@ julia> pconvert([1.0, 2.0, 3.0, 4.0])
 ERROR: Not supported dimension!
 ```
 """
-function pconvert(a::Array{T,1}) where T<:Union{Number, Quantity}
+function pconvert(a::Array{T,1}) where T<:Number
     if length(a) == 3
         return PVector(a[1], a[2], a[3])
     elseif length(a) == 2
@@ -30,7 +30,7 @@ function pconvert(a::Array{T,1}) where T<:Union{Number, Quantity}
 end
 
 """
-function pconvert(a::Array{T,2}) where T<:Union{Number, Quantity}
+function pconvert(a::Array{T,2}) where T<:Number
 
 convert 2xN Array to Array{PVector2D,1}, 3xN Array to Array{PVector,1}
 
@@ -54,7 +54,7 @@ julia> pconvert([1.0; 2.0; 3.0; 4.0])
 ERROR: Not supported dimension!
 ```
 """
-function pconvert(a::Array{T,2}) where T<:Union{Number, Quantity}
+function pconvert(a::Array{T,2}) where T<:Number
     row, col = size(a)
     if row == 3
         p = rand(PVector,0)

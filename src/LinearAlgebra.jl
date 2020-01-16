@@ -9,17 +9,17 @@
 
 ## PVector2D
 
-@inline rotate_z(p::PVector2D, theta::T) where T<:Union{Number, Quantity} = PVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
-@inline rotate(p::PVector2D, theta::T) where T<:Union{Number, Quantity} = rotate_z(p, theta)
+@inline rotate_z(p::PVector2D, theta::T) where T<:Number = PVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
+@inline rotate(p::PVector2D, theta::T) where T<:Number = rotate_z(p, theta)
 
 ### Cross product of 2D vectors (which is a number) is not supported here
 
 
 ## PVector
 
-@inline rotate_x(p::PVector, theta::T) where T<:Union{Number, Quantity} = PVector(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
-@inline rotate_y(p::PVector, theta::T) where T<:Union{Number, Quantity} = PVector(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
-@inline rotate_z(p::PVector, theta::T) where T<:Union{Number, Quantity} = PVector(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
+@inline rotate_x(p::PVector, theta::T) where T<:Number = PVector(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
+@inline rotate_y(p::PVector, theta::T) where T<:Number = PVector(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
+@inline rotate_z(p::PVector, theta::T) where T<:Number = PVector(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
 
 cross(a::PVector, b::PVector) = PVector(a.y * b.z - a.z * b.y, 
                                         a.z * b.x - a.x * b.z, 
