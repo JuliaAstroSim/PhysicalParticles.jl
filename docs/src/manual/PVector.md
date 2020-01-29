@@ -160,3 +160,33 @@ To avoid this, we have to use `upreferred` in both `norm` and `normalize`:
 @inline norm(p::PVector) = sqrt(upreferred(p * p))
 @inline normalize(p::PVector) = (n = ustrip(norm(p)); return PVector(upreferred(p.x/n), upreferred(p.y/n), upreferred(p.z/n)))
 ```
+
+### uconvert, ustrip, zero, one
+
+These would be useful when you cannot predict the type of input.
+
+```julia
+julia> p = PVector(2.0, 2.0, 2.0, u"km")
+PVector(2.0 km, 2.0 km, 2.0 km)
+
+julia> uconvert(u"m", p)
+PVector(2000.0 m, 2000.0 m, 2000.0 m)
+
+julia> ustrip(u"m", p)
+PVector{Float64}(2000.0, 2000.0, 2000.0)
+
+julia> ustrip(p)
+PVector{Float64}(2.0, 2.0, 2.0)
+
+julia> one(u"m", p)
+PVector(1.0 m, 1.0 m, 1.0 m)
+
+julia> one(p)
+PVector{Float64}(1.0, 1.0, 1.0)
+
+julia> zero(u"m", p)
+PVector(0.0 m, 0.0 m, 0.0 m)
+
+julia> zero(p)
+PVector{Float64}(0.0, 0.0, 0.0)
+```
