@@ -1,7 +1,5 @@
 # PhysicalParticles.jl
 
-![](https://github.com/JuliaAstroSim/PhysicalParticles.jl/workflows/.github/workflows/CI.yml/badge.svg)
-![](https://github.com/JuliaAstroSim/PhysicalParticles.jl/workflows/.github/workflows/doc.yml/badge.svg)
 [![codecov](https://codecov.io/gh/JuliaAstroSim/PhysicalParticles.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/JuliaAstroSim/PhysicalParticles.jl)
 [![][docs-dev-img]][docs-dev-url]
 

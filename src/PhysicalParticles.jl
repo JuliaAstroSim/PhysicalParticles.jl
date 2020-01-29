@@ -12,7 +12,7 @@ using DocStringExtensions
 using Unitful, UnitfulAstro, PhysicalConstants
 
 ## Explicitly overload functions and import types
-import Unitful: Units, AbstractQuantity
+import Unitful: Units, AbstractQuantity, uconvert
 
 import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==, getproperty
 

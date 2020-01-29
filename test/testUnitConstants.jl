@@ -17,6 +17,10 @@
 
     u = getunits(uAstro)
     @test [u...] == uAstro
+
+
+    @test PVector2D(u"m") == uconvert(u"m", PVector2D(u"km"))
+    @test PVector(u"m") == uconvert(u"m", PVector(u"km"))
 end
 
 @testset "Constant" begin
