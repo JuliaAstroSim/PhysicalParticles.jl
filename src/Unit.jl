@@ -24,6 +24,3 @@ function getunits(units = nothing)
     end
     return uLength, uTime, uCurrent, uTemperature, uLuminosity, uMass, uAmount
 end
-
-uconvert(u::Units, p::PVector2D) = PVector(uconvert(u, p.x), uconvert(u, p.y))
-uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))

@@ -57,3 +57,6 @@ PVector(x::Number, y::Number, z::Number, u::Units) = PVector(x * u, y * u, z * u
 PVector(x::T, y::T) where T<:Number = PVector2D(x, y)
 
 PVector(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
+
+uconvert(u::Units, p::PVector2D) = PVector(uconvert(u, p.x), uconvert(u, p.y))
+uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))

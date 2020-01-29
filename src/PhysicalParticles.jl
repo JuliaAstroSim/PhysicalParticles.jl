@@ -71,6 +71,7 @@ export
     astro, si, cgs,
     preferunits,
     getunits,
+    uconvert,
 
     # Constant
     Constants,
