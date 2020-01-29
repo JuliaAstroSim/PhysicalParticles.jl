@@ -58,5 +58,23 @@ PVector(x::T, y::T) where T<:Number = PVector2D(x, y)
 
 PVector(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
 
-uconvert(u::Units, p::PVector2D) = PVector(uconvert(u, p.x), uconvert(u, p.y))
+
+# Units
+
+uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
 uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))
+
+ustrip(u::Units, p::PVector2D) = PVector2D(ustrip(u, p.x), ustrip(u, p.y))
+ustrip(u::Units, p::PVector) = PVector(ustrip(u, p.x), ustrip(u, p.y), ustrip(u, p.z))
+ustrip(p::PVector2D) = PVector2D(ustrip(p.x), ustrip(p.y))
+ustrip(p::PVector) = PVector(ustrip(p.x), ustrip(p.y), ustrip(p.z))
+
+one(u::Units, p::PVector2D) = PVector2D(one(p.x) * u, one(p.y) * u)
+one(u::Units, p::PVector) = PVector(one(p.x) * u, one(p.y) * u, one(p.z) * u)
+one(p::PVector2D) = PVector2D(one(p.x), one(p.y))
+one(p::PVector) = PVector(one(p.x), one(p.y), one(p.z))
+
+zero(u::Units, p::PVector2D) = PVector2D(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)))
+zero(u::Units, p::PVector) = PVector(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)), uconvert(u, zero(p.z)))
+zero(p::PVector2D) = PVector2D(ustrip(zero(p.x)), ustrip(zero(p.y)))
+zero(p::PVector) = PVector(ustrip(zero(p.x)), ustrip(zero(p.y)), ustrip(zero(p.z)))

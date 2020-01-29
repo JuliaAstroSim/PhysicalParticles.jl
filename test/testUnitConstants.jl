@@ -19,8 +19,23 @@
     @test [u...] == uAstro
 
 
-    @test PVector2D(u"m") == uconvert(u"m", PVector2D(u"km"))
-    @test PVector(u"m") == uconvert(u"m", PVector(u"km"))
+    @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")
+    @test uconvert(u"m", PVector(u"km")) == PVector(u"m")
+
+    @test ustrip(PVector2D(u"m")) == PVector2D()
+    @test ustrip(PVector(u"m")) == PVector()
+    @test ustrip(u"m", PVector2D(1.0, 1.0, u"km")) == PVector2D(1000.0, 1000.0)
+    @test ustrip(u"m", PVector(1.0, 1.0, 1.0, u"km")) == PVector(1000.0, 1000.0, 1000.0)
+
+    @test one(PVector2D(u"m")) == PVector2D(1.0, 1.0)
+    @test one(PVector(u"m")) == PVector(1.0, 1.0, 1.0)
+    @test one(u"m", PVector2D(u"km")) == PVector2D(1.0u"m", 1.0u"m")
+    @test one(u"m", PVector(u"km")) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
+
+    @test zero(PVector2D(u"m")) == PVector2D()
+    @test zero(PVector(u"m")) == PVector()
+    @test zero(u"m", PVector2D(u"km")) == PVector2D(0.0u"m", 0.0u"m")
+    @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 end
 
 @testset "Constant" begin

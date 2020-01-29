@@ -12,9 +12,9 @@ using DocStringExtensions
 using Unitful, UnitfulAstro, PhysicalConstants
 
 ## Explicitly overload functions and import types
-import Unitful: Units, AbstractQuantity, uconvert
+import Unitful: Units, AbstractQuantity, uconvert, ustrip
 
-import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==, getproperty
+import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==, getproperty, one, zero
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -50,6 +50,7 @@ export
     show, display,
     ==,
     getproperty,
+    one, zero,
 
     # LinearAlgebra
     norm, normalize, dot, cross,
@@ -71,7 +72,7 @@ export
     astro, si, cgs,
     preferunits,
     getunits,
-    uconvert,
+    uconvert, ustrip,
 
     # Constant
     Constants,
