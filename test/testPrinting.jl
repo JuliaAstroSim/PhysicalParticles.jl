@@ -1,46 +1,58 @@
 @testset "Printing" begin
     #!!! Just make sure these could be printed
-    a = println(PVector2D())
-    @test a == nothing
-
-    a = println(PVector2D(u"m"))
-    @test a == nothing
-
-    a = println(PVector())
-    @test a == nothing
-
-    a = println(PVector(u"m"))
-    @test a == nothing
-
-    a = println(Massless2D())
-    @test a == nothing
-
-    a = println(Massless())
-    @test a == nothing
-
-    a = println(Ball2D())
-    @test a == nothing
-
-    a = println(Ball())
-    @test a == nothing
-
-    a = println(Star2D())
-    @test a == nothing
-
-    a = println(Star())
-    @test a == nothing
-
-    a = println(SPHGas2D())
-    @test a == nothing
-
-    a = println(SPHGas())
-    @test a == nothing
-
-    a = println(Extent2D(0.0, 0.0, 0.0, 0.0, 0.0, PVector2D(), PVector2D()))
-    @test a == nothing
-
-    a = println(Extent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, PVector(), PVector()))
-    @test a == nothing
-
+    a = show(PVector2D())
     println()
+    @test a == nothing
+
+    a = show(PVector2D(u"m"))
+    println()
+    @test a == nothing
+
+    a = show(PVector())
+    println()
+    @test a == nothing
+
+    a = show(PVector(u"m"))
+    println()
+    @test a == nothing
+
+    a = show(Massless2D())
+    println()
+    @test a == nothing
+
+    a = show(Massless())
+    println()
+    @test a == nothing
+
+    a = show(Ball2D())
+    println()
+    @test a == nothing
+
+    a = show(Ball())
+    println()
+    @test a == nothing
+
+    a = show(Star2D())
+    println()
+    @test a == nothing
+
+    a = show(Star())
+    println()
+    @test a == nothing
+
+    a = show(SPHGas2D())
+    println()
+    @test a == nothing
+
+    a = show(SPHGas())
+    println()
+    @test a == nothing
+
+    a = show(Extent2D(0.0, 0.0, 0.0, 0.0, 0.0, PVector2D(), PVector2D()))
+    println()
+    @test a == nothing
+
+    a = show(Extent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, PVector(), PVector()))
+    println()
+    @test a == nothing
 end
