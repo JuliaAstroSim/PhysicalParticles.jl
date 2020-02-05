@@ -54,7 +54,7 @@ mutable struct Star2D{F<:AbstractFloat, I<:Integer} <: AbstractParticle2D
     OldAcc::Quantity
 end
 Star2D() = Star2D(
-    PVector2D(u"kpc"), PVector2D(u"kpc/Gyr"), PVector2D(u"kpc/Gyr^2"), 0.0u"Msun", 0, GadgetStarType(),
+    PVector2D(u"kpc"), PVector2D(u"kpc/Gyr"), PVector2D(u"kpc/Gyr^2"), 0.0u"Msun", 0, STAR(),
     0, 0, 0.0,
     0.0u"J", 0.0u"kpc/Gyr^2"
 )
@@ -75,7 +75,7 @@ mutable struct Star{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
     OldAcc::Quantity
 end
 Star() = Star(
-    PVector(u"kpc"), PVector(u"kpc/Gyr"), PVector(u"kpc/Gyr^2"), 0.0u"Msun", 0, GadgetStarType(),
+    PVector(u"kpc"), PVector(u"kpc/Gyr"), PVector(u"kpc/Gyr^2"), 0.0u"Msun", 0, STAR(),
     0, 0, 0.0,
     0.0u"J", 0.0u"kpc/Gyr^2"
 )
@@ -114,7 +114,7 @@ mutable struct SPHGas2D{F<:AbstractFloat, I<:Integer} <: AbstractParticle2D
     MaxSignalVel::Quantity
 end
 SPHGas2D() = SPHGas2D(
-    PVector2D(u"kpc"), PVector2D(u"kpc/Gyr"), PVector2D(u"kpc/Gyr^2"), 0.0u"Msun", 0, GadgetGasType(),
+    PVector2D(u"kpc"), PVector2D(u"kpc/Gyr"), PVector2D(u"kpc/Gyr^2"), 0.0u"Msun", 0, GAS(),
     0, 0, 0.0,
     0.0u"J", 0.0u"kpc/Gyr^2",
 
@@ -158,7 +158,7 @@ mutable struct SPHGas{F<:AbstractFloat, I<:Integer} <: AbstractParticle3D
     MaxSignalVel::Quantity
 end
 SPHGas() = SPHGas(
-    PVector(u"kpc"), PVector(u"kpc/Gyr"), PVector(u"kpc/Gyr^2"), 0.0u"Msun", 0, GadgetGasType(),
+    PVector(u"kpc"), PVector(u"kpc/Gyr"), PVector(u"kpc/Gyr^2"), 0.0u"Msun", 0, GAS(),
     0, 0, 0.0,
     0.0u"J", 0.0u"kpc/Gyr^2",
 

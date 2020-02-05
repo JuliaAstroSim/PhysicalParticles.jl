@@ -46,13 +46,11 @@ export
 
     # Traits
     AbstractParticleType,
-    GadgetParticleType,
-        GadgetGasType,
-        GadgetHaloType,
-        GadgetDiskType,
-        GadgetBulgeType,
-        GadgetStarType,
-        GadgetBlackholeType,
+        AbstractGasType,
+            GAS,
+
+        AbstractStarType,
+            HALO, DISK, BULGE, STAR, BLACKHOLE,
 
     # Base functions
     +, -, *, /, zero, length, iterate, real,
