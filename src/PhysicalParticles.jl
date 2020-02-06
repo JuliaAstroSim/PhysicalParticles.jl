@@ -9,7 +9,7 @@ module PhysicalParticles
 __precompile__(true)
 
 using DocStringExtensions
-using Unitful, UnitfulAstro, PhysicalConstants
+using Unitful, UnitfulAstro
 
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity, uconvert, ustrip
@@ -19,8 +19,6 @@ import Base: +, -, *, /, zero, length, iterate, real, to_index, rand, show, ==, 
 import LinearAlgebra: norm, normalize, dot, cross
 
 import Statistics: mean, std, var
-
-import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 
 export
     AbstractPoint,
@@ -88,9 +86,6 @@ export
         getuMass,
         getuAmount,
     uconvert, ustrip,
-
-    # Constant
-    Constants,
 
     # Random
     rand_pvector, rand_pvector2d,
@@ -161,7 +156,7 @@ Base.getproperty(d::Dict, s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d, s) :
 
 include("Traits.jl")
 include("Unit.jl")
-include("Constants.jl")
+
 include("PVector.jl")
 include("PhysicalParticle.jl")
 

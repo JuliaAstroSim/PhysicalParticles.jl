@@ -2,7 +2,7 @@ using PhysicalParticles
 
 using Test, Unitful, UnitfulAstro
 
-include("testUnitConstants.jl")
+include("testUnits.jl")
 
 si()
 

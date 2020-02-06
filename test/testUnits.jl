@@ -56,8 +56,3 @@
     @test zero(u"m", PVector2D(u"km")) == PVector2D(0.0u"m", 0.0u"m")
     @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 end
-
-@testset "Constant" begin
-    c = PhysicalParticles.Constant()
-    @test Constants == c
-end
