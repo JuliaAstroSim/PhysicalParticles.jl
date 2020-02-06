@@ -44,6 +44,14 @@ export
     Extent, Extent2D,
     mass_center, extent,
 
+    # Traits
+    AbstractParticleType,
+        AbstractGasType,
+            GAS,
+
+        AbstractStarType,
+            HALO, DISK, BULGE, STAR, BLACKHOLE,
+
     # Base functions
     +, -, *, /, zero, length, iterate, real,
 
@@ -144,6 +152,7 @@ Base.getproperty(d::Dict, s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d, s) :
 
 ### Main files
 
+include("Traits.jl")
 include("Unit.jl")
 include("Constants.jl")
 include("PVector.jl")
