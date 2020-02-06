@@ -40,3 +40,6 @@ getuTemperature(units = uDefaults) = units[4]
 getuLuminosity(units = uDefaults) = units[5]
 getuMass(units = uDefaults) = units[6]
 getuAmount(units = uDefaults) = units[7]
+
+ustrip(T::Type, ::Nothing, x::Real) = convert(T, x)
+ustrip(::Nothing, x::Real) = x
