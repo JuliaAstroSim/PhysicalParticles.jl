@@ -154,6 +154,6 @@ version = "0.5.0"
 
 [[UnitfulAstro]]
 deps = ["Unitful", "UnitfulAngles"]
-git-tree-sha1 = "900a89c70b80253b52791da65aa3d3b069757202"
+git-tree-sha1 = "1fc67fc31fa326c262814203090d9bf7f6ad8079"
 uuid = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
-version = "0.4.0"
+version = "1.0.0"
