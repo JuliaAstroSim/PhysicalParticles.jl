@@ -16,11 +16,27 @@ astro() = preferunits(uAstro)
 si() = preferunits(uSI)
 cgs() = preferunits(uCGS)
 
-function getunits(units = nothing)
-    uLength, uTime, uCurrent, uTemperature, uLuminosity, uMass, uAmount = uDefaults
-
-    if !isnothing(units)
-        uLength, uTime, uCurrent, uTemperature, uLuminosity, uMass, uAmount = units
-    end
+function getunits(units = uDefaults)
+    uLength, uTime, uCurrent, uTemperature, uLuminosity, uMass, uAmount = units
     return uLength, uTime, uCurrent, uTemperature, uLuminosity, uMass, uAmount
 end
+
+function getunits(::Nothing)
+    return (nothing, nothing, nothing, nothing, nothing, nothing, nothing)
+end
+
+getuLength(::Nothing) = nothing
+getuTime(::Nothing) = nothing
+getuCurrent(::Nothing) = nothing
+getuTemperature(::Nothing) = nothing
+getuLuminosity(::Nothing) = nothing
+getuMass(::Nothing) = nothing
+getuAmount(::Nothing) = nothing
+
+getuLength(units = uDefaults) = units[1]
+getuTime(units = uDefaults) = units[2]
+getuCurrent(units = uDefaults) = units[3]
+getuTemperature(units = uDefaults) = units[4]
+getuLuminosity(units = uDefaults) = units[5]
+getuMass(units = uDefaults) = units[6]
+getuAmount(units = uDefaults) = units[7]

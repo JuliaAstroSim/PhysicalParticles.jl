@@ -18,6 +18,25 @@
     u = getunits(uAstro)
     @test [u...] == uAstro
 
+    u = getunits(nothing)
+    @test u == (nothing, nothing, nothing, nothing, nothing, nothing, nothing)
+
+    @test getuLength(nothing) == nothing
+    @test getuTime(nothing) == nothing
+    @test getuCurrent(nothing) == nothing
+    @test getuTemperature(nothing) == nothing
+    @test getuLuminosity(nothing) == nothing
+    @test getuMass(nothing) == nothing
+    @test getuAmount(nothing) == nothing
+
+    @test getuLength(uAstro) == u"kpc"
+    @test getuTime(uAstro) == u"Gyr"
+    @test getuCurrent(uAstro) == u"A"
+    @test getuTemperature(uAstro) == u"K"
+    @test getuLuminosity(uAstro) == u"cd"
+    @test getuMass(uAstro) == u"Msun"
+    @test getuAmount(uAstro) == u"mol"
+
 
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")
     @test uconvert(u"m", PVector(u"km")) == PVector(u"m")

@@ -14,7 +14,7 @@ using Unitful, UnitfulAstro, PhysicalConstants
 ## Explicitly overload functions and import types
 import Unitful: Units, AbstractQuantity, uconvert, ustrip
 
-import Base: +,-,*,/,zero,length,iterate,real,to_index, rand, show, ==, getproperty, one, zero
+import Base: +, -, *, /, zero, length, iterate, real, to_index, rand, show, ==, getproperty, one, zero
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -80,6 +80,13 @@ export
     astro, si, cgs,
     preferunits,
     getunits,
+        getuLength,
+        getuTime,
+        getuCurrent,
+        getuTemperature,
+        getuLuminosity,
+        getuMass,
+        getuAmount,
     uconvert, ustrip,
 
     # Constant
