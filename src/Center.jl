@@ -233,3 +233,8 @@ function center(a::Array{T,N}) where T <: AbstractParticle3D where N
     z = center_z(a)
     return typeof(a[1].Pos)(x,y,z)
 end
+
+
+pos_center(a::Array{T}) where T <: AbstractParticle = average(a, :Pos)
+
+mass_center(a::Array{T}) where T <: AbstractParticle = averagebymass(a, :Pos)

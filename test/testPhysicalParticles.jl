@@ -110,6 +110,7 @@ end
         @test e == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
         @test mass_center(p) == PVector2D(u"m")
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
+        @test mass_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
 
         p2 = [Ball2D(PVector2D(-2.0u"m", 2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 3), 
               Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
@@ -219,6 +220,7 @@ end
         @test e == Extent(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector(u"m"), PVector(-1.0, -1.0, -1.0, u"m"))
         @test mass_center(p) == PVector(u"m")
         @test mass_center([Star(uAstro)]) == PVector(u"kpc")
+        @test mass_center([Massless() for i in 1:3]) == PVector()
 
         p2 = [Ball(PVector(-2.0u"m", 2.0u"m", 2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 3), 
               Ball(PVector(2.0u"m", -2.0u"m", -2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 4)]

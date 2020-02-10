@@ -40,7 +40,7 @@ export
         AbstractExtent2D, AbstractExtent3D,
 
     Extent, Extent2D,
-    mass_center, extent,
+        extent,
 
     # Traits
     AbstractParticleCollection,
@@ -70,10 +70,14 @@ export
 
     mean, distance,
 
+    average, averagebymass,
+
     # Center
     min_x, min_y, min_z,
     max_x, max_y, max_z,
     center_x, center_y, center_z, center,
+    pos_center, mass_center,
+
 
     # Conversion
     pconvert,

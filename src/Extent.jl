@@ -66,24 +66,8 @@ extent(a::Extent, b::Extent) = (xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b
 
 function extent(a::Array{T}) where T <: AbstractExtent
     e = a[1]
-    for i in 2:length(a)
-        @inbounds e = extent(e, a[i])
+    for i in a[2:end]
+        @inbounds e = extent(e, i)
     end
     return e
-end
-
-#####  Mass center  #####
-
-function mass_center(a::Array{T}) where T <: AbstractParticle
-    if length(a) == 1
-        return a[1].Pos
-    end
-    sum_mass = a[1].Mass
-    sum_center = a[1].Pos * a[1].Mass
-    for i in 2:length(a)
-        sum_mass += a[i].Mass
-        sum_center += a[i].Pos * a[i].Mass
-    end
-
-    return sum_center/sum_mass
 end
