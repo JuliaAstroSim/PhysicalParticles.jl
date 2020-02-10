@@ -55,7 +55,7 @@ function averagebymass(a::Array{T}, symbol::Symbol) where T<:AbstractParticle
     sum = getfield(a[1], symbol)
     sum_mass = a[1].Mass
     for p in a[2:end]
-        sum += getfield(p, symbol)
+        sum += getfield(p, symbol) * p.Mass
         sum_mass += p.Mass
     end
 
