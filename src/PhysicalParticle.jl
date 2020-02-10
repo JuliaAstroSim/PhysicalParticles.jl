@@ -78,7 +78,7 @@ mutable struct Star2D{I<:Integer} <: AbstractParticle2D
     Acc::PVector2D
     Mass::Number
     ID::I
-    Type::AbstractParticleType
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -89,19 +89,19 @@ mutable struct Star2D{I<:Integer} <: AbstractParticle2D
 end
 
 
-Star2D(; id = 0, type = STAR()) = Star2D(
-    PVector2D(), PVector2D(), PVector2D(), 0.0, id, type,
+Star2D(; id = 0, collection = STAR()) = Star2D(
+    PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0
 )
 
-function Star2D(units::Array; id = 0, type = STAR())
+function Star2D(units::Array; id = 0, collection = STAR())
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     return Star2D(
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
-        0.0 * uMass, id, type,
+        0.0 * uMass, id, collection,
         0, 0, 0.0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2
     )
@@ -114,7 +114,7 @@ mutable struct Star{I<:Integer} <: AbstractParticle3D
     Acc::PVector
     Mass::Number
     ID::I
-    Type::AbstractParticleType
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -124,19 +124,19 @@ mutable struct Star{I<:Integer} <: AbstractParticle3D
     OldAcc::Number
 end
 
-Star(; id = 0, type = STAR()) = Star(
-    PVector(), PVector(), PVector(), 0.0, id, type,
+Star(; id = 0, collection = STAR()) = Star(
+    PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0
 )
 
-function Star(units::Array; id = 0, type = STAR())
+function Star(units::Array; id = 0, collection = STAR())
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     return Star(
         PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
-        0.0 * uMass, id, type,
+        0.0 * uMass, id, collection,
         0, 0, 0.0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2
     )
@@ -149,7 +149,7 @@ mutable struct SPHGas2D{I<:Integer} <: AbstractParticle2D
     Acc::PVector2D
     Mass::Number
     ID::I
-    Type::AbstractParticleType
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -177,8 +177,8 @@ mutable struct SPHGas2D{I<:Integer} <: AbstractParticle2D
     MaxSignalVel::Number
 end
 
-SPHGas2D(; id = 0, type = GAS()) = SPHGas2D(
-    PVector2D(), PVector2D(), PVector2D(), 0.0, id, type,
+SPHGas2D(; id = 0, collection = GAS()) = SPHGas2D(
+    PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0,
 
@@ -188,14 +188,14 @@ SPHGas2D(; id = 0, type = GAS()) = SPHGas2D(
     0.0, 0.0, 0.0
 )
 
-function SPHGas2D(units::Array; id = 0, type = GAS())
+function SPHGas2D(units::Array; id = 0, collection = GAS())
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     uTemperature = getuTemperature(units)
     return SPHGas2D(
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
-        0.0 * uMass, id, type,
+        0.0 * uMass, id, collection,
         0, 0, 0.0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
 
@@ -217,7 +217,7 @@ mutable struct SPHGas{I<:Integer} <: AbstractParticle3D
     Acc::PVector
     Mass::Number
     ID::I
-    Type::AbstractParticleType
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -245,8 +245,8 @@ mutable struct SPHGas{I<:Integer} <: AbstractParticle3D
     MaxSignalVel::Number
 end
 
-SPHGas(; id = 0, type = GAS()) = SPHGas(
-    PVector(), PVector(), PVector(), 0.0, id, type,
+SPHGas(; id = 0, collection = GAS()) = SPHGas(
+    PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0,
 
@@ -256,14 +256,14 @@ SPHGas(; id = 0, type = GAS()) = SPHGas(
     0.0, 0.0, 0.0
 )
 
-function SPHGas(units::Array; id = 0, type = GAS())
+function SPHGas(units::Array; id = 0, collection = GAS())
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     uTemperature = getuTemperature(units)
     return SPHGas(
         PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
-        0.0 * uMass, id, type,
+        0.0 * uMass, id, collection,
         0, 0, 0.0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
 

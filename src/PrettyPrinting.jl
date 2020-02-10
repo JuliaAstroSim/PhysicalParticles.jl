@@ -22,7 +22,7 @@ end
 
 function Base.show(io::IO, p::T) where T<:Union{Star, Star2D}
     print(
-        io, "Star ", p.ID, " ", p.Type,
+        io, "Star ", p.ID, " ", p.Collection,
         "\b\b: Pos = ", p.Pos, 
         ", Vel = ", p.Vel, 
         ", Acc = ", p.Acc, 
@@ -36,7 +36,7 @@ end
 
 function Base.show(io::IO, p::T) where T<:Union{SPHGas, SPHGas2D}
     print(
-        io, "SPHGas ", p.ID, " ", p.Type,
+        io, "SPHGas ", p.ID, " ", p.Collection,
         "\b\b: Pos = ", p.Pos, 
         ", Vel = ", p.Vel, 
         ", Acc = ", p.Acc, 

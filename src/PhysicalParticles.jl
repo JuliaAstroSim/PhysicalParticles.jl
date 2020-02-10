@@ -43,12 +43,17 @@ export
     mass_center, extent,
 
     # Traits
-    AbstractParticleType,
-        AbstractGasType,
+    AbstractParticleCollection,
+        AbstractGasCollection,
             GAS,
 
-        AbstractStarType,
+        AbstractStarCollection,
             HALO, DISK, BULGE, STAR, BLACKHOLE,
+
+    # AbstractDataDimension,
+    datadimension,
+        Physical2D, Physical3D,
+        Unitless2D, Unitless3D,
 
     # Base functions
     +, -, *, /, zero, length, iterate, real,

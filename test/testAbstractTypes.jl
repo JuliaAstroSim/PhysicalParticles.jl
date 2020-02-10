@@ -21,4 +21,11 @@
         @test iterate(a, 1) == nothing
         @test real(a) == a
     end
+
+    @testset "Data Dimensions" begin
+        @test datadimension([PVector2D()]) == Unitless2D()
+        @test datadimension([PVector()]) == Unitless3D()
+        @test datadimension([Star2D(uAstro)]) == Physical2D()
+        @test datadimension([Star(uAstro)]) == Physical3D()
+    end
 end
