@@ -33,6 +33,9 @@ getuLuminosity(::Nothing) = nothing
 getuMass(::Nothing) = nothing
 getuAmount(::Nothing) = nothing
 
+getuVel(::Nothing) = nothing
+getuAcc(::Nothing) = nothing
+
 getuLength(units = uDefaults) = units[1]
 getuTime(units = uDefaults) = units[2]
 getuCurrent(units = uDefaults) = units[3]
@@ -40,6 +43,9 @@ getuTemperature(units = uDefaults) = units[4]
 getuLuminosity(units = uDefaults) = units[5]
 getuMass(units = uDefaults) = units[6]
 getuAmount(units = uDefaults) = units[7]
+
+getuVel(units = uDefaults) = units[1] / units[2]
+getuAcc(units = uDefaults) = units[1] / units[2]^2
 
 ustrip(T::Type, ::Nothing, x::Real) = convert(T, x)
 ustrip(::Nothing, x::Real) = x

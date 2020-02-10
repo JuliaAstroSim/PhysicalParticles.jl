@@ -90,6 +90,10 @@ export
         getuLuminosity,
         getuMass,
         getuAmount,
+
+        getuVel,
+        getuAcc,
+
     uconvert, ustrip,
 
     # Random

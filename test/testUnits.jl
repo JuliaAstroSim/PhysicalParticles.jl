@@ -29,6 +29,9 @@
     @test getuMass(nothing) == nothing
     @test getuAmount(nothing) == nothing
 
+    @test getuVel(nothing) == nothing
+    @test getuAcc(nothing) == nothing
+
     @test getuLength(uAstro) == u"kpc"
     @test getuTime(uAstro) == u"Gyr"
     @test getuCurrent(uAstro) == u"A"
@@ -36,6 +39,9 @@
     @test getuLuminosity(uAstro) == u"cd"
     @test getuMass(uAstro) == u"Msun"
     @test getuAmount(uAstro) == u"mol"
+
+    @test getuVel(uAstro) == u"kpc/Gyr"
+    @test getuAcc(uAstro) == u"kpc/Gyr^2"
 
 
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")
