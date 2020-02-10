@@ -64,6 +64,8 @@ PVector(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
 uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
 uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))
 
+ustrip(::Nothing, p::PVector2D) = p
+ustrip(::Nothing, p::PVector) = p
 ustrip(u::Units, p::PVector2D) = PVector2D(ustrip(u, p.x), ustrip(u, p.y))
 ustrip(u::Units, p::PVector) = PVector(ustrip(u, p.x), ustrip(u, p.y), ustrip(u, p.z))
 ustrip(p::PVector2D) = PVector2D(ustrip(p.x), ustrip(p.y))

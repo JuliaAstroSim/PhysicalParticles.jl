@@ -51,6 +51,8 @@
     @test ustrip(PVector(u"m")) == PVector()
     @test ustrip(u"m", PVector2D(1.0, 1.0, u"km")) == PVector2D(1000.0, 1000.0)
     @test ustrip(u"m", PVector(1.0, 1.0, 1.0, u"km")) == PVector(1000.0, 1000.0, 1000.0)
+    @test ustrip(nothing, PVector2D()) == PVector2D()
+    @test ustrip(nothing, PVector()) == PVector()
 
     @test ustrip(Float64, nothing, 1.0) == 1.0
     @test ustrip(nothing, 1.0) == 1.0
