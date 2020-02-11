@@ -53,22 +53,22 @@ end
         # Non-unit
         a_non = rand_pvector2d(5)
         p_Massless2D = [Massless2D() for i=1:5]
-        assign_points(p_Massless2D, :Pos, a_non)
+        assign_particles(p_Massless2D, :Pos, a_non)
         @test p_Massless2D[1].Pos == a_non[1]
 
         # Unitful
         a = rand_pvector2d(5, u"m")
 
         p_Ball2D = [Ball2D(uSI) for i=1:5]
-        assign_points(p_Ball2D, :Pos, a)
+        assign_particles(p_Ball2D, :Pos, a)
         @test p_Ball2D[1].Pos == a[1]
 
         p_Star2D = [Star2D(uSI) for i=1:5]
-        assign_points(p_Star2D, :Pos, a)
+        assign_particles(p_Star2D, :Pos, a)
         @test p_Star2D[1].Pos == a[1]
 
         p_SPHGas2D = [SPHGas2D(uSI) for i=1:5]
-        assign_points(p_SPHGas2D, :Pos, a)
+        assign_particles(p_SPHGas2D, :Pos, a)
         @test p_SPHGas2D[1].Pos == a[1]
 
         # randn
@@ -110,7 +110,7 @@ end
         @test e == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
         @test mass_center(p) == PVector2D(u"m")
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
-        @test mass_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
+        @test pos_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
 
         p2 = [Ball2D(PVector2D(-2.0u"m", 2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 3), 
               Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
@@ -153,25 +153,25 @@ end
         # Non-unit
         a_non = rand_pvector(5)
         p_Massless = [Massless() for i=1:5]
-        assign_points(p_Massless, :Pos, a_non)
+        assign_particles(p_Massless, :Pos, a_non)
         @test p_Massless[1].Pos == a_non[1]
 
         append!(p_Massless, Massless())
-        @test_throws ErrorException assign_points(p_Massless, :Pos, a_non)
+        @test_throws ErrorException assign_particles(p_Massless, :Pos, a_non)
 
         # Unitful
         a = rand_pvector(5, u"m")
 
         p_Ball = [Ball(uSI) for i=1:5]
-        assign_points(p_Ball, :Pos, a)
+        assign_particles(p_Ball, :Pos, a)
         @test p_Ball[1].Pos == a[1]
 
         p_Star = [Star(uSI) for i=1:5]
-        assign_points(p_Star, :Pos, a)
+        assign_particles(p_Star, :Pos, a)
         @test p_Star[1].Pos == a[1]
 
         p_SPHGas = [SPHGas(uSI) for i=1:5]
-        assign_points(p_SPHGas, :Pos, a)
+        assign_particles(p_SPHGas, :Pos, a)
         @test p_SPHGas[1].Pos == a[1]
 
         # randn

@@ -76,25 +76,28 @@ end
 # Assign arrays
 
 """
-    function assign_points(particles::Array{P, N} where P<:AbstractParticle where N, symbol::Symbol, points::Array{P, N} where P<:AbstractPoint where N)
+    function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array{T,N} where T) where N
 
-Assign the symbol of particles through array of mathical vectors iteratively
+Assign the symbol of particles through array iteratively
 
 ## Examples
 
 ```julia
 julia> pu = rand_pvector(3, u"m")
 julia> p_Ball = [Ball() for i=1:3]
-julia> assign_points(p_Ball, :Pos, pu)
+julia> assign_particles(p_Ball, :Pos, pu)
+
+julia> m = rand(3) * u"kg"
+julia> assign_particles(p_Ball, :Mass, m)
 ```
 """
-function assign_points(particles::Array{P, N} where P<:AbstractParticle where N, symbol::Symbol, points::Array{P, N} where P<:AbstractPoint where N)
+function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array{T,N} where T) where N
     len = length(particles)
-    if len != length(points)
-        error("Length of particles (", len, ") and vectors (", length(points), ") does not match!")
+    if len != length(data)
+        error("Length of particles (", len, ") and vectors (", length(data), ") does not match!")
     end
 
     for i in 1:len
-        @inbounds setfield!(particles[i], symbol, points[i])
+        @inbounds setfield!(particles[i], symbol, data[i])
     end
 end

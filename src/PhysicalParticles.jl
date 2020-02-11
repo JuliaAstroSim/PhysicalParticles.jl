@@ -104,7 +104,7 @@ export
     rand_pvector, rand_pvector2d,
     randn_pvector, randn_pvector2d,
 
-    assign_points
+    assign_particles
 
     # Trait functions
     
