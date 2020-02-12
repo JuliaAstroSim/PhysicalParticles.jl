@@ -44,6 +44,7 @@ PVector2D(u::Units) = PVector2D(0.0 * u, 0.0 * u)
 
 PVector2D(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
 
+PVector2D(x::Number, y::Number, ::Nothing) = PVector2D(x, y)
 
 
 PVector() = PVector(0.0, 0.0, 0.0)
@@ -52,11 +53,14 @@ PVector(u::Units) = PVector(0.0 * u, 0.0 * u, 0.0 * u)
 
 PVector(x::Number, y::Number, z::Number, u::Units) = PVector(x * u, y * u, z * u)
 
+PVector(x::Number, y::Number, z::Number, ::Nothing) = PVector(x, y, z)
 
 
 PVector(x::T, y::T) where T<:Number = PVector2D(x, y)
 
 PVector(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
+
+PVector(x::Number, y::Number, ::Nothing) = PVector2D(x, y)
 
 
 # Units

@@ -17,6 +17,8 @@
         #@test c * 2.0 == PVector2D(BigFloat(10.0), BigFloat(12.0))
 
         @test b / 2.0 == PVector2D(1.5, 2.0)
+
+        @test PVector(0.0, 0.0, nothing) == PVector2D()
     end
 
     @testset "Linear Algebra" begin
@@ -78,6 +80,8 @@ end
         @test b * 3.0 == PVector(12.0, 15.0, 18.0)
 
         @test b / 2.0 == PVector(2.0, 2.5, 3.0)
+
+        @test PVector(0.0, 0.0, 0.0, nothing) == PVector()
     end
 
     @testset "Linear Algebra" begin
