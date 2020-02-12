@@ -103,7 +103,7 @@ function Star2D(units::Array; id = 0, collection = STAR())
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
         0.0 * uMass, id, collection,
         0, 0, 0.0,
-        0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2
+        0.0 * getuEnergy(units), 0.0 * uLength / uTime^2
     )
 end
 
@@ -138,7 +138,7 @@ function Star(units::Array; id = 0, collection = STAR())
         PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
         0.0 * uMass, id, collection,
         0, 0, 0.0,
-        0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2
+        0.0 * getuEnergy(units), 0.0 * uLength / uTime^2
     )
 end
 
@@ -197,15 +197,15 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
         0.0 * uMass, id, collection,
         0, 0, 0.0,
-        0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
+        0.0 * getuEnergy(units), 0.0 * uLength / uTime^2,
 
-        0.0 * uMass * uLength^2 / uTime^2 / uTemperature,
-        0.0 * uMass / uLength^2, 0.0 * uLength,
+        0.0 * getuEntropy(units),
+        0.0 * getuDensity2D(units), 0.0 * uLength,
         0.0, 0.0, 0,
         PVector2D(uLength / uTime),
         0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
-        0.0 * uMass / uLength / uTime^2,
-        0.0 * uMass * uLength^2 / uTime^3 / uTemperature,
+        0.0 * getuPressure(units),
+        0.0 * getuEntropy(units) / uTime,
         0.0 * uLength / uTime
     )
 end
@@ -267,13 +267,13 @@ function SPHGas(units::Array; id = 0, collection = GAS())
         0, 0, 0.0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
 
-        0.0 * uMass * uLength^2 / uTime^2 / uTemperature,
-        0.0 * uMass / uLength^3, 0.0 * uLength,
+        0.0 * getuEntropy(units),
+        0.0 * getuDensity(units), 0.0 * uLength,
         0.0, 0.0, 0,
         PVector(uLength / uTime),
         0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
-        0.0 * uMass / uLength / uTime^2,
-        0.0 * uMass * uLength^2 / uTime^3 / uTemperature,
+        0.0 * getuPressure(units),
+        0.0 * getuEntropy(units) / uTime,
         0.0 * uLength / uTime
     )
 end

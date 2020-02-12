@@ -97,6 +97,11 @@ export
 
         getuVel,
         getuAcc,
+        getuEnergy,
+        getuEntropy,
+        getuDensity,
+        getuDensity2D,
+        getuPressure,
 
     uconvert, ustrip,
 

@@ -19,6 +19,7 @@
         @test b / 2.0 == PVector2D(1.5, 2.0)
 
         @test PVector(0.0, 0.0, nothing) == PVector2D()
+        @test PVector2D(0.0, 0.0, nothing) == PVector2D()
     end
 
     @testset "Linear Algebra" begin

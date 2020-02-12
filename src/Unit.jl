@@ -35,6 +35,11 @@ getuAmount(::Nothing) = nothing
 
 getuVel(::Nothing) = nothing
 getuAcc(::Nothing) = nothing
+getuEnergy(::Nothing) = nothing
+getuEntropy(::Nothing) = nothing
+getuDensity(::Nothing) = nothing
+getuDensity2D(::Nothing) = nothing
+getuPressure(::Nothing) = nothing
 
 getuLength(units = uDefaults) = units[1]
 getuTime(units = uDefaults) = units[2]
@@ -46,6 +51,11 @@ getuAmount(units = uDefaults) = units[7]
 
 getuVel(units = uDefaults) = units[1] / units[2]
 getuAcc(units = uDefaults) = units[1] / units[2]^2
+getuEnergy(units = uDefaults) = units[6] * units[1]^2 / units[2]^2
+getuEntropy(units = uDefaults) = units[6] * units[1]^2 / units[2]^2 / units[4]
+getuDensity(units = uDefaults) = units[6] / units[1]^3
+getuDensity2D(units = uDefaults) = units[6] / units[1]^2
+getuPressure(units = uDefaults) = units[6] / units[1] / units[2]^2
 
 ustrip(T::Type, ::Nothing, x::Real) = convert(T, x)
 ustrip(::Nothing, x::Real) = x
