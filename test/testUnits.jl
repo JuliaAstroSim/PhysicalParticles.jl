@@ -31,6 +31,11 @@
 
     @test getuVel(nothing) == nothing
     @test getuAcc(nothing) == nothing
+    @test getuEnergy(nothing) == nothing
+    @test getuEntropy(nothing) == nothing
+    @test getuDensity(nothing) == nothing
+    @test getuDensity2D(nothing) == nothing
+    @test getuPressure(nothing) == nothing
 
     @test getuLength(uAstro) == u"kpc"
     @test getuTime(uAstro) == u"Gyr"
@@ -42,6 +47,11 @@
 
     @test getuVel(uAstro) == u"kpc/Gyr"
     @test getuAcc(uAstro) == u"kpc/Gyr^2"
+    @test getuEnergy(uAstro) == u"Msun * kpc^2/Gyr^2"
+    @test getuEntropy(uAstro) == u"Msun * kpc^2 / Gyr^2 / K"
+    @test getuDensity(uAstro) == u"Msun/kpc^3"
+    @test getuDensity2D(uAstro) == u"Msun/kpc^2"
+    @test getuPressure(uAstro) == u"Msun / kpc / Gyr^2"
 
 
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")

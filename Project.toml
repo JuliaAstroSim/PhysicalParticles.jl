@@ -4,7 +4,7 @@ license = "GPLv3"
 authors = ["islent <leoislent@gmail.com>"]
 description = "Support for physical vectors and particles"
 repository = "https://github.com/JuliaAstroSim/PhysicalParticles.jl"
-version = "1.0.2"
+version = "1.0.3"
 
 [deps]
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
