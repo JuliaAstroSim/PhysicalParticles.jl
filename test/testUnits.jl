@@ -72,8 +72,41 @@
     @test one(u"m", PVector2D(u"km")) == PVector2D(1.0u"m", 1.0u"m")
     @test one(u"m", PVector(u"km")) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
 
+    @test oneunit(PVector2D(u"m")) == PVector2D(1.0u"m", 1.0u"m")
+    @test oneunit(PVector(u"m")) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
+
     @test zero(PVector2D(u"m")) == PVector2D()
     @test zero(PVector(u"m")) == PVector()
     @test zero(u"m", PVector2D(u"km")) == PVector2D(0.0u"m", 0.0u"m")
     @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
+
+    @test isone(PVector(1.0, 1.0, 1.0))
+    @test_broken isone(PVector(1.0, 1.0, 1.0, u"m"))
+    @test isone(PVector2D(1.0, 1.0))
+    @test_broken isone(PVector2D(1.0, 1.0, u"m"))
+
+    @test iszero(PVector())
+    @test iszero(PVector(u"m"))
+    @test iszero(PVector2D())
+    @test iszero(PVector2D(u"m"))
+
+    @test isnan(PVector(NaN, NaN, NaN))
+    @test isnan(PVector(NaN, NaN, NaN, u"m"))
+    @test isnan(PVector2D(NaN, NaN))
+    @test isnan(PVector2D(NaN, NaN, u"m"))
+
+    @test hasnan(PVector(1.0, NaN, 1.0))
+    @test hasnan(PVector(1.0, NaN, 1.0, u"m"))
+    @test hasnan(PVector2D(1.0, NaN))
+    @test hasnan(PVector2D(1.0, NaN, u"m"))
+
+    @test isinf(PVector(Inf, Inf, Inf))
+    @test isinf(PVector(Inf, Inf, Inf, u"m"))
+    @test isinf(PVector2D(Inf, Inf))
+    @test isinf(PVector2D(Inf, Inf, u"m"))
+
+    @test hasinf(PVector(1.0, Inf, 1.0))
+    @test hasinf(PVector(1.0, Inf, 1.0, u"m"))
+    @test hasinf(PVector2D(1.0, Inf))
+    @test hasinf(PVector2D(1.0, Inf, u"m"))
 end

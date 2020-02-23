@@ -80,7 +80,28 @@ one(u::Units, p::PVector) = PVector(one(p.x) * u, one(p.y) * u, one(p.z) * u)
 one(p::PVector2D) = PVector2D(one(p.x), one(p.y))
 one(p::PVector) = PVector(one(p.x), one(p.y), one(p.z))
 
+oneunit(p::PVector2D) = PVector2D(oneunit(p.x), oneunit(p.y))
+oneunit(p::PVector) = PVector(oneunit(p.x), oneunit(p.y), oneunit(p.z))
+
 zero(u::Units, p::PVector2D) = PVector2D(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)))
 zero(u::Units, p::PVector) = PVector(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)), uconvert(u, zero(p.z)))
 zero(p::PVector2D) = PVector2D(ustrip(zero(p.x)), ustrip(zero(p.y)))
 zero(p::PVector) = PVector(ustrip(zero(p.x)), ustrip(zero(p.y)), ustrip(zero(p.z)))
+
+isone(p::AbstractPoint2D) = isone(p.x) && isone(p.y)
+isone(p::AbstractPoint3D) = isone(p.x) && isone(p.y) && isone(p.z)
+
+iszero(p::AbstractPoint2D) = iszero(p.x) && iszero(p.y)
+iszero(p::AbstractPoint3D) = iszero(p.x) && iszero(p.y) && iszero(p.z)
+
+isnan(p::AbstractPoint2D) = isnan(p.x) && isnan(p.y)
+isnan(p::AbstractPoint3D) = isnan(p.x) && isnan(p.y) && isnan(p.z)
+
+hasnan(p::AbstractPoint2D) = isnan(p.x) || isnan(p.y)
+hasnan(p::AbstractPoint3D) = isnan(p.x) || isnan(p.y) || isnan(p.z)
+
+isinf(p::AbstractPoint2D) = isinf(p.x) && isinf(p.y)
+isinf(p::AbstractPoint3D) = isinf(p.x) && isinf(p.y) && isinf(p.z)
+
+hasinf(p::AbstractPoint2D) = isinf(p.x) || isinf(p.y)
+hasinf(p::AbstractPoint3D) = isinf(p.x) || isinf(p.y) || isinf(p.z)
