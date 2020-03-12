@@ -59,3 +59,7 @@ getuPressure(units = uDefaults) = units[6] / units[1] / units[2]^2
 
 ustrip(T::Type, ::Nothing, x::Real) = convert(T, x)
 ustrip(::Nothing, x::Real) = x
+
+axisunit(::Nothing) = ""
+axisunit(u::Units) = string(" [", u, "]")
+axisunit(s::AbstractString, u::Units) = string(s, " [", u, "]")

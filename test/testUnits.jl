@@ -81,9 +81,9 @@
     @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 
     @test isone(PVector(1.0, 1.0, 1.0))
-    @test_broken isone(PVector(1.0, 1.0, 1.0, u"m"))
+    @test isone(PVector(1.0, 1.0, 1.0, u"m/m"))
     @test isone(PVector2D(1.0, 1.0))
-    @test_broken isone(PVector2D(1.0, 1.0, u"m"))
+    @test isone(PVector2D(1.0, 1.0, u"m/m"))
 
     @test iszero(PVector())
     @test iszero(PVector(u"m"))
@@ -109,4 +109,8 @@
     @test hasinf(PVector(1.0, Inf, 1.0, u"m"))
     @test hasinf(PVector2D(1.0, Inf))
     @test hasinf(PVector2D(1.0, Inf, u"m"))
+
+    @test axisunit(nothing) == ""
+    @test axisunit(u"m") == " [m]"
+    @test axisunit("len", u"m") == "len [m]"
 end

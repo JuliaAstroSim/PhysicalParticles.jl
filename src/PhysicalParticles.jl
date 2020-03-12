@@ -108,6 +108,7 @@ export
         getuPressure,
 
     uconvert, ustrip,
+    axisunit,
 
     # Random
     rand_pvector, rand_pvector2d,
