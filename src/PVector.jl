@@ -40,6 +40,8 @@ end
 
 PVector2D() = PVector2D(0.0, 0.0)
 
+PVector2D(::Nothing) = PVector2D(0.0, 0.0)
+
 PVector2D(u::Units) = PVector2D(0.0 * u, 0.0 * u)
 
 PVector2D(x::Number, y::Number, u::Units) = PVector2D(x * u, y * u)
@@ -48,6 +50,8 @@ PVector2D(x::Number, y::Number, ::Nothing) = PVector2D(x, y)
 
 
 PVector() = PVector(0.0, 0.0, 0.0)
+
+PVector(::Nothing) = PVector(0.0, 0.0, 0.0)
 
 PVector(u::Units) = PVector(0.0 * u, 0.0 * u, 0.0 * u)
 

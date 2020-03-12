@@ -20,6 +20,7 @@
 
         @test PVector(0.0, 0.0, nothing) == PVector2D()
         @test PVector2D(0.0, 0.0, nothing) == PVector2D()
+        @test PVector2D(nothing) == PVector2D()
     end
 
     @testset "Linear Algebra" begin
@@ -83,6 +84,7 @@ end
         @test b / 2.0 == PVector(2.0, 2.5, 3.0)
 
         @test PVector(0.0, 0.0, 0.0, nothing) == PVector()
+        @test PVector(nothing) == PVector()
     end
 
     @testset "Linear Algebra" begin
