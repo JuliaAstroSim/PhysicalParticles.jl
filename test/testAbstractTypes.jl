@@ -1,4 +1,11 @@
 @testset "AbstractTypes" begin
+    @testset "Basic" begin
+        a = PVector()
+        @test getx(a) == a.x
+        @test gety(a) == a.y
+        @test getz(a) == a.z
+    end
+
     @testset "Iterates" begin
         a = PVector()
 

@@ -25,6 +25,8 @@ export
     AbstractPoint,
         AbstractPoint2D, AbstractPoint3D,
 
+    getx, gety, getz,
+
     PVector, PVector2D,
 
 
@@ -139,6 +141,9 @@ abstract type AbstractPoint3D{T} <: AbstractPoint{T} end
 @inline iterate(p::T,st) where T <: AbstractPoint = nothing
 @inline real(p::T) where T <: AbstractPoint = p
 
+getx(p::AbstractPoint) = p.x
+gety(p::AbstractPoint) = p.y
+getz(p::AbstractPoint3D) = p.z
 
 
 abstract type AbstractParticle end
