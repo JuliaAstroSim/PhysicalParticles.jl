@@ -12,7 +12,7 @@ using DocStringExtensions
 using Unitful, UnitfulAstro
 
 ## Explicitly overload functions and import types
-import Unitful: Units, AbstractQuantity, uconvert, ustrip
+import Unitful: Units, AbstractQuantity, uconvert, ustrip, @u_str
 
 import Base: +, -, *, /, zero, length, iterate, real, to_index, rand, show, ==, getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit
@@ -58,16 +58,9 @@ export
         Physical2D, Physical3D,
         Unitless2D, Unitless3D,
 
-    # Base functions
-    +, -, *, /, zero, length, iterate, real,
+    @u_str,
 
-    show, display,
-    ==,
-    getproperty,
-    one, zero,
-    isone, iszero, isnan, isinf,
     hasnan, hasinf,
-    oneunit,
 
     # LinearAlgebra
     norm, normalize, dot, cross,
@@ -109,7 +102,6 @@ export
         getuDensity2D,
         getuPressure,
 
-    uconvert, ustrip,
     axisunit,
 
     # Random
@@ -118,11 +110,7 @@ export
 
     assign_particles
 
-    # Trait functions
-    
 
-
-## Include files
 
 ### Top level data structure
 
@@ -187,23 +175,6 @@ include("Unit.jl")
 
 include("PVector.jl")
 include("PhysicalParticle.jl")
-
-"""
-Basic mathematical algorithms should be implemented in type definition files,
-in the following order:
-    - get, set
-    - +, -, *
-
-Other operations would be implemented in seperate files:
-    - Conversion.jl ==> Conversions from and to array, conversions between inner types
-    - Random.jl ==> Generate random points and assign to particles
-    - LinearAlgebra.jl ==> General linear algebra methods
-    - Center.jl ==> Compute maximum, minimum, center
-    - Extent.jl ==> Compute extent for array of points and particles
-    - Neighbours.jl ==> Nearest neighbour searching
-    - Clustering.jl ==> Cluster center and clustering patterns, use kdtree methods in Neighbours
-    - PrettyPrinting.jl ==> Custom printing of vectors and particles
-"""
 
 include("Conversion.jl")
 include("Random.jl")
