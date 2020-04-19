@@ -36,6 +36,8 @@
 
         @test mean(p) == PVector2D(1.0, 1.0)
 
+        @test median([PVector2D(1.0, 4.0), PVector2D(2.0, 2.0), PVector2D(4.0, 1.0)]) == PVector2D(2.0, 2.0)
+
         @test distance(PVector2D(0.0f0, 0.0f0), PVector2D(3.0f0, 4.0f0)) == 5.0f0
         @test distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0)) == 5.0
 
@@ -98,6 +100,10 @@ end
         @test dot(a,a) == 14.0f0
 
         @test mean(p) == PVector(1.0, 1.0, 1.0)
+
+        @test median(
+            [PVector(1.0, 4.0, 0.0), PVector(2.0, 2.0, 0.0), PVector(4.0, 1.0, 0.0)]
+        ) == PVector(2.0, 2.0, 0.0)
 
         @test distance(PVector(0.0f0, 0.0f0, 0.0f0), PVector(3.0f0, 4.0f0, 12.0f0)) == 13.0f0
         @test distance(PVector(0.0, 0.0, 0.0), PVector(3.0, 4.0, 12.0)) == 13.0

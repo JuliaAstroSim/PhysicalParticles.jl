@@ -19,7 +19,7 @@ import Base: +, -, *, /, zero, length, iterate, real, to_index, rand, show, ==, 
 
 import LinearAlgebra: norm, normalize, dot, cross
 
-import Statistics: mean, std, var
+import Statistics: mean, std, var, median, middle
 
 export
     AbstractPoint,
@@ -67,9 +67,12 @@ export
 
     rotate, rotate_x, rotate_y, rotate_z,
 
-    mean, distance,
+    distance,
 
     average, averagebymass,
+
+    # Statistics
+    mean, std, var, median, middle,
 
     # Center
     min_x, min_y, min_z,

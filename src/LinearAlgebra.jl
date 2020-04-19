@@ -63,3 +63,25 @@ function averagebymass(a::Array{T}, symbol::Symbol) where T<:AbstractParticle
 end
 
 averagebymass(a::Array{T}, symbol::Symbol) where T <: Union{Massless, Massless2D} = average(a, symbol)
+
+middle(x::Quantity) = x
+middle(x::Quantity, y::Quantity) = x/2 + y/2
+
+function median(a::Array{T}) where T <: AbstractPoint2D
+    return PVector2D(
+        median([p.x for p in a]),
+        median([p.y for p in a])
+    )
+end
+
+function median(a::Array{T}) where T <: AbstractPoint3D
+    return PVector(
+        median([p.x for p in a]),
+        median([p.y for p in a]),
+        median([p.z for p in a])
+    )
+end
+
+function median(a::Array{T}, symbol::Symbol = :Pos) where T <: AbstractParticle
+    return median([getfield(p, symbol) for p in a])
+end

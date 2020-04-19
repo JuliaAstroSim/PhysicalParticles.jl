@@ -113,4 +113,7 @@
     @test axisunit(nothing) == ""
     @test axisunit(u"m") == " [m]"
     @test axisunit("len", u"m") == "len [m]"
+
+    @test middle(1.0u"m") == 1.0u"m"
+    @test middle(1.0u"m", 3.0u"m") == 2.0u"m"
 end

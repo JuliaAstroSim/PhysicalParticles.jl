@@ -30,6 +30,8 @@ end
 
         @test distance(a_Massless2D, b_Massless2D) == 5.0
 
+        @test median([a_Massless2D, b_Massless2D], :Pos) == PVector2D(1.5, 2.0)
+
 
         a_Ball2D = Ball2D(PVector2D(0.0u"m", 0.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 1)
         b_Ball2D = Ball2D(PVector2D(3.0u"m", 4.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 0.0u"kg", 2)
@@ -129,6 +131,8 @@ end
         @test Ball(uSI) == Ball(PVector(u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 0)
 
         @test distance(a_Massless, b_Massless) == 13.0
+
+        @test median([a_Massless, b_Massless], :Pos) == PVector(1.5, 2.0, 6.0)
 
 
         a_Ball = Ball(PVector(0.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 1)
