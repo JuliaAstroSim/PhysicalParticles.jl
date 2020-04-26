@@ -50,10 +50,10 @@
     @testset "Center" begin
         p = [PVector2D(-1.0u"m", 1.0u"m"), PVector2D(1.0u"m", -1.0u"m")]
 
-        @test min_x(p) == -1.0u"m"
-        @test min_y(p) == -1.0u"m"
-        @test max_x(p) == 1.0u"m"
-        @test max_y(p) == 1.0u"m"
+        @test minimum_x(p) == -1.0u"m"
+        @test minimum_y(p) == -1.0u"m"
+        @test maximum_x(p) == 1.0u"m"
+        @test maximum_y(p) == 1.0u"m"
         @test center_x(p) == 0.0u"m"
         @test center_y(p) == 0.0u"m"
         @test center(p) == PVector2D(0.0u"m", 0.0u"m")
@@ -121,12 +121,12 @@ end
     @testset "Center" begin
         p = [PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(1.0u"m", -1.0u"m", -1.0u"m")]
 
-        @test min_x(p) == -1.0u"m"
-        @test min_y(p) == -1.0u"m"
-        @test min_z(p) == -1.0u"m"
-        @test max_x(p) == 1.0u"m"
-        @test max_y(p) == 1.0u"m"
-        @test max_z(p) == 1.0u"m"
+        @test minimum_x(p) == -1.0u"m"
+        @test minimum_y(p) == -1.0u"m"
+        @test minimum_z(p) == -1.0u"m"
+        @test maximum_x(p) == 1.0u"m"
+        @test maximum_y(p) == 1.0u"m"
+        @test maximum_z(p) == 1.0u"m"
         @test center_x(p) == 0.0u"m"
         @test center_y(p) == 0.0u"m"
         @test center_z(p) == 0.0u"m"

@@ -77,6 +77,8 @@ export
     # Center
     min_x, min_y, min_z,
     max_x, max_y, max_z,
+    minimum_x, minimum_y, minimum_z,
+    maximum_x, maximum_y, maximum_z,
     center_x, center_y, center_z, center,
     pos_center, mass_center,
 

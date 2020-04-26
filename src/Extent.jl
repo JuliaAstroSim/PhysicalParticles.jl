@@ -36,13 +36,13 @@ Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 
   PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))
 ```
 """
-extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N = (xMin=min_x(a); xMax=max_x(a); yMin=min_y(a); yMax=max_y(a);
+extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N = (xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a);
                                                             len=max(xMax-xMin, yMax-yMin);
                                                             Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
                                                             Corner=PVector2D(xMin, yMin);
                                                             return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner))
 
-extent(a::Array{T, N}) where T<:Union{PVector, AbstractParticle3D} where N = (xMin=min_x(a); xMax=max_x(a); yMin=min_y(a); yMax=max_y(a); zMin=min_z(a); zMax=max_z(a);
+extent(a::Array{T, N}) where T<:Union{PVector, AbstractParticle3D} where N = (xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a); zMin=minimum_z(a); zMax=maximum_z(a);
                                                             len=max(xMax-xMin, yMax-yMin, zMax-zMin);
                                                             Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
                                                             Corner=PVector(xMin,yMin,zMin);
