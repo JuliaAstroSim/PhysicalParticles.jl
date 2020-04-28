@@ -68,7 +68,7 @@ PVector(0.0 m, 0.0 m, 0.0 m)
 
 ### Basic Operators
 
-Basic maths are well support by overriding `Base: +, -, *, /`, and array operations are supported by overriding `Base: length, iterate, to_index`
+Basic maths are well support by overriding `Base: +, -, *, /`, and array operations are supported by overriding `Base: length, iterate`
 
 ```julia
 julia> a = npconvert(ones(3))

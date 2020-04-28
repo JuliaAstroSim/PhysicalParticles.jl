@@ -12,9 +12,9 @@ using DocStringExtensions
 using Unitful, UnitfulAstro
 
 ## Explicitly overload functions and import types
-import Unitful: Units, AbstractQuantity, uconvert, ustrip, @u_str
-
-import Base: +, -, *, /, zero, length, iterate, real, to_index, rand, show, ==, getproperty,
+import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
+import Core: Symbol
+import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit
 
 import LinearAlgebra: norm, normalize, dot, cross
