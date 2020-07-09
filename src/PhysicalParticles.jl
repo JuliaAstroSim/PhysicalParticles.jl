@@ -168,6 +168,8 @@ function Base.:(==)(x::T, y::T) where T<:Union{AbstractPoint, AbstractParticle, 
     return true
 end
 
+Base.getproperty(d::Dict,s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d,s) : getindex(d,s)
+
 ### Main files
 
 include("Traits.jl")
