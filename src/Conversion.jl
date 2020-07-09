@@ -98,6 +98,6 @@ function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbo
     end
 
     for i in 1:len
-        @inbounds setfield!(particles[i], symbol, data[i])
+        @inbounds particles[i] = setproperty!!(particles[i], symbol, data[i])
     end
 end

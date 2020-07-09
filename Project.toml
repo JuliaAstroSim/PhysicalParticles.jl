@@ -7,10 +7,12 @@ repository = "https://github.com/JuliaAstroSim/PhysicalParticles.jl"
 version = "1.0.3"
 
 [deps]
+BangBang = "198e06fe-97b7-11e9-32a5-e1d131e6ad66"
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 IterTools = "c8e1da08-722c-5040-9ed9-7db0dc04731e"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 NearestNeighbors = "b8a86587-4115-5ab1-83bc-aa920d37bbce"
+Setfield = "efcf1570-3423-57d1-acb7-fd33fddbac46"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"

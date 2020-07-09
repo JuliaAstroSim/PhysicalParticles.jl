@@ -1,6 +1,7 @@
 using PhysicalParticles
 
 using Test, Unitful, UnitfulAstro
+using Setfield
 
 include("testUnits.jl")
 

@@ -143,7 +143,7 @@ function Star(units::Array; id = 0, collection = STAR())
 end
 
 
-struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
+struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
@@ -168,8 +168,8 @@ struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractPa
     NumNgbFound::I
 
     RotVel::PVector2D{V}
-    DivVel::V
-    CurlVel::V
+    DivVel::T_1
+    CurlVel::T_1
     dHsmlRho::dP
 
     Pressure::Prs
@@ -211,7 +211,7 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
 end
 
 
-struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
+struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
@@ -236,8 +236,8 @@ struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractPart
     NumNgbFound::I
 
     RotVel::PVector{V}
-    DivVel::V
-    CurlVel::V
+    DivVel::T_1
+    CurlVel::T_1
     dHsmlRho::dP
 
     Pressure::Prs
@@ -276,12 +276,4 @@ function SPHGas(units::Array; id = 0, collection = GAS())
         0.0 * getuEntropy(units) / uTime,
         0.0 * uLength / uTime
     )
-end
-
-## Set fields
-function setpos(p::AbstractParticle, pos::AbstractPoint)
-    T = typeof(p)
-    fields = fieldnames(T)
-    iter = fieldvalues(T)
-    return T()
 end
