@@ -8,6 +8,7 @@ module PhysicalParticles
 
 using DocStringExtensions
 using Unitful, UnitfulAstro
+using IterTools
 
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip

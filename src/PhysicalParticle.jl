@@ -2,9 +2,9 @@
 
 ## Non-unit particles
 
-mutable struct Massless2D{I<:Integer} <: AbstractParticle2D
-    Pos::PVector2D
-    Vel::PVector2D
+struct Massless2D{P, V, I<:Integer} <: AbstractParticle2D
+    Pos::PVector2D{P}
+    Vel::PVector2D{V}
     ID::I
 end
 
@@ -17,9 +17,9 @@ function Massless2D(units::Array; id = 0)
 end
 
 
-mutable struct Massless{I<:Integer} <: AbstractParticle3D
-    Pos::PVector
-    Vel::PVector
+struct Massless{P, V, I<:Integer} <: AbstractParticle3D
+    Pos::PVector{P}
+    Vel::PVector{V}
     ID::I
 end
 
@@ -34,11 +34,11 @@ end
 
 ## Physical particles
 
-mutable struct Ball2D{I<:Integer} <: AbstractParticle2D
-    Pos::PVector2D
-    Vel::PVector2D
-    Acc::PVector2D
-    Mass::Number
+struct Ball2D{P, V, A, M, I<:Integer} <: AbstractParticle2D
+    Pos::PVector2D{P}
+    Vel::PVector2D{V}
+    Acc::PVector2D{A}
+    Mass::M
     ID::I
 end
 
@@ -52,11 +52,11 @@ function Ball2D(units::Array; id = 0)
 end
 
 
-mutable struct Ball{I<:Integer} <: AbstractParticle3D
-    Pos::PVector
-    Vel::PVector
-    Acc::PVector
-    Mass::Number
+struct Ball{P, V, A, M, I<:Integer} <: AbstractParticle3D
+    Pos::PVector{P}
+    Vel::PVector{V}
+    Acc::PVector{A}
+    Mass::M
     ID::I
 end
 
@@ -72,20 +72,20 @@ end
 
 ## Astrophysical particles
 
-mutable struct Star2D{I<:Integer} <: AbstractParticle2D
-    Pos::PVector2D
-    Vel::PVector2D
-    Acc::PVector2D
-    Mass::Number
+struct Star2D{P, V, A, M, E, F, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
+    Pos::PVector2D{P}
+    Vel::PVector2D{V}
+    Acc::PVector2D{A}
+    Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::PC
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::Number
+    GravCost::F
 
-    Potential::Number
-    OldAcc::Number
+    Potential::E
+    OldAcc::A
 end
 
 
@@ -108,20 +108,20 @@ function Star2D(units::Array; id = 0, collection = STAR())
 end
 
 
-mutable struct Star{I<:Integer} <: AbstractParticle3D
-    Pos::PVector
-    Vel::PVector
-    Acc::PVector
-    Mass::Number
+struct Star{P, V, A, M, E, F, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
+    Pos::PVector{P}
+    Vel::PVector{V}
+    Acc::PVector{A}
+    Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::PC
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::Number
+    GravCost::F
 
-    Potential::Number
-    OldAcc::Number
+    Potential::E
+    OldAcc::A
 end
 
 Star(; id = 0, collection = STAR()) = Star(
@@ -143,38 +143,38 @@ function Star(units::Array; id = 0, collection = STAR())
 end
 
 
-mutable struct SPHGas2D{I<:Integer} <: AbstractParticle2D
-    Pos::PVector2D
-    Vel::PVector2D
-    Acc::PVector2D
-    Mass::Number
+struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
+    Pos::PVector2D{P}
+    Vel::PVector2D{V}
+    Acc::PVector2D{A}
+    Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::PC
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::Number
+    GravCost::F
 
-    Potential::Number
-    OldAcc::Number
+    Potential::E
+    OldAcc::A
 
     # SPH
-    Entropy::Number
-    Density::Number
-    Hsml::Number
+    Entropy::Et
+    Density::D
+    Hsml::P
 
-    Left::Number
-    Right::Number
+    Left::F
+    Right::F
     NumNgbFound::I
 
-    RotVel::PVector2D
-    DivVel::Number
-    CurlVel::Number
-    dHsmlRho::Number
+    RotVel::PVector2D{V}
+    DivVel::V
+    CurlVel::V
+    dHsmlRho::dP
 
-    Pressure::Number
-    DtEntropy::Number
-    MaxSignalVel::Number
+    Pressure::Prs
+    DtEntropy::dE
+    MaxSignalVel::V
 end
 
 SPHGas2D(; id = 0, collection = GAS()) = SPHGas2D(
@@ -211,38 +211,38 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
 end
 
 
-mutable struct SPHGas{I<:Integer} <: AbstractParticle3D
-    Pos::PVector
-    Vel::PVector
-    Acc::PVector
-    Mass::Number
+struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
+    Pos::PVector{P}
+    Vel::PVector{V}
+    Acc::PVector{A}
+    Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::PC
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::Number
+    GravCost::F
 
-    Potential::Number
-    OldAcc::Number
+    Potential::E
+    OldAcc::A
 
     # SPH
-    Entropy::Number
-    Density::Number
-    Hsml::Number
+    Entropy::Et
+    Density::D
+    Hsml::P
 
-    Left::Number
-    Right::Number
+    Left::F
+    Right::F
     NumNgbFound::I
 
-    RotVel::PVector
-    DivVel::Number
-    CurlVel::Number
-    dHsmlRho::Number
+    RotVel::PVector{V}
+    DivVel::V
+    CurlVel::V
+    dHsmlRho::dP
 
-    Pressure::Number
-    DtEntropy::Number
-    MaxSignalVel::Number
+    Pressure::Prs
+    DtEntropy::dE
+    MaxSignalVel::V
 end
 
 SPHGas(; id = 0, collection = GAS()) = SPHGas(
@@ -276,4 +276,12 @@ function SPHGas(units::Array; id = 0, collection = GAS())
         0.0 * getuEntropy(units) / uTime,
         0.0 * uLength / uTime
     )
+end
+
+## Set fields
+function setpos(p::AbstractParticle, pos::AbstractPoint)
+    T = typeof(p)
+    fields = fieldnames(T)
+    iter = fieldvalues(T)
+    return T()
 end
