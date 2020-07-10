@@ -285,3 +285,5 @@ function countdata(data::Dict)
     end
     return len
 end
+
+countdata(data::Array) = length(data)
