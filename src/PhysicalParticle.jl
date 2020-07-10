@@ -277,3 +277,11 @@ function SPHGas(units::Array; id = 0, collection = GAS())
         0.0 * uLength / uTime
     )
 end
+
+function countdata(data::Dict)
+    len = 0
+    for key in keys(data)
+        len += length(data[key])
+    end
+    return len
+end

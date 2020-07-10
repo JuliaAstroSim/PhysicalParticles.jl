@@ -38,6 +38,7 @@ export
     Star, Star2D,
     SPHGas, SPHGas2D,
 
+    countdata,
 
     AbstractExtent,
         AbstractExtent2D, AbstractExtent3D,

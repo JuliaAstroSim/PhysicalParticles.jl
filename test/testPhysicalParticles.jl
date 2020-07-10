@@ -233,3 +233,15 @@ end
         @test extent([e, e2]) == e2
     end
 end
+
+@testset "Dict" begin
+    data = Dict(
+        :gases => [SPHGas(uAstro, collection = GAS()) for i = 1:2],
+        :haloes => [Star(uAstro, collection = HALO()) for i = 1:2],
+        :disks => [Star(uAstro, collection = DISK()) for i = 1:2],
+        :bulges => [Star(uAstro, collection = BULGE()) for i = 1:2],
+        :stars => [Star(uAstro, collection = STAR()) for i = 1:2],
+        :blackholes => [Star(uAstro, collection = BLACKHOLE()) for i = 1:2],
+    )
+    @test countdata(data) == 12
+end
