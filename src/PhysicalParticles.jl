@@ -12,7 +12,7 @@ using Setfield
 using BangBang
 
 ## Explicitly overload functions and import types
-import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip
+import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit
@@ -106,6 +106,8 @@ export
         getuPressure,
 
     axisunit,
+
+    @u_str,
 
     # Random
     rand_pvector, rand_pvector2d,
