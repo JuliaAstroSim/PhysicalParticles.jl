@@ -29,3 +29,4 @@ datadimension(::AbstractPoint2D, ::Quantity) = Physical2D()
 datadimension(::AbstractPoint3D, ::Quantity) = Physical3D()
 
 datadimension(a::Array) = datadimension(a[1])
+datadimension(a::Dict) = datadimension(first(Iterators.flatten(values(a))))

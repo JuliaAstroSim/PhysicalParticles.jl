@@ -1,4 +1,4 @@
-mutable struct Extent2D{T<:Number} <: AbstractExtent2D{T}
+struct Extent2D{T<:Number} <: AbstractExtent2D{T}
     xMin::T
     xMax::T
     yMin::T
@@ -8,7 +8,7 @@ mutable struct Extent2D{T<:Number} <: AbstractExtent2D{T}
     Corner::PVector2D{T}
 end
 
-mutable struct Extent{T<:Number} <: AbstractExtent3D{T}
+struct Extent{T<:Number} <: AbstractExtent3D{T}
     xMin::T
     xMax::T
     yMin::T
@@ -36,38 +36,68 @@ Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 
   PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))
 ```
 """
-extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N = (xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a);
-                                                            len=max(xMax-xMin, yMax-yMin);
-                                                            Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
-                                                            Corner=PVector2D(xMin, yMin);
-                                                            return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner))
+function extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N
+    if isempty(a)
+        return nothing
+    end
 
-extent(a::Array{T, N}) where T<:Union{PVector, AbstractParticle3D} where N = (xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a); zMin=minimum_z(a); zMax=maximum_z(a);
-                                                            len=max(xMax-xMin, yMax-yMin, zMax-zMin);
-                                                            Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
-                                                            Corner=PVector(xMin,yMin,zMin);
-                                                            return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner))
+    xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a);
+    len=max(xMax-xMin, yMax-yMin);
+    Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+    Corner=PVector2D(xMin, yMin);
 
-extent(a::Extent2D, b::Extent2D) = (xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b.xMax);
-                                    yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
-                                    len=max(xMax-xMin, yMax-yMin);
-                                    Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
-                                    Corner=PVector2D(xMin,yMin);
-                                    return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner))
+    return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
+end
 
-extent(a::Extent, b::Extent) = (xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b.xMax);
-                                    yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
-                                    zMin = min(a.zMin, b.zMin); zMax = max(a.zMax, b.zMax);
-                                    len=max(xMax-xMin, yMax-yMin, zMax-zMin);
-                                    Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
-                                    Corner=PVector(xMin,yMin,zMin);
-                                    return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner))
+function extent(a::Array{T, N}) where T<:Union{PVector, AbstractParticle3D} where N
+    if isempty(a)
+        return nothing
+    end
 
+    xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a); zMin=minimum_z(a); zMax=maximum_z(a);
+    len=max(xMax-xMin, yMax-yMin, zMax-zMin);
+    Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+    Corner=PVector(xMin,yMin,zMin);
+
+    return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
+end
+
+function extent(a::Extent2D, b::Extent2D)
+    xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b.xMax);
+    yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
+    len=max(xMax-xMin, yMax-yMin);
+    Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+    Corner=PVector2D(xMin,yMin);
+    return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
+end
+
+function extent(a::Extent, b::Extent)
+    xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b.xMax);
+    yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
+    zMin = min(a.zMin, b.zMin); zMax = max(a.zMax, b.zMax);
+    len=max(xMax-xMin, yMax-yMin, zMax-zMin);
+    Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+    Corner=PVector(xMin,yMin,zMin);
+    return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
+end
+
+extent(e::AbstractExtent, ::Nothing) = e
+extent(::Nothing, e::AbstractExtent) = e
+extent(::Nothing, ::Nothing) = nothing
 
 function extent(a::Array{T}) where T <: AbstractExtent
     e = a[1]
     for i in a[2:end]
         @inbounds e = extent(e, i)
+    end
+    return e
+end
+
+function extent(data::Dict)
+    key = collect(keys(data))
+    e = extent(data[key[1]])
+    for k in key[2:end]
+        @inbounds e = extent(e, extent(data[k]))
     end
     return e
 end

@@ -244,4 +244,20 @@ end
         :blackholes => [Star(uAstro, collection = BLACKHOLE()) for i = 1:2],
     )
     @test countdata(data) == 12
+    @test extent(data) == Extent(0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", PVector(u"kpc"), PVector(u"kpc"))
+
+    push!(data, SPHGas(uAstro))
+    @test length(data.gases) == 3
+
+    push!(data, Star(uAstro))
+    @test length(data.stars) == 3
+    
+    push!(data, Star(uAstro, collection = DISK()))
+    @test length(data.stars) == 4
+
+    data2 = Dict()
+    push!(data2, SPHGas2D())
+    push!(data2, Star2D())
+    @test length(data2.gases) == 1
+    @test length(data2.stars) == 1
 end

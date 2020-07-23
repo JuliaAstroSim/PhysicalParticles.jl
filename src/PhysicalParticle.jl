@@ -72,13 +72,13 @@ end
 
 ## Astrophysical particles
 
-struct Star2D{P, V, A, M, E, F, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
+struct Star2D{P, V, A, M, E, F, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::PC
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -108,13 +108,13 @@ function Star2D(units::Array; id = 0, collection = STAR())
 end
 
 
-struct Star{P, V, A, M, E, F, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
+struct Star{P, V, A, M, E, F, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::PC
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -143,13 +143,13 @@ function Star(units::Array; id = 0, collection = STAR())
 end
 
 
-struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle2D
+struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::PC
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -211,13 +211,13 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
 end
 
 
-struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, PC<:AbstractParticleCollection} <: AbstractParticle3D
+struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::PC
+    Collection::AbstractParticleCollection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -287,3 +287,37 @@ function countdata(data::Dict)
 end
 
 countdata(data::Array) = length(data)
+
+function push!(data::Dict, p::Star)
+    if haskey(data, :stars)
+        push!(data.stars, p)
+    else
+        data[:stars] = [p]
+    end
+end
+
+function push!(data::Dict, p::Star2D)
+    if haskey(data, :stars)
+        push!(data.stars, p)
+    else
+        data[:stars] = [p]
+    end
+end
+
+function push!(data::Dict, p::SPHGas)
+    if haskey(data, :gases)
+        push!(data.gases, p)
+    else
+        data[:gases] = [p]
+    end
+end
+
+function push!(data::Dict, p::SPHGas2D)
+    if haskey(data, :gases)
+        push!(data.gases, p)
+    else
+        data[:gases] = [p]
+    end
+end
+
+push!(data::Array, p) = push!(data, p)
