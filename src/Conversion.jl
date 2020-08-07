@@ -101,3 +101,9 @@ function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbo
         @inbounds particles[i] = setproperty!!(particles[i], symbol, data[i])
     end
 end
+
+function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data) where N
+    for i in eachindex(particles)
+        @inbounds particles[i] = setproperty!!(particles[i], symbol, data)
+    end
+end
