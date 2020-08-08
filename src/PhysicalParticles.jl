@@ -39,6 +39,7 @@ export
     SPHGas, SPHGas2D,
 
     countdata,
+    split_data,
 
     AbstractExtent,
         AbstractExtent2D, AbstractExtent3D,

@@ -321,3 +321,41 @@ function push!(data::Dict, p::SPHGas2D)
 end
 
 push!(data::Array, p) = push!(data, p)
+
+"""
+function split_data(data::Array, i::Int64, N::Int64)
+
+    split data to N sections, return the ith section
+"""
+function split_data(data::Array, i::Int64, N::Int64)
+    if i > N || i <= 0
+        error("Wrong section index! 1 <= i <= N, i ∈ Integer")
+    end
+
+    if length(data) == 0
+        return empty(data)
+    end
+
+    len = length(data)
+    sec = div(len, N)
+    if len % N == 0
+        head = (i - 1) * sec + 1
+        return data[head : head + sec - 1]
+    else
+        if i <= len % N
+            head = (i - 1) * (sec + 1) + 1
+            return data[head : head + sec] # add one element
+        else
+            head = len - (N - i + 1) * sec + 1 # from tail
+            return data[head : head + sec - 1]
+        end
+    end
+end
+
+function split_data(data::Dict, i::Int64, N::Int64)
+    d = empty(data)
+    for key in keys(data)
+        d[key] = split_data(data[key], i, N)
+    end
+    return d
+end

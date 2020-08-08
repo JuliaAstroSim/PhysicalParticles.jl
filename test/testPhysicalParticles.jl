@@ -260,4 +260,13 @@ end
     push!(data2, Star2D())
     @test length(data2.gases) == 1
     @test length(data2.stars) == 1
+
+    a = [1,2,4]
+    d = Dict("split" => a)
+    @test sum(split_data(a, 1, 2)) == 3
+    @test sum(split_data(a, 2, 2)) == 4
+    @test isempty(split_data(a, 4, 4))
+    @test sum(split_data(d, 1, 2)["split"]) == 3
+    @test sum(split_data(d, 2, 2)["split"]) == 4
+    @test isempty(split_data(d, 4, 4)["split"])
 end
