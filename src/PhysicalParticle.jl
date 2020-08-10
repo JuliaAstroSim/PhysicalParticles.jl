@@ -322,6 +322,12 @@ end
 
 push!(data::Array, p) = push!(data, p)
 
+function append!(data::Dict{S, Array{T,N}}, d::Dict{S, Array{T,N}}) where S where T<:AbstractParticle where N
+    for p in Iterators.flatten(values(d))
+        push!(data, p)
+    end
+end
+
 """
 function split_data(data::Array, i::Int64, N::Int64)
 

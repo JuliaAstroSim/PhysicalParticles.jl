@@ -82,6 +82,25 @@ function median(a::Array{T}) where T <: AbstractPoint3D
     )
 end
 
-function median(a::Array{T}, symbol::Symbol = :Pos) where T <: AbstractParticle
+function median(a::Array{T}, symbol) where T <: AbstractParticle
     return median([getfield(p, symbol) for p in a])
+end
+
+function median(d::Dict{S, Array{T, N}}) where S where T<:AbstractPoint2D where N
+    return PVector2D(
+        median([p.x for p in Iterators.flatten(values(d))]),
+        median([p.y for p in Iterators.flatten(values(d))])
+    )
+end
+
+function median(d::Dict{S, Array{T, N}}) where S where T<:AbstractPoint3D where N
+    return PVector(
+        median([p.x for p in Iterators.flatten(values(d))]),
+        median([p.y for p in Iterators.flatten(values(d))]),
+        median([p.z for p in Iterators.flatten(values(d))])
+    )
+end
+
+function median(d::Dict{S, Array{T, N}}, symbol) where S where T<:AbstractParticle where N
+    return median([getfield(p, symbol) for p in Iterators.flatten(values(d))])
 end
