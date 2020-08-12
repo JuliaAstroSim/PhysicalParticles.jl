@@ -72,13 +72,13 @@ end
 
 ## Astrophysical particles
 
-struct Star2D{P, V, A, M, E, F, I<:Integer} <: AbstractParticle2D
+struct Star2D{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::APC
 
     Ti_endstep::I
     Ti_begstep::I
@@ -108,13 +108,13 @@ function Star2D(units::Array; id = 0, collection = STAR())
 end
 
 
-struct Star{P, V, A, M, E, F, I<:Integer} <: AbstractParticle3D
+struct Star{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::APC
 
     Ti_endstep::I
     Ti_begstep::I
@@ -143,13 +143,13 @@ function Star(units::Array; id = 0, collection = STAR())
 end
 
 
-struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle2D
+struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::APC
 
     Ti_endstep::I
     Ti_begstep::I
@@ -211,13 +211,13 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
 end
 
 
-struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle3D
+struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::AbstractParticleCollection
+    Collection::APC
 
     Ti_endstep::I
     Ti_begstep::I

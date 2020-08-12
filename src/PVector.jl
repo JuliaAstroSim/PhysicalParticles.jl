@@ -92,6 +92,9 @@ zero(u::Units, p::PVector) = PVector(uconvert(u, zero(p.x)), uconvert(u, zero(p.
 zero(p::PVector2D) = PVector2D(ustrip(zero(p.x)), ustrip(zero(p.y)))
 zero(p::PVector) = PVector(ustrip(zero(p.x)), ustrip(zero(p.y)), ustrip(zero(p.z)))
 
+zero(::Type{PVector{T}}) where T = PVector(zero(T), zero(T), zero(T))
+zero(::Type{PVector2D{T}}) where T = PVector2D(zero(T), zero(T))
+
 isone(p::AbstractPoint2D) = isone(p.x) && isone(p.y)
 isone(p::AbstractPoint3D) = isone(p.x) && isone(p.y) && isone(p.z)
 
