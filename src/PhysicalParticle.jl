@@ -350,9 +350,6 @@ julia> split_data([1,2,3], 3, 4)
 1-element Array{Int64,1}:
  3
 
-julia> split_data([1,2,3], 4, 4)
-Int64[]
-
 julia> split_data(Dict(1=>[1,2,3], 2=>[1,2]), 1, 2)
 Dict{Int64,Array{Int64,1}} with 2 entries:
   2 => [1]
