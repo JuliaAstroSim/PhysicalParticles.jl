@@ -72,13 +72,13 @@ end
 
 ## Astrophysical particles
 
-struct Star2D{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle2D
+struct Star2D{P, V, A, M, E, F, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::APC
+    Collection::Collection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -89,13 +89,13 @@ struct Star2D{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: 
 end
 
 
-Star2D(; id = 0, collection = STAR()) = Star2D(
+Star2D(; id = 0, collection = STAR) = Star2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0
 )
 
-function Star2D(units::Array; id = 0, collection = STAR())
+function Star2D(units::Array; id = 0, collection = STAR)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -108,13 +108,13 @@ function Star2D(units::Array; id = 0, collection = STAR())
 end
 
 
-struct Star{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle3D
+struct Star{P, V, A, M, E, F, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::APC
+    Collection::Collection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -124,13 +124,13 @@ struct Star{P, V, A, M, E, F, I<:Integer, APC<:AbstractParticleCollection} <: Ab
     OldAcc::A
 end
 
-Star(; id = 0, collection = STAR()) = Star(
+Star(; id = 0, collection = STAR) = Star(
     PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0
 )
 
-function Star(units::Array; id = 0, collection = STAR())
+function Star(units::Array; id = 0, collection = STAR)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -143,13 +143,13 @@ function Star(units::Array; id = 0, collection = STAR())
 end
 
 
-struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle2D
+struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
     Mass::M
     ID::I
-    Collection::APC
+    Collection::Collection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -177,7 +177,7 @@ struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:Abst
     MaxSignalVel::V
 end
 
-SPHGas2D(; id = 0, collection = GAS()) = SPHGas2D(
+SPHGas2D(; id = 0, collection = GAS) = SPHGas2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0,
@@ -188,7 +188,7 @@ SPHGas2D(; id = 0, collection = GAS()) = SPHGas2D(
     0.0, 0.0, 0.0
 )
 
-function SPHGas2D(units::Array; id = 0, collection = GAS())
+function SPHGas2D(units::Array; id = 0, collection = GAS)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -211,13 +211,13 @@ function SPHGas2D(units::Array; id = 0, collection = GAS())
 end
 
 
-struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:AbstractParticleCollection} <: AbstractParticle3D
+struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
     Mass::M
     ID::I
-    Collection::APC
+    Collection::Collection
 
     Ti_endstep::I
     Ti_begstep::I
@@ -245,7 +245,7 @@ struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer, APC<:Abstra
     MaxSignalVel::V
 end
 
-SPHGas(; id = 0, collection = GAS()) = SPHGas(
+SPHGas(; id = 0, collection = GAS) = SPHGas(
     PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0.0,
     0.0, 0.0,
@@ -256,7 +256,7 @@ SPHGas(; id = 0, collection = GAS()) = SPHGas(
     0.0, 0.0, 0.0
 )
 
-function SPHGas(units::Array; id = 0, collection = GAS())
+function SPHGas(units::Array; id = 0, collection = GAS)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -329,9 +329,35 @@ function append!(data::Dict{S, Array{T,N}}, d::Dict{S, Array{T,N}}) where S wher
 end
 
 """
-function split_data(data::Array, i::Int64, N::Int64)
+    split_data(data::Array, i::Int64, N::Int64)
+    split_data(data::Dict, i::Int64, N::Int64)
 
-    split data to N sections, return the ith section
+split data to N sections, return the ith section
+
+# Examples
+
+```jldoctest; setup = :(using PhysicalParticles)
+julia> split_data([1,2,3], 1, 2)
+2-element Array{Int64,1}:
+ 1
+ 2
+
+julia> split_data([1,2,3], 2, 2)
+1-element Array{Int64,1}:
+ 3
+
+julia> split_data([1,2,3], 3, 4)
+1-element Array{Int64,1}:
+ 3
+
+julia> split_data([1,2,3], 4, 4)
+Int64[]
+
+julia> split_data(Dict(1=>[1,2,3], 2=>[1,2]), 1, 2)
+Dict{Int64,Array{Int64,1}} with 2 entries:
+  2 => [1]
+  1 => [1, 2]
+```
 """
 function split_data(data::Array, i::Int64, N::Int64)
     if i > N || i <= 0

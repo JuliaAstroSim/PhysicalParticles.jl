@@ -48,12 +48,8 @@ export
         extent,
 
     # Traits
-    AbstractParticleCollection,
-        AbstractGasCollection,
-            GAS,
-
-        AbstractStarCollection,
-            HALO, DISK, BULGE, STAR, BLACKHOLE,
+    Collection,
+        GAS, HALO, DISK, BULGE, STAR, BLACKHOLE,
 
     # AbstractDataDimension,
     datadimension,

@@ -1,18 +1,11 @@
-abstract type AbstractParticleCollection end
-
-abstract type AbstractGasCollection <: AbstractParticleCollection end
-
-struct GAS <: AbstractGasCollection end
-
-abstract type AbstractStarCollection <: AbstractParticleCollection end
-
-struct HALO <: AbstractStarCollection end
-struct DISK <: AbstractStarCollection end
-struct BULGE <: AbstractStarCollection end
-struct STAR <: AbstractStarCollection end
-struct BLACKHOLE <: AbstractStarCollection end
-
-
+@enum Collection begin
+    GAS = 0
+    HALO = 1
+    DISK = 2
+    BULGE = 3
+    STAR = 4
+    BLACKHOLE = 5
+end
 
 abstract type AbstractDataDimension end
 struct Physical2D <: AbstractDataDimension end

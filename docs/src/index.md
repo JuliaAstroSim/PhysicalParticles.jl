@@ -11,14 +11,4 @@
 ## Manual Outline
 
 ```@contents
-Pages = [
-    "manual/guide.md",
-    "manual/PVector.md",
-    "manual/Conversion.md",
-    "manual/Random.md",
-    "manual/Extent.md",
-    "manual/Neighbors.md",
-    "manual/Clustering.md",
-]
-Depth = 1
 ```

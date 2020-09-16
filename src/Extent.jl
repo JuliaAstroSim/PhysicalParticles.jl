@@ -21,19 +21,19 @@ struct Extent{T<:Number} <: AbstractExtent3D{T}
 end
 
 """
-$(SIGNATURES)
+    extent(a::Array{T, N})
+    extent(data::Dict)
+    extent(a::Extent2D, b::Extent2D)
+    extent(a::Extent, b::Extent)
 
 Get `Extent` of an array of mathical vectors or particles, or by comparing two `Extent`s and even array of `Extent`s
 
 ## Examples
 
-```julia
-julia> p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m"), 1.0u"kg", 1),
-            Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m"), 1000.0u"g", 2)]
-julia> extent(p)
-Extent{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, 1.0 m, -1.0 m, 1.0 m, -1.0 m, 1.0 m, 2.0 m, 
-  PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(0.0 m, 0.0 m, 0.0 m), 
-  PVector{Quantity{Float64,𝐋,Unitful.FreeUnits{(m,),𝐋,nothing}}}(-1.0 m, -1.0 m, -1.0 m))
+```jldoctest; setup = :(using PhysicalParticles)
+julia> extent([Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1),
+               Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)])
+Extent: xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 m, zMax = 1.0 m, SideLength = 2.0 m, Center = PVector(0.0 m, 0.0 m, 0.0 m), Corner = PVector(-1.0 m, -1.0 m, -1.0 m)
 ```
 """
 function extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N
