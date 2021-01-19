@@ -74,7 +74,7 @@ function Base.show(io::IO, p::Extent2D)
         ", yMax = ", p.yMax,
         ", SideLength = ", p.SideLength,
         ", Center = ", p.Center,
-        ", Corner = ", p.Corner
+        #", Corner = ", p.Corner
     )
 end
 
@@ -89,6 +89,6 @@ function Base.show(io::IO, p::Extent)
         ", zMax = ", p.zMax,
         ", SideLength = ", p.SideLength,
         ", Center = ", p.Center,
-        ", Corner = ", p.Corner
+        #", Corner = ", p.Corner
     )
 end
