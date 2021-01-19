@@ -33,16 +33,19 @@ dot(a::AbstractPoint, b::AbstractPoint) = *(a,b)
 @inline distance(a::AbstractPoint, b::AbstractPoint) = norm(a - b)
 @inline distance(a::AbstractParticle, b::AbstractParticle) = norm(a.Pos - b.Pos)
 
-
 function average(data, symbol::Symbol)
     a = [getfield(p, symbol) for p in Iterators.flatten(values(data))]
     return sum(a) / length(a)
 end
 
 function averagebymass(data, symbol::Symbol)
-    a = [getfield(p, symbol) * getfield(p, :Mass) for p in Iterators.flatten(values(data))]
+    a = [getfield(p, symbol) for p in Iterators.flatten(values(data))]
     m = [getfield(p, :Mass) for p in Iterators.flatten(values(data))]
-    return sum(a) / sum(m)
+    msum = sum(m)
+    if iszero(msum)
+        return mean(a)
+    end
+    return sum(a .* m) / msum
 end
 
 averagebymass(a::Array{T}, symbol::Symbol) where T <: Union{Massless, Massless2D} = average(a, symbol)
