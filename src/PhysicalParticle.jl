@@ -289,34 +289,34 @@ end
 countdata(data::Array) = length(data)
 
 function push!(data::Dict, p::Star)
-    if haskey(data, :stars)
-        push!(data.stars, p)
+    if haskey(data, "stars")
+        push!(data["stars"], p)
     else
-        data[:stars] = [p]
+        data["stars"] = [p]
     end
 end
 
 function push!(data::Dict, p::Star2D)
-    if haskey(data, :stars)
-        push!(data.stars, p)
+    if haskey(data, "stars")
+        push!(data["stars"], p)
     else
-        data[:stars] = [p]
+        data["stars"] = [p]
     end
 end
 
 function push!(data::Dict, p::SPHGas)
-    if haskey(data, :gases)
-        push!(data.gases, p)
+    if haskey(data, "gases")
+        push!(data["gases"], p)
     else
-        data[:gases] = [p]
+        data["gases"] = [p]
     end
 end
 
 function push!(data::Dict, p::SPHGas2D)
-    if haskey(data, :gases)
-        push!(data.gases, p)
+    if haskey(data, "gases")
+        push!(data["gases"], p)
     else
-        data[:gases] = [p]
+        data["gases"] = [p]
     end
 end
 
