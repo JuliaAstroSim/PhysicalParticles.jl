@@ -72,7 +72,7 @@ end
 
 ## Astrophysical particles
 
-struct Star2D{P, V, A, M, E, F, I<:Integer} <: AbstractParticle2D
+struct Star2D{P, V, A, M, E, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
@@ -82,7 +82,7 @@ struct Star2D{P, V, A, M, E, F, I<:Integer} <: AbstractParticle2D
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::F
+    GravCost::I
 
     Potential::E
     OldAcc::A
@@ -91,7 +91,7 @@ end
 
 Star2D(; id = 0, collection = STAR) = Star2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
-    0, 0, 0.0,
+    0, 0, 0,
     0.0, 0.0
 )
 
@@ -102,13 +102,13 @@ function Star2D(units::Array; id = 0, collection = STAR)
     return Star2D(
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
         0.0 * uMass, id, collection,
-        0, 0, 0.0,
+        0, 0, 0,
         0.0 * getuEnergy(units), 0.0 * uLength / uTime^2
     )
 end
 
 
-struct Star{P, V, A, M, E, F, I<:Integer} <: AbstractParticle3D
+struct Star{P, V, A, M, E, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
@@ -118,7 +118,7 @@ struct Star{P, V, A, M, E, F, I<:Integer} <: AbstractParticle3D
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::F
+    GravCost::I
 
     Potential::E
     OldAcc::A
@@ -126,7 +126,7 @@ end
 
 Star(; id = 0, collection = STAR) = Star(
     PVector(), PVector(), PVector(), 0.0, id, collection,
-    0, 0, 0.0,
+    0, 0, 0,
     0.0, 0.0
 )
 
@@ -137,7 +137,7 @@ function Star(units::Array; id = 0, collection = STAR)
     return Star(
         PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
         0.0 * uMass, id, collection,
-        0, 0, 0.0,
+        0, 0, 0,
         0.0 * getuEnergy(units), 0.0 * uLength / uTime^2
     )
 end
@@ -153,7 +153,7 @@ struct SPHGas2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: Abstra
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::F
+    GravCost::I
 
     Potential::E
     OldAcc::A
@@ -179,7 +179,7 @@ end
 
 SPHGas2D(; id = 0, collection = GAS) = SPHGas2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
-    0, 0, 0.0,
+    0, 0, 0,
     0.0, 0.0,
 
     0.0, 0.0, 0.0,
@@ -196,7 +196,7 @@ function SPHGas2D(units::Array; id = 0, collection = GAS)
     return SPHGas2D(
         PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
         0.0 * uMass, id, collection,
-        0, 0, 0.0,
+        0, 0, 0,
         0.0 * getuEnergy(units), 0.0 * uLength / uTime^2,
 
         0.0 * getuEntropy(units),
@@ -221,7 +221,7 @@ struct SPHGas{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: Abstract
 
     Ti_endstep::I
     Ti_begstep::I
-    GravCost::F
+    GravCost::I
 
     Potential::E
     OldAcc::A
@@ -247,7 +247,7 @@ end
 
 SPHGas(; id = 0, collection = GAS) = SPHGas(
     PVector(), PVector(), PVector(), 0.0, id, collection,
-    0, 0, 0.0,
+    0, 0, 0,
     0.0, 0.0,
 
     0.0, 0.0, 0.0,
@@ -264,7 +264,7 @@ function SPHGas(units::Array; id = 0, collection = GAS)
     return SPHGas(
         PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
         0.0 * uMass, id, collection,
-        0, 0, 0.0,
+        0, 0, 0,
         0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
 
         0.0 * getuEntropy(units),
@@ -278,6 +278,12 @@ function SPHGas(units::Array; id = 0, collection = GAS)
     )
 end
 
+"""
+    countdata(data::Dict)
+    countdata(data::Array)
+
+Count the number of points or particles
+"""
 function countdata(data::Dict)
     len = 0
     for key in keys(data)

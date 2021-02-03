@@ -104,3 +104,29 @@ julia> axisunit("1.0", u"Gyr")
 axisunit(::Nothing) = ""
 axisunit(u::Units) = string(" [", u, "]")
 axisunit(s::AbstractString, u::Units) = string(s, " [", u, "]")
+
+struct ZeroValue{Len, POS, VEL, ACC, POT, PPM, MASS}
+    len::Len
+    pos::POS
+    vel::VEL
+    acc::ACC
+    pot::POT
+    potpermass::PPM
+    mass::MASS
+end
+
+function zerovalues(units::Nothing)
+    return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
+end
+
+function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+    return ZeroValue(
+        0.0 * getuLength(units),
+        PVector(getuLength(units)),
+        PVector(getuVel(units)),
+        PVector(getuAcc(units)),
+        0.0 * getuEnergy(units),
+        0.0 * getuEnergy(units) / getuMass(units),
+        0.0 * getuMass(units),
+    )
+end

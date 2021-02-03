@@ -116,4 +116,25 @@
 
     @test middle(1.0u"m") == 1.0u"m"
     @test middle(1.0u"m", 3.0u"m") == 2.0u"m"
+
+    @testset "Zero Values" begin
+        ZeroValues = zerovalues(nothing)
+        @test ZeroValues.len == 0.0
+        @test ZeroValues.pos == PVector()
+        @test ZeroValues.vel == PVector()
+        @test ZeroValues.acc == PVector()
+        @test ZeroValues.pot == 0.0
+        @test ZeroValues.potpermass == 0.0
+        @test ZeroValues.mass == 0.0
+
+
+        ZeroValues = zerovalues(uAstro)
+        @test ZeroValues.len == 0.0u"kpc"
+        @test ZeroValues.pos == PVector(u"kpc")
+        @test ZeroValues.vel == PVector(u"kpc/Gyr")
+        @test ZeroValues.acc == PVector(u"kpc/Gyr^2")
+        @test ZeroValues.pot == 0.0 * u"Msun * kpc^2 / Gyr^2"
+        @test ZeroValues.potpermass == 0.0 * u"kpc^2 / Gyr^2"
+        @test ZeroValues.mass == 0.0 * u"Msun"
+    end
 end

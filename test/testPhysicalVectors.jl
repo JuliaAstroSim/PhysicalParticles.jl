@@ -39,6 +39,14 @@
         @test median(
             [PVector2D(1.0, 4.0, u"m"), PVector2D(2.0, 2.0, u"m"), PVector2D(4.0, 1.0, u"m")]
         ) == PVector2D(2.0, 2.0, u"m")
+
+        @test median(
+            Dict("data" => [PVector2D(1.0, 4.0, u"m"), PVector2D(2.0, 2.0, u"m"), PVector2D(4.0, 1.0, u"m")])
+        ) == PVector2D(2.0, 2.0, u"m")
+
+        @test median(
+            Dict("data" => [PVector2D(1.0, 4.0, u"m"), PVector2D(2.0, 2.0, u"m"), PVector2D(4.0, 1.0, u"m")]), :x
+        ) == 2.0u"m"
         
         @test rotate(PVector(1.0u"m", 0.0u"m"), 0.5pi) * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
         @test rotate_z(PVector(1.0u"m", 0.0u"m"), 0.5pi) * PVector(1.0u"m", 0.0u"m") < 1.0e-10u"m^2"
@@ -106,6 +114,14 @@ end
         @test median(
             [PVector(1.0, 4.0, 0.0, u"m"), PVector(2.0, 2.0, 0.0, u"m"), PVector(4.0, 1.0, 0.0, u"m")]
         ) == PVector(2.0, 2.0, 0.0, u"m")
+
+        @test median(
+            Dict("data" => [PVector(1.0, 4.0, 0.0, u"m"), PVector(2.0, 2.0, 0.0, u"m"), PVector(4.0, 1.0, 0.0, u"m")])
+        ) == PVector(2.0, 2.0, 0.0, u"m")
+
+        @test median(
+            Dict("data" => [PVector(1.0, 4.0, 0.0, u"m"), PVector(2.0, 2.0, 0.0, u"m"), PVector(4.0, 1.0, 0.0, u"m")]), :x
+        ) == 2.0u"m"
 
         @test norm(rotate_x(PVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
         @test norm(rotate_y(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"

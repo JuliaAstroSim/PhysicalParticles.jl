@@ -58,6 +58,9 @@ end
         assign_particles(p_Massless2D, :Pos, a_non)
         @test p_Massless2D[1].Pos == a_non[1]
 
+        assign_particles(p_Massless2D, :Pos, PVector2D())
+        @test p_Massless2D[1].Pos == PVector2D()
+
         # Unitful
         a = rand_pvector2d(5, u"m")
 
@@ -72,6 +75,9 @@ end
         p_SPHGas2D = [SPHGas2D(uSI) for i=1:5]
         assign_particles(p_SPHGas2D, :Pos, a)
         @test p_SPHGas2D[1].Pos == a[1]
+
+        assign_particles(p_SPHGas2D, :Pos, PVector2D(u"m"))
+        @test p_SPHGas2D[1].Pos == PVector2D(u"m")
 
         # randn
         a_randn = randn_pvector2d(5)
@@ -119,6 +125,14 @@ end
         e2 = extent(p2)
         @test extent(e, e2) == e2
         @test extent([e, e2]) == e2
+
+
+        @test extent(nothing, e) == e
+        @test extent(e, nothing) == e
+        @test extent(nothing, nothing) === nothing
+
+
+        @test extent(empty(p2)) === nothing
     end
 end
 
@@ -231,6 +245,9 @@ end
         e2 = extent(p2)
         @test extent(e, e2) == e2
         @test extent([e, e2]) == e2
+
+
+        @test extent(empty(p2)) === nothing
     end
 end
 
