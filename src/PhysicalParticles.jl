@@ -13,6 +13,7 @@ using BangBang
 
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
+import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit, push!, append!
@@ -50,6 +51,9 @@ export
     # Traits
     Collection,
         GAS, HALO, DISK, BULGE, STAR, BLACKHOLE,
+
+    # Constants
+    Constant,
 
     # AbstractDataDimension,
     datadimension,
@@ -176,6 +180,7 @@ end
 
 include("Traits.jl")
 include("Unit.jl")
+include("Constants.jl")
 
 include("PVector.jl")
 include("PhysicalParticle.jl")

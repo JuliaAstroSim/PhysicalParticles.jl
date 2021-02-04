@@ -137,4 +137,9 @@
         @test ZeroValues.potpermass == 0.0 * u"kpc^2 / Gyr^2"
         @test ZeroValues.mass == 0.0 * u"Msun"
     end
+
+    @testset "Constants" begin
+        a = show(Constant())
+        @test a === nothing
+    end
 end
