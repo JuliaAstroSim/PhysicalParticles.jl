@@ -5,7 +5,7 @@
 #            u"cm/s^2", 0.0, BigFloat(0.0), "Milgrom 1983")
 const ACC0 = 1.2e-8u"cm/s^2"
 
-struct Constant{GC, ACC, MASS, K_B}
+struct Constant{GC, ACC0, MASS, K_B}
     #c::cC     # light speed
     G::GC     # Newtonian constant of gravitation
     #h::AbstractQuantity     # Planck constant
@@ -17,7 +17,7 @@ struct Constant{GC, ACC, MASS, K_B}
     #H::HC     # Hubble constant
     k_B::K_B    # Kelvin-Boltzmann constant
 
-    ACC0::ACC  # Modified gravitational acceleration constant
+    ACC0::ACC0  # Modified gravitational acceleration constant
 end
 
 function Constant(units = uAstro;
