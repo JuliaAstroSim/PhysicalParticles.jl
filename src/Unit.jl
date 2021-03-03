@@ -119,7 +119,7 @@ function zerovalues(units::Nothing)
     return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
 end
 
-function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
     return ZeroValue(
         0.0 * getuLength(units),
         PVector(getuLength(units)),
