@@ -1,10 +1,10 @@
 @enum Collection begin
-    GAS = 0
-    HALO = 1
-    DISK = 2
-    BULGE = 3
-    STAR = 4
-    BLACKHOLE = 5
+    GAS       = 1
+    HALO      = 2
+    DISK      = 3
+    BULGE     = 4
+    STAR      = 5
+    BLACKHOLE = 6
 end
 
 abstract type AbstractDataDimension end
