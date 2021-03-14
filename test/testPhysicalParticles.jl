@@ -116,6 +116,7 @@ end
 
         e = extent(p)
         @test e == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
+        @test area(e) == 4.0u"m^2"
         @test mass_center(p) == PVector2D(u"m")
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
         @test pos_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
@@ -236,6 +237,7 @@ end
 
         e = extent(p)
         @test e == Extent(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector(u"m"), PVector(-1.0, -1.0, -1.0, u"m"))
+        @test volume(e) == 8u"m^3"
         @test mass_center(p) == PVector(u"m")
         @test mass_center([Star(uAstro)]) == PVector(u"kpc")
         @test mass_center([Massless() for i in 1:3]) == PVector()
@@ -261,6 +263,7 @@ end
         "blackholes" => [Star(uAstro, collection = BLACKHOLE) for i = 1:2],
     )
     @test countdata(data) == 12
+    @test countdata(data["gases"]) == 2
     @test extent(data) == Extent(0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", PVector(u"kpc"), PVector(u"kpc"))
 
     push!(data, SPHGas(uAstro))
@@ -272,11 +275,15 @@ end
     push!(data, Star(uAstro, collection = DISK))
     @test length(data["stars"]) == 4
 
+    # push to new keys
     data2 = Dict()
     push!(data2, SPHGas2D())
     push!(data2, Star2D())
     @test length(data2["gases"]) == 1
     @test length(data2["stars"]) == 1
+
+    append!(data2, deepcopy(data2))
+    @test countdata(data2) == 4
 
     a = [1,2,4]
     d = Dict("split" => a)
@@ -286,4 +293,9 @@ end
     @test sum(split_data(d, 1, 2)["split"]) == 3
     @test sum(split_data(d, 2, 2)["split"]) == 4
     @test isempty(split_data(d, 4, 4)["split"])
+
+    @test_throws ErrorException split_data(a, 0, 2)
+    @test_throws ErrorException split_data(a, 3, 2)
+    @test length(split_data(empty(a), 1, 2)) == 0
+    @test sum(split_data(a, 3, 3)) == 4
 end

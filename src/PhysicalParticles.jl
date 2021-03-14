@@ -47,6 +47,7 @@ export
 
     Extent, Extent2D,
         extent,
+        volume, area,
 
     # Traits
     Collection,

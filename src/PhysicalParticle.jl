@@ -294,7 +294,7 @@ end
 
 countdata(data::Array) = length(data)
 
-function push!(data::Dict, p::Star)
+function push!(data::Dict, p::Union{Star, Star2D})
     if haskey(data, "stars")
         push!(data["stars"], p)
     else
@@ -302,15 +302,7 @@ function push!(data::Dict, p::Star)
     end
 end
 
-function push!(data::Dict, p::Star2D)
-    if haskey(data, "stars")
-        push!(data["stars"], p)
-    else
-        data["stars"] = [p]
-    end
-end
-
-function push!(data::Dict, p::SPHGas)
+function push!(data::Dict, p::Union{SPHGas, SPHGas2D})
     if haskey(data, "gases")
         push!(data["gases"], p)
     else
@@ -318,17 +310,7 @@ function push!(data::Dict, p::SPHGas)
     end
 end
 
-function push!(data::Dict, p::SPHGas2D)
-    if haskey(data, "gases")
-        push!(data["gases"], p)
-    else
-        data["gases"] = [p]
-    end
-end
-
-push!(data::Array, p) = push!(data, p)
-
-function append!(data::Dict{S, Array{T,N}}, d::Dict{S, Array{T,N}}) where S where T<:AbstractParticle where N
+function append!(data::Dict, d::Dict)
     for p in Iterators.flatten(values(d))
         push!(data, p)
     end

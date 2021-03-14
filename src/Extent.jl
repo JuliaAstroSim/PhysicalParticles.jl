@@ -101,3 +101,11 @@ function extent(data::Dict)
     end
     return e
 end
+
+function volume(e::Extent)
+    return (e.xMax - e.xMin) * (e.yMax - e.yMin) * (e.zMax - e.zMin)
+end
+
+function area(e::Extent2D)
+    return (e.xMax - e.xMin) * (e.yMax - e.yMin)
+end
