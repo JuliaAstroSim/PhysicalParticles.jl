@@ -112,3 +112,6 @@ isinf(p::AbstractPoint3D) = isinf(p.x) && isinf(p.y) && isinf(p.z)
 
 hasinf(p::AbstractPoint2D) = isinf(p.x) || isinf(p.y)
 hasinf(p::AbstractPoint3D) = isinf(p.x) || isinf(p.y) || isinf(p.z)
+
+isapprox(a::AbstractPoint2D, b::AbstractPoint2D) = isapprox(a.x, b.x) && isapprox(a.y, b.y)
+isapprox(a::AbstractPoint3D, b::AbstractPoint3D) = isapprox(a.x, b.x) && isapprox(a.y, b.y) && isapprox(a.z, b.z)

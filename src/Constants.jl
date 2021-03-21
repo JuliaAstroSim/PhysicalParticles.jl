@@ -48,6 +48,18 @@ function Constant(units = uAstro;
     )
 end
 
+function Constant(::Nothing, c::Constant)
+   return Constant([ustrip(getfield(c, n)) for n in fieldnames(Constant)]...)
+end
+
+function Constant(::Nothing, units)
+    return Constant(nothing, Constant(units))
+end
+
+function ustrip(c::Constant)
+    return Constant([ustrip(getfield(c, n)) for n in fieldnames(Constant)]...)
+end
+
 function Base.show(io::IO, c::Constant)
     print(io,
         "Converted Constants:",

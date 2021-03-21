@@ -115,6 +115,10 @@ struct ZeroValue{Len, POS, VEL, ACC, POT, PPM, MASS}
     mass::MASS
 end
 
+@inline length(::ZeroValue) = 1
+@inline iterate(z::ZeroValue) = (z,nothing)
+@inline iterate(z::ZeroValue,st) = nothing
+
 function zerovalues(units::Nothing)
     return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
 end
