@@ -1,10 +1,10 @@
 ## Special treatment with Quantity
 
-@inline norm(p::PVector2D) = sqrt(upreferred(p * p))
-@inline normalize(p::PVector2D) = (n = ustrip(norm(p)); return PVector2D(upreferred(p.x/n), upreferred(p.y/n)))
+@inline norm(p::PVector2D) = sqrt(p * p)
+@inline normalize(p::PVector2D) = (n = ustrip(norm(p)); return PVector2D(p.x/n, p.y/n))
 
-@inline norm(p::PVector) = sqrt(upreferred(p * p))
-@inline normalize(p::PVector) = (n = ustrip(norm(p)); return PVector(upreferred(p.x/n), upreferred(p.y/n), upreferred(p.z/n)))
+@inline norm(p::PVector) = sqrt(p * p)
+@inline normalize(p::PVector) = (n = ustrip(norm(p)); return PVector(p.x/n, p.y/n, p.z/n))
 
 
 ## PVector2D

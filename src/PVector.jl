@@ -72,6 +72,9 @@ PVector(x::Number, y::Number, ::Nothing) = PVector2D(x, y)
 uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
 uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))
 
+promote(a::PVector2D, b::PVector2D) = (a, PVector2D(promote(a.x, b.x)[2], promote(a.y, b.y)[2]))
+promote(a::PVector, b::PVector) = (a, PVector(promote(a.x, b.x)[2], promote(a.y, b.y)[2], promote(a.z, b.z)[2]))
+
 ustrip(::Nothing, p::PVector2D) = p
 ustrip(::Nothing, p::PVector) = p
 ustrip(u::Units, p::PVector2D) = PVector2D(ustrip(u, p.x), ustrip(u, p.y))

@@ -16,7 +16,7 @@ import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
 import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
-             one, zero, isone, iszero, isnan, isinf, oneunit, push!, append!, isapprox
+             one, zero, isone, iszero, isnan, isinf, oneunit, push!, append!, isapprox, promote
 
 import LinearAlgebra: norm, normalize, dot, cross
 
