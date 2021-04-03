@@ -87,6 +87,6 @@ function median(d::Dict{S, Array{T, N}}) where S where T<:AbstractPoint3D where 
     )
 end
 
-function median(d::Dict, symbol)
+function median(d::Dict, symbol::Symbol)
     return median([getfield(p, symbol) for p in Iterators.flatten(values(d))])
 end
