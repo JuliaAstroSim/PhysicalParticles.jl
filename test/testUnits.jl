@@ -21,21 +21,21 @@
     u = getunits(nothing)
     @test u == (nothing, nothing, nothing, nothing, nothing, nothing, nothing)
 
-    @test getuLength(nothing) == nothing
-    @test getuTime(nothing) == nothing
-    @test getuCurrent(nothing) == nothing
-    @test getuTemperature(nothing) == nothing
-    @test getuLuminosity(nothing) == nothing
-    @test getuMass(nothing) == nothing
-    @test getuAmount(nothing) == nothing
+    @test getuLength(nothing) === nothing
+    @test getuTime(nothing) === nothing
+    @test getuCurrent(nothing) === nothing
+    @test getuTemperature(nothing) === nothing
+    @test getuLuminosity(nothing) === nothing
+    @test getuMass(nothing) === nothing
+    @test getuAmount(nothing) === nothing
 
-    @test getuVel(nothing) == nothing
-    @test getuAcc(nothing) == nothing
-    @test getuEnergy(nothing) == nothing
-    @test getuEntropy(nothing) == nothing
-    @test getuDensity(nothing) == nothing
-    @test getuDensity2D(nothing) == nothing
-    @test getuPressure(nothing) == nothing
+    @test getuVel(nothing) === nothing
+    @test getuAcc(nothing) === nothing
+    @test getuEnergy(nothing) === nothing
+    @test getuEntropy(nothing) === nothing
+    @test getuDensity(nothing) === nothing
+    @test getuDensity2D(nothing) === nothing
+    @test getuPressure(nothing) === nothing
 
     @test getuLength(uAstro) == u"kpc"
     @test getuTime(uAstro) == u"Gyr"
