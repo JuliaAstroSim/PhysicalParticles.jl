@@ -8,7 +8,7 @@ convert two-element array to PVector2D, and three-element array to PVector
 
 ## Examples
 
-```jldoctest; setup = :(using PhysicalParticles)
+```jl
 julia> pconvert([1.0, 2.0])
 PVector2D{Float64}(1.0, 2.0)
 
@@ -33,17 +33,17 @@ convert 2xN Array to Array{PVector2D,1}, 3xN Array to Array{PVector,1}
 
 ## Examples
 
-```jldoctest; setup = :(using PhysicalParticles)
+```jl
 julia> pconvert([1.0 3.0; 
                  2.0 4.0])
-2-element Array{PVector2D,1}:
+2-element Vector{PVector2D}:
  PVector2D{Float64}(1.0, 2.0)
  PVector2D{Float64}(3.0, 4.0)
 
 julia> pconvert([1.0 4.0;
                  2.0 5.0;
                  3.0 6.0])
-2-element Array{PVector,1}:
+2-element Vector{PVector}:
  PVector{Float64}(1.0, 2.0, 3.0)
  PVector{Float64}(4.0, 5.0, 6.0)
 ```
@@ -76,7 +76,7 @@ Assign the symbol of particles through array iteratively
 
 ## Examples
 
-```jldoctest; setup = :(using PhysicalParticles)
+```jl
 julia> assign_particles([Ball(uSI) for i=1:3], :Pos, rand_pvector(3, u"m"))
 
 julia> assign_particles([Ball(uSI) for i=1:3], :Mass, 1.0u"kg")

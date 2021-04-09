@@ -53,6 +53,8 @@ PVector(1.0 m, 2.0 m, 3.0 m)
 julia> c = PVector2D(u"m/s")
 PVector2D(0.0 m s^-1, 0.0 m s^-1)
 
+julia> uconvert(u"m", PVector(1.0, 1.0, 1.0, u"km"))
+PVector(1000.0 m, 1000.0 m, 1000.0 m)
 
 
 julia> PVector(1.0, 1.0) * im
@@ -83,6 +85,26 @@ julia> distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0))
 
 julia> rotate(PVector(1.0, 0.0), 0.5pi)
 PVector2D{Float64}(6.123233995736766e-17, 1.0)
+
+
+julia> zero(PVector{Float64})
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia> iszero(PVector(u"m"))
+true
+
+julia> isnan(PVector(NaN, NaN))
+true
+
+julia> PVector2D(1.0, 1.0) ≈ PVector2D(1.0 + 1.0e-8, 1.0 + 1.0e-8)
+true
+
+
+julia> ustrip(PVector(1.0, 1.0, 1.0, u"km"))
+PVector{Float64}(1.0, 1.0, 1.0)
+
+julia> ustrip(u"m", PVector(1.0, 1.0, 1.0, u"km"))
+PVector{Float64}(1000.0, 1000.0, 1000.0)
 ```
 
 ### Particles
@@ -188,7 +210,7 @@ Extent: , xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 
 = PVector(0.0 m, 0.0 m, 0.0 m), Corner = PVector(-1.0 m, -1.0 m, -1.0 m)
 ```
 
-### Default Unit
+### Units
 
 Units are supported by [Unitful.jl](https://github.com/PainterQubits/Unitful.jl) and [UnitfulAstro.jl](https://github.com/JuliaAstro/UnitfulAstro.jl)
 
@@ -231,6 +253,73 @@ kg
 
 julia> getuAmount()
 mol
+```
+
+`axisunit` provides a convenient way to print units in the axis of plots:
+```jl
+julia> axisunit(nothing)
+""
+
+julia> axisunit(u"m")
+" [m]"
+
+julia> axisunit("Time", u"Gyr")
+"TIme [Gyr]"
+```
+
+### Constants
+
+Physical constants are imported from `CODATA2018` supported by [PhysicalConstants.jl](https://github.com/JuliaPhysics/PhysicalConstants.jl). However, constants in `PhysicalConstants` may cause type error if they are not converted to default units.
+
+To prevent this problem, construct an immutable struct `Constant` corresponding to the provided `units`:
+```jl
+julia> Constant()
+Converted Constants:
+    G = 4.498502151469553e-6 kpc^3 M⊙^-1 Gyr^-2
+    m_e = 4.581240435253955e-61 M⊙
+    m_n = 8.423451938769546e-58 M⊙
+    m_p = 8.411856872862986e-58 M⊙
+    k_B = 7.2624677363918e-60 kpc^2 M⊙ K^-1 Gyr^-2
+    ACC0 = 3872.920970357523 kpc Gyr^-2
+
+julia> Constant(uSI)
+Converted Constants:
+    G = 6.6743e-11 m^3 kg^-1 s^-2
+    m_e = 9.1093837015e-31 kg
+    m_n = 1.67492749804e-27 kg
+    m_p = 1.67262192369e-27 kg
+    k_B = 1.380649e-23 kg m^2 K^-1 s^-2
+    ACC0 = 1.2e-10 m s^-2
+
+julia> Constant(uCGS)
+Converted Constants:
+    G = 6.674299999999999e-8 cm^3 g^-1 s^-2
+    m_e = 9.1093837015e-28 g
+    m_n = 1.67492749804e-24 g
+    m_p = 1.67262192369e-24 g
+    k_B = 1.380649e-16 g cm^2 K^-1 s^-2
+    ACC0 = 1.2e-8 cm s^-2
+
+julia> using Unitful
+
+julia> ustrip(Constant())
+Converted Constants:
+    G = 4.498502151469553e-6
+    m_e = 4.581240435253955e-61
+    m_n = 8.423451938769546e-58
+    m_p = 8.411856872862986e-58
+    k_B = 7.2624677363918e-60
+    ACC0 = 3872.920970357523
+```
+
+### Zerovalues
+
+`ZeroValue` is useful for accumulated summation, array initialization, etc. Examples:
+```jl
+zerovalues(nothing)
+zerovalues()
+zerovalues(uSI)
+zerovalues(uCGS)
 ```
 
 ## References

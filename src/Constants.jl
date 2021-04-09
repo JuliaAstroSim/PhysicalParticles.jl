@@ -20,6 +20,30 @@ struct Constant{GC, ACC0, MASS, K_B}
     ACC0::ACC0  # Modified gravitational acceleration constant
 end
 
+"""
+    function Constant(units = uAstro; kw...)
+
+    Construct an immutable struct storing basic physical constants corresponding to `units` (default is `uAstro`).
+
+# Keywords
+
+- G:    Newtonian constant of gravitation
+- m_e:  Electron mass
+- m_n:  Neutron mass
+- m_p:  Protron mass
+- k_B:  Kelvin-Boltzmann constant
+- ACC0: Modified gravitational acceleration constant
+
+# Examples
+
+```jl
+Constant()
+Constant(uSI)
+Constant(uCGS)
+using Unitful
+ustrip(Constant())
+```
+"""
 function Constant(units = uAstro;
     #c_0 = CODATA2018.c_0,
     G = CODATA2018.G,

@@ -27,3 +27,28 @@ getuLuminosity()
 getuMass()
 getuAmount()
 ```
+
+## Constants
+
+Physical constants are imported from `CODATA2018` supported by [PhysicalConstants.jl](https://github.com/JuliaPhysics/PhysicalConstants.jl). However, constants in `PhysicalConstants` may cause type error if they are not converted to default units.
+
+To prevent this problem, construct an immutable struct `Constant` corresponding to the provided `units`:
+```@repl
+using PhysicalParticles
+Constant()
+Constant(uSI)
+Constant(uCGS)
+using Unitful
+ustrip(Constant())
+```
+
+## Zerovalues
+
+`ZeroValue` is useful for accumulated summation, array initialization, etc. Examples:
+```@repl
+using PhysicalParticles
+zerovalues(nothing)
+zerovalues()
+zerovalues(uSI)
+zerovalues(uCGS)
+```

@@ -80,6 +80,9 @@
     @test zero(u"m", PVector2D(u"km")) == PVector2D(0.0u"m", 0.0u"m")
     @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 
+    @test zero(PVector{Float64}) == PVector()
+    @test zero(PVector2D{Float64}) == PVector2D()
+
     @test isone(PVector(1.0, 1.0, 1.0))
     @test isone(PVector(1.0, 1.0, 1.0, u"m/m"))
     @test isone(PVector2D(1.0, 1.0))
@@ -136,10 +139,18 @@
         @test ZeroValues.pot == 0.0 * u"Msun * kpc^2 / Gyr^2"
         @test ZeroValues.potpermass == 0.0 * u"kpc^2 / Gyr^2"
         @test ZeroValues.mass == 0.0 * u"Msun"
+
+        @test length(ZeroValues) == 1
+        @test iterate(ZeroValues) == (ZeroValues, nothing)
+        @test iterate(ZeroValues, nothing) === nothing
     end
 
     @testset "Constants" begin
-        a = show(Constant())
+        c = Constant()
+        a = show(c)
         @test a === nothing
+
+        nc = Constant(nothing, uAstro)
+        @test nc == ustrip(c)
     end
 end

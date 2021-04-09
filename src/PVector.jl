@@ -1,3 +1,23 @@
+"""
+    struct PVector2D{T<:Number} <: AbstractPoint2D{T}
+
+## Fields
+- x::T
+- y::T
+
+## Examples
+
+```jl
+julia> PVector2D()
+PVector2D{Float64}(0.0, 0.0)
+
+julia> PVector2D(u"m")
+PVector2D(0.0 m, 0.0 m)
+
+julia> PVector(1.0im, 2.0 + 3.0im)
+PVector2D{ComplexF64}(0.0 + 1.0im, 2.0 + 3.0im)
+```
+"""
 struct PVector2D{T<:Number} <: AbstractPoint2D{T}
     x::T
     y::T
@@ -9,6 +29,27 @@ end
 
 @inline *(a::PVector2D, b::PVector2D) = a.x * b.x + a.y * b.y
 
+"""
+    struct PVector{T<:Number} <: AbstractPoint3D{T}
+
+## Fields
+- x::T
+- y::T
+- z::T
+
+## Examples
+
+```jl
+julia> PVector()
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia> PVector(u"m")
+PVector(0.0 m, 0.0 m, 0.0 m)
+
+julia> PVector() * im
+PVector{ComplexF64}(0.0 + 0.0im, 0.0 + 0.0im, 0.0 + 0.0im)
+```
+"""
 struct PVector{T<:Number} <: AbstractPoint3D{T}
     x::T
     y::T
@@ -71,9 +112,6 @@ PVector(x::Number, y::Number, ::Nothing) = PVector2D(x, y)
 
 uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
 uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))
-
-promote(a::PVector2D, b::PVector2D) = (a, PVector2D(promote(a.x, b.x)[2], promote(a.y, b.y)[2]))
-promote(a::PVector, b::PVector) = (a, PVector(promote(a.x, b.x)[2], promote(a.y, b.y)[2], promote(a.z, b.z)[2]))
 
 ustrip(::Nothing, p::PVector2D) = p
 ustrip(::Nothing, p::PVector) = p

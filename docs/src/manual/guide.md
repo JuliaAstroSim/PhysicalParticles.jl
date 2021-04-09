@@ -27,6 +27,7 @@ using PhysicalParticles, UnitfulAstro
 a = PVector()
 b = PVector(1.0u"m", 2.0u"m", 3.0u"m")
 c = PVector2D(u"m/s")
+uconvert(u"m", PVector(1.0, 1.0, 1.0, u"km"))
 PVector(1.0, 1.0) * im
 b * 2.0u"s"
 b + PVector(2.0, 2.0, 2.0, u"m") / 2
@@ -36,6 +37,12 @@ d = PVector(3u"kpc", 4u"kpc")
 norm(d)
 distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0))
 rotate(PVector(1.0, 0.0), 0.5pi)
+zero(PVector{Float64})
+iszero(PVector(u"m"))
+isnan(PVector(NaN, NaN))
+PVector2D(1.0, 1.0) ≈ PVector2D(1.0 + 1.0e-8, 1.0 + 1.0e-8)
+ustrip(PVector(1.0, 1.0, 1.0, u"km"))
+ustrip(u"m", PVector(1.0, 1.0, 1.0, u"km"))
 ```
 
 ### Particles

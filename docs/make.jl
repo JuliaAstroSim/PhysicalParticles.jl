@@ -9,6 +9,7 @@ DocumenterTools.genkeys(user="JuliaAstroSim", repo="git@github.com:JuliaAstroSim
 using Documenter
 
 using PhysicalParticles
+using Unitful, UnitfulAstro, BangBang
 
 # The DOCSARGS environment variable can be used to pass additional arguments to make.jl.
 # This is useful on CI, if you need to change the behavior of the build slightly but you
