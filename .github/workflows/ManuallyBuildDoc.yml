@@ -18,7 +18,7 @@ jobs:
           Pkg.add("Documenter");
           Pkg.develop(PackageSpec(; path=pwd()));
           Pkg.instantiate();'
-      - name: Build and deploy
+      - name: Build and deploy doc
         env:
           #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Deploying to else where, so use SSH instead
           DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
