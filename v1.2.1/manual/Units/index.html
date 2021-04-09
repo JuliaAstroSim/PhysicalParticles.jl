@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Units · PhysicalParticles.jl</title><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-153693590-1', 'auto');
+ga('send', 'pageview', {'page': location.pathname + location.search + location.hash});
+</script><link rel="canonical" href="https://juliaastrosims.github.io/PhysicalParticles.jl/dev/manual/Units/"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/alpha_small.ico" rel="icon" type="image/x-icon"/></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../"><img src="../../assets/logo.svg" alt="PhysicalParticles.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit">PhysicalParticles.jl</span></div><form class="docs-search" action="../../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="../guide/">Package Guide</a></li><li><a class="tocitem" href="../PVector/">PVector</a></li><li><a class="tocitem" href="../Conversion/">Conversion</a></li><li class="is-active"><a class="tocitem" href>Units</a><ul class="internal"><li><a class="tocitem" href="#Default-Units"><span>Default Units</span></a></li><li><a class="tocitem" href="#Constants"><span>Constants</span></a></li><li><a class="tocitem" href="#Zerovalues"><span>Zerovalues</span></a></li></ul></li><li><a class="tocitem" href="../Random/">Random</a></li><li><a class="tocitem" href="../Extent/">Extent</a></li><li><a class="tocitem" href="../Neighbors/">Neighbors</a></li><li><a class="tocitem" href="../Clustering/">Clustering</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../lib/Types/">Types</a></li><li><a class="tocitem" href="../../lib/Methods/">Methods</a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Manual</a></li><li class="is-active"><a href>Units</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Units</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaAstroSim/PhysicalParticles.jl/blob/master/docs/src/manual/Units.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="Units"><a class="docs-heading-anchor" href="#Units">Units</a><a id="Units-1"></a><a class="docs-heading-anchor-permalink" href="#Units" title="Permalink"></a></h1><p>Units are supported by <a href="https://github.com/PainterQubits/Unitful.jl">Unitful.jl</a> and <a href="https://github.com/JuliaAstro/UnitfulAstro.jl">UnitfulAstro.jl</a></p><h2 id="Default-Units"><a class="docs-heading-anchor" href="#Default-Units">Default Units</a><a id="Default-Units-1"></a><a class="docs-heading-anchor-permalink" href="#Default-Units" title="Permalink"></a></h2><p>You could set preferred units by</p><pre><code class="language-julia">const uSI = u&quot;m,s,A,K,cd,kg,mol&quot;
+preferunits(uSI)</code></pre><p>or simply call <code>si()</code>. <code>astro()</code> and <code>cgs()</code> are implemented in the same way.</p><p>This would affect unit promotions in <code>Unitful</code> package and default outputs in related packages, by setting <code>Unitful.promotion</code> and <code>PhysicalParticles.uDefaults</code> respectively.</p><p>Examples to get basic units:</p><pre><code class="language-julia-repl">julia&gt; using PhysicalParticles
+
+julia&gt; getunits()
+(m, s, A, K, cd, kg, mol)
+
+julia&gt; getunits(uAstro)
+(kpc, Gyr, A, K, cd, M⊙, mol)
+
+julia&gt; getunits(nothing)
+(nothing, nothing, nothing, nothing, nothing, nothing, nothing)
+
+julia&gt; getuLength()
+m
+
+julia&gt; getuTime(uSI)
+s
+
+julia&gt; getuCurrent(uCGS)
+A
+
+julia&gt; getuTemperature(nothing)
+
+julia&gt; getuLuminosity()
+cd
+
+julia&gt; getuMass()
+kg
+
+julia&gt; getuAmount()
+mol</code></pre><h2 id="Constants"><a class="docs-heading-anchor" href="#Constants">Constants</a><a id="Constants-1"></a><a class="docs-heading-anchor-permalink" href="#Constants" title="Permalink"></a></h2><p>Physical constants are imported from <code>CODATA2018</code> supported by <a href="https://github.com/JuliaPhysics/PhysicalConstants.jl">PhysicalConstants.jl</a>. However, constants in <code>PhysicalConstants</code> may cause type error if they are not converted to default units.</p><p>To prevent this problem, construct an immutable struct <code>Constant</code> corresponding to the provided <code>units</code>:</p><pre><code class="language-julia-repl">julia&gt; using PhysicalParticles
+
+julia&gt; Constant()
+Converted Constants:
+    G = 4.498502151469553e-6 kpc^3 Gyr^-2 M⊙^-1
+    m_e = 4.581240435253955e-61 M⊙
+    m_n = 8.423451938769546e-58 M⊙
+    m_p = 8.411856872862986e-58 M⊙
+    k_B = 7.262467736391801e-60 kpc^2 M⊙ Gyr^-2 K^-1
+    ACC0 = 3872.920970357523 kpc Gyr^-2
+
+julia&gt; Constant(uSI)
+Converted Constants:
+    G = 6.6743e-11 m^3 kg^-1 s^-2
+    m_e = 9.1093837015e-31 kg
+    m_n = 1.67492749804e-27 kg
+    m_p = 1.67262192369e-27 kg
+    k_B = 1.380649e-23 kg m^2 K^-1 s^-2
+    ACC0 = 1.2e-10 m s^-2
+
+julia&gt; Constant(uCGS)
+Converted Constants:
+    G = 6.674299999999999e-8 cm^3 g^-1 s^-2
+    m_e = 9.1093837015e-28 g
+    m_n = 1.67492749804e-24 g
+    m_p = 1.67262192369e-24 g
+    k_B = 1.380649e-16 g cm^2 K^-1 s^-2
+    ACC0 = 1.2e-8 cm s^-2
+
+julia&gt; using Unitful
+
+julia&gt; ustrip(Constant())
+Converted Constants:
+    G = 4.498502151469553e-6
+    m_e = 4.581240435253955e-61
+    m_n = 8.423451938769546e-58
+    m_p = 8.411856872862986e-58
+    k_B = 7.262467736391801e-60
+    ACC0 = 3872.920970357523</code></pre><h2 id="Zerovalues"><a class="docs-heading-anchor" href="#Zerovalues">Zerovalues</a><a id="Zerovalues-1"></a><a class="docs-heading-anchor-permalink" href="#Zerovalues" title="Permalink"></a></h2><p><code>ZeroValue</code> is useful for accumulated summation, array initialization, etc. Examples:</p><pre><code class="language-julia-repl">julia&gt; using PhysicalParticles
+
+julia&gt; zerovalues(nothing)
+ZeroValue{Float64, PVector{Float64}, PVector{Float64}, PVector{Float64}, Float64, Float64, Float64}(0.0, PVector{Float64}(0.0, 0.0, 0.0), PVector{Float64}(0.0, 0.0, 0.0), PVector{Float64}(0.0, 0.0, 0.0), 0.0, 0.0, 0.0)
+
+julia&gt; zerovalues()
+ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(kpc,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(kpc,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(Gyr^-1, kpc), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(Gyr^-2, kpc), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(Gyr^-2, kpc^2, M⊙), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(Gyr^-2, kpc^2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(M⊙,), 𝐌, nothing}}}(0.0 kpc, PVector(0.0 kpc, 0.0 kpc, 0.0 kpc), PVector(0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1, 0.0 kpc Gyr^-1), PVector(0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2, 0.0 kpc Gyr^-2), 0.0 kpc^2 M⊙ Gyr^-2, 0.0 kpc^2 Gyr^-2, 0.0 M⊙)
+
+julia&gt; zerovalues(uSI)
+ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(kg, m^2, s^-2), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(m^2, s^-2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(kg,), 𝐌, nothing}}}(0.0 m, PVector(0.0 m, 0.0 m, 0.0 m), PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), 0.0 kg m^2 s^-2, 0.0 m^2 s^-2, 0.0 kg)
+
+julia&gt; zerovalues(uCGS)
+ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(cm, s^-1), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(cm, s^-2), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(g, cm^2, s^-2), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(cm^2, s^-2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(g,), 𝐌, nothing}}}(0.0 cm, PVector(0.0 cm, 0.0 cm, 0.0 cm), PVector(0.0 cm s^-1, 0.0 cm s^-1, 0.0 cm s^-1), PVector(0.0 cm s^-2, 0.0 cm s^-2, 0.0 cm s^-2), 0.0 g cm^2 s^-2, 0.0 cm^2 s^-2, 0.0 g)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Conversion/">« Conversion</a><a class="docs-footer-nextpage" href="../Random/">Random »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 9 April 2021 08:47">Friday 9 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

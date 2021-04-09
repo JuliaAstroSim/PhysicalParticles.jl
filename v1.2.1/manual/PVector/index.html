@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>PVector · PhysicalParticles.jl</title><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-153693590-1', 'auto');
+ga('send', 'pageview', {'page': location.pathname + location.search + location.hash});
+</script><link rel="canonical" href="https://juliaastrosims.github.io/PhysicalParticles.jl/dev/manual/PVector/"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../assets/themeswap.js"></script><link href="../../assets/alpha_small.ico" rel="icon" type="image/x-icon"/></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../"><img src="../../assets/logo.svg" alt="PhysicalParticles.jl logo"/></a><div class="docs-package-name"><span class="docs-autofit">PhysicalParticles.jl</span></div><form class="docs-search" action="../../search/"><input class="docs-search-query" id="documenter-search-query" name="q" type="text" placeholder="Search docs"/></form><ul class="docs-menu"><li><a class="tocitem" href="../../">Home</a></li><li><span class="tocitem">Manual</span><ul><li><a class="tocitem" href="../guide/">Package Guide</a></li><li class="is-active"><a class="tocitem" href>PVector</a><ul class="internal"><li><a class="tocitem" href="#PVector-and-PVector2D"><span>PVector and PVector2D</span></a></li></ul></li><li><a class="tocitem" href="../Conversion/">Conversion</a></li><li><a class="tocitem" href="../Units/">Units</a></li><li><a class="tocitem" href="../Random/">Random</a></li><li><a class="tocitem" href="../Extent/">Extent</a></li><li><a class="tocitem" href="../Neighbors/">Neighbors</a></li><li><a class="tocitem" href="../Clustering/">Clustering</a></li></ul></li><li><span class="tocitem">Library</span><ul><li><a class="tocitem" href="../../lib/Types/">Types</a></li><li><a class="tocitem" href="../../lib/Methods/">Methods</a></li></ul></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Manual</a></li><li class="is-active"><a href>PVector</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>PVector</a></li></ul></nav><div class="docs-right"><a class="docs-edit-link" href="https://github.com/JuliaAstroSim/PhysicalParticles.jl/blob/master/docs/src/manual/PVector.md" title="Edit on GitHub"><span class="docs-icon fab"></span><span class="docs-label is-hidden-touch">Edit on GitHub</span></a><a class="docs-settings-button fas fa-cog" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-sidebar-button fa fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a></div></header><article class="content" id="documenter-page"><h1 id="PVector"><a class="docs-heading-anchor" href="#PVector">PVector</a><a id="PVector-1"></a><a class="docs-heading-anchor-permalink" href="#PVector" title="Permalink"></a></h1><p>All of the sub-types of <code>Number</code> and <code>Quantity</code> are supported. In general it works as we expected whereas there are too many possibilities to foresee. Mathematically vector operations, linear algebra, array conversions, neighbor searching, etc. are well documented in corresponding sections.</p><p>The vector types are immutable out of performance reason. </p><h2 id="PVector-and-PVector2D"><a class="docs-heading-anchor" href="#PVector-and-PVector2D">PVector and PVector2D</a><a id="PVector-and-PVector2D-1"></a><a class="docs-heading-anchor-permalink" href="#PVector-and-PVector2D" title="Permalink"></a></h2><h3 id="Constructor"><a class="docs-heading-anchor" href="#Constructor">Constructor</a><a id="Constructor-1"></a><a class="docs-heading-anchor-permalink" href="#Constructor" title="Permalink"></a></h3><p>It is assumed that 3D vectors are used more often, so we choose <code>PVector</code> to represent 3D vectors and provide user-friendly functions to avoid errors in case you missed suffix <code>2D</code>:</p><pre><code class="language-julia-repl">julia&gt; using PhysicalParticles
+
+julia&gt; PVector(1.0, 2.0)
+PVector2D{Float64}(1.0, 2.0)
+
+julia&gt; PVector(2.0, 3.0, u&quot;m&quot;)
+PVector2D(2.0 m, 3.0 m)</code></pre><p>The default constructors of <code>PVector</code> are still 3d-version:</p><pre><code class="language-julia-repl">julia&gt; PVector()
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia&gt; PVector(u&quot;m&quot;)
+PVector(0.0 m, 0.0 m, 0.0 m)</code></pre><h3 id="Basic-Operators"><a class="docs-heading-anchor" href="#Basic-Operators">Basic Operators</a><a id="Basic-Operators-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-Operators" title="Permalink"></a></h3><p>Basic maths are well support by overriding <code>Base: +, -, *, /</code>, and array operations are supported by overriding <code>Base: length, iterate</code></p><pre><code class="language-julia-repl">julia&gt; a = pconvert(ones(3))
+PVector{Float64}(1.0, 1.0, 1.0)
+
+julia&gt; b = pconvert(ones(3)) * 2
+PVector{Float64}(2.0, 2.0, 2.0)
+
+julia&gt; a + b
+PVector{Float64}(3.0, 3.0, 3.0)
+
+julia&gt; a * b
+6.0
+
+julia&gt; norm(a)
+1.7320508075688772
+
+julia&gt; norm(a) == sqrt(3)
+true
+
+julia&gt; normalize(a)
+PVector{Float64}(0.5773502691896258, 0.5773502691896258, 0.5773502691896258)
+
+julia&gt; normalize(a) == a / sqrt(3)
+true
+
+julia&gt; cross(a, b)
+PVector{Float64}(0.0, 0.0, 0.0)
+
+julia&gt; dot(a,b) == *(a,b)
+true
+
+julia&gt; c = pconvert(ones(3)) * 1.0u&quot;m&quot;
+PVector(1.0 m, 1.0 m, 1.0 m)
+
+julia&gt; c * a
+3.0 m</code></pre><h3 id="More-types,-more-possibilities"><a class="docs-heading-anchor" href="#More-types,-more-possibilities">More types, more possibilities</a><a id="More-types,-more-possibilities-1"></a><a class="docs-heading-anchor-permalink" href="#More-types,-more-possibilities" title="Permalink"></a></h3><p><code>T&lt;:Number</code> gives us a whole world to try out new vector operations. As we mentioned above, the build-in type operation and promotion schemes have guaranteed most of operations would be correct:</p><pre><code class="language-julia-repl">julia&gt; a = PVector(1.0, 1.0, 1.0) * im
+PVector{ComplexF64}(0.0 + 1.0im, 0.0 + 1.0im, 0.0 + 1.0im)
+
+julia&gt; a * PVector(1, 2, 3)
+0.0 + 6.0im
+
+julia&gt; norm(a)
+0.0 + 1.7320508075688772im
+
+julia&gt; b = PVector(1.0f0, 2.0f0)
+PVector2D{Float32}(1.0f0, 2.0f0)
+
+julia&gt; b * 2
+PVector2D{Float32}(2.0f0, 4.0f0)
+
+julia&gt; b * 2.0
+PVector2D{Float64}(2.0, 4.0)</code></pre><h3 id="LinearAlgebra"><a class="docs-heading-anchor" href="#LinearAlgebra">LinearAlgebra</a><a id="LinearAlgebra-1"></a><a class="docs-heading-anchor-permalink" href="#LinearAlgebra" title="Permalink"></a></h3><p><code>norm</code>, <code>normalize</code>, <code>dot</code>, <code>cross</code> from <code>LinearAlgebra</code> module are overloaded.</p><p>However, when it comes to <code>Quantity</code>, some wierd things would happen:</p><pre><code class="language-julia-repl">julia&gt; using Unitful
+
+julia&gt; sqrt(1.0u&quot;km&quot; * 1000.0u&quot;m&quot;)
+31.622776601683793 m^1/2 km^1/2
+
+julia&gt; sqrt(upreferred(1.0u&quot;km&quot; * 1000.0u&quot;m&quot;))
+1000.0 m
+
+julia&gt; 1.0u&quot;km&quot; / sqrt(upreferred(1.0u&quot;km&quot; * 1.0u&quot;km&quot;))
+0.001 km m^-1</code></pre><p>To avoid this, we have to use <code>upreferred</code> in both <code>norm</code> and <code>normalize</code>:</p><pre><code class="language-julia">@inline norm(p::PVector2D) = sqrt(upreferred(p * p))
+@inline normalize(p::PVector2D) = (n = ustrip(norm(p)); return PVector2D(upreferred(p.x/n), upreferred(p.y/n)))
+
+@inline norm(p::PVector) = sqrt(upreferred(p * p))
+@inline normalize(p::PVector) = (n = ustrip(norm(p)); return PVector(upreferred(p.x/n), upreferred(p.y/n), upreferred(p.z/n)))</code></pre><h3 id="uconvert,-ustrip,-zero,-one"><a class="docs-heading-anchor" href="#uconvert,-ustrip,-zero,-one">uconvert, ustrip, zero, one</a><a id="uconvert,-ustrip,-zero,-one-1"></a><a class="docs-heading-anchor-permalink" href="#uconvert,-ustrip,-zero,-one" title="Permalink"></a></h3><p>These would be useful when you cannot predict the type of input.</p><pre><code class="language-julia-repl">julia&gt; p = PVector(2.0, 2.0, 2.0, u&quot;km&quot;)
+PVector(2.0 km, 2.0 km, 2.0 km)
+
+julia&gt; uconvert(u&quot;m&quot;, p)
+PVector(2000.0 m, 2000.0 m, 2000.0 m)
+
+julia&gt; ustrip(u&quot;m&quot;, p)
+PVector{Float64}(2000.0, 2000.0, 2000.0)
+
+julia&gt; ustrip(p)
+PVector{Float64}(2.0, 2.0, 2.0)
+
+julia&gt; one(u&quot;m&quot;, p)
+PVector(1.0 m, 1.0 m, 1.0 m)
+
+julia&gt; one(p)
+PVector{Float64}(1.0, 1.0, 1.0)
+
+julia&gt; zero(u&quot;m&quot;, p)
+PVector(0.0 m, 0.0 m, 0.0 m)
+
+julia&gt; zero(p)
+PVector{Float64}(0.0, 0.0, 0.0)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../guide/">« Package Guide</a><a class="docs-footer-nextpage" href="../Conversion/">Conversion »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 9 April 2021 08:47">Friday 9 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
