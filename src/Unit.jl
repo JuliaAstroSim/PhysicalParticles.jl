@@ -441,3 +441,18 @@ function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where
         0.0 * getuMass(units),
     )
 end
+
+ZeroValue(units = uAstro) = zerovalues(units)
+
+function Base.show(io::IO, z::ZeroValue)
+    print(io, """
+        Zero Values:
+            len = $(z.len)
+            pos = $(z.pos)
+            vel = $(z.vel)
+            acc = $(z.acc)
+            pot = $(z.pot)
+            potpermass = $(z.potpermass)
+            mass = $(z.mass)
+    """)
+end

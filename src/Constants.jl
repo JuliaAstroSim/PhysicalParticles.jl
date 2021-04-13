@@ -5,8 +5,8 @@
 #            u"cm/s^2", 0.0, BigFloat(0.0), "Milgrom 1983")
 const ACC0 = 1.2e-8u"cm/s^2"
 
-struct Constant{cC, GC, ACC0, MASS, K_B}
-    c::cC     # light speed
+struct Constant{CC, GC, ACC0, MASS, K_B}
+    c::CC     # light speed
     G::GC     # Newtonian constant of gravitation
     #h::AbstractQuantity     # Planck constant
     #e::AbstractQuantity     # Elementary charge

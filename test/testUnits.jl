@@ -143,6 +143,8 @@
         @test length(ZeroValues) == 1
         @test iterate(ZeroValues) == (ZeroValues, nothing)
         @test iterate(ZeroValues, nothing) === nothing
+
+        @test show(ZeroValue()) === nothing
     end
 
     @testset "Constants" begin
