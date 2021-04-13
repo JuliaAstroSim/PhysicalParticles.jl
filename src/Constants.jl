@@ -5,8 +5,8 @@
 #            u"cm/s^2", 0.0, BigFloat(0.0), "Milgrom 1983")
 const ACC0 = 1.2e-8u"cm/s^2"
 
-struct Constant{GC, ACC0, MASS, K_B}
-    #c::cC     # light speed
+struct Constant{cC, GC, ACC0, MASS, K_B}
+    c::cC     # light speed
     G::GC     # Newtonian constant of gravitation
     #h::AbstractQuantity     # Planck constant
     #e::AbstractQuantity     # Elementary charge
@@ -27,6 +27,7 @@ end
 
 # Keywords
 
+- c:    Speed of light
 - G:    Newtonian constant of gravitation
 - m_e:  Electron mass
 - m_n:  Neutron mass
@@ -45,7 +46,7 @@ ustrip(Constant())
 ```
 """
 function Constant(units = uAstro;
-    #c_0 = CODATA2018.c_0,
+    c_0 = CODATA2018.c_0,
     G = CODATA2018.G,
     #h = CODATA2018.h,
     #e = CODATA2018.e,
@@ -58,7 +59,7 @@ function Constant(units = uAstro;
     ACC0 = ACC0,
 )
     return Constant(
-        #uconvert(getuVel(units), c),
+        uconvert(getuVel(units), c_0),
         uconvert(units[1]^3 / units[6] / units[2]^2, G),
         #uconvert(units[6] * units[1]^2 / units[2], h),
         #uconvert(units[3] * units[2], e),
@@ -87,6 +88,7 @@ end
 function Base.show(io::IO, c::Constant)
     print(io,
         "Converted Constants:",
+        "\n    c = ", c.c,
         "\n    G = ", c.G,
         "\n    m_e = ", c.m_e,
         "\n    m_n = ", c.m_n,

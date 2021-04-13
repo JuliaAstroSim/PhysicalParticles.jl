@@ -9,8 +9,8 @@
 
 ## PVector2D
 
-@inline rotate_z(p::PVector2D, theta::T) where T<:Number = PVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
-@inline rotate(p::PVector2D, theta::T) where T<:Number = rotate_z(p, theta)
+@inline rotate_z(p::PVector2D, theta::Number) = PVector2D(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta))
+@inline rotate(p::PVector2D, theta::Number) = rotate_z(p, theta)
 
 ### Cross product of 2D vectors (which is a number) is not supported here
 
@@ -22,21 +22,21 @@ $(SIGNATURES)
 
 Rotate p around x-axis for angle `theta` in radian
 """
-@inline rotate_x(p::PVector, theta::T) where T<:Number = PVector(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
+@inline rotate_x(p::PVector, theta::Number) = PVector(p.x, p.y*cos(theta)-p.z*sin(theta), p.y*sin(theta)+p.z*cos(theta))
 
 """
 $(SIGNATURES)
 
 Rotate p around y-axis for angle `theta` in radian
 """
-@inline rotate_y(p::PVector, theta::T) where T<:Number = PVector(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
+@inline rotate_y(p::PVector, theta::Number) = PVector(p.x*cos(theta)+p.z*sin(theta), p.y, -p.x*sin(theta)+p.z*cos(theta))
 
 """
 $(SIGNATURES)
 
 Rotate p around z-axis for angle `theta` in radian
 """
-@inline rotate_z(p::PVector, theta::T) where T<:Number = PVector(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
+@inline rotate_z(p::PVector, theta::Number) = PVector(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
 
 """
     function cross(a::PVector, b::PVector)
@@ -132,6 +132,8 @@ end
     function median(d::Dict, symbol::Symbol)
 
 Return the midian value of field `symbol` in array of particles or dict of arrays of particles.
+
+$_center_doc
 """
 function median(a::Array{T}, symbol::Symbol) where T <: AbstractParticle
     return median([getfield(p, symbol) for p in a])

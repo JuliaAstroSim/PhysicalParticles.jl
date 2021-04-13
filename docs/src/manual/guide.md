@@ -94,8 +94,12 @@ pconvert([1.0u"m" 4.0u"m";
 
 ```@repl guide
 p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1),
-     Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)]
+     Ball(PVector(3.0u"m", -3.0u"m", -3.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 3000.0u"g", 2)]
+minimum_x(p)
+maximum_x(p)
 center(p)
+pos_center(p)
 mass_center(p)
+median(p)
 extent(p)
 ```

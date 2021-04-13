@@ -178,6 +178,14 @@ end
 
 #Base.getproperty(d::Dict,s::Symbol) = s ∈ fieldnames(Dict) ? getfield(d,s) : getindex(d,s)
 
+_center_doc = """
+There are differences among `center`, `pos_center`, `mass_center` and `median`:
+- `center`: box center of particles
+- `pos_center`: average position of particles
+- `mass_center`: mass weighted average position of particles
+- `median`: middle value of positions of particles
+"""
+
 ### Main files
 
 include("Traits.jl")

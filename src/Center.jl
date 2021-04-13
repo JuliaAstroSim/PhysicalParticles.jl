@@ -159,7 +159,7 @@ end
 """
 $(SIGNATURES)
 
-Compute center of x direction of points or particles
+Compute box center of x direction of points or particles
 """
 function center_x(a::Array{T,N}) where T <: Union{AbstractPoint, AbstractParticle} where N
     left = minimum_x(a)
@@ -170,7 +170,7 @@ end
 """
 $(SIGNATURES)
 
-Compute center of y direction of points or particles
+Compute box center of y direction of points or particles
 """
 function center_y(a::Array{T,N}) where T <: Union{AbstractPoint, AbstractParticle} where N
     left = minimum_y(a)
@@ -181,7 +181,7 @@ end
 """
 $(SIGNATURES)
 
-Compute center of z direction of points or particles
+Compute box center of z direction of points or particles
 """
 function center_z(a::Array{T,N}) where T <: Union{AbstractPoint3D, AbstractParticle3D} where N
     left = minimum_z(a)
@@ -192,7 +192,9 @@ end
 """
 $(SIGNATURES)
 
-Compute center of points or particles
+Compute box center of points or particles
+
+$_center_doc
 """
 function center(a::Array{T,N}) where T <: Union{AbstractPoint2D, AbstractParticle2D} where N
     x = center_x(a)
@@ -213,7 +215,7 @@ end
 Compute averaged position with equal weights. 
 It is different from `middle(a, :Pos)` which computes the middle value of a symbol (useful to avoid influences from distant particles).
 
-For mass center, try `mass_center(a)`.
+$_center_doc
 """
 pos_center(a::Array{T}) where T <: AbstractParticle = average(a, :Pos)
 
@@ -222,6 +224,6 @@ pos_center(a::Array{T}) where T <: AbstractParticle = average(a, :Pos)
 
 Compute mass center of particles, which is weighted by mass.
 
-For a equal weighted center, use `pos_center`; for middle value, try `middle(a, :Pos`
+$_center_doc
 """
 mass_center(a::Array{T}) where T <: AbstractParticle = averagebymass(a, :Pos)

@@ -188,27 +188,38 @@ julia> pconvert([1.0u"m" 4.0u"m";
 
 ```julia
 julia> p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1),
-            Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)]
+            Ball(PVector(3.0u"m", -3.0u"m", -3.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 3000.0u"g", 2)]
 2-element Array{Ball{Int64},1}:
  Ball 1: Pos = PVector(-1.0 m, 1.0 m, 1.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 1.0 kg
- Ball 2: Pos = PVector(1.0 m, -1.0 m, -1.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 1000.0 g
+ Ball 2: Pos = PVector(3.0 m, -3.0 m, -3.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 1000.0 g
 
-julia> min_x(p)
+julia> minimum_x(p)
 -1.0 m
 
-julia> max_z(p)
-1.0 m
+julia> maximum_x(p)
+3.0 m
 
 julia> center(p)
-PVector(0.0 m, 0.0 m, 0.0 m)
+PVector(1.0 m, -1.0 m, -1.0 m)
+
+julia> pos_center(p)
+PVector(1.0 m, -1.0 m, -1.0 m)
 
 julia> mass_center(p)
-PVector(0.0 m, 0.0 m, 0.0 m)
+PVector(2.0 m, -2.0 m, -2.0 m)
+
+julia> median(p, :Pos)
+PVector(1.0 m, -1.0 m, -1.0 m)
 
 julia> extent(p)
-Extent: , xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 m, zMax = 1.0 m, SideLength = 2.0 m, Center 
-= PVector(0.0 m, 0.0 m, 0.0 m), Corner = PVector(-1.0 m, -1.0 m, -1.0 m)
+Extent: xMin = -1.0 m, xMax = 3.0 m, yMin = -3.0 m, yMax = 1.0 m, zMin = -3.0 m, zMax = 1.0 m, SideLength = 4.0 m, Center = PVector(1.0 m, -1.0 m, -1.0 m)
 ```
+
+There are differences among `center`, `pos_center`, `mass_center` and `median`:
+- `center`: box center of particles
+- `pos_center`: average position of particles
+- `mass_center`: mass weighted average position of particles
+- `median`: middle value of positions of particles
 
 ### Units
 
