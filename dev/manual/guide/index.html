@@ -108,15 +108,15 @@ julia&gt; a = [Star()]
 julia&gt; a[1] = setproperties!!(a[1], Mass = 321.0) # In general, `Mass` is mutated right at its original memory address.
 ERROR: UndefVarError: setproperties!! not defined</code></pre><h3 id="Random-and-Conversion"><a class="docs-heading-anchor" href="#Random-and-Conversion">Random and Conversion</a><a id="Random-and-Conversion-1"></a><a class="docs-heading-anchor-permalink" href="#Random-and-Conversion" title="Permalink"></a></h3><pre><code class="language-julia-repl">julia&gt; p = rand_pvector(3)
 3-element Vector{PVector{Float64}}:
- PVector{Float64}(0.24378023878680954, 0.3093411107920434, 0.5843860561189027)
- PVector{Float64}(0.08872428188711945, 0.6384651628614815, 0.7564589306176339)
- PVector{Float64}(0.3891509739284118, 0.4364982622766871, 0.3312215173202684)
+ PVector{Float64}(0.11983590438302638, 0.25620980325531395, 0.6045865228922589)
+ PVector{Float64}(0.6162928727699055, 0.19847176174818482, 0.19899426305269796)
+ PVector{Float64}(0.056533524970351134, 0.045036934994048705, 0.5344629556580034)
 
 julia&gt; pu = rand_pvector(3, u&quot;m&quot;)
 3-element Vector{PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}}}:
- PVector(0.6344527073434632 m, 0.13018836088911345 m, 0.8984929797922556 m)
- PVector(0.011770904027848417 m, 0.8244965698375664 m, 0.12547232798158503 m)
- PVector(0.5878164856175432 m, 0.13981813011160504 m, 0.014722390825930853 m)
+ PVector(0.34373429046844906 m, 0.8781246478903724 m, 0.9682370734437062 m)
+ PVector(0.2540908815668026 m, 0.20885278750827552 m, 0.05519664472112651 m)
+ PVector(0.8277915787389583 m, 0.3199672853639193 m, 0.3388669447789652 m)
 
 julia&gt; p_Ball = [Ball(uSI) for i=1:3]
 3-element Vector{Ball{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(kg,), 𝐌, nothing}}, Int64}}:
@@ -128,9 +128,9 @@ julia&gt; assign_particles(p_Ball, :Pos, pu)
 
 julia&gt; p_Ball
 3-element Vector{Ball{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(kg,), 𝐌, nothing}}, Int64}}:
- Ball 0: Pos = PVector(0.6344527073434632 m, 0.13018836088911345 m, 0.8984929797922556 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
- Ball 0: Pos = PVector(0.011770904027848417 m, 0.8244965698375664 m, 0.12547232798158503 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
- Ball 0: Pos = PVector(0.5878164856175432 m, 0.13981813011160504 m, 0.014722390825930853 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
+ Ball 0: Pos = PVector(0.34373429046844906 m, 0.8781246478903724 m, 0.9682370734437062 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
+ Ball 0: Pos = PVector(0.2540908815668026 m, 0.20885278750827552 m, 0.05519664472112651 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
+ Ball 0: Pos = PVector(0.8277915787389583 m, 0.3199672853639193 m, 0.3388669447789652 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg
 
 julia&gt; pconvert([1.0, 2.0, 3.0])
 PVector{Float64}(1.0, 2.0, 3.0)
@@ -141,16 +141,31 @@ julia&gt; pconvert([1.0u&quot;m&quot; 4.0u&quot;m&quot;;
 2-element Vector{PVector}:
  PVector(1.0 m, 2.0 m, 3.0 m)
  PVector(4.0 m, 5.0 m, 6.0 m)</code></pre><h3 id="Extent"><a class="docs-heading-anchor" href="#Extent">Extent</a><a id="Extent-1"></a><a class="docs-heading-anchor-permalink" href="#Extent" title="Permalink"></a></h3><pre><code class="language-julia-repl">julia&gt; p = [Ball(PVector(-1.0u&quot;m&quot;, 1.0u&quot;m&quot;, 1.0u&quot;m&quot;), PVector(u&quot;m/s&quot;), PVector(u&quot;m/s^2&quot;), 1.0u&quot;kg&quot;, 1),
-            Ball(PVector(1.0u&quot;m&quot;, -1.0u&quot;m&quot;, -1.0u&quot;m&quot;), PVector(u&quot;m/s&quot;), PVector(u&quot;m/s^2&quot;), 1000.0u&quot;g&quot;, 2)]
+            Ball(PVector(3.0u&quot;m&quot;, -3.0u&quot;m&quot;, -3.0u&quot;m&quot;), PVector(u&quot;m/s&quot;), PVector(u&quot;m/s^2&quot;), 3000.0u&quot;g&quot;, 2)]
 2-element Vector{Ball{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}, M, Int64} where M}:
  Ball 1: Pos = PVector(-1.0 m, 1.0 m, 1.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 1.0 kg
- Ball 2: Pos = PVector(1.0 m, -1.0 m, -1.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 1000.0 g
+ Ball 2: Pos = PVector(3.0 m, -3.0 m, -3.0 m), Vel = PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), Acc = PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), Mass = 3000.0 g
+
+julia&gt; minimum_x(p)
+-1.0 m
+
+julia&gt; maximum_x(p)
+3.0 m
 
 julia&gt; center(p)
-PVector(0.0 m, 0.0 m, 0.0 m)
+PVector(1.0 m, -1.0 m, -1.0 m)
+
+julia&gt; pos_center(p)
+PVector(1.0 m, -1.0 m, -1.0 m)
 
 julia&gt; mass_center(p)
-PVector(0.0 m, 0.0 m, 0.0 m)
+PVector(2.0 m, -2.0 m, -2.0 m)
+
+julia&gt; median(p)
+ERROR: MethodError: no method matching isless(::Ball{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(g,), 𝐌, nothing}}, Int64}, ::Ball{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}, Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(kg,), 𝐌, nothing}}, Int64})
+Closest candidates are:
+  isless(::Any, !Matched::Missing) at missing.jl:88
+  isless(!Matched::Missing, ::Any) at missing.jl:87
 
 julia&gt; extent(p)
-Extent: xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 m, zMax = 1.0 m, SideLength = 2.0 m, Center = PVector(0.0 m, 0.0 m, 0.0 m)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« Home</a><a class="docs-footer-nextpage" href="../PVector/">PVector »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 9 April 2021 08:41">Friday 9 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+Extent: xMin = -1.0 m, xMax = 3.0 m, yMin = -3.0 m, yMax = 1.0 m, zMin = -3.0 m, zMax = 1.0 m, SideLength = 4.0 m, Center = PVector(1.0 m, -1.0 m, -1.0 m)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../">« Home</a><a class="docs-footer-nextpage" href="../PVector/">PVector »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Tuesday 13 April 2021 02:23">Tuesday 13 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>

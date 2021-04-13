@@ -40,6 +40,7 @@ mol</code></pre><h2 id="Constants"><a class="docs-heading-anchor" href="#Constan
 
 julia&gt; Constant()
 Converted Constants:
+    c = 306601.3937855506 kpc Gyr^-1
     G = 4.498502151469553e-6 kpc^3 Gyr^-2 M⊙^-1
     m_e = 4.581240435253955e-61 M⊙
     m_n = 8.423451938769546e-58 M⊙
@@ -49,6 +50,7 @@ Converted Constants:
 
 julia&gt; Constant(uSI)
 Converted Constants:
+    c = 2.99792458e8 m s^-1
     G = 6.6743e-11 m^3 kg^-1 s^-2
     m_e = 9.1093837015e-31 kg
     m_n = 1.67492749804e-27 kg
@@ -58,6 +60,7 @@ Converted Constants:
 
 julia&gt; Constant(uCGS)
 Converted Constants:
+    c = 2.99792458e10 cm s^-1
     G = 6.674299999999999e-8 cm^3 g^-1 s^-2
     m_e = 9.1093837015e-28 g
     m_n = 1.67492749804e-24 g
@@ -69,6 +72,7 @@ julia&gt; using Unitful
 
 julia&gt; ustrip(Constant())
 Converted Constants:
+    c = 306601.3937855506
     G = 4.498502151469553e-6
     m_e = 4.581240435253955e-61
     m_n = 8.423451938769546e-58
@@ -86,4 +90,4 @@ julia&gt; zerovalues(uSI)
 ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(m,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(m, s^-1), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(m, s^-2), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(kg, m^2, s^-2), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(m^2, s^-2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(kg,), 𝐌, nothing}}}(0.0 m, PVector(0.0 m, 0.0 m, 0.0 m), PVector(0.0 m s^-1, 0.0 m s^-1, 0.0 m s^-1), PVector(0.0 m s^-2, 0.0 m s^-2, 0.0 m s^-2), 0.0 kg m^2 s^-2, 0.0 m^2 s^-2, 0.0 kg)
 
 julia&gt; zerovalues(uCGS)
-ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(cm, s^-1), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(cm, s^-2), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(g, cm^2, s^-2), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(cm^2, s^-2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(g,), 𝐌, nothing}}}(0.0 cm, PVector(0.0 cm, 0.0 cm, 0.0 cm), PVector(0.0 cm s^-1, 0.0 cm s^-1, 0.0 cm s^-1), PVector(0.0 cm s^-2, 0.0 cm s^-2, 0.0 cm s^-2), 0.0 g cm^2 s^-2, 0.0 cm^2 s^-2, 0.0 g)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Conversion/">« Conversion</a><a class="docs-footer-nextpage" href="../Random/">Random »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Friday 9 April 2021 08:41">Friday 9 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+ZeroValue{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}, PVector{Unitful.Quantity{Float64, 𝐋, Unitful.FreeUnits{(cm,), 𝐋, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-1, Unitful.FreeUnits{(cm, s^-1), 𝐋 𝐓^-1, nothing}}}, PVector{Unitful.Quantity{Float64, 𝐋 𝐓^-2, Unitful.FreeUnits{(cm, s^-2), 𝐋 𝐓^-2, nothing}}}, Unitful.Quantity{Float64, 𝐋^2 𝐌 𝐓^-2, Unitful.FreeUnits{(g, cm^2, s^-2), 𝐋^2 𝐌 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐋^2 𝐓^-2, Unitful.FreeUnits{(cm^2, s^-2), 𝐋^2 𝐓^-2, nothing}}, Unitful.Quantity{Float64, 𝐌, Unitful.FreeUnits{(g,), 𝐌, nothing}}}(0.0 cm, PVector(0.0 cm, 0.0 cm, 0.0 cm), PVector(0.0 cm s^-1, 0.0 cm s^-1, 0.0 cm s^-1), PVector(0.0 cm s^-2, 0.0 cm s^-2, 0.0 cm s^-2), 0.0 g cm^2 s^-2, 0.0 cm^2 s^-2, 0.0 g)</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../Conversion/">« Conversion</a><a class="docs-footer-nextpage" href="../Random/">Random »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> on <span class="colophon-date" title="Tuesday 13 April 2021 02:23">Tuesday 13 April 2021</span>. Using Julia version 1.6.0.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
