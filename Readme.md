@@ -142,6 +142,21 @@ julia> distance(a,b)
 0.0 m
 ```
 
+### StructArrays.jl support
+
+`StructArray` provides a more efficient way to iterate on a field of particles:
+```julia
+sArray = [Star() for i in 1:5]
+sStruct = StructArray(sArray)
+
+# Easier to set properties, and even faster!
+sStruct.Mass[1] = 1000.0
+
+assign_particles(sStruct, :Pos, randn_pvector(5))
+
+mean(sStruct.Pos)
+```
+
 ### Random and Conversion
 
 ```julia

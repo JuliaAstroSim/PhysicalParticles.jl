@@ -2,6 +2,7 @@ using PhysicalParticles
 
 using Test, Unitful, UnitfulAstro
 using Setfield
+using StructArrays
 #using Documenter
 
 include("testUnits.jl")

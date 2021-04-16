@@ -10,6 +10,7 @@ using DocStringExtensions
 using Unitful, UnitfulAstro
 using Setfield
 using BangBang
+using StructArrays
 
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str

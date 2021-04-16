@@ -83,6 +83,7 @@ end
 
 """
     function averagebymass(data, symbol::Symbol)
+    function averagebymass(data::StructArray, symbol::Symbol)
 
 Average on field `symbol` weighted by `:Mass` of elements in an array of dict of arrays
 
@@ -102,6 +103,14 @@ function averagebymass(data, symbol::Symbol)
 end
 
 averagebymass(a::Array{T}, symbol::Symbol) where T <: Union{Massless, Massless2D} = average(a, symbol)
+
+function averagebymass(data::StructArray, symbol::Symbol)
+    msum = sum(data.Mass)
+    if iszero(msum)
+        return mean(getproperty(data, symbol))
+    end
+    return sum(getproperty(data, symbol) .* data.Mass) / msum
+end
 
 middle(x::Quantity) = x
 middle(x::Quantity, y::Quantity) = x/2 + y/2

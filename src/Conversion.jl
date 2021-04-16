@@ -70,19 +70,16 @@ end
 # Assign arrays
 
 """
-    assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array{T,N} where T) where N
+    assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array) where N
 
-Assign the symbol of particles through array iteratively
+Assign the symbol of `particles` with elements in `data` one by one. `particles` and `data` must have equal length.
 
 ## Examples
-
 ```jl
 julia> assign_particles([Ball(uSI) for i=1:3], :Pos, rand_pvector(3, u"m"))
-
-julia> assign_particles([Ball(uSI) for i=1:3], :Mass, 1.0u"kg")
 ```
 """
-function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array{T,N} where T) where N
+function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array) where N
     len = length(particles)
     if len != length(data)
         error("Length of particles (", len, ") and vectors (", length(data), ") does not match!")
@@ -93,8 +90,38 @@ function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbo
     end
 end
 
+function assign_particles(particles::StructArray, symbol::Symbol, data::Array)
+    len = length(particles)
+    if len != length(data)
+        error("Length of particles (", len, ") and vectors (", length(data), ") does not match!")
+    end
+
+    a = getproperty(particles, symbol)
+    for i in 1:len
+        @inbounds a[i] = data[i]
+    end
+end
+
+"""
+    assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data) where N
+    assign_particles(particles::StructArray, symbol::Symbol, data)
+
+Assign the symbol of `particles` to `data` identically.
+
+# Examples
+```jl
+julia> assign_particles([Ball(uSI) for i=1:3], :Mass, 1.0u"kg")
+```
+"""
 function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data) where N
     for i in eachindex(particles)
         @inbounds particles[i] = setproperty!!(particles[i], symbol, data)
+    end
+end
+
+function assign_particles(particles::StructArray, symbol::Symbol, data)
+    a = getproperty(particles, symbol)
+    for i in eachindex(a)
+        @inbounds a[i] = data
     end
 end

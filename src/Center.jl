@@ -167,6 +167,8 @@ function center_x(a::Array{T,N}) where T <: Union{AbstractPoint, AbstractParticl
     return (left + right) / 2.0
 end
 
+center_x(a::StructArray) = center_x(a.Pos)
+
 """
 $(SIGNATURES)
 
@@ -178,6 +180,8 @@ function center_y(a::Array{T,N}) where T <: Union{AbstractPoint, AbstractParticl
     return (left + right) / 2.0
 end
 
+center_y(a::StructArray) = center_y(a.Pos)
+
 """
 $(SIGNATURES)
 
@@ -188,6 +192,8 @@ function center_z(a::Array{T,N}) where T <: Union{AbstractPoint3D, AbstractParti
     right = maximum_z(a)
     return (left + right) / 2.0
 end
+
+center_z(a::StructArray) = center_z(a.Pos)
 
 """
 $(SIGNATURES)
@@ -209,8 +215,11 @@ function center(a::Array{T,N}) where T <: Union{AbstractPoint3D, AbstractParticl
     return PVector(x,y,z)
 end
 
+center(a::StructArray) = center(a.Pos)
+
 """
     pos_center(a::Array{T}) where T <: AbstractParticle
+    pos_center(a::StructArray)
 
 Compute averaged position with equal weights. 
 It is different from `middle(a, :Pos)` which computes the middle value of a symbol (useful to avoid influences from distant particles).
@@ -219,11 +228,16 @@ $_center_doc
 """
 pos_center(a::Array{T}) where T <: AbstractParticle = average(a, :Pos)
 
+pos_center(a::StructArray) = mean(a.Pos)
+
 """
     mass_center(a::Array{T}) where T <: AbstractParticle
+    mass_center(a::StructArray)
 
 Compute mass center of particles, which is weighted by mass.
 
 $_center_doc
 """
 mass_center(a::Array{T}) where T <: AbstractParticle = averagebymass(a, :Pos)
+
+mass_center(a::StructArray) = averagebymass(a, :Pos)

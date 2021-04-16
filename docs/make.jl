@@ -44,6 +44,7 @@ makedocs(
             "manual/Extent.md",
             "manual/Neighbors.md",
             "manual/Clustering.md",
+            "manual/StructArrays.md",
         ],
         "Library" => Any[
             "lib/Types.md",

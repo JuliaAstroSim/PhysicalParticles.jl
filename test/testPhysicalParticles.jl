@@ -121,6 +121,12 @@ end
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
         @test pos_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
 
+        # StructArray
+        ps = StructArray(p)
+        @test center_x(ps) == 0.0u"m"
+        @test center_y(ps) == 0.0u"m"
+        @test center(ps) == PVector(0.0u"m", 0.0u"m")
+
         p2 = [Ball2D(PVector2D(-2.0u"m", 2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 3), 
               Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
         e2 = extent(p2)
@@ -241,6 +247,18 @@ end
         @test mass_center(p) == PVector(u"m")
         @test mass_center([Star(uAstro)]) == PVector(u"kpc")
         @test mass_center([Massless() for i in 1:3]) == PVector()
+
+        # StructArray
+        ps = StructArray(p)
+        @test center_x(ps) == 0.0u"m"
+        @test center_y(ps) == 0.0u"m"
+        @test center_z(ps) == 0.0u"m"
+        @test center(ps) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
+        @test pos_center(ps) == PVector(u"m")
+        
+        assign_particles(ps, :Pos, PVector(1.0u"m", 1.0u"m", 1.0u"m"))
+        assign_particles(ps, :Mass, 1.0u"g")
+        @test mass_center(ps) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
 
         p2 = [Ball(PVector(-2.0u"m", 2.0u"m", 2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 3), 
               Ball(PVector(2.0u"m", -2.0u"m", -2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 4)]
