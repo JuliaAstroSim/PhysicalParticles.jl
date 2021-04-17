@@ -130,8 +130,8 @@ oneunit(p::PVector) = PVector(oneunit(p.x), oneunit(p.y), oneunit(p.z))
 
 zero(u::Units, p::PVector2D) = PVector2D(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)))
 zero(u::Units, p::PVector) = PVector(uconvert(u, zero(p.x)), uconvert(u, zero(p.y)), uconvert(u, zero(p.z)))
-zero(p::PVector2D) = PVector2D(ustrip(zero(p.x)), ustrip(zero(p.y)))
-zero(p::PVector) = PVector(ustrip(zero(p.x)), ustrip(zero(p.y)), ustrip(zero(p.z)))
+zero(p::PVector2D) = PVector2D(zero(p.x), zero(p.y))
+zero(p::PVector) = PVector(zero(p.x), zero(p.y), zero(p.z))
 
 zero(::Type{PVector{T}}) where T = PVector(zero(T), zero(T), zero(T))
 zero(::Type{PVector2D{T}}) where T = PVector2D(zero(T), zero(T))

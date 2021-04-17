@@ -75,8 +75,8 @@
     @test oneunit(PVector2D(u"m")) == PVector2D(1.0u"m", 1.0u"m")
     @test oneunit(PVector(u"m")) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
 
-    @test zero(PVector2D(u"m")) == PVector2D()
-    @test zero(PVector(u"m")) == PVector()
+    @test zero(PVector2D(1.0, 1.0, u"m")) == PVector2D(u"m")
+    @test zero(PVector(1.0, 1.0, 1.0, u"m")) == PVector(u"m")
     @test zero(u"m", PVector2D(u"km")) == PVector2D(0.0u"m", 0.0u"m")
     @test zero(u"m", PVector(u"km")) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
 

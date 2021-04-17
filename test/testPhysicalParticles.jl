@@ -199,6 +199,12 @@ end
         assign_particles(p_SPHGas, :Pos, a)
         @test p_SPHGas[1].Pos == a[1]
 
+        # StructArray
+        ps = StructArray(p_Star)
+        assign_particles(ps, :Pos, a)
+        @test sum(ps.Pos) == sum(a)
+        @test_throws ErrorException assign_particles(ps, :Pos, [PVector(u"m")])
+
         # randn
         a_randn = randn_pvector(5)
         @test length(a_randn) == 5
