@@ -127,13 +127,28 @@ end
             Dict("data" => [PVector(1.0, 4.0, 0.0, u"m"), PVector(2.0, 2.0, 0.0, u"m"), PVector(4.0, 1.0, 0.0, u"m")]), :x
         ) == 2.0u"m"
 
-        @test norm(rotate_x(PVector(0.0u"m", 1.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_y(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_z(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 0.5pi) - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_x(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 0.5pi)["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 0.5pi)["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 0.5pi)["stars"][1].Pos - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
 
-        @test norm(rotate_x(PVector(0.0u"m", 1.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_y(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
-        @test norm(rotate_z(PVector(1.0u"m", 0.0u"m", 0.0u"m"), 90.0u"°") - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_x(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 1.0u"m", 1.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate_x(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°")["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°")["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°")["stars"][1].Pos - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate_x(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z(Dict("stars" => [Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 1.0u"m", 1.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), PVector(0.0u"m", 1.0u"m", 1.0u"m"), pi)["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), PVector(0.0u"m", 1.0u"m", 1.0u"m"), pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), PVector(0.0u"m", 1.0u"m", 1.0u"m"), 180.0u"°")["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate(Dict("stars" => [Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)]), PVector(0.0u"m", 1.0u"m", 1.0u"m"), 180.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))["stars"][1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+
 
         @test cross(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(0.0u"m", 1.0u"m", 0.0u"m")) == PVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
     end

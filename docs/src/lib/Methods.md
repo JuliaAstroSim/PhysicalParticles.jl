@@ -53,6 +53,7 @@ center_z
 rotate_x
 rotate_y
 rotate_z
+rotate
 ```
 
 ## Internal

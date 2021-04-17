@@ -86,6 +86,17 @@ julia> distance(PVector2D(0.0, 0.0), PVector2D(3.0, 4.0))
 julia> rotate(PVector(1.0, 0.0), 0.5pi)
 PVector2D{Float64}(6.123233995736766e-17, 1.0)
 
+julia> rotate(PVector(1.0, 0.0, 0.0), 0.0, 0.0, 0.5pi)
+PVector{Float64}(6.123233995736766e-17, 1.0, 0.0)
+
+julia> rotate_z(PVector(1.0, 0.0, 0.0), 90.0u"°")
+PVector{Float64}(0.0, 1.0, 0.0)
+
+julia> rotate(PVector(1.0, 0.0, 0.0), 0.0, 0.0, 90.0u"°", PVector(-1.0, 0.0, 0.0))
+PVector{Float64}(-1.0, 2.0, 0.0)
+
+julia> rotate(PVector(0.0, 1.0, 0.0), PVector(0.0, 1.0, 1.0), pi)
+PVector{Float64}(-8.659560562354932e-17, -2.220446049250313e-16, 0.9999999999999998)
 
 julia> zero(PVector{Float64})
 PVector{Float64}(0.0, 0.0, 0.0)
