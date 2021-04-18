@@ -74,6 +74,12 @@ export
 
     average, averagebymass,
 
+    # Coordinates
+    cylinderial2xyz,
+    spherical2xyz,
+    cylinderial,
+    spherical,
+
     # Statistics
     mean, std, var, median, middle,
 

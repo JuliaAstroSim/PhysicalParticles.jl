@@ -26,6 +26,24 @@
         @test PVector2D(1.0, 1.0) ≈ PVector2D(1.0 + 1.0e-9, 1.0)
     end
 
+    @testset "Coordinates" begin
+        @test cylinderial2xyz(2.0u"m", pi/4) ≈ PVector2D(sqrt(2), sqrt(2), u"m")
+        @test cylinderial2xyz(2.0u"m", pi/4, 1.0u"m") ≈ PVector(sqrt(2), sqrt(2), 1.0, u"m")
+        
+        @test cylinderial(PVector2D(u"m")) == (0.0u"m", 0.0)
+        @test sum(cylinderial(PVector2D(sqrt(2), sqrt(2), u"m")) .≈ (2.0u"m", pi/4)) == 2
+        @test sum(cylinderial(PVector2D(-sqrt(2), sqrt(2), u"m")) .≈ (2.0u"m", 3pi/4)) == 2
+        @test sum(cylinderial(PVector2D(-sqrt(2), -sqrt(2), u"m")) .≈ (2.0u"m", 5pi/4)) == 2
+
+        @test cylinderial(PVector(0.0, 0.0, 1.0, u"m")) == (0.0u"m", 0.0, 1.0u"m")
+        @test sum(cylinderial(PVector(sqrt(2), sqrt(2), 1.0, u"m")) .≈ (2.0u"m", pi/4, 1.0u"m")) == 3
+        @test sum(cylinderial(PVector(-sqrt(2), sqrt(2), 1.0, u"m")) .≈ (2.0u"m", 3pi/4, 1.0u"m")) == 3
+        @test sum(cylinderial(PVector(-sqrt(2), -sqrt(2), 1.0, u"m")) .≈ (2.0u"m", 5pi/4, 1.0u"m")) == 3
+
+        @test spherical2xyz(sqrt(2)u"m", pi/4, pi/4) ≈ PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m")
+        @test sum(spherical(PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m")) .≈ (sqrt(2)u"m", pi/4, pi/4)) == 3
+    end
+
     @testset "Linear Algebra" begin
         p = [PVector2D(1.0u"m", 1.0u"m") for i = 1:5]
         

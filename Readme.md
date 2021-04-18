@@ -98,6 +98,19 @@ PVector{Float64}(-1.0, 2.0, 0.0)
 julia> rotate(PVector(0.0, 1.0, 0.0), PVector(0.0, 1.0, 1.0), pi)
 PVector{Float64}(-8.659560562354932e-17, -2.220446049250313e-16, 0.9999999999999998)
 
+# Coordinate Transformations
+julia> cylinderial(PVector(sqrt(2), sqrt(2), 1.0, u"m"))
+(2.0 m, 0.7853981633974484, 1.0 m)
+
+julia> cylinderial2xyz(2.0u"m", pi/4, 1.0u"m")
+PVector(1.4142135623730951 m, 1.414213562373095 m, 1.0 m)
+
+julia> spherical(PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m"))
+(1.4142135623730951 m, 0.7853981633974484, 0.7853981633974483)
+
+julia> spherical2xyz(sqrt(2)u"m", pi/4, pi/4)
+PVector(0.7071067811865476 m, 0.7071067811865475 m, 1.0000000000000002 m)
+
 julia> zero(PVector{Float64})
 PVector{Float64}(0.0, 0.0, 0.0)
 
