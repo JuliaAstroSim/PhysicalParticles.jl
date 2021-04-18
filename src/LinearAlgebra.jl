@@ -38,20 +38,26 @@ Rx(roll) = | 0  cos(roll)  -sin(roll) |
 @inline rotate_x(p::PVector, roll::Number) = PVector(p.x, p.y*cos(roll)-p.z*sin(roll), p.y*sin(roll)+p.z*cos(roll))
 
 """
-    rotate_x(data, roll::Number)
+    rotate_x(data, roll::Number; vel::Bool = true)
 
 Rotate all particles in data around x-axis by `roll` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_x(data::Array, roll::Number)
+function rotate_x(data::Array, roll::Number; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_x(data[i].Pos, roll))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_x(data[i].Vel, roll))
+        end
     end
     data
 end
 
-function rotate_x(data::Dict, roll::Number)
+function rotate_x(data::Dict, roll::Number; vel::Bool = true)
     for k in keys(data)
-        rotate_x(data[k], roll)
+        rotate_x(data[k], roll; vel)
     end
     data
 end
@@ -64,20 +70,26 @@ Rotate `p` around the x-axis of `center` point by `roll` in radian angle.
 rotate_x(p::PVector, roll::Number, center::PVector) = rotate_x(p - center, roll) + center
 
 """
-    rotate_x(data, roll::Number, center::PVector)
+    rotate_x(data, roll::Number, center::PVector; vel::Bool = true)
 
 Rotate all particles in data around the x-axis of `center` point by `roll` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_x(data::Array, roll::Number, center::PVector)
+function rotate_x(data::Array, roll::Number, center::PVector; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_x(data[i].Pos, roll, center))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_x(data[i].Vel, roll))
+        end
     end
     data
 end
 
-function rotate_x(data::Dict, roll::Number, center::PVector)
+function rotate_x(data::Dict, roll::Number, center::PVector; vel::Bool = true)
     for k in keys(data)
-        rotate_x(data[k], roll, center)
+        rotate_x(data[k], roll, center; vel)
     end
     data
 end
@@ -101,20 +113,26 @@ Ry(pitch) = |       0       1        0     |
 @inline rotate_y(p::PVector, pitch::Number) = PVector(p.x*cos(pitch)+p.z*sin(pitch), p.y, -p.x*sin(pitch)+p.z*cos(pitch))
 
 """
-    rotate_y(data, pitch::Number)
+    rotate_y(data, pitch::Number; vel::Bool = true)
 
 Rotate all particles in data around y-axis by `pitch` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_y(data::Array, pitch::Number)
+function rotate_y(data::Array, pitch::Number; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_y(data[i].Pos, pitch))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_y(data[i].Vel, pitch))
+        end
     end
     data
 end
 
-function rotate_y(data::Dict, pitch::Number)
+function rotate_y(data::Dict, pitch::Number; vel::Bool = true)
     for k in keys(data)
-        rotate_y(data[k], pitch)
+        rotate_y(data[k], pitch; vel)
     end
     data
 end
@@ -127,20 +145,26 @@ Rotate `p` around the y-axis of `center` point by `pitch` in radian angle.
 rotate_y(p::PVector, pitch::Number, center::PVector) = rotate_y(p - center, pitch) + center
 
 """
-    rotate_y(data, pitch::Number, center::PVector)
+    rotate_y(data, pitch::Number, center::PVector; vel::Bool = true)
 
 Rotate all particles in data around the y-axis of `center` point by `pitch` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_y(data::Array, pitch::Number, center::PVector)
+function rotate_y(data::Array, pitch::Number, center::PVector; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_y(data[i].Pos, pitch, center))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_y(data[i].Vel, pitch))
+        end
     end
     data
 end
 
-function rotate_y(data::Dict, pitch::Number, center::PVector)
+function rotate_y(data::Dict, pitch::Number, center::PVector; vel::Bool = true)
     for k in keys(data)
-        rotate_y(data[k], pitch, center)
+        rotate_y(data[k], pitch, center; vel)
     end
     data
 end
@@ -164,20 +188,26 @@ Rz(yaw) = | sin(yaw)   cos(yaw)  0 |
 @inline rotate_z(p::PVector, theta::Number) = PVector(p.x*cos(theta)-p.y*sin(theta), p.x*sin(theta)+p.y*cos(theta), p.z)
 
 """
-    rotate_z(data, yaw::Number)
+    rotate_z(data, yaw::Number; vel::Bool = true)
 
 Rotate all particles in data around z-axis by `yaw` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_z(data::Array, yaw::Number)
+function rotate_z(data::Array, yaw::Number; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_z(data[i].Pos, yaw))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_z(data[i].Vel, yaw))
+        end
     end
     data
 end
 
-function rotate_z(data::Dict, yaw::Number)
+function rotate_z(data::Dict, yaw::Number; vel::Bool = true)
     for k in keys(data)
-        rotate_z(data[k], yaw)
+        rotate_z(data[k], yaw; vel)
     end
     data
 end
@@ -190,20 +220,26 @@ Rotate `p` around the z-axis of `center` point by `yaw` in radian angle.
 rotate_z(p::PVector, yaw::Number, center::PVector) = rotate_z(p - center, yaw) + center
 
 """
-    rotate_z(data, yaw::Number, center::PVector)
+    rotate_z(data, yaw::Number, center::PVector; vel::Bool = true)
 
 Rotate all particles in data around the z-axis of `center` point by `yaw` in radian angle.
+$_common_keyword_rotate_vel
 """
-function rotate_z(data::Array, yaw::Number, center::PVector)
+function rotate_z(data::Array, yaw::Number, center::PVector; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate_z(data[i].Pos, yaw, center))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate_z(data[i].Vel, yaw))
+        end
     end
     data
 end
 
-function rotate_z(data::Dict, yaw::Number, center::PVector)
+function rotate_z(data::Dict, yaw::Number, center::PVector; vel::Bool = true)
     for k in keys(data)
-        rotate_z(data[k], yaw, center)
+        rotate_z(data[k], yaw, center; vel)
     end
     data
 end
@@ -213,17 +249,68 @@ end
 """
     rotate(p::PVector, α::Number, β::Number, γ::Number)
 
-Rotate `p` in radian Euler angles (α, β, γ) = (roll, pitch, yaw).
+Rotate `p` by radian Euler angles (α, β, γ) = (roll, pitch, yaw).
 Angles can have units, for example, u"°" (\\degree).
 """
 rotate(p::PVector, α::Number, β::Number, γ::Number) = rotate_z(rotate_y(rotate_x(p, α), β), γ)
 
 """
+    rotate(data, yaw::Number, center::PVector; vel::Bool = true)
+
+Rotate all particles in data by radian Euler angles (α, β, γ) = (roll, pitch, yaw).
+$_common_keyword_rotate_vel
+"""
+function rotate(data::Array, α::Number, β::Number, γ::Number; vel::Bool = true)
+    for i in eachindex(data)
+        data[i] = setproperties!!(data[i], Pos = rotate(data[i].Pos, α, β, γ))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate(data[i].Vel, α, β, γ))
+        end
+    end
+    data
+end
+
+function rotate(data::Dict, α::Number, β::Number, γ::Number; vel::Bool = true)
+    for k in keys(data)
+        rotate(data[k], α, β, γ; vel)
+    end
+    data
+end
+
+"""
     rotate(p::PVector, α::Number, β::Number, γ::Number, center::PVector)
 
-Rotate `p` in radian Euler angles (α, β, γ) = (roll, pitch, yaw) around `center` point
+Rotate `p` by radian Euler angles (α, β, γ) = (roll, pitch, yaw) around `center` point.
+Angles can have units, for example, u"°" (\\degree).
 """
 rotate(p::PVector, α::Number, β::Number, γ::Number, center::PVector) = rotate(p - center, α, β, γ) + center
+
+"""
+    rotate(data, yaw::Number, center::PVector; vel::Bool = true)
+
+Rotate all particles in data by radian Euler angles (α, β, γ) = (roll, pitch, yaw) around `center` point.
+$_common_keyword_rotate_vel
+"""
+function rotate(data::Array, α::Number, β::Number, γ::Number, center::PVector; vel::Bool = true)
+    for i in eachindex(data)
+        data[i] = setproperties!!(data[i], Pos = rotate(data[i].Pos, α, β, γ, center))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate(data[i].Vel, α, β, γ))
+        end
+    end
+    data
+end
+
+function rotate(data::Dict, α::Number, β::Number, γ::Number, center::PVector; vel::Bool = true)
+    for k in keys(data)
+        rotate(data[k], α, β, γ, center; vel)
+    end
+    data
+end
 
 """
 rotate(p::PVector, vec::PVector, θ::Number)
@@ -247,20 +334,26 @@ function rotate(p::PVector, vec::PVector, θ::Number)
 end
 
 """
-    rotate(data::Array, vec::PVector, θ::Number)
+    rotate(data::Array, vec::PVector, θ::Number; vel::Bool = true)
 
 Rotate all particles in data around direction vector `vec` by angle `θ`.
+$_common_keyword_rotate_vel
 """
-function rotate(data::Array, vec::PVector, θ::Number)
+function rotate(data::Array, vec::PVector, θ::Number; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate(data[i].Pos, vec, θ))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate(data[i].Vel, vec, θ))
+        end
     end
     data
 end
 
-function rotate(data::Dict, vec::PVector, θ::Number)
+function rotate(data::Dict, vec::PVector, θ::Number; vel::Bool = true)
     for k in keys(data)
-        rotate(data[k], vec, θ)
+        rotate(data[k], vec, θ; vel)
     end
     data
 end
@@ -273,20 +366,26 @@ Rotate `p` around direction vector `vec` at `center` point by angle `θ`.
 rotate(p::PVector, vec::PVector, θ::Number, center::PVector) = rotate(p - center, vec, θ) + center
 
 """
-    rotate(data, vec::PVector, θ::Number, center::PVector)
+    rotate(data, vec::PVector, θ::Number, center::PVector; vel::Bool = true)
 
 Rotate all particles in data around direction vector `vec` at `center` point by angle `θ`.
+$_common_keyword_rotate_vel
 """
-function rotate(data::Array, vec::PVector, θ::Number, center::PVector)
+function rotate(data::Array, vec::PVector, θ::Number, center::PVector; vel::Bool = true)
     for i in eachindex(data)
         data[i] = setproperties!!(data[i], Pos = rotate(data[i].Pos, vec, θ, center))
+    end
+    if vel
+        for i in eachindex(data)
+            data[i] = setproperties!!(data[i], Vel = rotate(data[i].Vel, vec, θ))
+        end
     end
     data
 end
 
-function rotate(data::Dict, vec::PVector, θ::Number, center::PVector)
+function rotate(data::Dict, vec::PVector, θ::Number, center::PVector; vel::Bool = true)
     for k in keys(data)
-        rotate(data[k], vec, θ, center)
+        rotate(data[k], vec, θ, center; vel)
     end
     data
 end

@@ -265,6 +265,7 @@ end
         assign_particles(ps, :Pos, PVector(1.0u"m", 1.0u"m", 1.0u"m"))
         assign_particles(ps, :Mass, 1.0u"g")
         @test mass_center(ps) == PVector(1.0u"m", 1.0u"m", 1.0u"m")
+        @test mass_center(StructArray([Star()])) == PVector()
 
         p2 = [Ball(PVector(-2.0u"m", 2.0u"m", 2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 3), 
               Ball(PVector(2.0u"m", -2.0u"m", -2.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 4)]
