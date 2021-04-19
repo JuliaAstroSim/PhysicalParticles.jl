@@ -39,7 +39,7 @@ getuDensity
 getuDensity2D
 getuPressure
 axisunit
-zerovalues
+ZeroValue
 rand_pvector
 rand_pvector2d
 randn_pvector

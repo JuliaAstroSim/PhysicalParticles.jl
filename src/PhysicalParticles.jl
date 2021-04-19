@@ -11,10 +11,12 @@ using Unitful, UnitfulAstro
 using Setfield
 using BangBang
 using StructArrays
+using Measurements
 
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
 import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
+import Measurements: Measurement, measurement
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit, push!, append!, isapprox
@@ -118,9 +120,9 @@ export
 
     axisunit,
     ZeroValue,
-    zerovalues,
 
     @u_str,
+    Measurement, measurement,
 
     # Random
     rand_pvector, rand_pvector2d,

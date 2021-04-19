@@ -47,8 +47,8 @@ ustrip(Constant())
 `ZeroValue` is useful for accumulated summation, array initialization, etc. Examples:
 ```@repl
 using PhysicalParticles
-zerovalues(nothing)
-zerovalues()
-zerovalues(uSI)
-zerovalues(uCGS)
+ZeroValue(nothing)
+ZeroValue()
+ZeroValue(uSI)
+ZeroValue(uCGS)
 ```

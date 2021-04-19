@@ -120,8 +120,10 @@
     @test middle(1.0u"m") == 1.0u"m"
     @test middle(1.0u"m", 3.0u"m") == 2.0u"m"
 
+    @test measurement(PVector(u"m")).x == measurement(PVector2D(u"m")).x
+
     @testset "Zero Values" begin
-        ZeroValues = zerovalues(nothing)
+        ZeroValues = ZeroValue(nothing)
         @test ZeroValues.len == 0.0
         @test ZeroValues.pos == PVector()
         @test ZeroValues.vel == PVector()
@@ -131,7 +133,7 @@
         @test ZeroValues.mass == 0.0
 
 
-        ZeroValues = zerovalues(uAstro)
+        ZeroValues = ZeroValue(uAstro)
         @test ZeroValues.len == 0.0u"kpc"
         @test ZeroValues.pos == PVector(u"kpc")
         @test ZeroValues.vel == PVector(u"kpc/Gyr")
@@ -145,6 +147,8 @@
         @test iterate(ZeroValues, nothing) === nothing
 
         @test show(ZeroValue()) === nothing
+        @test show(ZeroValue(Measurement)) === nothing
+        @test show(ZeroValue(Measurement, nothing)) === nothing
     end
 
     @testset "Constants" begin
@@ -154,5 +158,8 @@
 
         nc = Constant(nothing, uAstro)
         @test nc == ustrip(c)
+
+        @test show(Constant(BigFloat, uSI)) === nothing
+        @test show(Constant(Measurement, uSI)) === nothing
     end
 end

@@ -158,6 +158,12 @@ isapprox(a::AbstractPoint2D, b::AbstractPoint2D) = isapprox(a.x, b.x) && isappro
 isapprox(a::AbstractPoint3D, b::AbstractPoint3D) = isapprox(a.x, b.x) && isapprox(a.y, b.y) && isapprox(a.z, b.z)
 
 
+# Measurements
+measurement(q::Quantity) = measurement(q, zero(q))
+
+measurement(p::PVector2D) = PVector2D(measurement(p.x), measurement(p.y))
+measurement(p::PVector) = PVector(measurement(p.x), measurement(p.y), measurement(p.z))
+
 
 # Coordinate Transformations
 """

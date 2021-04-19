@@ -413,24 +413,24 @@ end
 @inline iterate(z::ZeroValue,st) = nothing
 
 """
-    function zerovalues(units::Nothing)
-    function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
+    function ZeroValue(::Nothing)
+    function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
 
     Construct an immutable struct providing zero values in corresponding `units` (default is `uAstro`).
     Useful for accumulated summation, array initialization, etc.
 
 # Examples
 
-zerovalues(nothing)
-zerovalues()
-zerovalues(uSI)
-zerovalues(uCGS)
+ZeroValue(nothing)
+ZeroValue()
+ZeroValue(uSI)
+ZeroValue(uCGS)
 """
-function zerovalues(units::Nothing)
+function ZeroValue(::Nothing)
     return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
 end
 
-function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
+function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
     return ZeroValue(
         0.0 * getuLength(units),
         PVector(getuLength(units)),
@@ -442,7 +442,10 @@ function zerovalues(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where
     )
 end
 
-ZeroValue(units = uAstro) = zerovalues(units)
+function ZeroValue(::Type{Measurement}, args...)
+    z = ZeroValue(args...)
+    return ZeroValue(measurement.([getfield(z, i) for i in fieldnames(ZeroValue)])...)
+end
 
 function Base.show(io::IO, z::ZeroValue)
     print(io, """

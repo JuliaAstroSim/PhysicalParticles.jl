@@ -81,6 +81,40 @@ function Constant(::Nothing, units)
     return Constant(nothing, Constant(units))
 end
 
+function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+    println("Constructing BigFloat constants")
+    return Constant(
+        uconvert(getuVel(units), BigFloat("299792458")u"m/s"),
+        uconvert(units[1]^3 / units[6] / units[2]^2, BigFloat("6.67430e-11")u"m^3/kg/s^2"),
+        #uconvert(units[6] * units[1]^2 / units[2], BigFloat("6.62607015e-34")u"J*s"),
+        #uconvert(units[3] * units[2], BigFloat("1.602176634e-19")u"C"),
+        uconvert(getuMass(units), BigFloat("9.1093837015e-31")u"kg"),
+        uconvert(getuMass(units), BigFloat("1.67492749804e-27")u"kg"),
+        uconvert(getuMass(units), BigFloat("1.67262192369e-27")u"kg"),
+        #uconvert(units[6] / units[4]^4 / units[2]^3, BigFloat("5.6703744191844294e-8")u"W/K^4/m^2"),
+        #uconvert(units[2]^-1, BigFloat("")),
+        uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], BigFloat("1.380649e-23")u"J/K"),
+        uconvert(getuAcc(units), BigFloat("1.2e-8")u"cm/s^2"),
+    )
+end
+
+function Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+    println("Constructing Unitless Measurement constants")
+    return Constant(
+        uconvert(getuVel(units), measurement(CODATA2018.c_0)),
+        uconvert(units[1]^3 / units[6] / units[2]^2, measurement(CODATA2018.G)),
+        #uconvert(units[6] * units[1]^2 / units[2], measurement(CODATA2018.h)),
+        #uconvert(units[3] * units[2], measurement(CODATA2018.e)),
+        uconvert(getuMass(units), measurement(CODATA2018.m_e)),
+        uconvert(getuMass(units), measurement(CODATA2018.m_n)),
+        uconvert(getuMass(units), measurement(CODATA2018.m_p)),
+        #uconvert(units[6] / units[4]^4 / units[2]^3, measurement(CODATA2018.σ)),
+        #uconvert(units[2]^-1, measurement(CODATA2018.H)),
+        uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], measurement(CODATA2018.k_B)),
+        uconvert(getuAcc(units), measurement(ACC0, 0.0*ACC0)),
+    )
+end
+
 function ustrip(c::Constant)
     return Constant([ustrip(getfield(c, n)) for n in fieldnames(Constant)]...)
 end
