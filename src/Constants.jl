@@ -81,6 +81,11 @@ function Constant(::Nothing, units)
     return Constant(nothing, Constant(units))
 end
 
+"""
+    Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+
+Construct an immutable struct storing basic physical constants in `BigFloat` corresponding to `units` (default is `uAstro`).
+"""
 function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
     println("Constructing BigFloat constants")
     return Constant(
@@ -98,6 +103,11 @@ function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothin
     )
 end
 
+"""
+    Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
+
+Construct an immutable struct storing basic physical constants in `Measurement` corresponding to `units` (default is `uAstro`).
+"""
 function Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
     println("Constructing Unitless Measurement constants")
     return Constant(

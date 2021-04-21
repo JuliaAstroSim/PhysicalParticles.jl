@@ -416,15 +416,16 @@ end
     function ZeroValue(::Nothing)
     function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
 
-    Construct an immutable struct providing zero values in corresponding `units` (default is `uAstro`).
-    Useful for accumulated summation, array initialization, etc.
+Construct an immutable struct providing zero `Measurement` values in corresponding `units` (default is `uAstro`).
+Useful for accumulated summation, array initialization, etc.
 
 # Examples
-
+```
 ZeroValue(nothing)
 ZeroValue()
 ZeroValue(uSI)
 ZeroValue(uCGS)
+```
 """
 function ZeroValue(::Nothing)
     return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
@@ -442,6 +443,19 @@ function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where 
     )
 end
 
+"""
+    ZeroValue(::Type{Measurement}, args...)
+
+Construct an immutable struct providing zero values in corresponding `units` (default is `uAstro`).
+
+# Examples
+```jl
+ZeroValue(Measurement, nothing)
+ZeroValue(Measurement, )
+ZeroValue(Measurement, uSI)
+ZeroValue(Measurement, uCGS)
+```
+"""
 function ZeroValue(::Type{Measurement}, args...)
     z = ZeroValue(args...)
     return ZeroValue(measurement.([getfield(z, i) for i in fieldnames(ZeroValue)])...)
