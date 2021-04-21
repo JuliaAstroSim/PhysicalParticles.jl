@@ -50,6 +50,8 @@ norm(a)
 b = PVector(1.0f0, 2.0f0)
 b * 2
 b * 2.0
+PVector(BigFloat)
+PVector2D(BigInt, u"m")
 ```
 
 ### LinearAlgebra

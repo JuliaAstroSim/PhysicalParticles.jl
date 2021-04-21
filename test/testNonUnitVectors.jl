@@ -21,6 +21,8 @@
         @test PVector(0.0, 0.0, nothing) == PVector2D()
         @test PVector2D(0.0, 0.0, nothing) == PVector2D()
         @test PVector2D(nothing) == PVector2D()
+
+        @test PVector2D(Float64) == PVector2D()
     end
 
     @testset "Linear Algebra" begin
@@ -87,6 +89,8 @@ end
 
         @test PVector(0.0, 0.0, 0.0, nothing) == PVector()
         @test PVector(nothing) == PVector()
+
+        @test PVector(Float64) == PVector()
     end
 
     @testset "Linear Algebra" begin

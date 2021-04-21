@@ -28,6 +28,8 @@ a = PVector()
 b = PVector(1.0u"m", 2.0u"m", 3.0u"m")
 c = PVector2D(u"m/s")
 uconvert(u"m", PVector(1.0, 1.0, 1.0, u"km"))
+PVector(BigFloat)
+PVector2D(BigInt, u"m")
 PVector(1.0, 1.0) * im
 b * 2.0u"s"
 b + PVector(2.0, 2.0, 2.0, u"m") / 2

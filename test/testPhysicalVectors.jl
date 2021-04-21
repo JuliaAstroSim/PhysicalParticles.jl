@@ -24,6 +24,8 @@
         @test b / 2.0u"s" == PVector2D(1.5u"m / s", 2.0u"m / s")
 
         @test PVector2D(1.0, 1.0) ≈ PVector2D(1.0 + 1.0e-9, 1.0)
+
+        @test PVector2D(Float64, u"m") == PVector2D(u"m")
     end
 
     @testset "Coordinates" begin
@@ -119,6 +121,8 @@ end
         @test b / 2.0u"s" == PVector(2.0u"m / s", 2.5u"m / s", 3.0u"m / s")
 
         @test PVector(1.0, 1.0, 1.0) ≈ PVector(1.0 + 1.0e-9, 1.0, 1.0)
+
+        @test PVector(Float64, u"m") == PVector(u"m")
     end
 
     @testset "Linear Algebra" begin

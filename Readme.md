@@ -56,6 +56,12 @@ PVector2D(0.0 m s^-1, 0.0 m s^-1)
 julia> uconvert(u"m", PVector(1.0, 1.0, 1.0, u"km"))
 PVector(1000.0 m, 1000.0 m, 1000.0 m)
 
+julia> PVector(BigFloat)
+PVector{BigFloat}(0.0, 0.0, 0.0)
+
+julia> PVector2D(BigInt, u"m")
+PVector2D(0 m, 0 m)
+
 
 julia> PVector(1.0, 1.0) * im
 PVector2D{Complex{Float64}}(0.0 + 1.0im, 0.0 + 1.0im)
