@@ -413,10 +413,51 @@ end
 @inline iterate(z::ZeroValue,st) = nothing
 
 """
+    ZeroValue(::Type{T}, ::Nothing) where T<:Number
+    ZeroValue(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro) where T<:Number
+
+Construct an immutable struct providing zero values of type `T` in corresponding `units` (default is `uAstro`).
+Use `nothing` if unitless.
+Useful for accumulated summation, array initialization, etc.
+
+# Examples
+```jl
+ZeroValue(Float32, nothing)
+ZeroValue(Int32)
+ZeroValue(BigFloat, uSI)
+ZeroValue(Measurement, uCGS)
+```
+"""
+function ZeroValue(::Type{T}, ::Nothing) where T<:Number
+    return ZeroValue(
+        zero(T),
+        PVector(T),
+        PVector(T),
+        PVector(T),
+        zero(T),
+        zero(T),
+        zero(T),
+    )
+end
+
+function ZeroValue(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro) where T<:Number
+    return ZeroValue(
+        zero(T) * getuLength(units),
+        PVector(T, getuLength(units)),
+        PVector(T, getuVel(units)),
+        PVector(T, getuAcc(units)),
+        zero(T) * getuEnergy(units),
+        zero(T) * getuEnergy(units) / getuMass(units),
+        zero(T) * getuMass(units),
+    )
+end
+
+"""
     function ZeroValue(::Nothing)
     function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
 
 Construct an immutable struct providing zero `Measurement` values in corresponding `units` (default is `uAstro`).
+Use `nothing` if unitless.
 Useful for accumulated summation, array initialization, etc.
 
 # Examples
@@ -428,37 +469,11 @@ ZeroValue(uCGS)
 ```
 """
 function ZeroValue(::Nothing)
-    return ZeroValue(0.0, PVector(), PVector(), PVector(), 0.0, 0.0, 0.0)
+    return ZeroValue(Float64, nothing)
 end
 
 function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
-    return ZeroValue(
-        0.0 * getuLength(units),
-        PVector(getuLength(units)),
-        PVector(getuVel(units)),
-        PVector(getuAcc(units)),
-        0.0 * getuEnergy(units),
-        0.0 * getuEnergy(units) / getuMass(units),
-        0.0 * getuMass(units),
-    )
-end
-
-"""
-    ZeroValue(::Type{Measurement}, args...)
-
-Construct an immutable struct providing zero values in corresponding `units` (default is `uAstro`).
-
-# Examples
-```jl
-ZeroValue(Measurement, nothing)
-ZeroValue(Measurement, )
-ZeroValue(Measurement, uSI)
-ZeroValue(Measurement, uCGS)
-```
-"""
-function ZeroValue(::Type{Measurement}, args...)
-    z = ZeroValue(args...)
-    return ZeroValue(measurement.([getfield(z, i) for i in fieldnames(ZeroValue)])...)
+    return ZeroValue(Float64, units)
 end
 
 function Base.show(io::IO, z::ZeroValue)
