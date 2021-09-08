@@ -441,7 +441,7 @@ function split_data(data::Union{Array, StructArray}, i::Int64, N::Int64)
     end
 
     if length(data) == 0
-        return empty(data)
+        return data
     end
 
     len = length(data)
