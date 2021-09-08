@@ -55,9 +55,18 @@ function rotate_x(data::Array, roll::Number; vel::Bool = true)
     data
 end
 
-function rotate_x(data::Dict, roll::Number; vel::Bool = true)
-    for k in keys(data)
-        rotate_x(data[k], roll; vel)
+#! setproperties!! is slow for StructArray
+
+function rotate_x(data::StructArray, roll::Number; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_x(Pos[i], roll)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_x(Vel[i], roll)
+        end
     end
     data
 end
@@ -87,9 +96,16 @@ function rotate_x(data::Array, roll::Number, center::PVector; vel::Bool = true)
     data
 end
 
-function rotate_x(data::Dict, roll::Number, center::PVector; vel::Bool = true)
-    for k in keys(data)
-        rotate_x(data[k], roll, center; vel)
+function rotate_x(data::StructArray, roll::Number, center::PVector; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_x(Pos[i], roll, center)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_x(Vel[i], roll)
+        end
     end
     data
 end
@@ -130,9 +146,16 @@ function rotate_y(data::Array, pitch::Number; vel::Bool = true)
     data
 end
 
-function rotate_y(data::Dict, pitch::Number; vel::Bool = true)
-    for k in keys(data)
-        rotate_y(data[k], pitch; vel)
+function rotate_y(data::StructArray, pitch::Number; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_y(Pos[i], pitch)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_y(Vel[i], pitch)
+        end
     end
     data
 end
@@ -162,9 +185,16 @@ function rotate_y(data::Array, pitch::Number, center::PVector; vel::Bool = true)
     data
 end
 
-function rotate_y(data::Dict, pitch::Number, center::PVector; vel::Bool = true)
-    for k in keys(data)
-        rotate_y(data[k], pitch, center; vel)
+function rotate_y(data::StructArray, pitch::Number, center::PVector; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_y(Pos[i], pitch, center)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_y(Vel[i], pitch)
+        end
     end
     data
 end
@@ -205,9 +235,16 @@ function rotate_z(data::Array, yaw::Number; vel::Bool = true)
     data
 end
 
-function rotate_z(data::Dict, yaw::Number; vel::Bool = true)
-    for k in keys(data)
-        rotate_z(data[k], yaw; vel)
+function rotate_z(data::StructArray, yaw::Number; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_z(Pos[i], yaw)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_z(Vel[i], yaw)
+        end
     end
     data
 end
@@ -237,9 +274,16 @@ function rotate_z(data::Array, yaw::Number, center::PVector; vel::Bool = true)
     data
 end
 
-function rotate_z(data::Dict, yaw::Number, center::PVector; vel::Bool = true)
-    for k in keys(data)
-        rotate_z(data[k], yaw, center; vel)
+function rotate_z(data::StructArray, yaw::Number, center::PVector; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        @inbounds Pos[i] = rotate_z(Pos[i], yaw, center)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            @inbounds Vel[i] = rotate_z(Vel[i], yaw)
+        end
     end
     data
 end
@@ -272,9 +316,16 @@ function rotate(data::Array, α::Number, β::Number, γ::Number; vel::Bool = tru
     data
 end
 
-function rotate(data::Dict, α::Number, β::Number, γ::Number; vel::Bool = true)
-    for k in keys(data)
-        rotate(data[k], α, β, γ; vel)
+function rotate(data::StructArray, α::Number, β::Number, γ::Number; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        Pos[i] = rotate(Pos[i], α, β, γ)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            Vel[i] = rotate(Vel[i], α, β, γ)
+        end
     end
     data
 end
@@ -305,9 +356,16 @@ function rotate(data::Array, α::Number, β::Number, γ::Number, center::PVector
     data
 end
 
-function rotate(data::Dict, α::Number, β::Number, γ::Number, center::PVector; vel::Bool = true)
-    for k in keys(data)
-        rotate(data[k], α, β, γ, center; vel)
+function rotate(data::StructArray, α::Number, β::Number, γ::Number, center::PVector; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        Pos[i] = rotate(Pos[i], α, β, γ, center)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            Vel[i] = rotate(Vel[i], α, β, γ)
+        end
     end
     data
 end
@@ -351,9 +409,16 @@ function rotate(data::Array, vec::PVector, θ::Number; vel::Bool = true)
     data
 end
 
-function rotate(data::Dict, vec::PVector, θ::Number; vel::Bool = true)
-    for k in keys(data)
-        rotate(data[k], vec, θ; vel)
+function rotate(data::StructArray, vec::PVector, θ::Number; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        Pos[i] = rotate(Pos[i], vec, θ)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            Vel[i] = rotate(Vel[i], vec, θ)
+        end
     end
     data
 end
@@ -383,9 +448,16 @@ function rotate(data::Array, vec::PVector, θ::Number, center::PVector; vel::Boo
     data
 end
 
-function rotate(data::Dict, vec::PVector, θ::Number, center::PVector; vel::Bool = true)
-    for k in keys(data)
-        rotate(data[k], vec, θ, center; vel)
+function rotate(data::StructArray, vec::PVector, θ::Number, center::PVector; vel::Bool = true)
+    Pos = data.Pos
+    for i in eachindex(Pos)
+        Pos[i] = rotate(Pos[i], vec, θ, center)
+    end
+    if vel
+        Vel = data.Vel
+        for i in eachindex(Vel)
+            Vel[i] = rotate(Vel[i], vec, θ)
+        end
     end
     data
 end
@@ -429,10 +501,12 @@ a = rand_pvector(5)
 average(a, :x)
 ```
 """
-function average(data, symbol::Symbol)
-    a = [getfield(p, symbol) for p in Iterators.flatten(values(data))]
-    return sum(a) / length(a)
+function average(data::Array, symbol::Symbol)
+    a = [getfield(p, symbol) for p in data]
+    return mean(a)
 end
+
+average(data::StructArray, symbol::Symbol) = mean(getproperty(data, symbol))
 
 """
     function averagebymass(data, symbol::Symbol)
@@ -445,17 +519,39 @@ Average on field `symbol` weighted by `:Mass` of elements in an array of dict of
 averagebymass(data, :Pos)
 ```
 """
-function averagebymass(data, symbol::Symbol)
-    a = [getfield(p, symbol) for p in Iterators.flatten(values(data))]
-    m = [getfield(p, :Mass) for p in Iterators.flatten(values(data))]
-    msum = sum(m)
-    if iszero(msum)
-        return mean(a)
+function averagebymass(data::Array, symbol::Symbol)
+    if isempty(data)
+        return NaN
     end
-    return sum(a .* m) / msum
+
+    a = [getfield(p, symbol) for p in data]
+    m = [getfield(p, :Mass) for p in data]
+    u = unit(first(m))
+    mu = ustrip.(u, m)
+    msum = sum(mu)
+    if iszero(msum)
+        return sum(a .* mu) / length(data)
+    end
+    return sum(a .* mu) / msum
 end
 
-averagebymass(a::Array{T}, symbol::Symbol) where T <: Union{Massless, Massless2D} = average(a, symbol)
+function averagebymass(data::StructArray, symbol::Symbol)
+    if isempty(data)
+        return NaN
+    end
+
+    a = getproperty(data, symbol)
+    m = data.Mass
+    u = unit(first(m))
+    mu = ustrip.(u, m)
+    msum = sum(mu)
+    if iszero(msum)
+        return sum(a .* mu) / length(data)
+    end
+    return sum(a .* mu) / msum
+end
+
+averagebymass(a::Union{Array{T,N}, StructArray{T,N,NT,Tu}}, symbol::Symbol) where T<:Union{Massless, Massless2D} where N where NT where Tu = average(a, symbol)
 
 function averagebymass(data::StructArray, symbol::Symbol)
     msum = sum(data.Mass)
@@ -474,14 +570,14 @@ middle(x::Quantity, y::Quantity) = x/2 + y/2
 
 Return the midian value in array of points.
 """
-function median(a::Array{T}) where T <: AbstractPoint2D
+function median(a::Union{Array{T,N}, StructArray{T,N,NT,Tu}}) where T <: AbstractPoint2D where N where NT where Tu
     return PVector2D(
         median([p.x for p in a]),
         median([p.y for p in a])
     )
 end
 
-function median(a::Array{T}) where T <: AbstractPoint3D
+function median(a::Union{Array{T,N}, StructArray{T,N,NT,Tu}}) where T <: AbstractPoint3D where N where NT where Tu
     return PVector(
         median([p.x for p in a]),
         median([p.y for p in a]),
@@ -501,21 +597,6 @@ function median(a::Array{T}, symbol::Symbol) where T <: AbstractParticle
     return median([getfield(p, symbol) for p in a])
 end
 
-function median(d::Dict{S, Array{T, N}}) where S where T<:AbstractPoint2D where N
-    return PVector2D(
-        median([p.x for p in Iterators.flatten(values(d))]),
-        median([p.y for p in Iterators.flatten(values(d))])
-    )
-end
-
-function median(d::Dict{S, Array{T, N}}) where S where T<:AbstractPoint3D where N
-    return PVector(
-        median([p.x for p in Iterators.flatten(values(d))]),
-        median([p.y for p in Iterators.flatten(values(d))]),
-        median([p.z for p in Iterators.flatten(values(d))])
-    )
-end
-
-function median(d::Dict, symbol::Symbol)
-    return median([getfield(p, symbol) for p in Iterators.flatten(values(d))])
+function median(a::StructArray, symbol::Symbol)
+    return median(getproperty(a, symbol))
 end

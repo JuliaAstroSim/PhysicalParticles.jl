@@ -66,7 +66,7 @@ julia> extent([Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVecto
 Extent: xMin = -1.0 m, xMax = 1.0 m, yMin = -1.0 m, yMax = 1.0 m, zMin = -1.0 m, zMax = 1.0 m, SideLength = 2.0 m, Center = PVector(0.0 m, 0.0 m, 0.0 m)
 ```
 """
-function extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} where N
+function extent(a::Union{Array{T, N}, StructArray{T,N,NT,Tu}}) where T<:Union{PVector2D, AbstractParticle2D} where N where NT where Tu
     if isempty(a)
         return nothing
     end
@@ -79,7 +79,7 @@ function extent(a::Array{T, N}) where T<:Union{PVector2D, AbstractParticle2D} wh
     return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
 end
 
-function extent(a::Array{T, N}) where T<:Union{PVector, AbstractParticle3D} where N
+function extent(a::Union{Array{T, N}, StructArray{T,N,NT,Tu}}) where T<:Union{PVector, AbstractParticle3D} where N where NT where Tu
     if isempty(a)
         return nothing
     end
@@ -119,15 +119,6 @@ function extent(a::Array{T}) where T <: AbstractExtent
     e = a[1]
     for i in a[2:end]
         @inbounds e = extent(e, i)
-    end
-    return e
-end
-
-function extent(data::Dict)
-    key = collect(keys(data))
-    e = extent(data[key[1]])
-    for k in key[2:end]
-        @inbounds e = extent(e, extent(data[k]))
     end
     return e
 end

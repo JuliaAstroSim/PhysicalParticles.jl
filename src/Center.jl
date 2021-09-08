@@ -57,6 +57,7 @@ max_z(a::AbstractParticle, b::AbstractParticle) = ifelse(isless(a.Pos.z, b.Pos.z
 """
     function minimum_x(a::Array{T,N}) where T <: AbstractPoint where N
     function minimum_x(a::Array{T,N}) where T <: AbstractParticle where N
+    function minimum_x(a::StructArray)
 
 Return the minimum `:x` field of points in array `a`
 Return the minimum `Pos.x` of particles in array `a`
@@ -71,9 +72,12 @@ function minimum_x(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.x
 end
 
+minimum_x(a::StructArray) = minimum_x(a.Pos)
+
 """
     function minimum_y(a::Array{T,N}) where T <: AbstractPoint where N
     function minimum_y(a::Array{T,N}) where T <: AbstractParticle where N
+    function minimum_y(a::StructArray)
 
 Return the minimum `:y` field of points in array `a`
 Return the minimum `Pos.y` of particles in array `a`
@@ -88,9 +92,12 @@ function minimum_y(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.y
 end
 
+minimum_y(a::StructArray) = minimum_y(a.Pos)
+
 """
     function minimum_z(a::Array{T,N}) where T <: AbstractPoint where N
     function minimum_z(a::Array{T,N}) where T <: AbstractParticle where N
+    function minimum_z(a::StructArray)
 
 Return the minimum `:z` field of points in array `a`
 Return the minimum `Pos.z` of particles in array `a`
@@ -105,9 +112,12 @@ function minimum_z(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.z
 end
 
+minimum_z(a::StructArray) = minimum_z(a.Pos)
+
 """
     function maximum_x(a::Array{T,N}) where T <: AbstractPoint where N
     function maximum_x(a::Array{T,N}) where T <: AbstractParticle where N
+    function maximum_x(a::StructArray)
 
 Return the maximum `:x` field of points in array `a`
 Return the maximum `Pos.x` of particles in array `a`
@@ -122,9 +132,12 @@ function maximum_x(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.x
 end
 
+maximum_x(a::StructArray) = maximum_x(a.Pos)
+
 """
     function maximum_y(a::Array{T,N}) where T <: AbstractPoint where N
     function maximum_y(a::Array{T,N}) where T <: AbstractParticle where N
+    function maximum_y(a::StructArray)
 
 Return the maximum `:y` field of points in array `a`
 Return the maximum `Pos.y` of particles in array `a`
@@ -139,9 +152,12 @@ function maximum_y(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.y
 end
 
+maximum_y(a::StructArray) = maximum_y(a.Pos)
+
 """
     function maximum_z(a::Array{T,N}) where T <: AbstractPoint where N
     function maximum_z(a::Array{T,N}) where T <: AbstractParticle where N
+    function maximum_z(a::StructArray)
 
 Return the maximum `:z` field of points in array `a`
 Return the maximum `Pos.z` of particles in array `a`
@@ -155,6 +171,8 @@ function maximum_z(a::Array{T,N}) where T <: AbstractParticle where N
     m = mapreduce(identity, max_z, a)
     return m.Pos.z
 end
+
+maximum_z(a::StructArray) = maximum_z(a.Pos)
 
 """
 $(SIGNATURES)

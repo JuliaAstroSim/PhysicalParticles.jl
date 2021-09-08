@@ -13,11 +13,6 @@
     @test Star2D(uAstro).Pos == PVector2D(u"kpc")
     @test Star().Pos == PVector()
     @test Star(uAstro).Pos == PVector(u"kpc")
-
-    @test SPHGas2D().Pos == PVector2D()
-    @test SPHGas2D(uAstro).Pos == PVector2D(u"kpc")
-    @test SPHGas().Pos == PVector()
-    @test SPHGas(uAstro).Pos == PVector(u"kpc")
 end
 
 @testset "2D particles" begin
@@ -44,11 +39,6 @@ end
         b_Star2D =  @set! b_Star2D.Pos = PVector2D(3.0u"m", 4.0u"m")
         @test distance(a_Star2D, b_Star2D) == 5.0u"m"
 
-
-        a_SPHGas2D = SPHGas2D(uSI)
-        b_SPHGas2D = SPHGas2D(uSI)
-        b_SPHGas2D = @set! b_SPHGas2D.Pos = PVector2D(3.0u"m", 4.0u"m")
-        @test distance(a_SPHGas2D, b_SPHGas2D) == 5.0u"m"
     end
 
     @testset "Random" begin
@@ -71,13 +61,6 @@ end
         p_Star2D = [Star2D(uSI) for i=1:5]
         assign_particles(p_Star2D, :Pos, a)
         @test p_Star2D[1].Pos == a[1]
-
-        p_SPHGas2D = [SPHGas2D(uSI) for i=1:5]
-        assign_particles(p_SPHGas2D, :Pos, a)
-        @test p_SPHGas2D[1].Pos == a[1]
-
-        assign_particles(p_SPHGas2D, :Pos, PVector2D(u"m"))
-        @test p_SPHGas2D[1].Pos == PVector2D(u"m")
 
         # randn
         a_randn = randn_pvector2d(5)
@@ -166,12 +149,6 @@ end
         b_Star = Star(uSI)
         b_Star = @set! b_Star.Pos = PVector(3.0u"m", 4.0u"m", 12.0u"m")
         @test distance(a_Star, b_Star) == 13.0u"m"
-
-
-        a_SPHGas = SPHGas(uSI)
-        b_SPHGas = SPHGas(uSI)
-        b_SPHGas = @set! b_SPHGas.Pos = PVector(3.0u"m", 4.0u"m", 12.0u"m")
-        @test distance(a_SPHGas, b_SPHGas) == 13.0u"m"
     end
 
     @testset "Random" begin
@@ -194,10 +171,6 @@ end
         p_Star = [Star(uSI) for i=1:5]
         assign_particles(p_Star, :Pos, a)
         @test p_Star[1].Pos == a[1]
-
-        p_SPHGas = [SPHGas(uSI) for i=1:5]
-        assign_particles(p_SPHGas, :Pos, a)
-        @test p_SPHGas[1].Pos == a[1]
 
         # StructArray
         ps = StructArray(p_Star)
@@ -276,51 +249,4 @@ end
 
         @test extent(empty(p2)) === nothing
     end
-end
-
-@testset "Dict" begin
-    data = Dict(
-        "gases" => [SPHGas(uAstro, collection = GAS) for i = 1:2],
-        "haloes" => [Star(uAstro, collection = HALO) for i = 1:2],
-        "disks" => [Star(uAstro, collection = DISK) for i = 1:2],
-        "bulges" => [Star(uAstro, collection = BULGE) for i = 1:2],
-        "stars" => [Star(uAstro, collection = STAR) for i = 1:2],
-        "blackholes" => [Star(uAstro, collection = BLACKHOLE) for i = 1:2],
-    )
-    @test countdata(data) == 12
-    @test countdata(data["gases"]) == 2
-    @test extent(data) == Extent(0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", 0.0u"kpc", PVector(u"kpc"), PVector(u"kpc"))
-
-    push!(data, SPHGas(uAstro))
-    @test length(data["gases"]) == 3
-
-    push!(data, Star(uAstro))
-    @test length(data["stars"]) == 3
-    
-    push!(data, Star(uAstro, collection = DISK))
-    @test length(data["stars"]) == 4
-
-    # push to new keys
-    data2 = Dict()
-    push!(data2, SPHGas2D())
-    push!(data2, Star2D())
-    @test length(data2["gases"]) == 1
-    @test length(data2["stars"]) == 1
-
-    append!(data2, deepcopy(data2))
-    @test countdata(data2) == 4
-
-    a = [1,2,4]
-    d = Dict("split" => a)
-    @test sum(split_data(a, 1, 2)) == 3
-    @test sum(split_data(a, 2, 2)) == 4
-    @test isempty(split_data(a, 4, 4))
-    @test sum(split_data(d, 1, 2)["split"]) == 3
-    @test sum(split_data(d, 2, 2)["split"]) == 4
-    @test isempty(split_data(d, 4, 4)["split"])
-
-    @test_throws ErrorException split_data(a, 0, 2)
-    @test_throws ErrorException split_data(a, 3, 2)
-    @test length(split_data(empty(a), 1, 2)) == 0
-    @test sum(split_data(a, 3, 3)) == 4
 end

@@ -30,20 +30,6 @@ function Base.show(io::IO, p::T) where T<:Union{Star, Star2D}
         ", Ti_endstep = ", p.Ti_endstep,
         ", Ti_begstep = ", p.Ti_begstep,
         ", Potential = ", p.Potential,
-        ", OldAcc = ", p.OldAcc
-    )
-end
-
-function Base.show(io::IO, p::T) where T<:Union{SPHGas, SPHGas2D}
-    print(
-        io, "SPHGas ", p.ID, " ", p.Collection,
-        ": Pos = ", p.Pos, 
-        ", Vel = ", p.Vel, 
-        ", Acc = ", p.Acc, 
-        ", Mass = ", p.Mass,
-        ", Ti_endstep = ", p.Ti_endstep,
-        ", Ti_begstep = ", p.Ti_begstep,
-        ", Potential = ", p.Potential,
         ", OldAcc = ", p.OldAcc,
 
         ", Entropy = ", p.Entropy,

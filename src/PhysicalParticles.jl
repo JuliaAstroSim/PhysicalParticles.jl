@@ -10,8 +10,9 @@ using DocStringExtensions
 using Unitful, UnitfulAstro
 using Setfield
 using BangBang
-using StructArrays
 using Measurements
+using Reexport
+@reexport using StructArrays
 
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
@@ -19,7 +20,7 @@ import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Measurements: Measurement, measurement
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
-             one, zero, isone, iszero, isnan, isinf, oneunit, push!, append!, isapprox
+             one, zero, isone, iszero, isnan, isinf, oneunit, isapprox
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -40,9 +41,7 @@ export
     Massless, Massless2D,
     Ball, Ball2D,
     Star, Star2D,
-    SPHGas, SPHGas2D,
 
-    countdata,
     split_data,
 
     AbstractExtent,

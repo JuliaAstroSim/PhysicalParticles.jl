@@ -143,6 +143,8 @@ zero(p::PVector) = PVector(zero(p.x), zero(p.y), zero(p.z))
 
 zero(::Type{PVector{T}}) where T = PVector(zero(T), zero(T), zero(T))
 zero(::Type{PVector2D{T}}) where T = PVector2D(zero(T), zero(T))
+zero(::Type{PVector}) = zero(PVector{Float64})
+zero(::Type{PVector2D}) = zero(PVector2D{Float64})
 
 isone(p::AbstractPoint2D) = isone(p.x) && isone(p.y)
 isone(p::AbstractPoint3D) = isone(p.x) && isone(p.y) && isone(p.z)

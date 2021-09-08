@@ -82,6 +82,8 @@
 
     @test zero(PVector{Float64}) == PVector()
     @test zero(PVector2D{Float64}) == PVector2D()
+    @test zero(PVector) == PVector()
+    @test zero(PVector2D) == PVector2D()
 
     @test isone(PVector(1.0, 1.0, 1.0))
     @test isone(PVector(1.0, 1.0, 1.0, u"m/m"))

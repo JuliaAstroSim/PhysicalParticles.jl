@@ -51,17 +51,9 @@ julia> pconvert([1.0 4.0;
 function pconvert(a::Array{T,2}) where T<:Number
     row, col = size(a)
     if row == 3
-        p = rand(PVector,0)
-        for i in 1:col
-            @inbounds append!(p, PVector(a[1,i], a[2,i], a[3,i]))
-        end
-        return p
+        return StructArray{PVector}((a[1,:], a[2,:], a[3,:]))
     elseif row == 2
-        p = rand(PVector2D,0)
-        for i in 1:col
-            @inbounds append!(p, PVector2D(a[1,i], a[2,i]))
-        end
-        return p
+        return StructArray{PVector2D}((a[1,:], a[2,:]))
     else
         error(a, "\n       Not supported dimension! Use 2D and 3D vectors")
     end

@@ -71,18 +71,6 @@ Physical2D()
 
 julia> datadimension([Star(uAstro)])
 Physical3D()
-
-julia> datadimension(Dict("pos" => [PVector2D()]))
-Unitless2D()
-
-julia> datadimension(Dict("pos" => [PVector()]))
-Unitless3D()
-
-julia> datadimension(Dict("stars" => [Star2D(uAstro)]))
-Physical2D()
-
-julia> datadimension(Dict("stars" => [Star(uAstro)]))
-Physical3D()
 ```
 """
 datadimension(p::AbstractParticle) = datadimension(p.Pos, p.Pos.x)
@@ -93,5 +81,4 @@ datadimension(::AbstractPoint3D, ::Number) = Unitless3D()
 datadimension(::AbstractPoint2D, ::Quantity) = Physical2D()
 datadimension(::AbstractPoint3D, ::Quantity) = Physical3D()
 
-datadimension(a::Array) = datadimension(a[1])
-datadimension(a::Dict) = datadimension(first(Iterators.flatten(values(a))))
+datadimension(a::Array) = datadimension(first(a))

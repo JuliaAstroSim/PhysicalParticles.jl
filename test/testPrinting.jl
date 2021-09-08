@@ -40,14 +40,6 @@
     println()
     @test a === nothing
 
-    a = show(SPHGas2D())
-    println()
-    @test a === nothing
-
-    a = show(SPHGas())
-    println()
-    @test a === nothing
-
     a = show(Extent2D(0.0, 0.0, 0.0, 0.0, 0.0, PVector2D(), PVector2D()))
     println()
     @test a === nothing

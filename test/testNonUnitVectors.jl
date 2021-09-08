@@ -139,6 +139,6 @@ end
 
         @test pconvert([1.0 4.0;
                          2.0 5.0;
-                         3.0 6.0]) == [PVector(1.0, 2.0, 3.0), PVector(4.0, 5.0, 6.0)]
+                         3.0 6.0]) == StructArray([PVector(1.0, 2.0, 3.0), PVector(4.0, 5.0, 6.0)])
     end
 end

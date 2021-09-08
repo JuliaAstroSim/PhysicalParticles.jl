@@ -1,4 +1,4 @@
-using Makie
+using GLMakie
 using Unitful, UnitfulAstro
 using BenchmarkTools
 
@@ -15,6 +15,7 @@ using CSV
 using Colors
 
 using BenchmarkPlots
+using Polyester
 
 
 include("StructArrays.jl")
