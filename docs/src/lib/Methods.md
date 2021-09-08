@@ -9,7 +9,7 @@ Pages = ["Methods.md"]
 ## Public
 
 ```@docs
-countdata
+length
 split_data
 extent
 volume

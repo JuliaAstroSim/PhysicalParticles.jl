@@ -89,9 +89,8 @@ function assign_particles(particles::StructArray, symbol::Symbol, data::Array)
     end
 
     a = getproperty(particles, symbol)
-    for i in 1:len
-        @inbounds a[i] = data[i]
-    end
+    a .= data
+    return nothing
 end
 
 """
@@ -113,7 +112,6 @@ end
 
 function assign_particles(particles::StructArray, symbol::Symbol, data)
     a = getproperty(particles, symbol)
-    for i in eachindex(a)
-        @inbounds a[i] = data
-    end
+    a .= data
+    return nothing
 end
