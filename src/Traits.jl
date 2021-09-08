@@ -81,4 +81,4 @@ datadimension(::AbstractPoint3D, ::Number) = Unitless3D()
 datadimension(::AbstractPoint2D, ::Quantity) = Physical2D()
 datadimension(::AbstractPoint3D, ::Quantity) = Physical3D()
 
-datadimension(a::Array) = datadimension(first(a))
+datadimension(a::Union{Array, StructArray}) = datadimension(first(a))
