@@ -553,14 +553,6 @@ end
 
 averagebymass(a::Union{Array{T,N}, StructArray{T,N,NT,Tu}}, symbol::Symbol) where T<:Union{Massless, Massless2D} where N where NT where Tu = average(a, symbol)
 
-function averagebymass(data::StructArray, symbol::Symbol)
-    msum = sum(data.Mass)
-    if iszero(msum)
-        return mean(getproperty(data, symbol))
-    end
-    return sum(getproperty(data, symbol) .* data.Mass) / msum
-end
-
 middle(x::Quantity) = x
 middle(x::Quantity, y::Quantity) = x/2 + y/2
 

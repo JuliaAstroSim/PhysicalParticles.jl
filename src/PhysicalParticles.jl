@@ -20,7 +20,7 @@ import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Measurements: Measurement, measurement
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
-             one, zero, isone, iszero, isnan, isinf, oneunit, isapprox
+             one, zero, isone, iszero, isnan, isinf, oneunit, isapprox, parse
 
 import LinearAlgebra: norm, normalize, dot, cross
 
@@ -201,6 +201,7 @@ include("Unit.jl")
 include("Constants.jl")
 
 include("PVector.jl")
+include("parse.jl")
 include("PhysicalParticle.jl")
 
 include("Conversion.jl")
