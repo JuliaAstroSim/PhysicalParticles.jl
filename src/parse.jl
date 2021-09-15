@@ -3,7 +3,7 @@
 
 function parse(::Type{PVector}, s::AbstractString; kw...)
     # Unitless 3D
-    m = match(r"^PVector{([A-Za-z0-9]+)}\((-?\d+\.\d+[A-Za-z0-9]+), (-?\d+\.\d+[A-Za-z0-9]+), (-?\d+\.\d+[A-Za-z0-9]+)\)", s)
+    m = match(r"^PVector{([A-Za-z0-9]+)}\(([\-\+\.A-Za-z0-9\-\+]+), ([\-\+\.A-Za-z0-9\-\+]+), ([\-\+\.A-Za-z0-9\-\+]+)\)", s)
     if !isnothing(m)
         captures = m.captures
         #t = eval(Meta.parse(captures[1]))
@@ -24,7 +24,7 @@ end
 
 function parse(::Type{PVector2D}, s::AbstractString; kw...)
     # Unitless 2D
-    m = match(r"^PVector2D{([A-Za-z0-9]+)}\((-?\d+\.\d+[A-Za-z0-9]+), (-?\d+\.\d+[A-Za-z0-9]+)\)", s)
+    m = match(r"^PVector2D{([A-Za-z0-9]+)}\(([\-\+\.A-Za-z0-9\-\+]+), ([\-\+\.A-Za-z0-9\-\+]+)\)", s)
     if !isnothing(m)
         captures = m.captures
         #t = eval(Meta.parse(captures[1]))
