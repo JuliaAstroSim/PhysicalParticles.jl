@@ -25,6 +25,10 @@
         @test PVector2D(Float64) == PVector2D()
 
         @test parse(PVector2D, string(a)) == a
+
+        @test PVector2D((1,2)) == PVector2D(1,2)
+        @test PVector2D([1,2]) == PVector2D(1,2)
+        @test PVector([1,2]) == PVector2D(1,2)
     end
 
     @testset "Linear Algebra" begin
@@ -95,6 +99,8 @@ end
         @test PVector(Float64) == PVector()
         
         @test parse(PVector, string(a)) == a
+
+        @test PVector((1,2,3)) == PVector(1,2,3)
     end
 
     @testset "Linear Algebra" begin

@@ -116,6 +116,13 @@ PVector(::Type{T}) where T<:Number = PVector(zero(T), zero(T), zero(T))
 PVector(::Type{T}, u::Units) where T<:Number = PVector(zero(T)*u, zero(T)*u, zero(T)*u)
 
 
+# Tuple
+PVector2D(t::Tuple{T,T}) where T = PVector2D(t...)
+PVector(t::Tuple{T,T}) where T = PVector2D(t...)
+
+PVector(t::Tuple{T,T,T}) where T = PVector(t...)
+
+
 # Units
 
 uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
