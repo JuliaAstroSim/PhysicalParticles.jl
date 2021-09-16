@@ -57,6 +57,7 @@ getuAmount(::Nothing) = nothing
 getuVel(::Nothing) = nothing
 getuAcc(::Nothing) = nothing
 getuEnergy(::Nothing) = nothing
+getuEnergyUnit(::Nothing) = nothing
 getuEntropy(::Nothing) = nothing
 getuDensity(::Nothing) = nothing
 getuDensity2D(::Nothing) = nothing
@@ -284,6 +285,28 @@ g cm^2 s^-2
 getuEnergy(units = uDefaults) = units[6] * units[1]^2 / units[2]^2
 
 """
+    function getuEnergyUnit(::Nothing)
+    function getuEnergyUnit(units)
+
+Extract energy per mass unit from `units` or `nothing`
+
+## Examples
+```jl
+julia> getuEnergyUnit(nothing)
+
+julia> getuEnergyUnit(uAstro)
+kpc^2 Gyr^-2
+
+julia> getuEnergyUnit(uSI)
+m^2 s^-2
+
+julia> getuEnergyUnit(uCGS)
+cm^2 s^-2
+```
+"""
+getuEnergyUnit(units = uDefaults) = units[1]^2 / units[2]^2
+
+"""
     function getuEntropy(::Nothing)
     function getuEntropy(units)
 
@@ -398,7 +421,7 @@ axisunit(::Nothing) = ""
 axisunit(u::Units) = string(" [", u, "]")
 axisunit(s::AbstractString, u::Units) = string(s, " [", u, "]")
 
-struct ZeroValue{Len, POS, VEL, ACC, POT, PPM, MASS}
+struct ZeroValue{Len, POS, VEL, ACC, POT, PPM, MASS, DEN}
     len::Len
     pos::POS
     vel::VEL
@@ -406,6 +429,7 @@ struct ZeroValue{Len, POS, VEL, ACC, POT, PPM, MASS}
     pot::POT
     potpermass::PPM
     mass::MASS
+    density::DEN
 end
 
 @inline length(::ZeroValue) = 1
@@ -437,18 +461,27 @@ function ZeroValue(::Type{T}, ::Nothing) where T<:Number
         zero(T),
         zero(T),
         zero(T),
+        zero(T),
     )
 end
 
-function ZeroValue(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro) where T<:Number
+function ZeroValue(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro;
+        twodim::Bool = false,
+    ) where T<:Number
+    if twodim
+        density = 0.0 * getuDensity2D(units)
+    else
+        density = 0.0 * getuDensity(units)
+    end
     return ZeroValue(
         zero(T) * getuLength(units),
         PVector(T, getuLength(units)),
         PVector(T, getuVel(units)),
         PVector(T, getuAcc(units)),
         zero(T) * getuEnergy(units),
-        zero(T) * getuEnergy(units) / getuMass(units),
+        zero(T) * getuEnergyUnit(units),
         zero(T) * getuMass(units),
+        density,
     )
 end
 
@@ -486,5 +519,6 @@ function Base.show(io::IO, z::ZeroValue)
             pot = $(z.pot)
             potpermass = $(z.potpermass)
             mass = $(z.mass)
+            density = $(z.density)
     """)
 end

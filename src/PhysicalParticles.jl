@@ -11,6 +11,7 @@ using Unitful, UnitfulAstro
 using Setfield
 using BangBang
 using Measurements
+using Random
 using Reexport
 @reexport using StructArrays
 
@@ -19,9 +20,9 @@ import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
 import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Measurements: Measurement, measurement
 import Core: Symbol
-import Base: +, -, *, /, zero, length, iterate, real, rand, show, ==, #getproperty,
+import Base: +, -, *, /, zero, length, iterate, real, show, ==, #getproperty,
              one, zero, isone, iszero, isnan, isinf, oneunit, isapprox, parse
-
+import Random
 import LinearAlgebra: norm, normalize, dot, cross
 
 import Statistics: mean, std, var, median, middle
@@ -112,6 +113,7 @@ export
         getuVel,
         getuAcc,
         getuEnergy,
+        getuEnergyUnit,
         getuEntropy,
         getuDensity,
         getuDensity2D,

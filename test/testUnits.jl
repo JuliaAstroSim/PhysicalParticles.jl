@@ -32,6 +32,7 @@
     @test getuVel(nothing) === nothing
     @test getuAcc(nothing) === nothing
     @test getuEnergy(nothing) === nothing
+    @test getuEnergyUnit(nothing) === nothing
     @test getuEntropy(nothing) === nothing
     @test getuDensity(nothing) === nothing
     @test getuDensity2D(nothing) === nothing
@@ -48,6 +49,7 @@
     @test getuVel(uAstro) == u"kpc/Gyr"
     @test getuAcc(uAstro) == u"kpc/Gyr^2"
     @test getuEnergy(uAstro) == u"Msun * kpc^2/Gyr^2"
+    @test getuEnergyUnit(uAstro) == u"kpc^2/Gyr^2"
     @test getuEntropy(uAstro) == u"Msun * kpc^2 / Gyr^2 / K"
     @test getuDensity(uAstro) == u"Msun/kpc^3"
     @test getuDensity2D(uAstro) == u"Msun/kpc^2"
