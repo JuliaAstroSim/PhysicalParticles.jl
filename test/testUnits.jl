@@ -38,6 +38,7 @@
     @test getuDensity2D(nothing) === nothing
     @test getuPressure(nothing) === nothing
     @test getuMomentum(nothing) === nothing
+    @test getuMomentumAngular(nothing) === nothing
 
     @test getuLength(uAstro) == u"kpc"
     @test getuTime(uAstro) == u"Gyr"
@@ -56,6 +57,7 @@
     @test getuDensity2D(uAstro) == u"Msun/kpc^2"
     @test getuPressure(uAstro) == u"Msun / kpc / Gyr^2"
     @test getuMomentum(uAstro) == u"Msun * kpc / Gyr"
+    @test getuMomentumAngular(uAstro) == u"Msun * kpc^2 / Gyr"
 
 
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")

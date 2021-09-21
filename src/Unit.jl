@@ -63,6 +63,7 @@ getuDensity(::Nothing) = nothing
 getuDensity2D(::Nothing) = nothing
 getuPressure(::Nothing) = nothing
 getuMomentum(::Nothing) = nothing
+getuMomentumAngular(::Nothing) = nothing
 
 """
     function getuLength(::Nothing)
@@ -416,6 +417,28 @@ g cm s^-1
 ```
 """
 getuMomentum(units = uDefaults) = units[6] * units[1] / units[2]
+
+"""
+    function getuMomentumAngular(::Nothing)
+    function getuMomentumAngular(units)
+
+Extract momentum unit from `units` or `nothing`
+
+## Examples
+```jl
+julia> getuMomentumAngular(nothing)
+
+julia> getuMomentumAngular(uAstro)
+kpc^2 M⊙ Gyr^-1
+
+julia> getuMomentumAngular(uSI)
+kg m^2 s^-1
+
+julia> getuMomentumAngular(uCGS)
+g cm^2 s^-1
+```
+"""
+getuMomentumAngular(units = uDefaults) = units[6] * units[1]^2 / units[2]
 
 ustrip(T::Type, ::Nothing, x::Real) = convert(T, x)
 ustrip(::Nothing, x::Real) = x

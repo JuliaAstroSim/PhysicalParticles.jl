@@ -119,6 +119,7 @@ export
         getuDensity2D,
         getuPressure,
         getuMomentum,
+        getuMomentumAngular,
 
     axisunit,
     ZeroValue,
