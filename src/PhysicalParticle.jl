@@ -258,7 +258,7 @@ struct Star2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: Abstract
     MaxSignalVel::V
 end
 
-Star2D(; id = 0, collection = GAS) = Star2D(
+Star2D(; id = 0, collection = STAR) = Star2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0,
     0.0, 0.0,
@@ -269,7 +269,7 @@ Star2D(; id = 0, collection = GAS) = Star2D(
     0.0, 0.0, 0.0
 )
 
-function Star2D(units::Array; id = 0, collection = GAS)
+function Star2D(units::Array; id = 0, collection = STAR)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -380,7 +380,7 @@ struct Star{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractPa
     MaxSignalVel::V
 end
 
-Star(; id = 0, collection = GAS) = Star(
+Star(; id = 0, collection = STAR) = Star(
     PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0,
     0.0, 0.0,
@@ -391,7 +391,7 @@ Star(; id = 0, collection = GAS) = Star(
     0.0, 0.0, 0.0
 )
 
-function Star(units::Array; id = 0, collection = GAS)
+function Star(units::Array; id = 0, collection = STAR)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
