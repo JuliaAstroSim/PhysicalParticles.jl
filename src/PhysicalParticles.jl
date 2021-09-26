@@ -50,7 +50,7 @@ export
 
     Extent, Extent2D,
         extent,
-        volume, area,
+        #volume, area,
 
     # Traits
     Collection,
@@ -68,7 +68,7 @@ export
     hasnan, hasinf,
 
     # LinearAlgebra
-    norm, normalize, dot, cross,
+    #norm, normalize, dot, cross,
 
     rotate, rotate_x, rotate_y, rotate_z,
 
@@ -83,7 +83,7 @@ export
     spherical,
 
     # Statistics
-    mean, std, var, median, middle,
+    #mean, std, var, median, middle,
 
     # Center
     min_x, min_y, min_z,
