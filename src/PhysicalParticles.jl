@@ -13,6 +13,7 @@ using BangBang
 using Measurements
 using Random
 using Reexport
+using StaticArrays
 @reexport using StructArrays
 
 ## Explicitly overload functions and import types
@@ -21,11 +22,13 @@ import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
 import Measurements: Measurement, measurement
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, show, ==, #getproperty,
+             Array, Vector,
              one, zero, isone, iszero, isnan, isinf, oneunit, isapprox, parse
 import Random
 import LinearAlgebra: norm, normalize, dot, cross
 
 import Statistics: mean, std, var, median, middle
+import StaticArrays: SVector, SArray, MVector, MArray
 
 export
     AbstractPoint,

@@ -122,6 +122,20 @@ PVector(t::Tuple{T,T}) where T = PVector2D(t...)
 
 PVector(t::Tuple{T,T,T}) where T = PVector(t...)
 
+# Convert to Array
+Vector(p::AbstractPoint3D) = [p.x, p.y, p.z]
+Vector(p::AbstractPoint2D) = [p.x, p.y]
+Array(p::AbstractPoint) = Vector(p)
+
+# Convert to SArray
+SVector(p::AbstractPoint3D) = SVector(p.x, p.y, p.z)
+SVector(p::AbstractPoint2D) = SVector(p.x, p.y)
+SArray(p::AbstractPoint) = SVector(p)
+
+# Convert to MArray
+MVector(p::AbstractPoint3D) = MVector(p.x, p.y, p.z)
+MVector(p::AbstractPoint2D) = MVector(p.x, p.y)
+MArray(p::AbstractPoint) = MVector(p)
 
 # Units
 

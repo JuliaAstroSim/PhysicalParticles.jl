@@ -29,6 +29,10 @@
         @test PVector2D((1,2)) == PVector2D(1,2)
         @test PVector2D([1,2]) == PVector2D(1,2)
         @test PVector([1,2]) == PVector2D(1,2)
+
+        @test Array(PVector2D()) == [0.0, 0.0]
+        @test SArray(PVector2D()) == SVector(0.0, 0.0)
+        @test MArray(PVector2D()) == MVector(0.0, 0.0)
     end
 
     @testset "Linear Algebra" begin
@@ -101,6 +105,10 @@ end
         @test parse(PVector, string(a)) == a
 
         @test PVector((1,2,3)) == PVector(1,2,3)
+
+        @test Array(PVector()) == [0.0, 0.0, 0.0]
+        @test SArray(PVector()) == SVector(0.0, 0.0, 0.0)
+        @test MArray(PVector()) == MVector(0.0, 0.0, 0.0)
     end
 
     @testset "Linear Algebra" begin

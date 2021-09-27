@@ -99,7 +99,7 @@ end
 
         e = extent(p)
         @test e == Extent2D(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector2D(u"m"), PVector(-1.0, -1.0, u"m"))
-        @test area(e) == 4.0u"m^2"
+        @test PhysicalParticles.area(e) == 4.0u"m^2"
         @test mass_center(p) == PVector2D(u"m")
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
         @test pos_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
@@ -222,7 +222,7 @@ end
 
         e = extent(p)
         @test e == Extent(-1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", -1.0u"m", 1.0u"m", 2.0u"m", PVector(u"m"), PVector(-1.0, -1.0, -1.0, u"m"))
-        @test volume(e) == 8u"m^3"
+        @test PhysicalParticles.volume(e) == 8u"m^3"
         @test mass_center(p) == PVector(u"m")
         @test mass_center([Star(uAstro)]) == PVector(u"kpc")
         @test mass_center([Massless() for i in 1:3]) == PVector()
