@@ -34,5 +34,7 @@
         @test datadimension([PVector()]) == Unitless3D()
         @test datadimension([Star2D(uAstro)]) == Physical2D()
         @test datadimension([Star(uAstro)]) == Physical3D()
+
+        @test PVector(1.0) == 1.0
     end
 end

@@ -115,6 +115,9 @@ PVector(::Type{T}) where T<:Number = PVector(zero(T), zero(T), zero(T))
 
 PVector(::Type{T}, u::Units) where T<:Number = PVector(zero(T)*u, zero(T)*u, zero(T)*u)
 
+# 1D point, simply return the number
+PVector(x::Number) = x
+
 
 # Tuple
 PVector2D(t::Tuple{T,T}) where T = PVector2D(t...)
