@@ -36,5 +36,7 @@
         @test datadimension([Star(uAstro)]) == Physical3D()
 
         @test PVector(1.0) == 1.0
+        @test PVector(1.0, u"m") == 1.0u"m"
+        @test PVector(1.0, nothing) == 1.0
     end
 end

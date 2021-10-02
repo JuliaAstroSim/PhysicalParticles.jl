@@ -117,6 +117,8 @@ PVector(::Type{T}, u::Units) where T<:Number = PVector(zero(T)*u, zero(T)*u, zer
 
 # 1D point, simply return the number
 PVector(x::Number) = x
+PVector(x::Number, ::Nothing) = x
+PVector(x::Number, u::Units) = x * u
 
 
 # Tuple
