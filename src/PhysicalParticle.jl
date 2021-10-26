@@ -395,17 +395,20 @@ function Star(units::Array; id = 0, collection = STAR)
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
+    uVel = getuVel(units)
+    uAcc = getuAcc(units)
+    uEnergyUnit = getuEnergyUnit(units)
     uTemperature = getuTemperature(units)
     return Star(
-        PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2),
+        PVector(uLength), PVector(uVel), PVector(uAcc),
         0.0 * uMass, id, collection,
         0, 0, 0,
-        0.0 * uMass * uLength^2 / uTime^2, 0.0 * uLength / uTime^2,
+        0.0 * uEnergyUnit, 0.0 * uAcc,
 
         0.0 * getuEntropy(units),
         0.0 * getuDensity(units), 0.0 * uLength,
         0.0, 0.0, 0,
-        PVector(uLength / uTime),
+        PVector(uVel),
         0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
         0.0 * getuPressure(units),
         0.0 * getuEntropy(units) / uTime,
