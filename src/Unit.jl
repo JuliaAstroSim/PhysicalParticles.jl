@@ -23,13 +23,13 @@ function preferunits(u)
     end
 end
 
-"Set defulat units to `uAstro`"
+"Set default units to `uAstro`"
 astro() = preferunits(uAstro)
 
-"Set defulat units to `uSI`"
+"Set default units to `uSI`"
 si() = preferunits(uSI)
 
-"Set defulat units to `uCGS`"
+"Set default units to `uCGS`"
 cgs() = preferunits(uCGS)
 
 """
