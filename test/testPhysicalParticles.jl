@@ -250,3 +250,17 @@ end
         @test extent(empty(p2)) === nothing
     end
 end
+
+@testset "Collection" begin
+    data = StructArray(Star(uSI, collection=i) for i in instances(Collection))
+    append!(data, StructArray(Star(uSI, collection = GAS)))
+
+    # getindex
+    @test length(data[GAS]) == 2
+    @test length(data[HALO]) == 1
+    @test length(data[DISK]) == 1
+    @test length(data[BULGE]) == 1
+    @test length(data[STAR]) == 1
+    @test length(data[BLACKHOLE]) == 1
+
+end

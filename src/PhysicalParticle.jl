@@ -416,6 +416,9 @@ function Star(units::Array; id = 0, collection = STAR)
     )
 end
 
+Base.getindex(a::StructArray{D} where D<:AbstractParticle, col::Collection) = a[a.Collection .== col]
+
+
 """
     split_data(data::Array, i::Int64, N::Int64)
 
