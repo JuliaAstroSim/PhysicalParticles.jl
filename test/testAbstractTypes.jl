@@ -43,7 +43,10 @@
     @testset "Split data" begin
         @test split_data([1,2,3], 1, 2) == [1,2]
         @test split_data([1,2,3], 2, 2) == [3]
+        @test split_data([1,2,3], 3, 3) == [3]
         @test split_data([1,2,3], 3, 4) == [3]
         @test split_data([1,2,3], 4, 4) == Int[]
+        @test_broken split_data([1,2,3], 3, 2)
+        @test split_data([], 1, 2) == []
     end
 end
