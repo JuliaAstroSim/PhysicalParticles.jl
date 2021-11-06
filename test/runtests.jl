@@ -1,9 +1,9 @@
 using PhysicalParticles
 
 using Test, Unitful, UnitfulAstro
-using Setfield
 using StructArrays
 using StaticArrays
+using BangBang
 #using Documenter
 
 include("testUnits.jl")

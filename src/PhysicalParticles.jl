@@ -8,7 +8,6 @@ module PhysicalParticles
 
 using DocStringExtensions
 using Unitful, UnitfulAstro
-using Setfield
 using BangBang
 using Measurements
 using Random

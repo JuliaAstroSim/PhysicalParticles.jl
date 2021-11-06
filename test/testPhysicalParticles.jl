@@ -36,7 +36,7 @@ end
         
         a_Star2D = Star2D(uSI)
         b_Star2D = Star2D(uSI)
-        b_Star2D =  @set! b_Star2D.Pos = PVector2D(3.0u"m", 4.0u"m")
+        b_Star2D = setproperties!!(b_Star2D, Pos = PVector2D(3.0u"m", 4.0u"m"))
         @test distance(a_Star2D, b_Star2D) == 5.0u"m"
 
     end
@@ -147,7 +147,7 @@ end
         
         a_Star = Star(uSI)
         b_Star = Star(uSI)
-        b_Star = @set! b_Star.Pos = PVector(3.0u"m", 4.0u"m", 12.0u"m")
+        b_Star = setproperties!!(b_Star, Pos = PVector(3.0u"m", 4.0u"m", 12.0u"m"))
         @test distance(a_Star, b_Star) == 13.0u"m"
     end
 
