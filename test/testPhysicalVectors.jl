@@ -26,6 +26,10 @@
         @test PVector2D(1.0, 1.0) ≈ PVector2D(1.0 + 1.0e-9, 1.0)
 
         @test PVector2D(Float64, u"m") == PVector2D(u"m")
+
+        @test parse(PVector2D, "PVector2D(1.0 m s^-1, 2.0 m s^-1)") == PVector2D(1.0,2.0,u"m/s")
+        @test parse(PVector2D, "PVector2D(1.0f0 m s^-1, 2.0f0 m s^-1)") == PVector2D(1.0f0,2.0f0,u"m/s")
+        @test isnothing(parse(PVector2D, "PVector2D((0.0 + 1.0im) m s^-1, (0.0 + 2.0im) m s^-1)")) # parsing unitful complex numbers is not supported, considering the too many possibilities.
     end
 
     @testset "Coordinates" begin
@@ -123,6 +127,10 @@ end
         @test PVector(1.0, 1.0, 1.0) ≈ PVector(1.0 + 1.0e-9, 1.0, 1.0)
 
         @test PVector(Float64, u"m") == PVector(u"m")
+
+        @test parse(PVector, "PVector(1.0 m s^-1, 2.0 m s^-1, 3.0 m s^-1)") == PVector(1.0,2.0,3.0,u"m/s")
+        @test parse(PVector, "PVector(1.0f0 m s^-1, 2.0f0 m s^-1, 3.0f0 m s^-1)") == PVector(1.0f0,2.0f0,3.0f0,u"m/s")
+        @test isnothing(parse(PVector, "PVector((0.0 + 1.0im) m s^-1, (0.0 + 2.0im) m s^-1), (0.0 + 3.0im) m s^-1)")) # parsing unitful complex numbers is not supported, considering the too many possibilities.
     end
 
     @testset "Linear Algebra" begin
@@ -148,6 +156,28 @@ end
         @test median(
             StructArray([PVector(1.0, 4.0, 0.0, u"m"), PVector(2.0, 2.0, 0.0, u"m"), PVector(4.0, 1.0, 0.0, u"m")]), :x
         ) == 2.0u"m"
+
+        @test norm(rotate_x([Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 0.5pi)[1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y([Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 0.5pi)[1].Pos - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z([Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 0.5pi)[1].Pos - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate_x([Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y([Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z([Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 0.5pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 1.0u"m", 1.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate_x([Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 90.0u"°")[1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y([Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 90.0u"°")[1].Pos - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z([Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 90.0u"°")[1].Pos - PVector(0.0u"m", 1.0u"m", 0.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate_x([Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_y([Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 0.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate_z([Massless(PVector(1.0u"m", 0.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 90.0u"°", PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 1.0u"m", 1.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate([Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], PVector(0.0u"m", 1.0u"m", 1.0u"m"), pi)[1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate([Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], PVector(0.0u"m", 1.0u"m", 1.0u"m"), pi, PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
+
+        @test norm(rotate([Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)], 0.5pi, 0.0, 0.0)[1].Pos - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
+        @test norm(rotate([Massless(PVector(0.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), 1)], 0.5pi, 0.0, 0.0, PVector(0.0u"m", 0.0u"m", 1.0u"m"))[1].Pos - PVector(0.0u"m", 0.0u"m", 2.0u"m")) < 1.0e-10u"m"
 
         @test norm(rotate_x(StructArray([Massless(PVector(0.0u"m", 1.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 0.5pi).Pos[1] - PVector(0.0u"m", 0.0u"m", 1.0u"m")) < 1.0e-10u"m"
         @test norm(rotate_y(StructArray([Massless(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), 1)]), 0.5pi).Pos[1] - PVector(0.0u"m", 0.0u"m", -1.0u"m")) < 1.0e-10u"m"

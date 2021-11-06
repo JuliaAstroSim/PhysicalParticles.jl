@@ -39,4 +39,11 @@
         @test PVector(1.0, u"m") == 1.0u"m"
         @test PVector(1.0, nothing) == 1.0
     end
+
+    @testset "Split data" begin
+        @test split_data([1,2,3], 1, 2) == [1,2]
+        @test split_data([1,2,3], 2, 2) == [3]
+        @test split_data([1,2,3], 3, 4) == [3]
+        @test split_data([1,2,3], 4, 4) == Int[]
+    end
 end

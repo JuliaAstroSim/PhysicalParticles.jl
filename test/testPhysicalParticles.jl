@@ -234,6 +234,35 @@ end
         @test center_z(ps) == 0.0u"m"
         @test center(ps) == PVector(0.0u"m", 0.0u"m", 0.0u"m")
         @test pos_center(ps) == PVector(u"m")
+
+        @test minimum_x(ps) == -1.0u"m"
+        @test minimum_y(ps) == -1.0u"m"
+        @test minimum_z(ps) == -1.0u"m"
+        @test maximum_x(ps) == 1.0u"m"
+        @test maximum_y(ps) == 1.0u"m"
+        @test maximum_z(ps) == 1.0u"m"
+
+        using Unitful, StructArrays
+
+        struct T
+            x
+        end
+
+        a = [T(1.0u"km"), T(1.0u"km")]
+        as = StructArray(a)
+
+        b = [T(1.0u"km"), T(1000.0u"m")]
+        bs = StructArray(b)
+
+        struct S{Q}
+            y::Q
+        end
+
+        c = [S(1.0u"km"), S(1.0u"km")]
+        cs = StructArray(c)
+
+        d = [S(1.0u"km"), S(1000.0u"m")]
+        ds = StructArray(d)
         
         assign_particles(ps, :Pos, PVector(1.0u"m", 1.0u"m", 1.0u"m"))
         assign_particles(ps, :Mass, 1.0u"g")

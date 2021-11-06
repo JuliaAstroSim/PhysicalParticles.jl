@@ -33,6 +33,14 @@
         @test Array(PVector2D()) == [0.0, 0.0]
         @test SArray(PVector2D()) == SVector(0.0, 0.0)
         @test MArray(PVector2D()) == MVector(0.0, 0.0)
+
+        @test isnothing(parse(PVector2D, "PVector2D{Float64}(1.0, 2.0, 3.0)"))
+        @test parse(PVector2D, "PVector2D{Float64}(1.0, 2.0)") == PVector2D(1.0, 2.0)
+        @test parse(PVector2D, "PVector2D{Float32}(1.0f0, 2.0f0)") == PVector2D(1.0f0, 2.0f0)
+        @test parse(PVector2D, "PVector2D{ComplexF64}(0.0 + 1.0im, 0.0 + 2.0im)") == PVector2D(1.0im, 2.0im)
+        @test parse(PVector2D, "PVector2D{ComplexF64}(0.0f0 + 1.0f0im, 0.0f0 + 2.0f0im)") == PVector2D(1.0f0im, 2.0f0im)
+        @test parse(PVector2D, "PVector2D{ComplexF64}(1.0im, 2.0im)") == PVector2D(1.0im, 2.0im)
+        @test parse(PVector2D, "PVector2D{ComplexF64}(1.0f0im, 2.0f0im)") == PVector2D(1.0f0im, 2.0f0im)
     end
 
     @testset "Linear Algebra" begin
@@ -109,6 +117,14 @@ end
         @test Array(PVector()) == [0.0, 0.0, 0.0]
         @test SArray(PVector()) == SVector(0.0, 0.0, 0.0)
         @test MArray(PVector()) == MVector(0.0, 0.0, 0.0)
+
+        @test isnothing(parse(PVector, "PVector{Float64}(1.0, 2.0)"))
+        @test parse(PVector, "PVector{Float64}(1.0, 2.0, 3.0)") == PVector(1.0, 2.0, 3.0)
+        @test parse(PVector, "PVector{Float32}(1.0f0, 2.0f0, 3.0f0)") == PVector(1.0f0, 2.0f0, 3.0f0)
+        @test parse(PVector, "PVector{ComplexF64}(0.0 + 1.0im, 0.0 + 2.0im, 0.0 + 3.0im)") == PVector(1.0im, 2.0im, 3.0im)
+        @test parse(PVector, "PVector{ComplexF64}(0.0f0 + 1.0f0im, 0.0f0 + 2.0f0im, 0.0f0 + 3.0f0im)") == PVector(1.0f0im, 2.0f0im, 3.0f0im)
+        @test parse(PVector, "PVector{ComplexF64}(1.0im, 2.0im, 3.0im)") == PVector(1.0im, 2.0im, 3.0im)
+        @test parse(PVector, "PVector{ComplexF64}(1.0f0im, 2.0f0im, 3.0f0im)") == PVector(1.0f0im, 2.0f0im, 3.0f0im)
     end
 
     @testset "Linear Algebra" begin
