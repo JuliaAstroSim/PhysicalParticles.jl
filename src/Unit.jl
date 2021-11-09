@@ -10,6 +10,11 @@ const uCGS = [u"cm,s,A,K,cd,g,mol"...]
 "Default units: m,s,A,K,cd,kg,mol"
 const uDefaults = [u"m,s,A,K,cd,kg,mol"...]
 
+@unit Gadget2Mass "1e10M⊙" Gadget2MassUnit 1e10*u"Msun" false
+
+"Default units: kpc, kpc/km*s, A K, cd, 1e10M⊙, mol"
+const uGadget2 = [u"kpc",u"kpc/km*s",u"A",u"K",u"cd",Gadget2Mass,u"mol"]
+
 """
     preferunits(u)
 
@@ -31,6 +36,9 @@ si() = preferunits(uSI)
 
 "Set default units to `uCGS`"
 cgs() = preferunits(uCGS)
+
+"Set default units to uGadget2"
+ugadget2() = preferunits(uGadget2)
 
 """
     getunits(units = uDefaults)

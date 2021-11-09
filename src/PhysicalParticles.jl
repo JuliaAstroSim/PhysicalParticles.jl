@@ -100,8 +100,9 @@ export
     pconvert,
 
     # Unit setting
-    uAstro, uSI, uCGS, uDefaults,
-    astro, si, cgs,
+    uAstro, uSI, uCGS, uGadget2, uDefaults,
+    astro, si, cgs, ugadget2,
+    Gadget2Mass,
     preferunits,
     getunits,
         getuLength,
@@ -218,5 +219,9 @@ include("Extent.jl")
 include("Neighbors.jl")
 include("Clustering.jl")
 include("PrettyPrinting.jl")
+
+function __init__()
+    Unitful.register(PhysicalParticles)
+end
 
 end  # module PhysicalParticles
