@@ -146,6 +146,8 @@ MArray(p::AbstractPoint) = MVector(p)
 
 uconvert(u::Units, p::PVector2D) = PVector2D(uconvert(u, p.x), uconvert(u, p.y))
 uconvert(u::Units, p::PVector) = PVector(uconvert(u, p.x), uconvert(u, p.y), uconvert(u, p.z))
+uconvert(::Nothing, p::PVector2D{T}) where T<:Real = p
+uconvert(::Nothing, p::PVector{T}) where T<:Real = p
 
 ustrip(::Nothing, p::PVector2D) = p
 ustrip(::Nothing, p::PVector) = p

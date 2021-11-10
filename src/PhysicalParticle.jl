@@ -32,7 +32,7 @@ struct Massless2D{P, V, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Massless2D(; id = 0) = Massless2D(PVector2D(), PVector2D(), id)
+Massless2D(u = nothing; id = 0) = Massless2D(PVector2D(), PVector2D(), id)
 
 function Massless2D(units::Array; id = 0)
     uLength = getuLength(units)
@@ -70,7 +70,7 @@ struct Massless{P, V, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Massless(; id = 0) = Massless(PVector(), PVector(), id)
+Massless(u = nothing; id = 0) = Massless(PVector(), PVector(), id)
 
 function Massless(units::Array; id = 0)
     uLength = getuLength(units)
@@ -115,7 +115,7 @@ struct Ball2D{P, V, A, M, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Ball2D(; id = 0) = Ball2D(PVector2D(), PVector2D(), PVector2D(), 0.0, id)
+Ball2D(u = nothing; id = 0) = Ball2D(PVector2D(), PVector2D(), PVector2D(), 0.0, id)
 
 function Ball2D(units::Array; id = 0)
     uLength = getuLength(units)
@@ -158,7 +158,7 @@ struct Ball{P, V, A, M, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Ball(; id = 0) = Ball(PVector(), PVector(), PVector(), 0.0, id)
+Ball(u = nothing; id = 0) = Ball(PVector(), PVector(), PVector(), 0.0, id)
 
 function Ball(units::Array; id = 0)
     uLength = getuLength(units)
@@ -258,7 +258,7 @@ struct Star2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: Abstract
     MaxSignalVel::V
 end
 
-Star2D(; id = 0, collection = STAR) = Star2D(
+Star2D(u = nothing; id = 0, collection = STAR) = Star2D(
     PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
     0, 0, 0,
     0.0, 0.0,
@@ -380,7 +380,7 @@ struct Star{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractPa
     MaxSignalVel::V
 end
 
-Star(; id = 0, collection = STAR) = Star(
+Star(u = nothing; id = 0, collection = STAR) = Star(
     PVector(), PVector(), PVector(), 0.0, id, collection,
     0, 0, 0,
     0.0, 0.0,

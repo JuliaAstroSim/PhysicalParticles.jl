@@ -65,6 +65,8 @@
     @test uconvert(nothing, 1.0) == 1.0
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")
     @test uconvert(u"m", PVector(u"km")) == PVector(u"m")
+    @test uconvert(nothing, PVector2D(1,2)) == PVector2D(1,2)
+    @test uconvert(nothing, PVector(1,2,3)) == PVector(1,2,3)
 
     @test ustrip(PVector2D(u"m")) == PVector2D()
     @test ustrip(PVector(u"m")) == PVector()
