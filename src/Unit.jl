@@ -559,8 +559,8 @@ function ZeroValue(::Nothing)
     return ZeroValue(Float64, nothing)
 end
 
-function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro)
-    return ZeroValue(Float64, units)
+function ZeroValue(units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N} = uAstro; kw...)
+    return ZeroValue(Float64, units; kw...)
 end
 
 function Base.show(io::IO, z::ZeroValue)
@@ -576,3 +576,5 @@ function Base.show(io::IO, z::ZeroValue)
             density = $(z.density)
     """)
 end
+
+uconvert(::Nothing, x::Real) = x

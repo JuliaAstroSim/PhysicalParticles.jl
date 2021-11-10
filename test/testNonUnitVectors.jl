@@ -29,6 +29,7 @@
         @test PVector2D((1,2)) == PVector2D(1,2)
         @test PVector2D([1,2]) == PVector2D(1,2)
         @test PVector([1,2]) == PVector2D(1,2)
+        @test PVector((1,2)) == PVector2D(1,2)
 
         @test Array(PVector2D()) == [0.0, 0.0]
         @test SArray(PVector2D()) == SVector(0.0, 0.0)

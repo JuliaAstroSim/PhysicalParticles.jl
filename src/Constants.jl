@@ -58,6 +58,14 @@ function Constant(units = uAstro;
     k_B = CODATA2018.k_B,
     ACC0 = ACC0,
 )
+    if isnothing(units)
+        error(
+        """
+        Cannot determine unitless constants. Please construct unitful constants and then strip the units.
+        For example, `Constant(nothing, uAstro)` or `Constant(nothing, Constant(uAstro))`
+        """)
+    end
+    
     return Constant(
         uconvert(getuVel(units), c_0),
         uconvert(units[1]^3 / units[6] / units[2]^2, G),

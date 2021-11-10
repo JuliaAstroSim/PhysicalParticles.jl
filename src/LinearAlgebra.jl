@@ -502,11 +502,21 @@ average(a, :x)
 ```
 """
 function average(data::Array, symbol::Symbol)
+    if isempty(data)
+        return NaN
+    end
+
     a = [getfield(p, symbol) for p in data]
     return mean(a)
 end
 
-average(data::StructArray, symbol::Symbol) = mean(getproperty(data, symbol))
+function average(data::StructArray, symbol::Symbol) 
+    if isempty(data)
+        return NaN
+    end
+
+    return mean(getproperty(data, symbol))
+end
 
 """
     function averagebymass(data, symbol::Symbol)

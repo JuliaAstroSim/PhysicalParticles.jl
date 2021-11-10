@@ -103,26 +103,31 @@ end
         @test mass_center(p) == PVector2D(u"m")
         @test mass_center([Star2D(uAstro)]) == PVector2D(u"kpc")
         @test pos_center([Massless2D(uAstro)]) == PVector2D(u"kpc")
-
+        
+        @test isnan(pos_center(empty([Ball(uAstro)])))
+        @test isnan(mass_center(empty([Ball(uAstro)])))
+        
         # StructArray
         ps = StructArray(p)
         @test center_x(ps) == 0.0u"m"
         @test center_y(ps) == 0.0u"m"
         @test center(ps) == PVector(0.0u"m", 0.0u"m")
-
+        
         p2 = [Ball2D(PVector2D(-2.0u"m", 2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1.0u"kg", 3), 
-              Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
+        Ball2D(PVector2D(2.0u"m", -2.0u"m"), PVector2D(u"m/s"), PVector2D(u"m/s^2"), 1000.0u"g", 4)]
         e2 = extent(p2)
         @test extent(e, e2) == e2
         @test extent([e, e2]) == e2
-
-
+        
         @test extent(nothing, e) == e
         @test extent(e, nothing) == e
         @test extent(nothing, nothing) === nothing
-
-
+        
         @test extent(empty(p2)) === nothing
+        
+        @test average(ps, :ID) == 1.5
+        @test isnan(pos_center(empty(StructArray(Ball(uAstro) for i in 1:1))))
+        @test isnan(mass_center(empty(StructArray(Ball(uAstro) for i in 1:1))))
     end
 end
 

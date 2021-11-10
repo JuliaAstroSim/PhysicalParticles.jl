@@ -8,6 +8,9 @@
     cgs()
     @test uDefaults == uCGS
 
+    ugadget2()
+    @test uDefaults == uGadget2
+
     uTest = [u"mm,ms,A,K,cd,mg,mol"...]
     preferunits(uTest)
     @test [uDefaults...] == uTest
@@ -59,7 +62,7 @@
     @test getuMomentum(uAstro) == u"Msun * kpc / Gyr"
     @test getuMomentumAngular(uAstro) == u"Msun * kpc^2 / Gyr"
 
-
+    @test uconvert(nothing, 1.0) == 1.0
     @test uconvert(u"m", PVector2D(u"km")) == PVector2D(u"m")
     @test uconvert(u"m", PVector(u"km")) == PVector(u"m")
 
@@ -139,6 +142,7 @@
         @test ZeroValues.pot == 0.0
         @test ZeroValues.potpermass == 0.0
         @test ZeroValues.mass == 0.0
+        @test ZeroValues.density == 0.0
 
 
         ZeroValues = ZeroValue(uAstro)
@@ -149,6 +153,7 @@
         @test ZeroValues.pot == 0.0 * u"Msun * kpc^2 / Gyr^2"
         @test ZeroValues.potpermass == 0.0 * u"kpc^2 / Gyr^2"
         @test ZeroValues.mass == 0.0 * u"Msun"
+        @test ZeroValues.density == 0.0 * u"Msun/kpc^3"
 
         @test length(ZeroValues) == 1
         @test iterate(ZeroValues) == (ZeroValues, nothing)
@@ -157,6 +162,9 @@
         @test show(ZeroValue()) === nothing
         @test show(ZeroValue(Measurement)) === nothing
         @test show(ZeroValue(Measurement, nothing)) === nothing
+
+        ZeroValues = ZeroValue(uAstro, twodim = true)
+        ZeroValues.density == 0.0 * u"Msun/kpc^2"
     end
 
     @testset "Constants" begin
@@ -169,5 +177,7 @@
 
         @test show(Constant(BigFloat, uSI)) === nothing
         @test show(Constant(Measurement, uSI)) === nothing
+
+        @test_broken Constant(nothing)
     end
 end
