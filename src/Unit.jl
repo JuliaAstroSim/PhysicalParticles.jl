@@ -27,6 +27,7 @@ function preferunits(u)
         @inbounds uDefaults[i] = u[i]
     end
 end
+preferunits(::Nothing) = nothing
 
 "Set default units to `uAstro`"
 astro() = preferunits(uAstro)

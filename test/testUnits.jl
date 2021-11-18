@@ -14,6 +14,7 @@
     uTest = [u"mm,ms,A,K,cd,mg,mol"...]
     preferunits(uTest)
     @test [uDefaults...] == uTest
+    @test isnothing(preferunits(nothing))
 
     u = getunits()
     @test [u...] == uDefaults

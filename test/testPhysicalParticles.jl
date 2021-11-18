@@ -128,6 +128,9 @@ end
         @test average(ps, :ID) == 1.5
         @test isnan(pos_center(empty(StructArray(Ball(uAstro) for i in 1:1))))
         @test isnan(mass_center(empty(StructArray(Ball(uAstro) for i in 1:1))))
+
+        ex = 2.0 * e
+        @test ex.xMin == 2.0 * e.xMin
     end
 end
 
@@ -282,6 +285,9 @@ end
 
 
         @test extent(empty(p2)) === nothing
+
+        ex = 2.0 * e
+        @test ex.zMin == 2.0 * e.zMin
     end
 end
 

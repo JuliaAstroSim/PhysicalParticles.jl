@@ -115,6 +115,10 @@ extent(e::AbstractExtent, ::Nothing) = e
 extent(::Nothing, e::AbstractExtent) = e
 extent(::Nothing, ::Nothing) = nothing
 
+*(e::Extent2D, x::Real) = Extent2D(e.xMin*x,e.xMax*x,e.yMin*x,e.yMax*x,e.SideLength*x,e.Center*x,e.Corner*x)
+*(e::Extent, x::Real) = Extent(e.xMin*x,e.xMax*x,e.yMin*x,e.yMax*x,e.zMin*x,e.zMax*x,e.SideLength*x,e.Center*x,e.Corner*x)
+*(x::Real, e::AbstractExtent) = *(e, x)
+
 function extent(a::Array{T}) where T <: AbstractExtent
     e = a[1]
     for i in a[2:end]
