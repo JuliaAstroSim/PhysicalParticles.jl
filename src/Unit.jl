@@ -579,3 +579,5 @@ function Base.show(io::IO, z::ZeroValue)
 end
 
 uconvert(::Nothing, x::Real) = x
+uconvert(::Nothing, x::AbstractQuantity) = ustrip(x)
+uconvert(::Real, x::Real) = x
