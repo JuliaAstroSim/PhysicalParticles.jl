@@ -89,3 +89,12 @@ one(p)
 zero(u"m", p)
 zero(p)
 ```
+
+### parse from string
+
+```@repl pvector
+parse(PVector2D, "PVector2D{Float64}(1.0, 2.0)")
+parse(PVector, "PVector{Float32}(1.0f0, 2.0f0, 3.0f0)")
+parse(PVector, "PVector(1.0f0 m s^-1, 2.0f0 m s^-1, 3.0f0 m s^-1)")
+parse(PVector2D, "PVector2D{ComplexF64}(1.0im, 2.0im)")
+```

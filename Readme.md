@@ -135,6 +135,18 @@ PVector{Float64}(1.0, 1.0, 1.0)
 
 julia> ustrip(u"m", PVector(1.0, 1.0, 1.0, u"km"))
 PVector{Float64}(1000.0, 1000.0, 1000.0)
+
+julia> parse(PVector2D, "PVector2D{Float64}(1.0, 2.0)")
+PVector2D{Float64}(1.0, 2.0)
+
+julia> parse(PVector, "PVector{Float32}(1.0f0, 2.0f0, 3.0f0)")
+PVector{Float32}(1.0f0, 2.0f0, 3.0f0)
+
+julia> parse(PVector, "PVector(1.0f0 m s^-1, 2.0f0 m s^-1, 3.0f0 m s^-1)")
+PVector(1.0f0 m s^-1, 2.0f0 m s^-1, 3.0f0 m s^-1)
+
+julia> parse(PVector2D, "PVector2D{ComplexF64}(1.0im, 2.0im)")
+PVector2D{ComplexF64}(0.0 + 1.0im, 0.0 + 2.0im)
 ```
 
 ### Particles
@@ -178,6 +190,9 @@ julia> distance(a,b)
 ```julia
 sArray = [Star() for i in 1:5]
 sStruct = StructArray(sArray)
+
+# Or construct using loop comprehension
+sStruct = StructArray(Star() for i in 1:5)
 
 # Easier to set properties, and even faster!
 sStruct.Mass[1] = 1000.0
@@ -275,7 +290,7 @@ Set default units by
 const uSI = u"m,s,A,K,cd,kg,mol"
 preferunits(uSI)
 ```
-or simply call `si()`. `astro()` and `cgs()` are implemented in the same way.
+or simply call `si()`, `astro()`, `ugadget2()` and `cgs()` are implemented in the same way.
 
 This would affect unit promotions in `Unitful` package and default outputs in related packages, by setting `Unitful.promotion` and `PhysicalParticles.uDefaults` respectively.
 
@@ -286,6 +301,9 @@ julia> getunits()
 
 julia> getunits(uAstro)
 (kpc, Gyr, A, K, cd, M⊙, mol)
+
+julia> getunits(uGadget2)
+(kpc, kpc s km^-1, A, K, cd, 1e10M⊙, mol)
 
 julia> getunits(nothing)
 (nothing, nothing, nothing, nothing, nothing, nothing, nothing)

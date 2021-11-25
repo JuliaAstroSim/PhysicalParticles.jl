@@ -9,7 +9,7 @@ You could set preferred units by
 const uSI = u"m,s,A,K,cd,kg,mol"
 preferunits(uSI)
 ```
-or simply call `si()`. `astro()` and `cgs()` are implemented in the same way.
+or simply call `si()`, `astro()`, `ugadget2()` and `cgs()` are implemented in the same way.
 
 This would affect unit promotions in `Unitful` package and default outputs in related packages, by setting `Unitful.promotion` and `PhysicalParticles.uDefaults` respectively.
 
@@ -18,6 +18,7 @@ Examples to get basic units:
 using PhysicalParticles
 getunits()
 getunits(uAstro)
+getunits(uGadget2)
 getunits(nothing)
 getuLength()
 getuTime(uSI)
@@ -51,4 +52,6 @@ ZeroValue(nothing)
 ZeroValue()
 ZeroValue(uSI)
 ZeroValue(uCGS)
+ZeroValue(Measurement)
+ZeroValue(BigFloat)
 ```
