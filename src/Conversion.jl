@@ -118,3 +118,48 @@ function assign_particles(particles::StructArray, symbol::Symbol, data)
     a .= data
     return nothing
 end
+
+
+"""
+    function pack_xy(data; kw...)
+
+Return Tuple (x,y) substracted from points or positions of particles in data.
+Useful to prepare a plot.
+
+# Keywords
+- `xaxis`: `Symbol` to extract on x-axis. Default is `:x`
+- `yaxis`: `Symbol` to extract on y-axis. Defualt is `:y`
+"""
+function pack_xy(data::StructArray{T,N,NT,Tu};
+    xaxis = :x,
+    yaxis = :y) where T<:AbstractPoint where N where NT where Tu
+    return [getproperty(data, xaxis) getproperty(data, yaxis)]
+end
+
+function pack_xy(data::StructArray{T,N,NT,Tu};
+    xaxis = :x,
+    yaxis = :y) where T<:AbstractParticle where N where NT where Tu
+    pack_xy(data.Pos; xaxis, yaxis)
+end
+
+function pack_xy(data::Array; kw...)
+    return pack_xy(StructArray(data); kw...)
+end
+
+"""
+    function pack_xy(data; kw...)
+
+Return Nx3 array substracted from points or positions of particles in data.
+Useful to prepare a plot.
+"""
+function pack_xyz(d::StructArray{T,N,NT,Tu}) where T<:AbstractPoint where N where NT where Tu
+    return [d.x d.y d.z]
+end
+
+function pack_xyz(d::StructArray{T,N,NT,Tu}) where T<:AbstractParticle where N where NT where Tu
+    return pack_xyz(d.Pos)
+end
+
+function pack_xyz(d::Array)
+    return pack_xyz(StructArray(d))
+end

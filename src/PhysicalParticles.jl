@@ -98,6 +98,7 @@ export
 
     # Conversion
     pconvert,
+    pack_xy, pack_xyz,
 
     # Unit setting
     uAstro, uSI, uCGS, uGadget2, uDefaults,
