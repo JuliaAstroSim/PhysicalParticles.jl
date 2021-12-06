@@ -29,16 +29,16 @@ function preferunits(u)
 end
 preferunits(::Nothing) = nothing
 
-"Set default units to `uAstro`"
+"Set default units to `uAstro`. See `Unitful.preferunits` for more info"
 astro() = preferunits(uAstro)
 
-"Set default units to `uSI`"
+"Set default units to `uSI`. See `Unitful.preferunits` for more info"
 si() = preferunits(uSI)
 
-"Set default units to `uCGS`"
+"Set default units to `uCGS`. See `Unitful.preferunits` for more info"
 cgs() = preferunits(uCGS)
 
-"Set default units to uGadget2"
+"Set default units to `uGadget2`. See `Unitful.preferunits` for more info"
 ugadget2() = preferunits(uGadget2)
 
 """
