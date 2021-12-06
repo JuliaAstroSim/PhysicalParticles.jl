@@ -124,6 +124,8 @@ end
         @test extent(nothing, nothing) === nothing
         
         @test extent(empty(p2)) === nothing
+
+        @test PhysicalParticles.area(extent([0.0 0.0; 1.0 1.0])) == 1.0
         
         @test average(ps, :ID) == 1.5
         @test isnan(pos_center(empty(StructArray(Ball(uAstro) for i in 1:1))))
@@ -283,6 +285,8 @@ end
         @test extent(e, e2) == e2
         @test extent([e, e2]) == e2
 
+        @test PhysicalParticles.volume(extent([0.0 0.0 0.0; 1.0 1.0 1.0])) == 1.0
+        @test_broken extent([0.0 0.0 0.0 0.0; 1.0 1.0 1.0 1.0])
 
         @test extent(empty(p2)) === nothing
 

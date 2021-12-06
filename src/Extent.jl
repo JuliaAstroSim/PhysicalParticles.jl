@@ -111,6 +111,26 @@ function extent(a::Extent, b::Extent)
     return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
 end
 
+function extent(a::Array{T,2}) where T<:Number
+    if size(a)[2] == 2
+        xMax, yMax = maximum(a, dims = 1)
+        xMin, yMin = minimum(a, dims = 1)
+        len=max(xMax-xMin, yMax-yMin);
+        Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+        Corner=PVector2D(xMin,yMin);
+        return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
+    elseif size(a)[2] == 3
+        xMax, yMax, zMax = maximum(a, dims = 1)
+        xMin, yMin, zMin = minimum(a, dims = 1)
+        len=max(xMax-xMin, yMax-yMin, zMax-zMin);
+        Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+        Corner=PVector(xMin,yMin,zMin);
+        return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
+    else
+        error("Only 2D or 3D packed position array is supported")
+    end
+end
+
 extent(e::AbstractExtent, ::Nothing) = e
 extent(::Nothing, e::AbstractExtent) = e
 extent(::Nothing, ::Nothing) = nothing
