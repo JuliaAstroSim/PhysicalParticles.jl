@@ -195,6 +195,14 @@ hasinf(p::AbstractPoint3D) = isinf(p.x) || isinf(p.y) || isinf(p.z)
 isapprox(a::AbstractPoint2D, b::AbstractPoint2D) = isapprox(a.x, b.x) && isapprox(a.y, b.y)
 isapprox(a::AbstractPoint3D, b::AbstractPoint3D) = isapprox(a.x, b.x) && isapprox(a.y, b.y) && isapprox(a.z, b.z)
 
+numeric_type(::AbstractPoint{Quantity{T,D,U}}) where T where D where U = T
+numeric_type(::AbstractPoint{T}) where T = T
+
+# Here we have to use concrete PVector type. Is there a better solution?
+numeric_type(::AbstractArray{PVector{Quantity{T,D,U}}, N}) where T where D where U where N = T
+numeric_type(::AbstractArray{PVector2D{Quantity{T,D,U}}, N}) where T where D where U where N = T
+numeric_type(::AbstractArray{PVector{T}, N}) where T where N = T
+numeric_type(::AbstractArray{PVector2D{T}, N}) where T where N = T
 
 # Measurements
 measurement(q::Quantity) = measurement(q, zero(q))

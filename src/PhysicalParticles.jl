@@ -37,6 +37,8 @@ export
 
     PVector, PVector2D,
 
+    numeric_type,
+
 
     AbstractParticle,
         AbstractParticle2D, AbstractParticle3D,

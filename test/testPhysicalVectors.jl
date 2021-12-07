@@ -30,6 +30,9 @@
         @test parse(PVector2D, "PVector2D(1.0 m s^-1, 2.0 m s^-1)") == PVector2D(1.0,2.0,u"m/s")
         @test parse(PVector2D, "PVector2D(1.0f0 m s^-1, 2.0f0 m s^-1)") == PVector2D(1.0f0,2.0f0,u"m/s")
         @test isnothing(parse(PVector2D, "PVector2D((0.0 + 1.0im) m s^-1, (0.0 + 2.0im) m s^-1)")) # parsing unitful complex numbers is not supported, considering the too many possibilities.
+
+        @test numeric_type(a) == Float32
+        @test numeric_type([b]) == Float64
     end
 
     @testset "Coordinates" begin
@@ -131,6 +134,9 @@ end
         @test parse(PVector, "PVector(1.0 m s^-1, 2.0 m s^-1, 3.0 m s^-1)") == PVector(1.0,2.0,3.0,u"m/s")
         @test parse(PVector, "PVector(1.0f0 m s^-1, 2.0f0 m s^-1, 3.0f0 m s^-1)") == PVector(1.0f0,2.0f0,3.0f0,u"m/s")
         @test isnothing(parse(PVector, "PVector((0.0 + 1.0im) m s^-1, (0.0 + 2.0im) m s^-1), (0.0 + 3.0im) m s^-1)")) # parsing unitful complex numbers is not supported, considering the too many possibilities.
+
+        @test numeric_type(a) == Float32
+        @test numeric_type([b]) == Float64
     end
 
     @testset "Linear Algebra" begin
