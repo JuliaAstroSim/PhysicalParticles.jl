@@ -23,7 +23,7 @@ import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, show, ==, #getproperty,
              Array, Vector,
              one, zero, isone, iszero, isnan, isinf, oneunit, isapprox, parse
-import Random
+import Random: rand
 import LinearAlgebra: norm, normalize, dot, cross
 
 import Statistics: mean, std, var, median, middle
@@ -134,7 +134,6 @@ export
     Measurement, measurement,
 
     # Random
-    rand_pvector, rand_pvector2d,
     randn_pvector, randn_pvector2d,
 
     assign_particles

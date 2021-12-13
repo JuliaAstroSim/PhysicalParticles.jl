@@ -43,7 +43,7 @@ end
 
     @testset "Random" begin
         # Non-unit
-        a_non = rand_pvector2d(5)
+        a_non = rand(PVector2D{Float64}, 5)
         p_Massless2D = [Massless2D() for i=1:5]
         assign_particles(p_Massless2D, :Pos, a_non)
         @test p_Massless2D[1].Pos == a_non[1]
@@ -51,8 +51,11 @@ end
         assign_particles(p_Massless2D, :Pos, PVector2D())
         @test p_Massless2D[1].Pos == PVector2D()
 
+        a = rand(PVector2D{Float64}, 5)
+        @test length(a) == 5
+
         # Unitful
-        a = rand_pvector2d(5, u"m")
+        a = rand(PVector2D{Float64}, 5) * u"m"
 
         p_Ball2D = [Ball2D(uSI) for i=1:5]
         assign_particles(p_Ball2D, :Pos, a)
@@ -163,7 +166,7 @@ end
 
     @testset "Random" begin
         # Non-unit
-        a_non = rand_pvector(5)
+        a_non = rand(PVector{Float64}, 5)
         p_Massless = [Massless() for i=1:5]
         assign_particles(p_Massless, :Pos, a_non)
         @test p_Massless[1].Pos == a_non[1]
@@ -171,8 +174,11 @@ end
         append!(p_Massless, Massless())
         @test_throws ErrorException assign_particles(p_Massless, :Pos, a_non)
 
+        a = rand(PVector{Float64}, 5)
+        @test length(a) == 5
+
         # Unitful
-        a = rand_pvector(5, u"m")
+        a = rand(PVector{Float64}, 5) * u"m"
 
         p_Ball = [Ball(uSI) for i=1:5]
         assign_particles(p_Ball, :Pos, a)

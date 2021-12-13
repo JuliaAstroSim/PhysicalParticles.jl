@@ -1,7 +1,7 @@
 # Summation
 
 function StructArrayDataGen(N::Int)
-    return StructArray(rand_pvector(N, u"m"))
+    return StructArray(rand(PVector{Float64}, N) * u"m")
 end
 
 function SA_sum_sum(a::StructArray)

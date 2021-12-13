@@ -40,8 +40,6 @@ getuDensity2D
 getuPressure
 axisunit
 ZeroValue
-rand_pvector
-rand_pvector2d
 randn_pvector
 randn_pvector2d
 assign_particles

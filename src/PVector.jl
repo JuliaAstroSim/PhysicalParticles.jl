@@ -69,10 +69,16 @@ end
 @inline *(p::PVector2D{T}, h::Number) where T<:Number = PVector2D(p.x * h, p.y * h)
 @inline *(h::Number, p::PVector2D{T}) where T<:Number = PVector2D(p.x * h, p.y * h)
 
+@inline *(p::PVector2D{T}, u::Units) where T<:Number = PVector2D(p.x * u, p.y * u)
+@inline *(u::Units, p::PVector2D{T}) where T<:Number = PVector2D(p.x * u, p.y * u)
+
 @inline /(p::PVector2D{T}, h::Number) where T<:Number = PVector2D(p.x / h, p.y / h)
 
 @inline *(p::PVector{T}, h::Number) where T<:Number = PVector(p.x * h, p.y * h, p.z * h)
 @inline *(h::Number, p::PVector{T}) where T<:Number = PVector(p.x * h, p.y * h, p.z * h)
+
+@inline *(p::PVector{T}, u::Units) where T<:Number = PVector(p.x * u, p.y * u, p.z * u)
+@inline *(u::Units, p::PVector{T}) where T<:Number = PVector(p.x * u, p.y * u, p.z * u)
 
 @inline /(p::PVector{T}, h::Number) where T<:Number = PVector(p.x / h, p.y / h, p.z / h)
 

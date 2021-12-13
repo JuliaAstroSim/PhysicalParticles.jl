@@ -3,19 +3,21 @@
 Usage of random point generators is straightforward:
 ```@repl
 using PhysicalParticles
-p = rand_pvector(3)
-pu = rand_pvector(3, u"m")
+rand(PVector{Float64}, 3, 3)
+rand(PVector2D{Int}, 3)
+p = randn_pvector(3)
+pu = randn_pvector(3, u"m")
 ```
 
-Here is the list of supported generators:
+To generate vectors in normal distribution:
 ```julia
-rand_pvector(n::Integer)
-rand_pvector(n::Integer, T::DataType)
-rand_pvector(n::Integer, u::Unitful.Units)
-rand_pvector(n::Integer, u::Unitful.Units, T::DataType)
+randn_pvector(n::Integer)
+randn_pvector(n::Integer, T::DataType)
+randn_pvector(n::Integer, u::Unitful.Units)
+randn_pvector(n::Integer, u::Unitful.Units, T::DataType)
 
-rand_pvector2d(n::Integer)
-rand_pvector2d(n::Integer, T::DataType)
-rand_pvector2d(n::Integer, u::Unitful.Units)
-rand_pvector2d(n::Integer, u::Unitful.Units, T::DataType)
+randn_pvector2d(n::Integer)
+randn_pvector2d(n::Integer, T::DataType)
+randn_pvector2d(n::Integer, u::Unitful.Units)
+randn_pvector2d(n::Integer, u::Unitful.Units, T::DataType)
 ```

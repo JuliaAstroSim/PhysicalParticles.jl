@@ -89,8 +89,8 @@ a[1] = setproperties!!(a[1], Mass = 321.0) # In general, `Mass` is mutated right
 ### Random and Conversion
 
 ```@repl guide
-p = rand_pvector(3)
-pu = rand_pvector(3, u"m")
+p = rand(PVector{Float64}, 3)
+pu = rand(PVector{Float64}, 3) * u"m"
 p_Ball = [Ball(uSI) for i=1:3]
 assign_particles(p_Ball, :Pos, pu)
 p_Ball

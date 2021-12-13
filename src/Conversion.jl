@@ -71,7 +71,7 @@ Assign the symbol of `particles` with elements in `data` one by one. `particles`
 
 ## Examples
 ```jl
-julia> assign_particles([Ball(uSI) for i=1:3], :Pos, rand_pvector(3, u"m"))
+julia> assign_particles([Ball(uSI) for i=1:3], :Pos, rand(PVector{Float64}, 3) * u"m")
 ```
 """
 function assign_particles(particles::Array{P,N} where P<:AbstractParticle, symbol::Symbol, data::Array) where N
