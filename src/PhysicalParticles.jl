@@ -47,6 +47,7 @@ export
     Ball, Ball2D,
     Star, Star2D,
 
+    split_block,
     split_data,
 
     AbstractExtent,

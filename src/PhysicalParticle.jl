@@ -418,6 +418,32 @@ end
 
 Base.getindex(a::StructArray{D} where D<:AbstractParticle, col::Collection) = a[a.Collection .== col]
 
+"""
+
+"""
+function split_block(NumTotal::Int, i::Int, N::Int)
+    if i > N || i <= 0
+        error("Wrong section index! 1 <= i <= N, i ∈ Integer")
+    end
+
+    if NumTotal == 0
+        return 1, 0
+    end
+
+    sec = div(NumTotal, N)
+    if NumTotal % N == 0
+        head = (i - 1) * sec + 1
+        return head, head + sec - 1
+    else
+        if i <= NumTotal % N
+            head = (i-1)*(sec+1)+1
+            return head, head + sec      # add one element
+        else
+            head = NumTotal - (N-i+1)*sec + 1 # count from tail
+            return head, head + sec - 1
+        end
+    end
+end
 
 """
     split_data(data::Array, i::Int64, N::Int64)
@@ -442,26 +468,10 @@ julia> split_data([1,2,3], 3, 4)
 ```
 """
 function split_data(data::Union{Array, StructArray}, i::Int64, N::Int64)
-    if i > N || i <= 0
-        error("Wrong section index! 1 <= i <= N, i ∈ Integer")
-    end
-
     if length(data) == 0
         return data
     end
 
-    len = length(data)
-    sec = div(len, N)
-    if len % N == 0
-        head = (i - 1) * sec + 1
-        return data[head : head + sec - 1]
-    else
-        if i <= len % N
-            head = (i - 1) * (sec + 1) + 1
-            return data[head : head + sec] # add one element
-        else
-            head = len - (N - i + 1) * sec + 1 # from tail
-            return data[head : head + sec - 1]
-        end
-    end
+    head, tail = split_block(length(data), i, N)
+    return data[head:tail]
 end
