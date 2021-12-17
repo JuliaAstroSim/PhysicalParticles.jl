@@ -185,4 +185,54 @@
 
         @test_broken Constant(nothing)
     end
+
+    @testset "Measurements" begin
+        p = Star(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Star(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+        
+        p = Star2D(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Star2D(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+
+        p = Ball(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Ball(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+        
+        p = Ball2D(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Ball2D(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+
+        p = Massless(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Massless(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+        
+        p = Massless2D(Measurement, Int, nothing)
+        @test p.Pos.x == measurement(0.0)
+        @test value(p).Pos.x == 0.0
+
+        p = Massless2D(Measurement, Int, uAstro)
+        @test p.Pos.x == measurement(0.0u"kpc")
+        @test value(p).Pos.x == 0.0u"kpc"
+    end
 end

@@ -3,16 +3,9 @@
 ## Non-unit particles
 
 """
-    struct Massless2D{P, V, I<:Integer} <: AbstractParticle2D
-
+$(TYPEDEF)
+$(TYPEDFIELDS)
 2D particle type without mass.
-
-## Fields
-```jl
-Pos::PVector2D{P}
-Vel::PVector2D{V}
-ID::I
-```
 
 ## Examples
 ```jl
@@ -32,25 +25,21 @@ struct Massless2D{P, V, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Massless2D(u = nothing; id = 0) = Massless2D(PVector2D(), PVector2D(), id)
+Massless2D{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Massless2D(PVector2D(F), PVector2D(F), id)
 
-function Massless2D(units::Array; id = 0)
+function Massless2D{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
-    return Massless2D(PVector2D(uLength), PVector2D(uLength / uTime), id)
+    return Massless2D(PVector2D(F, uLength), PVector2D(F, uLength / uTime), id)
 end
 
-"""
-    struct Massless{P, V, I<:Integer} <: AbstractParticle3D
-        
-3D particle type without mass.
+Massless2D(args...; kw...) = Massless2D{Float64, Int}(args...; kw...)
+Massless2D(F, I, args...; kw...) = Massless2D{F, I}(args...; kw...)
 
-## Fields
-```jl
-Pos::PVector{P}
-Vel::PVector{V}
-ID::I
-```
+"""
+$(TYPEDEF)
+$(TYPEDFIELDS)
+3D particle type without mass.
 
 ## Examples
 ```jl
@@ -70,30 +59,23 @@ struct Massless{P, V, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Massless(u = nothing; id = 0) = Massless(PVector(), PVector(), id)
+Massless{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Massless(PVector(F), PVector(F), id)
 
-function Massless(units::Array; id = 0)
+function Massless{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
-    return Massless(PVector(uLength), PVector(uLength / uTime), id)
+    return Massless(PVector(F, uLength), PVector(F, uLength / uTime), id)
 end
 
+Massless(args...; kw...) = Massless{Float64, Int}(args...; kw...)
+Massless(F, I, args...; kw...) = Massless{F, I}(args...; kw...)
 
 ## Physical particles
 
 """
-    struct Ball2D{P, V, A, M, I<:Integer} <: AbstractParticle2D
-
+$(TYPEDEF)
+$(TYPEDFIELDS)
 Basic 2D particle type.
-
-## Fields
-```jl
-Pos::PVector2D{P}
-Vel::PVector2D{V}
-Acc::PVector2D{A}
-Mass::M
-ID::I
-```
 
 ## Examples
 ```jl
@@ -115,28 +97,24 @@ struct Ball2D{P, V, A, M, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Ball2D(u = nothing; id = 0) = Ball2D(PVector2D(), PVector2D(), PVector2D(), 0.0, id)
+Ball2D{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Ball2D(
+    PVector2D(F), PVector2D(F), PVector2D(F), zero(F), id
+)
 
-function Ball2D(units::Array; id = 0)
+function Ball2D{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
-    return Ball2D(PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2), 0.0 * uMass, id)
+    return Ball2D(PVector2D(F, uLength), PVector2D(F, uLength / uTime), PVector2D(F, uLength / uTime^2), zero(F) * uMass, id)
 end
 
+Ball2D(args...; kw...) = Ball2D{Float64, Int}(args...; kw...)
+Ball2D(F, I, args...; kw...) = Ball2D{F, I}(args...; kw...)
+
 """
-    struct Ball{P, V, A, M, I<:Integer} <: AbstractParticle3D
-
+$(TYPEDEF)
+$(TYPEDFIELDS)
 Basic 3D particle type.
-
-## Fields
-```jl
-Pos::PVector{P}
-Vel::PVector{V}
-Acc::PVector{A}
-Mass::M
-ID::I
-```
 
 ## Examples
 ```jl
@@ -158,58 +136,28 @@ struct Ball{P, V, A, M, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Ball(u = nothing; id = 0) = Ball(PVector(), PVector(), PVector(), 0.0, id)
+Ball{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Ball(
+    PVector(F), PVector(F), PVector(F), zero(F), id
+)
 
-function Ball(units::Array; id = 0)
+function Ball{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
-    return Ball(PVector(uLength), PVector(uLength / uTime), PVector(uLength / uTime^2), 0.0 * uMass, id)
+    return Ball(PVector(F, uLength), PVector(F, uLength / uTime), PVector(F, uLength / uTime^2), zero(F) * uMass, id)
 end
+
+Ball(args...; kw...) = Ball{Float64, Int}(args...; kw...)
+Ball(F, I, args...; kw...) = Ball{F, I}(args...; kw...)
 
 
 ## Astrophysical particles
 
 """
-    struct Star2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle2D
-
+$(TYPEDEF)
+$(TYPEDFIELDS)
 2D Particle type designed for AstroSim.jl.
 [`Collection`](@ref) is an `Enum` defined in the same way with `Gadget2`, with index starting from 1.
-
-## Fields
-```jl
-Pos::PVector2D{P}
-Vel::PVector2D{V}
-Acc::PVector2D{A}
-Mass::M
-ID::I
-Collection::Collection
-
-Ti_endstep::I  # Next integer step on the timeline.
-Ti_begstep::I  # Present integer step on the timeline.
-GravCost::I    # For each two-particle interaction, GravCost += 1
-
-Potential::E   # Particle potential in the force field
-OldAcc::A      # Save the normalization of acceleration of last step. Useful in Tree n-body method.
-
-# SPH
-Entropy::Et
-Density::D
-Hsml::P
-
-Left::F
-Right::F
-NumNgbFound::I
-
-RotVel::PVector2D{V}
-DivVel::T_1
-CurlVel::T_1
-dHsmlRho::dP
-
-Pressure::Prs
-DtEntropy::dE
-MaxSignalVel::V
-```
 
 ## Examples
 ```jl
@@ -224,7 +172,7 @@ julia> Star2D(uSI, id = 1)
 SPHGas 1 GAS: Pos = PVector2D(0.0 m, 0.0 m), Vel = PVector2D(0.0 m s^-1, 0.0 m s^-1), Acc = PVector2D(0.0 m s^-2, 0.0 m s^-2), Mass = 0.0 kg, Ti_endstep = 0, Ti_begstep = 0, Potential = 0.0 kg m^2 s^-2, OldAcc = 0.0 m s^-2, Entropy = 0.0 kg m^2 K^-1 s^-2, Density = 0.0 kg m^-2, Hsml = 0.0 m, Left = 0.0, Right = 0.0, NumNgbFound = 0, RotVel = PVector2D(0.0 m s^-1, 0.0 m s^-1), DivVel = 0.0 s^-1, CurlVel = 0.0 s^-1, dHsmlRho = 0.0 m, Pressure = 0.0 kg m^-1 s^-2, DtEntropy = 0.0 kg m^2 K^-1 s^-3, MaxSignalVel = 0.0 m s^-1
 ```
 """
-struct Star2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle2D
+struct Star2D{P, V, A, M, E, I<:Integer} <: AbstractParticle2D
     Pos::PVector2D{P}
     Vel::PVector2D{V}
     Acc::PVector2D{A}
@@ -232,106 +180,81 @@ struct Star2D{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: Abstract
     ID::I
     Collection::Collection
 
-    Ti_endstep::I  # Next integer step on the timeline.
-    Ti_begstep::I  # Present integer step on the timeline.
-    GravCost::I    # For each two-particle interaction, GravCost += 1
+    "Next integer step on the timeline."
+    Ti_endstep::I
+    "Present integer step on the timeline."
+    Ti_begstep::I
+    "For each two-particle interaction, GravCost += 1"
+    GravCost::I
     
-    Potential::E   # Particle potential in the force field
-    OldAcc::A      # Save the normalization of acceleration of last step. Useful in Tree n-body method.
+    "Particle potential in the force field"
+    Potential::E
+    "Save the normalization of acceleration of last step. Useful in Tree n-body method"
+    OldAcc::A
 
     # SPH
-    Entropy::Et
-    Density::D
-    Hsml::P
+    # Entropy::Et
+    # Density::D
+    # Hsml::P
 
-    Left::F
-    Right::F
-    NumNgbFound::I
+    # Left::F
+    # Right::F
+    # NumNgbFound::I
 
-    RotVel::PVector2D{V}
-    DivVel::T_1
-    CurlVel::T_1
-    dHsmlRho::dP
+    # RotVel::PVector2D{V}
+    # DivVel::T_1
+    # CurlVel::T_1
+    # dHsmlRho::dP
 
-    Pressure::Prs
-    DtEntropy::dE
-    MaxSignalVel::V
+    # Pressure::Prs
+    # DtEntropy::dE
+    # MaxSignalVel::V
 end
 
-Star2D(u = nothing; id = 0, collection = STAR) = Star2D(
-    PVector2D(), PVector2D(), PVector2D(), 0.0, id, collection,
-    0, 0, 0,
-    0.0, 0.0,
+function Star2D{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
+    Star2D(
+        PVector2D(F), PVector2D(F), PVector2D(F), zero(F), id, collection,
+        zero(I), zero(I), zero(I),
+        zero(F), zero(F),
 
-    0.0, 0.0, 0.0,
-    0.0, 0.0, 0,
-    PVector2D(), 0.0, 0.0, 0.0,
-    0.0, 0.0, 0.0
-)
+        # 0.0, 0.0, 0.0,
+        # 0.0, 0.0, 0,
+        # PVector2D(F), 0.0, 0.0, 0.0,
+        # 0.0, 0.0, 0.0
+    )
+end
 
-function Star2D(units::Array; id = 0, collection = STAR)
+function Star2D{F,I}(units::Array; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     uTemperature = getuTemperature(units)
     return Star2D(
-        PVector2D(uLength), PVector2D(uLength / uTime), PVector2D(uLength / uTime^2),
-        0.0 * uMass, id, collection,
-        0, 0, 0,
-        0.0 * getuEnergy(units), 0.0 * uLength / uTime^2,
+        PVector2D(F, uLength), PVector2D(F, uLength / uTime), PVector2D(F, uLength / uTime^2),
+        zero(F) * uMass, id, collection,
+        zero(I), zero(I), zero(I),
+        zero(F) * getuEnergy(units), zero(F) * uLength / uTime^2,
 
-        0.0 * getuEntropy(units),
-        0.0 * getuDensity2D(units), 0.0 * uLength,
-        0.0, 0.0, 0,
-        PVector2D(uLength / uTime),
-        0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
-        0.0 * getuPressure(units),
-        0.0 * getuEntropy(units) / uTime,
-        0.0 * uLength / uTime
+        # 0.0 * getuEntropy(units),
+        # 0.0 * getuDensity2D(units), 0.0 * uLength,
+        # 0.0, 0.0, 0,
+        # PVector2D(F, uLength / uTime),
+        # 0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
+        # 0.0 * getuPressure(units),
+        # 0.0 * getuEntropy(units) / uTime,
+        # 0.0 * uLength / uTime
     )
 end
 
-"""
-    struct Star{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle3D
+Star2D(args...; kw...) = Star2D{Float64, Int}(args...; kw...)
+Star2D(F, I, args...; kw...) = Star2D{F, I}(args...; kw...)
 
+"""
+$(TYPEDEF)
+$(TYPEDFIELDS)
 3D Particle type designed for AstroSim.jl.
 
 [`Collection`](@ref) is an `Enum` defined in the same way with `Gadget2`, but start from 1.
-
-## Fields
-```jl
-Pos::PVector2D{P}
-Vel::PVector2D{V}
-Acc::PVector2D{A}
-Mass::M
-ID::I
-Collection::Collection
-
-Ti_endstep::I  # Next integer step on the timeline.
-Ti_begstep::I  # Present integer step on the timeline.
-GravCost::I    # For each two-particle interaction, GravCost += 1
-
-Potential::E   # Particle potential in the force field
-OldAcc::A      # Save the normalization of acceleration of last step. Useful in Tree n-body method.
-
-# SPH
-Entropy::Et
-Density::D
-Hsml::P
-
-Left::F
-Right::F
-NumNgbFound::I
-
-RotVel::PVector2D{V}
-DivVel::T_1
-CurlVel::T_1
-dHsmlRho::dP
-
-Pressure::Prs
-DtEntropy::dE
-MaxSignalVel::V
-```
 
 ## Examples
 ```jl
@@ -346,7 +269,7 @@ Star 1 GAS: Pos = PVector(0.0 m, 0.0 m, 0.0 m), Vel = PVector(0.0 m s^-1, 0.0 m 
 kg m^2 K^-1 s^-3, MaxSignalVel = 0.0 m s^-1
 ```
 """
-struct Star{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractParticle3D
+struct Star{P, V, A, M, E, I<:Integer} <: AbstractParticle3D
     Pos::PVector{P}
     Vel::PVector{V}
     Acc::PVector{A}
@@ -354,44 +277,51 @@ struct Star{P, V, A, M, E, F, Et, D, dP, dE, Prs, T_1, I<:Integer} <: AbstractPa
     ID::I
     Collection::Collection
 
-    Ti_endstep::I  # Next integer step on the timeline.
-    Ti_begstep::I  # Present integer step on the timeline.
-    GravCost::I    # For each two-particle interaction, GravCost += 1
+    "Next integer step on the timeline."
+    Ti_endstep::I
+    "Present integer step on the timeline."
+    Ti_begstep::I
+    "For each two-particle interaction, GravCost += 1"
+    GravCost::I
     
-    Potential::E   # Particle potential in the force field
-    OldAcc::A      # Save the normalization of acceleration of last step. Useful in Tree n-body method.
+    "Particle potential in the force field"
+    Potential::E
+    "Save the normalization of acceleration of last step. Useful in Tree n-body method."
+    OldAcc::A
 
     # SPH
-    Entropy::Et
-    Density::D
-    Hsml::P
+    # Entropy::Et
+    # Density::D
+    # Hsml::P
 
-    Left::F
-    Right::F
-    NumNgbFound::I
+    # Left::F
+    # Right::F
+    # NumNgbFound::I
 
-    RotVel::PVector{V}
-    DivVel::T_1
-    CurlVel::T_1
-    dHsmlRho::dP
+    # RotVel::PVector{V}
+    # DivVel::T_1
+    # CurlVel::T_1
+    # dHsmlRho::dP
 
-    Pressure::Prs
-    DtEntropy::dE
-    MaxSignalVel::V
+    # Pressure::Prs
+    # DtEntropy::dE
+    # MaxSignalVel::V
 end
 
-Star(u = nothing; id = 0, collection = STAR) = Star(
-    PVector(), PVector(), PVector(), 0.0, id, collection,
-    0, 0, 0,
-    0.0, 0.0,
+function Star{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
+    Star(
+        PVector(F), PVector(F), PVector(F), zero(F), id, collection,
+        zero(I), zero(I), zero(I),
+        zero(F), zero(F),
 
-    0.0, 0.0, 0.0,
-    0.0, 0.0, 0,
-    PVector(), 0.0, 0.0, 0.0,
-    0.0, 0.0, 0.0
-)
+        # 0.0, 0.0, 0.0,
+        # 0.0, 0.0, 0,
+        # PVector(F), 0.0, 0.0, 0.0,
+        # 0.0, 0.0, 0.0
+    )
+end
 
-function Star(units::Array; id = 0, collection = STAR)
+function Star{F,I}(units::Array; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
@@ -400,26 +330,43 @@ function Star(units::Array; id = 0, collection = STAR)
     uEnergyUnit = getuEnergyUnit(units)
     uTemperature = getuTemperature(units)
     return Star(
-        PVector(uLength), PVector(uVel), PVector(uAcc),
-        0.0 * uMass, id, collection,
-        0, 0, 0,
-        0.0 * uEnergyUnit, 0.0 * uAcc,
+        PVector(F, uLength), PVector(F, uVel), PVector(F, uAcc),
+        zero(F) * uMass, id, collection,
+        zero(I), zero(I), zero(I),
+        zero(F) * uEnergyUnit, zero(F) * uAcc,
 
-        0.0 * getuEntropy(units),
-        0.0 * getuDensity(units), 0.0 * uLength,
-        0.0, 0.0, 0,
-        PVector(uVel),
-        0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
-        0.0 * getuPressure(units),
-        0.0 * getuEntropy(units) / uTime,
-        0.0 * uLength / uTime
+        # 0.0 * getuEntropy(units),
+        # 0.0 * getuDensity(units), 0.0 * uLength,
+        # 0.0, 0.0, 0,
+        # PVector(F, uVel),
+        # 0.0 / uTime, 0.0 / uTime, 0.0 * uLength,
+        # 0.0 * getuPressure(units),
+        # 0.0 * getuEntropy(units) / uTime,
+        # 0.0 * uLength / uTime
     )
 end
 
+Star(args...; kw...) = Star{Float64, Int}(args...; kw...)
+Star(F, I, args...; kw...) = Star{F, I}(args...; kw...)
+
 Base.getindex(a::StructArray{D} where D<:AbstractParticle, col::Collection) = a[a.Collection .== col]
 
-"""
+value(p::PVector2D) = PVector2D(value(p.x), value(p.y))
+value(p::PVector) = PVector(value(p.x), value(p.y), value(p.z))
+value(c::Collection) = c
 
+value(p::Star2D) = Star2D(value.(getfield.(p, fieldnames(Star2D)))...)
+value(p::Star) = Star(value.(getfield.(p, fieldnames(Star)))...)
+value(p::Ball2D) = Ball2D(value.(getfield.(p, fieldnames(Ball2D)))...)
+value(p::Ball) = Ball(value.(getfield.(p, fieldnames(Ball)))...)
+value(p::Massless2D) = Massless2D(value.(getfield.(p, fieldnames(Massless2D)))...)
+value(p::Massless) = Massless(value.(getfield.(p, fieldnames(Massless)))...)
+
+"""
+    split_block(NumTotal::Int, i::Int, N::Int)
+
+Split data to N sections.
+Return Tuple `(head, tail)` to iterate in the `i`-th block
 """
 function split_block(NumTotal::Int, i::Int, N::Int)
     if i > N || i <= 0
@@ -446,7 +393,7 @@ function split_block(NumTotal::Int, i::Int, N::Int)
 end
 
 """
-    split_data(data::Array, i::Int64, N::Int64)
+    split_data(data::AbstractArray, i::Int64, N::Int64)
 
 split data to N sections, return the ith section
 
@@ -467,7 +414,7 @@ julia> split_data([1,2,3], 3, 4)
  3
 ```
 """
-function split_data(data::Union{Array, StructArray}, i::Int64, N::Int64)
+function split_data(data::AbstractArray, i::Int64, N::Int64)
     if length(data) == 0
         return data
     end

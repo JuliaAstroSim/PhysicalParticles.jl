@@ -18,7 +18,7 @@ using StaticArrays
 ## Explicitly overload functions and import types
 import Unitful: Units, Quantity, AbstractQuantity, uconvert, ustrip, @u_str
 import PhysicalConstants: PhysicalConstant, CODATA2018, @constant
-import Measurements: Measurement, measurement
+import Measurements: Measurement, measurement, value
 import Core: Symbol
 import Base: +, -, *, /, zero, length, iterate, real, show, ==, #getproperty,
              Array, Vector,
@@ -63,6 +63,9 @@ export
 
     # Constants
     Constant,
+
+    # Measurements
+    value,
 
     # AbstractDataDimension,
     datadimension,

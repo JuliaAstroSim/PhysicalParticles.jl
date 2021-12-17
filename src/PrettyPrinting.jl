@@ -32,19 +32,19 @@ function Base.show(io::IO, p::T) where T<:Union{Star, Star2D}
         ", Potential = ", p.Potential,
         ", OldAcc = ", p.OldAcc,
 
-        ", Entropy = ", p.Entropy,
-        ", Density = ", p.Density,
-        ", Hsml = ", p.Hsml,
-        ", Left = ", p.Left,
-        ", Right = ", p.Right,
-        ", NumNgbFound = ", p.NumNgbFound,
-        ", RotVel = ", p.RotVel,
-        ", DivVel = ", p.DivVel,
-        ", CurlVel = ", p.CurlVel,
-        ", dHsmlRho = ", p.dHsmlRho,
-        ", Pressure = ", p.Pressure,
-        ", DtEntropy = ", p.DtEntropy,
-        ", MaxSignalVel = ", p.MaxSignalVel
+        # ", Entropy = ", p.Entropy,
+        # ", Density = ", p.Density,
+        # ", Hsml = ", p.Hsml,
+        # ", Left = ", p.Left,
+        # ", Right = ", p.Right,
+        # ", NumNgbFound = ", p.NumNgbFound,
+        # ", RotVel = ", p.RotVel,
+        # ", DivVel = ", p.DivVel,
+        # ", CurlVel = ", p.CurlVel,
+        # ", dHsmlRho = ", p.dHsmlRho,
+        # ", Pressure = ", p.Pressure,
+        # ", DtEntropy = ", p.DtEntropy,
+        # ", MaxSignalVel = ", p.MaxSignalVel
     )
 end
 
