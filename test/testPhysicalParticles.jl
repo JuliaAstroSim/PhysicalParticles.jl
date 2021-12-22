@@ -13,6 +13,10 @@
     @test Star2D(uAstro).Pos == PVector2D(u"kpc")
     @test Star().Pos == PVector()
     @test Star(uAstro).Pos == PVector(u"kpc")
+
+    s = Star(uAstro)
+    @test convert(Float32, s).Pos.x === 0.0f0u"kpc"
+    @test convert(Int32, s).ID === Int32(0)
 end
 
 @testset "2D particles" begin

@@ -124,6 +124,8 @@ PVector(::Type{T}, u::Units) where T<:Number = PVector(zero(T)*u, zero(T)*u, zer
 # numeric type conversion
 convert(::Type{PVector2D{T}}, p::PVector2D{U}) where {T,U} = PVector2D{T}(T(p.x), T(p.y))
 convert(::Type{PVector{T}}, p::PVector{U}) where {T,U} = PVector{T}(T(p.x), T(p.y), T(p.z))
+convert(::Type{T}, p::PVector2D{U}) where {T<:Real,U} = PVector2D(T(p.x), T(p.y))
+convert(::Type{T}, p::PVector{U}) where {T<:Real,U} = PVector(T(p.x), T(p.y), T(p.z))
 
 # 1D point, simply return the number
 PVector(x::Number) = x

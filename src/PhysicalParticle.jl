@@ -362,6 +362,17 @@ value(p::Ball) = Ball(value.(getfield.(p, fieldnames(Ball)))...)
 value(p::Massless2D) = Massless2D(value.(getfield.(p, fieldnames(Massless2D)))...)
 value(p::Massless) = Massless(value.(getfield.(p, fieldnames(Massless)))...)
 
+# convert numeric type of Pos, Vel, Acc...
+convert(::Type{T}, p::Star) where T<:AbstractFloat = Star(
+    convert(T,p.Pos),convert(T,p.Vel),convert(T,p.Acc),T(p.Mass),
+    p.ID,p.Collection,p.Ti_endstep,p.Ti_begstep,p.GravCost,T(p.Potential),T(p.OldAcc),
+)
+
+convert(::Type{T}, p::Star) where T<:Integer = Star(
+    p.Pos,p.Vel,p.Acc,p.Mass,
+    T(p.ID),p.Collection,T(p.Ti_endstep),T(p.Ti_begstep),T(p.GravCost),p.Potential,p.OldAcc,
+)
+
 """
     split_block(NumTotal::Int, i::Int, N::Int)
 

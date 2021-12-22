@@ -33,6 +33,9 @@
 
         @test numeric_type(a) == Float32
         @test numeric_type([b]) == Float64
+
+        p = convert(Float64, PVector2D(1.0f0,2.0f0,u"m"))
+        @test p.x === 1.0u"m"
     end
 
     @testset "Coordinates" begin
@@ -137,6 +140,9 @@ end
 
         @test numeric_type(a) == Float32
         @test numeric_type([b]) == Float64
+
+        p = convert(Float64, PVector(1.0f0,2.0f0,3.0f0,u"m"))
+        @test p.x === 1.0u"m"
     end
 
     @testset "Linear Algebra" begin
