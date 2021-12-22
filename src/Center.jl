@@ -175,7 +175,7 @@ end
 maximum_z(a::StructArray) = maximum_z(a.Pos)
 
 """
-$(SIGNATURES)
+$(TYPEDSIGNATURES)
 
 Compute box center of x direction of points or particles
 """
@@ -188,7 +188,7 @@ end
 center_x(a::StructArray) = center_x(a.Pos)
 
 """
-$(SIGNATURES)
+$(TYPEDSIGNATURES)
 
 Compute box center of y direction of points or particles
 """
@@ -201,7 +201,7 @@ end
 center_y(a::StructArray) = center_y(a.Pos)
 
 """
-$(SIGNATURES)
+$(TYPEDSIGNATURES)
 
 Compute box center of z direction of points or particles
 """
@@ -214,7 +214,7 @@ end
 center_z(a::StructArray) = center_z(a.Pos)
 
 """
-$(SIGNATURES)
+$(TYPEDSIGNATURES)
 
 Compute box center of points or particles
 

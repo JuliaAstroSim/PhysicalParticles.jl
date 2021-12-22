@@ -45,6 +45,9 @@
 
         @test numeric_type(a) == Float32
         @test numeric_type([b]) == Float64
+
+        p = convert(PVector2D{Float32}, PVector2D(1.0,2.0))
+        @test p.x == 1.0f0
     end
 
     @testset "Linear Algebra" begin
@@ -132,6 +135,9 @@ end
 
         @test numeric_type(a) == Float32
         @test numeric_type([b]) == Float64
+
+        p = convert(PVector{Float32}, PVector(1.0,2.0,3.0))
+        @test p.x == 1.0f0
     end
 
     @testset "Linear Algebra" begin

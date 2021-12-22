@@ -475,7 +475,7 @@ cross(a::PVector, b::PVector) = PVector(a.y * b.z - a.z * b.y,
 
 ## Generic functions
 """
-$(SIGNATURES)
+$(TYPEDSIGNATURES)
 
 Dot product or scalar product of vector `a` and `b`.
 """
