@@ -90,12 +90,10 @@ function Constant(::Nothing, units)
 end
 
 """
-    Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
-
+$(TYPEDSIGNATURES)
 Construct an immutable struct storing basic physical constants in `BigFloat` corresponding to `units` (default is `uAstro`).
 """
 function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
-    println("Constructing BigFloat constants")
     return Constant(
         uconvert(getuVel(units), BigFloat("299792458")u"m/s"),
         uconvert(units[1]^3 / units[6] / units[2]^2, BigFloat("6.67430e-11")u"m^3/kg/s^2"),
@@ -112,12 +110,10 @@ function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothin
 end
 
 """
-    Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
-
+$(TYPEDSIGNATURES)
 Construct an immutable struct storing basic physical constants in `Measurement` corresponding to `units` (default is `uAstro`).
 """
 function Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
-    println("Constructing Unitless Measurement constants")
     return Constant(
         uconvert(getuVel(units), measurement(CODATA2018.c_0)),
         uconvert(units[1]^3 / units[6] / units[2]^2, measurement(CODATA2018.G)),
@@ -130,6 +126,27 @@ function Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, not
         #uconvert(units[2]^-1, measurement(CODATA2018.H)),
         uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], measurement(CODATA2018.k_B)),
         uconvert(getuAcc(units), measurement(ACC0, 0.0*ACC0)),
+    )
+end
+
+"""
+$(TYPEDSIGNATURES)
+"""
+function Constant(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N};
+    ACC0 = ACC0,
+) where T<:Real
+    return Constant(
+        T(uconvert(getuVel(units), CODATA2018.c_0)),
+        T(uconvert(units[1]^3 / units[6] / units[2]^2, CODATA2018.G)),
+        #T(uconvert(units[6] * units[1]^2 / units[2], CODATA2018.h)),
+        #T(uconvert(units[3] * units[2], CODATA2018.e)),
+        T(uconvert(getuMass(units), CODATA2018.m_e)),
+        T(uconvert(getuMass(units), CODATA2018.m_n)),
+        T(uconvert(getuMass(units), CODATA2018.m_p)),
+        #T(uconvert(units[6] / units[4]^4 / units[2]^3, CODATA2018.σ)),
+        #T(uconvert(units[2]^-1, CODATA2018.H)),
+        T(uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], CODATA2018.k_B)),
+        T(uconvert(getuAcc(units), ACC0)),
     )
 end
 
