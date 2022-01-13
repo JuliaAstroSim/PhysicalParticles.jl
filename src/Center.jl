@@ -72,7 +72,8 @@ function minimum_x(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.x
 end
 
-minimum_x(a::StructArray) = minimum_x(a.Pos)
+minimum_x(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = minimum_x(a.Pos)
+minimum_x(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = minimum(a.x)
 
 """
     function minimum_y(a::Array{T,N}) where T <: AbstractPoint where N
@@ -92,7 +93,8 @@ function minimum_y(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.y
 end
 
-minimum_y(a::StructArray) = minimum_y(a.Pos)
+minimum_y(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = minimum_y(a.Pos)
+minimum_y(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = minimum(a.x)
 
 """
     function minimum_z(a::Array{T,N}) where T <: AbstractPoint where N
@@ -112,7 +114,8 @@ function minimum_z(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.z
 end
 
-minimum_z(a::StructArray) = minimum_z(a.Pos)
+minimum_z(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = minimum_z(a.Pos)
+minimum_z(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = minimum(a.x)
 
 """
     function maximum_x(a::Array{T,N}) where T <: AbstractPoint where N
@@ -132,7 +135,8 @@ function maximum_x(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.x
 end
 
-maximum_x(a::StructArray) = maximum_x(a.Pos)
+maximum_x(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = maximum_x(a.Pos)
+maximum_x(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = maximum(a.x)
 
 """
     function maximum_y(a::Array{T,N}) where T <: AbstractPoint where N
@@ -152,7 +156,8 @@ function maximum_y(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.y
 end
 
-maximum_y(a::StructArray) = maximum_y(a.Pos)
+maximum_y(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = maximum_y(a.Pos)
+maximum_y(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = maximum(a.x)
 
 """
     function maximum_z(a::Array{T,N}) where T <: AbstractPoint where N
@@ -172,7 +177,8 @@ function maximum_z(a::Array{T,N}) where T <: AbstractParticle where N
     return m.Pos.z
 end
 
-maximum_z(a::StructArray) = maximum_z(a.Pos)
+maximum_z(a::StructArray{T,NT,Tu,N}) where {T<:AbstractParticle,NT,Tu,N} = maximum_z(a.Pos)
+maximum_z(a::StructArray{T,NT,Tu,N}) where {T<:AbstractPoint,NT,Tu,N} = maximum(a.x)
 
 """
 $(TYPEDSIGNATURES)

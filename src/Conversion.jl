@@ -133,7 +133,7 @@ Useful to prepare a plot.
 function pack_xy(data::StructArray{T,N,NT,Tu};
     xaxis = :x,
     yaxis = :y) where T<:AbstractPoint where N where NT where Tu
-    return [getproperty(data, xaxis) getproperty(data, yaxis)]
+    return [getproperty(data, xaxis), getproperty(data, yaxis)]
 end
 
 function pack_xy(data::StructArray{T,N,NT,Tu};

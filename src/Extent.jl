@@ -73,7 +73,7 @@ function extent(a::Union{Array{T, N}, StructArray{T,N,NT,Tu}}) where T<:Union{PV
 
     xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a);
     len=max(xMax-xMin, yMax-yMin);
-    Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+    Center=PVector2D((xMax+xMin)/2, (yMax+yMin)/2);
     Corner=PVector2D(xMin, yMin);
 
     return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
@@ -86,7 +86,7 @@ function extent(a::Union{Array{T, N}, StructArray{T,N,NT,Tu}}) where T<:Union{PV
 
     xMin=minimum_x(a); xMax=maximum_x(a); yMin=minimum_y(a); yMax=maximum_y(a); zMin=minimum_z(a); zMax=maximum_z(a);
     len=max(xMax-xMin, yMax-yMin, zMax-zMin);
-    Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+    Center=PVector((xMax+xMin)/2, (yMax+yMin)/2, (zMax+zMin)/2);
     Corner=PVector(xMin,yMin,zMin);
 
     return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
@@ -96,7 +96,7 @@ function extent(a::Extent2D, b::Extent2D)
     xMin = min(a.xMin, b.xMin); xMax = max(a.xMax, b.xMax);
     yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
     len=max(xMax-xMin, yMax-yMin);
-    Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+    Center=PVector2D((xMax+xMin)/2, (yMax+yMin))/2;
     Corner=PVector2D(xMin,yMin);
     return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
 end
@@ -106,7 +106,7 @@ function extent(a::Extent, b::Extent)
     yMin = min(a.yMin, b.yMin); yMax = max(a.yMax, b.yMax);
     zMin = min(a.zMin, b.zMin); zMax = max(a.zMax, b.zMax);
     len=max(xMax-xMin, yMax-yMin, zMax-zMin);
-    Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+    Center=PVector((xMax+xMin)/2, (yMax+yMin)/2, (zMax+zMin))/2;
     Corner=PVector(xMin,yMin,zMin);
     return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
 end
@@ -116,14 +116,14 @@ function extent(a::Array{T,2}) where T<:Number
         xMax, yMax = maximum(a, dims = 1)
         xMin, yMin = minimum(a, dims = 1)
         len=max(xMax-xMin, yMax-yMin);
-        Center=PVector2D(0.5(xMax+xMin), 0.5(yMax+yMin));
+        Center=PVector2D((xMax+xMin)/2, (yMax+yMin))/2;
         Corner=PVector2D(xMin,yMin);
         return Extent2D(xMin,xMax,yMin,yMax,len,Center,Corner)
     elseif size(a)[2] == 3
         xMax, yMax, zMax = maximum(a, dims = 1)
         xMin, yMin, zMin = minimum(a, dims = 1)
         len=max(xMax-xMin, yMax-yMin, zMax-zMin);
-        Center=PVector(0.5(xMax+xMin), 0.5(yMax+yMin), 0.5(zMax+zMin));
+        Center=PVector((xMax+xMin)/2, (yMax+yMin)/2, (zMax+zMin))/2;
         Corner=PVector(xMin,yMin,zMin);
         return Extent(xMin,xMax,yMin,yMax,zMin,zMax,len,Center,Corner)
     else

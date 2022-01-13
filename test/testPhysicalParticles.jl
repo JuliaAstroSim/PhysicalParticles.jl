@@ -308,8 +308,8 @@ end
         p = [Ball(PVector(-1.0u"m", 1.0u"m", 1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1.0u"kg", 1), 
              Ball(PVector(1.0u"m", -1.0u"m", -1.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 1000.0u"g", 2)]
         ps = StructArray(p)
-        @test pack_xy(p) == [[-1.0, 1.0] [1.0, -1.0]] .* u"m"
-        @test pack_xy(ps.Pos) == [[-1.0, 1.0] [1.0, -1.0]] .* u"m"
+        @test pack_xy(p) == [[-1.0, 1.0], [1.0, -1.0]] .* u"m"
+        @test pack_xy(ps.Pos) == [[-1.0, 1.0], [1.0, -1.0]] .* u"m"
         @test pack_xyz(p) == [[-1.0, 1.0] [1.0, -1.0] [1.0, -1.0]] .* u"m"
         @test pack_xyz(ps.Pos) == [[-1.0, 1.0] [1.0, -1.0] [1.0, -1.0]] .* u"m"
     end
