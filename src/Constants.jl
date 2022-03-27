@@ -6,27 +6,45 @@
 const ACC0 = 1.2e-8u"cm/s^2"
 const HubbleConstant = 74.03u"km/s/Mpc"
 
-struct Constant{CC, GC, Planck, EC, ACC0, MASS, SB, HC, K_B}
-    c::CC     # light speed
-    G::GC     # Newtonian constant of gravitation
-    h::Planck     # Planck constant
-    e::EC     # Elementary charge
-    m_e::MASS   # Electron mass
-    m_n::MASS   # Neutron mass
-    m_p::MASS   # Protron mass
-    σ::SB     # Stefan-Boltzmann constant
-    H::HC     # Hubble constant
-    k_B::K_B    # Kelvin-Boltzmann constant
+"""
+$(TYPEDEF)
+$(TYPEDFIELDS)
+"""
+struct Constant
+    "light speed"
+    c
+    "Newtonian constant of gravitation"
+    G
+    "Planck constant"
+    h
+    "Elementary charge"
+    e
+    "Electron mass"
+    m_e
+    "Neutron mass"
+    m_n
+    "Protron mass"
+    m_p
+    "Stefan-Boltzmann constant"
+    σ
+    "Hubble constant"
+    H
+    "Kelvin-Boltzmann constant"
+    k_B
+    "Vacuum electric permittivity (electric constant)"
+    ε_0
+    "Vacuum magnetic permeability"
+    μ_0
 
-    ACC0::ACC0  # Modified gravitational acceleration constant
+    "Modified gravitational acceleration constant"
+    ACC0
 end
 
 """
-    function Constant(units = uAstro; kw...)
+$(TYPEDSIGNATURES)
+Construct an immutable struct storing basic physical constants corresponding to `units` (default is `uAstro`).
 
-    Construct an immutable struct storing basic physical constants corresponding to `units` (default is `uAstro`).
-
-# Keywords
+## Keywords
 
 - c:    Speed of light
 - G:    Newtonian constant of gravitation
@@ -36,7 +54,7 @@ end
 - k_B:  Kelvin-Boltzmann constant
 - ACC0: Modified gravitational acceleration constant
 
-# Examples
+## Examples
 
 ```jl
 Constant()
@@ -57,6 +75,8 @@ function Constant(units = uAstro;
     σ = CODATA2018.σ,
     H = HubbleConstant,
     k_B = CODATA2018.k_B,
+    ε_0 = CODATA2018.ε_0,
+    μ_0 = CODATA2018.μ_0,
     ACC0 = ACC0,
 )
     if isnothing(units)
@@ -78,6 +98,8 @@ function Constant(units = uAstro;
         uconvert(units[6] / units[4]^4 / units[2]^3, σ),
         uconvert(units[2]^-1, H),
         uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], k_B),
+        uconvert(units[1]^-3 * units[6]^-1 * units[2]^4 * units[3]^2, ε_0),
+        uconvert(units[6] * units[1] / units[2]^2 / units[3]^2, μ_0),
         uconvert(getuAcc(units), ACC0),
     )
 end
@@ -96,16 +118,18 @@ Construct an immutable struct storing basic physical constants in `BigFloat` cor
 """
 function Constant(::Type{BigFloat}, units::Vector{Unitful.FreeUnits{N, D, nothing} where D where N})
     return Constant(
-        uconvert(getuVel(units), BigFloat("299792458")u"m/s"),
-        uconvert(units[1]^3 / units[6] / units[2]^2, BigFloat("6.67430e-11")u"m^3/kg/s^2"),
-        uconvert(units[6] * units[1]^2 / units[2], BigFloat("6.62607015e-34")u"J*s"),
-        uconvert(units[3] * units[2], BigFloat("1.602176634e-19")u"C"),
-        uconvert(getuMass(units), BigFloat("9.1093837015e-31")u"kg"),
-        uconvert(getuMass(units), BigFloat("1.67492749804e-27")u"kg"),
-        uconvert(getuMass(units), BigFloat("1.67262192369e-27")u"kg"),
-        uconvert(units[6] / units[4]^4 / units[2]^3, BigFloat("5.6703744191844294e-8")u"W/K^4/m^2"),
+        uconvert(getuVel(units), BigFloat(CODATA2018.c_0)),
+        uconvert(units[1]^3 / units[6] / units[2]^2, BigFloat(CODATA2018.G)),
+        uconvert(units[6] * units[1]^2 / units[2], BigFloat(CODATA2018.h)),
+        uconvert(units[3] * units[2], BigFloat(CODATA2018.e)),
+        uconvert(getuMass(units), BigFloat(CODATA2018.m_e)),
+        uconvert(getuMass(units), BigFloat(CODATA2018.m_n)),
+        uconvert(getuMass(units), BigFloat(CODATA2018.m_p)),
+        uconvert(units[6] / units[4]^4 / units[2]^3, BigFloat(CODATA2018.σ)),
         uconvert(units[2]^-1, BigFloat("2.399148907975663e-18")u"s^-1"),
-        uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], BigFloat("1.380649e-23")u"J/K"),
+        uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], BigFloat(CODATA2018.k_B)),
+        uconvert(units[1]^-3 * units[6]^-1 * units[2]^4 * units[3]^2, BigFloat(CODATA2018.ε_0)),
+        uconvert(units[6] * units[1] / units[2]^2 / units[3]^2, BigFloat(CODATA2018.μ_0)),
         uconvert(getuAcc(units), BigFloat("1.2e-8")u"cm/s^2"),
     )
 end
@@ -126,6 +150,8 @@ function Constant(::Type{Measurement}, units::Vector{Unitful.FreeUnits{N, D, not
         uconvert(units[6] / units[4]^4 / units[2]^3, measurement(CODATA2018.σ)),
         uconvert(units[2]^-1, measurement(HubbleConstant, 1.42/74.03*HubbleConstant)),
         uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], measurement(CODATA2018.k_B)),
+        uconvert(units[1]^-3 * units[6]^-1 * units[2]^4 * units[3]^2, measurement(CODATA2018.ε_0)),
+        uconvert(units[6] * units[1] / units[2]^2 / units[3]^2, measurement(CODATA2018.μ_0)),
         uconvert(getuAcc(units), measurement(ACC0, 0.0*ACC0)),
     )
 end
@@ -148,6 +174,8 @@ function Constant(::Type{T}, units::Vector{Unitful.FreeUnits{N, D, nothing} wher
         T(uconvert(units[6] / units[4]^4 / units[2]^3, CODATA2018.σ)),
         T(uconvert(units[2]^-1, H)),
         T(uconvert(units[1]^2 * units[6] / units[2]^2 / units[4], CODATA2018.k_B)),
+        T(uconvert(units[1]^-3 * units[6]^-1 * units[2]^4 * units[3]^2, CODATA2018.ε_0)),
+        T(uconvert(units[6] * units[1] / units[2]^2 / units[3]^2, CODATA2018.μ_0)),
         T(uconvert(getuAcc(units), ACC0)),
     )
 end
@@ -170,6 +198,8 @@ function Base.show(io::IO, c::Constant)
                σ = $(c.σ) (Stefan-Boltzmann constant)
                H = $(c.H) (Hubble constant)
              k_B = $(c.k_B) (Kelvin-Boltzmann constant)
+             ε_0 = $(c.ε_0) (Vacuum electric permittivity)
+             μ_0 = $(c.μ_0) (Vacuum magnetic permeability)
             ACC0 = $(c.ACC0) (Modified gravitational acceleration constant)
         """
     )
