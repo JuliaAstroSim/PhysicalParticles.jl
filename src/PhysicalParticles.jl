@@ -86,10 +86,10 @@ export
     average, averagebymass,
 
     # Coordinates
-    cylinderial2xyz,
-    spherical2xyz,
-    cylinderial,
-    spherical,
+    cylinderial2cartesian,
+    spherical2cartesian,
+    cartesian2cylinderial,
+    spherical2cylinderial,
 
     # Statistics
     mean, std, var, median, middle,
@@ -215,6 +215,7 @@ include("Unit.jl")
 include("Constants.jl")
 
 include("PVector.jl")
+include("Coordinates.jl")
 include("parse.jl")
 include("PhysicalParticle.jl")
 

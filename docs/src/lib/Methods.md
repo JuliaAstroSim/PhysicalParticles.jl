@@ -52,10 +52,10 @@ rotate_x
 rotate_y
 rotate_z
 rotate
-cylinderial
-cylinderial2xyz
-spherical
-spherical2xyz
+cartesian2cylinderial
+cylinderial2cartesian
+spherical2cylinderial
+spherical2cartesian
 ```
 
 ## Internal
