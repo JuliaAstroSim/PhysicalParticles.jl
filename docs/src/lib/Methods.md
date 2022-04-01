@@ -53,8 +53,8 @@ rotate_y
 rotate_z
 rotate
 cartesian2cylinderial
+cartesian2spherical
 cylinderial2cartesian
-spherical2cylinderial
 spherical2cartesian
 ```
 

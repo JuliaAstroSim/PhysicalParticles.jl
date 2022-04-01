@@ -53,7 +53,7 @@
         @test sum(cartesian2cylinderial(PVector(-sqrt(2), -sqrt(2), 1.0, u"m")) .≈ (2.0u"m", 5pi/4, 1.0u"m")) == 3
 
         @test spherical2cartesian(sqrt(2)u"m", pi/4, pi/4) ≈ PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m")
-        @test sum(spherical2cylinderial(PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m")) .≈ (sqrt(2)u"m", pi/4, pi/4)) == 3
+        @test sum(cartesian2spherical(PVector(sqrt(0.5), sqrt(0.5), 1.0, u"m")) .≈ (sqrt(2)u"m", pi/4, pi/4)) == 3
     end
 
     @testset "Linear Algebra" begin

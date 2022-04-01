@@ -89,7 +89,7 @@ export
     cylinderial2cartesian,
     spherical2cartesian,
     cartesian2cylinderial,
-    spherical2cylinderial,
+    cartesian2spherical,
 
     # Statistics
     mean, std, var, median, middle,
