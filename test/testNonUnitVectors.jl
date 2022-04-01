@@ -10,6 +10,7 @@
         @test b - a == PVector(2.0, 2.0)
         #@test b + c == PVector2D(BigFloat(8.0), BigFloat(10.0))
         #@test c - a == PVector2D(BigFloat(4.0), BigFloat(4.0))
+        @test -b == PVector2D(-3.0, -4.0)
 
         @test a * b == 11.0
         @test 3.0 * b == PVector2D(9.0, 12.0)
@@ -105,6 +106,7 @@ end
     @testset "Basic" begin
         @test a + b == PVector(5.0, 7.0, 9.0)
         @test b - a == PVector(3.0, 3.0, 3.0)
+        @test -b == PVector(-4.0, -5.0, -6.0)
 
         @test a * b == 32.0
         @test 3.0 * b == PVector(12.0, 15.0, 18.0)

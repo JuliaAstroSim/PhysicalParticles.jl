@@ -29,6 +29,8 @@ end
 
 @inline *(a::PVector2D, b::PVector2D) = a.x * b.x + a.y * b.y
 
+@inline -(p::PVector2D) = PVector2D(-p.x, -p.y)
+
 """
     struct PVector{T<:Number} <: AbstractPoint3D{T}
 
@@ -62,6 +64,7 @@ end
 
 @inline *(a::PVector, b::PVector) = a.x * b.x + a.y * b.y + a.z * b.z
 
+@inline -(p::PVector) = PVector(-p.x, -p.y, -p.z)
 
 
 # Interact with Number and Quantity
