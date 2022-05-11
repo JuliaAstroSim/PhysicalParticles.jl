@@ -224,3 +224,6 @@ measurement(q::Quantity) = measurement(q, zero(q))
 
 measurement(p::PVector2D) = PVector2D(measurement(p.x), measurement(p.y))
 measurement(p::PVector) = PVector(measurement(p.x), measurement(p.y), measurement(p.z))
+
+measurement(p::PVector2D, e::PVector2D) = PVector2D(measurement(p.x, e.x), measurement(p.y, e.y))
+measurement(p::PVector, e::PVector) = PVector(measurement(p.x, e.x), measurement(p.y, e.y), measurement(p.z, e.z))

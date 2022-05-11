@@ -137,6 +137,7 @@
     @test middle(1.0u"m", 3.0u"m") == 2.0u"m"
 
     @test measurement(PVector(u"m")).x == measurement(PVector2D(u"m")).x
+    @test measurement(PVector(), PVector()).x == measurement(PVector2D(), PVector2D()).x
 
     @testset "Zero Values" begin
         ZeroValues = ZeroValue(nothing)
