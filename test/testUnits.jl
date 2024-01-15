@@ -235,5 +235,10 @@
         p = Massless2D(Measurement, Int, uAstro)
         @test p.Pos.x == measurement(0.0u"kpc")
         @test value(p).Pos.x == 0.0u"kpc"
+
+        @test ismeasurement(PVector(Measurement))
+        @test ismeasurement(PVector2D(Measurement))
+        @test ismeasurement(PVector(Measurement, u"m"))
+        @test ismeasurement(PVector2D(Measurement, u"m"))
     end
 end

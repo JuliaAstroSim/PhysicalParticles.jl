@@ -227,3 +227,14 @@ measurement(p::PVector) = PVector(measurement(p.x), measurement(p.y), measuremen
 
 measurement(p::PVector2D, e::PVector2D) = PVector2D(measurement(p.x, e.x), measurement(p.y, e.y))
 measurement(p::PVector, e::PVector) = PVector(measurement(p.x, e.x), measurement(p.y, e.y), measurement(p.z, e.z))
+
+function ismeasurement(x)
+    if x isa Unitful.Quantity
+        return x.val isa Measurement
+    end
+
+    return x isa Measurement
+end
+
+ismeasurement(p::AbstractPoint2D) = ismeasurement(p.x) && ismeasurement(p.y)
+ismeasurement(p::AbstractPoint3D) = ismeasurement(p.x) && ismeasurement(p.y) && ismeasurement(p.z)

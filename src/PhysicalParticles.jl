@@ -137,6 +137,7 @@ export
 
     @u_str,
     Measurement, measurement,
+    ismeasurement,
 
     # Random
     randn_pvector, randn_pvector2d,
