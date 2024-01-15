@@ -328,3 +328,30 @@ end
     @test length(data[BLACKHOLE]) == 1
 
 end
+
+@testset "Measurements" begin
+    @test typeof(Massless2D(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Massless2D(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Massless(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Massless(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Ball2D(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Ball2D(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Ball2D(Measurement=true).Acc.x) <: Measurement
+    @test typeof(Ball2D(Measurement=true).Mass) <: Measurement
+    @test typeof(Ball(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Ball(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Ball(Measurement=true).Acc.x) <: Measurement
+    @test typeof(Ball(Measurement=true).Mass) <: Measurement
+    @test typeof(Star2D(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Star2D(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Star2D(Measurement=true).Acc.x) <: Measurement
+    @test typeof(Star2D(Measurement=true).Mass) <: Measurement
+    @test typeof(Star2D(Measurement=true).Potential) <: Measurement
+    @test typeof(Star2D(Measurement=true).OldAcc) <: Measurement
+    @test typeof(Star(Measurement=true).Pos.x) <: Measurement
+    @test typeof(Star(Measurement=true).Vel.x) <: Measurement
+    @test typeof(Star(Measurement=true).Acc.x) <: Measurement
+    @test typeof(Star(Measurement=true).Mass) <: Measurement
+    @test typeof(Star(Measurement=true).Potential) <: Measurement
+    @test typeof(Star(Measurement=true).OldAcc) <: Measurement
+end

@@ -224,8 +224,6 @@ include("Random.jl")
 include("LinearAlgebra.jl")
 include("Center.jl")
 include("Extent.jl")
-include("Neighbors.jl")
-include("Clustering.jl")
 include("PrettyPrinting.jl")
 
 function __init__()

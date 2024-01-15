@@ -25,12 +25,16 @@ struct Massless2D{P, V, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Massless2D{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Massless2D(PVector2D(F), PVector2D(F), id)
+function Massless2D{F,I}(u::Nothing=nothing; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer} 
+    f = Measurement ? measurement : identity
+    return Massless2D(f(PVector2D(F)), f(PVector2D(F)), id)
+end
 
-function Massless2D{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
+function Massless2D{F,I}(units::Array; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
-    return Massless2D(PVector2D(F, uLength), PVector2D(F, uLength / uTime), id)
+    f = Measurement ? measurement : identity
+    return Massless2D(f(PVector2D(F, uLength)), f(PVector2D(F, uLength / uTime)), id)
 end
 
 Massless2D(args...; kw...) = Massless2D{Float64, Int}(args...; kw...)
@@ -59,12 +63,16 @@ struct Massless{P, V, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Massless{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Massless(PVector(F), PVector(F), id)
+function Massless{F,I}(u::Nothing=nothing; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
+    f = Measurement ? measurement : identity
+    return Massless(f(PVector(F)), f(PVector(F)), id)
+end
 
-function Massless{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
+function Massless{F,I}(units::Array; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
-    return Massless(PVector(F, uLength), PVector(F, uLength / uTime), id)
+    f = Measurement ? measurement : identity
+    return Massless(f(PVector(F, uLength)), f(PVector(F, uLength / uTime)), id)
 end
 
 Massless(args...; kw...) = Massless{Float64, Int}(args...; kw...)
@@ -97,15 +105,17 @@ struct Ball2D{P, V, A, M, I<:Integer} <: AbstractParticle2D
     ID::I
 end
 
-Ball2D{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Ball2D(
-    PVector2D(F), PVector2D(F), PVector2D(F), zero(F), id
-)
+function Ball2D{F,I}(u::Nothing=nothing; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
+    f = Measurement ? measurement : identity
+    return Ball2D(f(PVector2D(F)), f(PVector2D(F)), f(PVector2D(F)), f(zero(F)), id)
+end
 
-function Ball2D{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
+function Ball2D{F,I}(units::Array; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
-    return Ball2D(PVector2D(F, uLength), PVector2D(F, uLength / uTime), PVector2D(F, uLength / uTime^2), zero(F) * uMass, id)
+    f = Measurement ? measurement : identity
+    return Ball2D(f(PVector2D(F, uLength)), f(PVector2D(F, uLength / uTime)), f(PVector2D(F, uLength / uTime^2)), f(zero(F) * uMass), id)
 end
 
 Ball2D(args...; kw...) = Ball2D{Float64, Int}(args...; kw...)
@@ -136,15 +146,17 @@ struct Ball{P, V, A, M, I<:Integer} <: AbstractParticle3D
     ID::I
 end
 
-Ball{F,I}(u::Nothing=nothing; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer} = Ball(
-    PVector(F), PVector(F), PVector(F), zero(F), id
-)
+function Ball{F,I}(u::Nothing=nothing; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
+    f = Measurement ? measurement : identity
+    return Ball(f(PVector(F)), f(PVector(F)), f(PVector(F)), f(zero(F)), id)
+end
 
-function Ball{F,I}(units::Array; id::I = zero(I)) where {F<:AbstractFloat, I<:Integer}
+function Ball{F,I}(units::Array; id::I = zero(I), Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
-    return Ball(PVector(F, uLength), PVector(F, uLength / uTime), PVector(F, uLength / uTime^2), zero(F) * uMass, id)
+    f = Measurement ? measurement : identity
+    return Ball(f(PVector(F, uLength)), f(PVector(F, uLength / uTime)), f(PVector(F, uLength / uTime^2)), f(zero(F) * uMass), id)
 end
 
 Ball(args...; kw...) = Ball{Float64, Int}(args...; kw...)
@@ -211,11 +223,12 @@ struct Star2D{P, V, A, M, E, I<:Integer} <: AbstractParticle2D
     # MaxSignalVel::V
 end
 
-function Star2D{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
-    Star2D(
-        PVector2D(F), PVector2D(F), PVector2D(F), zero(F), id, collection,
+function Star2D{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR, Measurement=false) where {F<:AbstractFloat, I<:Integer}
+    f = Measurement ? measurement : identity
+    return Star2D(
+        f(PVector2D(F)), f(PVector2D(F)), f(PVector2D(F)), f(zero(F)), id, collection,
         zero(I), zero(I), zero(I),
-        zero(F), zero(F),
+        f(zero(F)), f(zero(F)),
 
         # 0.0, 0.0, 0.0,
         # 0.0, 0.0, 0,
@@ -224,16 +237,17 @@ function Star2D{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) whe
     )
 end
 
-function Star2D{F,I}(units::Array; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
+function Star2D{F,I}(units::Array; id::I = zero(I), collection = STAR, Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
-    uTemperature = getuTemperature(units)
+    # uTemperature = getuTemperature(units)
+    f = Measurement ? measurement : identity
     return Star2D(
-        PVector2D(F, uLength), PVector2D(F, uLength / uTime), PVector2D(F, uLength / uTime^2),
-        zero(F) * uMass, id, collection,
+        f(PVector2D(F, uLength)), f(PVector2D(F, uLength / uTime)), f(PVector2D(F, uLength / uTime^2)),
+        f(zero(F) * uMass), id, collection,
         zero(I), zero(I), zero(I),
-        zero(F) * getuEnergy(units), zero(F) * uLength / uTime^2,
+        f(zero(F) * getuEnergy(units)), f(zero(F) * uLength / uTime^2),
 
         # 0.0 * getuEntropy(units),
         # 0.0 * getuDensity2D(units), 0.0 * uLength,
@@ -308,11 +322,12 @@ struct Star{P, V, A, M, E, I<:Integer} <: AbstractParticle3D
     # MaxSignalVel::V
 end
 
-function Star{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
+function Star{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR, Measurement=false) where {F<:AbstractFloat, I<:Integer}
+    f = Measurement ? measurement : identity
     Star(
-        PVector(F), PVector(F), PVector(F), zero(F), id, collection,
+        f(PVector(F)), f(PVector(F)), f(PVector(F)), f(zero(F)), id, collection,
         zero(I), zero(I), zero(I),
-        zero(F), zero(F),
+        f(zero(F)), f(zero(F)),
 
         # 0.0, 0.0, 0.0,
         # 0.0, 0.0, 0,
@@ -321,19 +336,20 @@ function Star{F,I}(u::Nothing=nothing; id::I = zero(I), collection = STAR) where
     )
 end
 
-function Star{F,I}(units::Array; id::I = zero(I), collection = STAR) where {F<:AbstractFloat, I<:Integer}
+function Star{F,I}(units::Array; id::I = zero(I), collection = STAR, Measurement=false) where {F<:AbstractFloat, I<:Integer}
     uLength = getuLength(units)
     uTime = getuTime(units)
     uMass = getuMass(units)
     uVel = getuVel(units)
     uAcc = getuAcc(units)
     uEnergyUnit = getuEnergyUnit(units)
-    uTemperature = getuTemperature(units)
+    # uTemperature = getuTemperature(units)
+    f = Measurement ? measurement : identity
     return Star(
-        PVector(F, uLength), PVector(F, uVel), PVector(F, uAcc),
-        zero(F) * uMass, id, collection,
+        f(PVector(F, uLength)), f(PVector(F, uVel)), f(PVector(F, uAcc)),
+        f(zero(F) * uMass), id, collection,
         zero(I), zero(I), zero(I),
-        zero(F) * uEnergyUnit, zero(F) * uAcc,
+        f(zero(F) * uEnergyUnit), f(zero(F) * uAcc),
 
         # 0.0 * getuEntropy(units),
         # 0.0 * getuDensity(units), 0.0 * uLength,
