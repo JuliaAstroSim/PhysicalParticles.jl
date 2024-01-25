@@ -77,7 +77,7 @@ export
     hasnan, hasinf,
 
     # LinearAlgebra
-    norm, normalize, dot, cross,
+    norm, normalize, dot, cross, ×,
 
     rotate, rotate_x, rotate_y, rotate_z,
 

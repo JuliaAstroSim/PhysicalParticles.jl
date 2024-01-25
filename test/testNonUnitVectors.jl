@@ -166,6 +166,7 @@ end
         @test norm(rotate_z(PVector(1.0, 0.0, 0.0), 0.5pi) - PVector(0.0, 1.0, 0.0)) < 1.0e-10
 
         @test cross(PVector(1.0, 0.0, 0.0), PVector(0.0, 1.0, 0.0)) == PVector(0.0, 0.0, 1.0)
+        @test PVector(1.0, 0.0, 0.0) × PVector(0.0, 1.0, 0.0) == PVector(0.0, 0.0, 1.0)
     end
 
     @testset "Center" begin

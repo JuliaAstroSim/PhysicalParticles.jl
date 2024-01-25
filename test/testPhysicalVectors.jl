@@ -215,6 +215,7 @@ end
 
 
         @test cross(PVector(1.0u"m", 0.0u"m", 0.0u"m"), PVector(0.0u"m", 1.0u"m", 0.0u"m")) == PVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
+        @test PVector(1.0u"m", 0.0u"m", 0.0u"m") × PVector(0.0u"m", 1.0u"m", 0.0u"m") == PVector(0.0u"m^2", 0.0u"m^2", 1.0u"m^2")
     end
 
     @testset "Center" begin
