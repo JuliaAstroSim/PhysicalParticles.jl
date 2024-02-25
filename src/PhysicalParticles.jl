@@ -25,7 +25,7 @@ import Base: +, -, *, /, zero, length, iterate, real, show, ==, #getproperty,
              Array, Vector,
              one, zero, isone, iszero, isnan, isinf, oneunit, isapprox, parse
 import Random: rand
-import LinearAlgebra: norm, normalize, dot, cross
+import LinearAlgebra: norm, normalize, dot, cross, ×
 
 import Statistics: mean, std, var, median, middle
 import StaticArrays: SVector, SArray, MVector, MArray
