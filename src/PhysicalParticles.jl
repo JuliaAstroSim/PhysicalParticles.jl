@@ -30,6 +30,7 @@ import LinearAlgebra: norm, normalize, dot, cross, ×
 import Statistics: mean, std, var, median, middle
 import StaticArrays: SVector, SArray, MVector, MArray
 
+export NumericalIntegration
 export
     AbstractPoint,
         AbstractPoint2D, AbstractPoint3D,
@@ -226,6 +227,8 @@ include("LinearAlgebra.jl")
 include("Center.jl")
 include("Extent.jl")
 include("PrettyPrinting.jl")
+
+include("NumericalIntegration.jl")
 
 function __init__()
     Unitful.register(PhysicalParticles)

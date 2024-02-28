@@ -16,6 +16,8 @@ include("testPhysicalVectors.jl")
 include("testAbstractTypes.jl")
 include("testPrinting.jl")
 
+include("NumericalIntegrations.jl")
+
 #@testset "Documentation" begin
 #    doctest(PhysicalParticles, manual = false)
 #    doctest(PhysicalParticles, manual = true)
