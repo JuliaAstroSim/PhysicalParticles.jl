@@ -462,6 +462,15 @@ function rotate(data::StructArray, vec::PVector, θ::Number, center::PVector; ve
     data
 end
 
+"""
+    function cross(a::PVector2D, b::PVector2D)
+
+Cross product of vector `a` and `b`. Return a new `PVector`
+"""
+function cross(a::PVector2D, b::PVector2D) 
+    z = a.x * b.y - a.y * b.x
+    PVector(zero(z), zero(z), z)
+end
 
 """
     function cross(a::PVector, b::PVector)
