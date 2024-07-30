@@ -70,6 +70,8 @@ end
         @test p_Star2D[1].Pos == a[1]
 
         # randn
+        randn(PVector2D{Float64})
+
         a_randn = randn_pvector2d(5)
         @test length(a_randn) == 5
 
@@ -199,6 +201,8 @@ end
         @test_throws ErrorException assign_particles(ps, :Pos, [PVector(u"m")])
 
         # randn
+        randn(PVector{Float64})
+
         a_randn = randn_pvector(5)
         @test length(a_randn) == 5
 

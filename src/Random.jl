@@ -1,5 +1,7 @@
 Random.rand(rng::AbstractRNG, ::Random.SamplerType{PVector2D{T}}) where T = PVector2D(rand(rng,T), rand(rng,T))
 Random.rand(rng::AbstractRNG, ::Random.SamplerType{PVector{T}}) where T = PVector(rand(rng,T), rand(rng,T), rand(rng,T))
+Random.randn(rng::AbstractRNG, ::Type{PVector2D{T}}) where T = PVector2D(randn(rng,T), randn(rng,T))
+Random.randn(rng::AbstractRNG, ::Type{PVector{T}}) where T = PVector(randn(rng,T), randn(rng,T), randn(rng,T))
 
 """
     randn_pvector2d(n::Integer, T::DataType = Float64)
