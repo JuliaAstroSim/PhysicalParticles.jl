@@ -25,7 +25,7 @@ UnitfulAstro = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
 [compat]
 BangBang = "0.3, 0.4, 0.5"
 DocStringExtensions = "0.8, 0.9"
-Interpolations = "0.15"
+Interpolations = "0.15, 0.16"
 IterTools = "1"
 Measurements = "2"
 PhysicalConstants = "0.2"
