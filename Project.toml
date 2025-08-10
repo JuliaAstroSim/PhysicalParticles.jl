@@ -35,7 +35,7 @@ Statistics = "1"
 StructArrays = "0.6, 0.7"
 Unitful = "1"
 UnitfulAstro = "1"
-julia = "1.10"
+julia = "1.2.0"
 
 [extras]
 HCubature = "19dc6840-f33b-545b-b366-655c7e3ffd49"
