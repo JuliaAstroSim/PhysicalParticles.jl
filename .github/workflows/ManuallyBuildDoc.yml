@@ -1,7 +1,7 @@
 name: ManuallyBuildDoc
 
 on: 
-  [push, pull_request, workflow_dispatch]
+  [workflow_dispatch]
 
 # 64-bit Julia only
 jobs:
