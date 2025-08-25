@@ -2,6 +2,9 @@
 
 `StructArray` provides a more efficient way to iterate on a field of particles:
 ```@repl guide
+using PhysicalParticles
+using StructArrays
+
 sArray = [Star() for i in 1:5]
 sStruct = StructArray(sArray)
 
