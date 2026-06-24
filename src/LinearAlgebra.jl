@@ -499,6 +499,7 @@ Euclidean distance between two points or two particles.
 """
 @inline distance(a::AbstractPoint, b::AbstractPoint) = norm(a - b)
 @inline distance(a::AbstractParticle, b::AbstractParticle) = norm(a.Pos - b.Pos)
+@inline distance(t::Tuple) = distance(t...)
 
 """
     function average(data, symbol::Symbol)
