@@ -4,12 +4,23 @@ on:
   [workflow_dispatch]
 
 # 64-bit Julia only
+#
+# 部署认证用 `GITHUB_TOKEN`（HTTPS），不再用 `DOCUMENTER_KEY`（SSH deploy key）：
+# Documenter 的 GitHubActions 配置里
+#   authentication_method(::GitHubActions) = env_nonempty("DOCUMENTER_KEY") ? SSH : HTTPS
+# 所以在 env 里**不提供** DOCUMENTER_KEY 时，deploydocs 会自动用
+#   https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git
+# 推送 gh-pages。只需给 workflow `contents: write` 权限，无需维护 SSH key。
+# 本仓其它包（AstroIC / PhysicalTrees / PhysicalMeshes / AstroIO / AstroPlot / AstroNbodySim）用的是同一套方式。
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: julia-actions/setup-julia@latest
+      - uses: actions/checkout@v4
+      - uses: julia-actions/setup-julia@v2
         with:
           version: '1.11.6'
       - run: julia --project=docs -e '
@@ -19,6 +30,5 @@ jobs:
           Pkg.instantiate();'
       - name: Build and deploy doc
         env:
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Deploying to else where, so use SSH instead
-          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: julia --project=docs --color=yes docs/make.jl
