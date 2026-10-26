@@ -24,7 +24,7 @@ makedocs(
     format = Documenter.HTML(
         # Use clean URLs, unless built as a "local" build
         prettyurls = !("local" in ARGS),
-        canonical = "https://juliaastrosims.github.io/PhysicalParticles.jl/dev/",
+        canonical = "https://juliaastrosim.github.io/PhysicalParticles.jl/dev/",
         assets = ["assets/alpha_small.ico"],
         analytics = "UA-153693590-1",
         highlights = ["llvm", "yaml"],
