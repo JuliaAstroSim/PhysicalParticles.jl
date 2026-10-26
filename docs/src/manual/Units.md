@@ -1,6 +1,6 @@
 # Units
 
-Units are supported by [Unitful.jl](https://github.com/PainterQubits/Unitful.jl) and [UnitfulAstro.jl](https://github.com/JuliaAstro/UnitfulAstro.jl)
+Units are supported by [Unitful.jl](https://github.com/JuliaPhysics/Unitful.jl) and [UnitfulAstro.jl](https://github.com/JuliaAstro/UnitfulAstro.jl)
 
 ## Default Units
 

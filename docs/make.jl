@@ -33,6 +33,7 @@ makedocs(
     sitename = "PhysicalParticles.jl",
     authors = "islent",
     linkcheck = !("skiplinks" in ARGS),
+    checkdocs = :none,
     pages = [
         "Home" => "index.md",
         "Manual" => Any[

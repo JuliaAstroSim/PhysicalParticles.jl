@@ -18,8 +18,6 @@ Ball
 Ball2D
 Star
 Star2D
-SPHGas
-SPHGas2D
 Extent
 Extent2D
 Collection

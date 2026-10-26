@@ -9,20 +9,23 @@ Pages = ["Methods.md"]
 ## Public
 
 ```@docs
-length
 split_data
+split_block
 extent
-volume
-area
 distance
 average
 averagebymass
 pos_center
 mass_center
 pconvert
+pack_xy
+pack_xyz
 astro
 cgs
 si
+preferunits
+ugadget2
+uGadget2
 getunits
 getuLength
 getuTime
@@ -34,6 +37,9 @@ getuAmount
 getuVel
 getuAcc
 getuEnergy
+getuEnergyUnit
+getuMomentum
+getuMomentumAngular
 getuEntropy
 getuDensity
 getuDensity2D
@@ -56,11 +62,23 @@ cartesian2cylinderial
 cartesian2spherical
 cylinderial2cartesian
 spherical2cartesian
+dot
+cross
+median
+```
+
+## NumericalIntegration
+
+```@docs
+NumericalIntegration.integrate
+NumericalIntegration.cumul_integrate
 ```
 
 ## Internal
 
 ```@docs
+PhysicalParticles.volume
+PhysicalParticles.area
 PhysicalParticles.min_x
 PhysicalParticles.max_x
 PhysicalParticles.min_y

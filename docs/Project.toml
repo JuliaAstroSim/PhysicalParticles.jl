@@ -1,9 +1,13 @@
 [deps]
+BangBang = "198e06fe-97b7-11e9-32a5-e1d131e6ad66"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+StructArrays = "09ab397b-f2b6-538f-b94a-2f83cf4a842a"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 UnitfulAstro = "6112ee07-acf9-5e0f-b108-d242c714bf9f"
 
 [compat]
+BangBang = "0.3, 0.4, 0.5"
 Documenter = "1"
+StructArrays = "0.6, 0.7"
 Unitful = "1"
 UnitfulAstro = "1"

@@ -22,6 +22,6 @@ pconvert([1.0 4.0;
 ```@repl conversion
 ppoints = rand(PVector{Float64}, 3) * u"m"
 p_Ball = [Ball(uSI) for i=1:3]
-assign_particles(p_Ball, :Pos, pu)
+assign_particles(p_Ball, :Pos, ppoints)
 p_Ball
 ```

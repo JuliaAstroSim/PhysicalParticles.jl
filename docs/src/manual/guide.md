@@ -23,7 +23,7 @@ pkg> test PhysicalParticles
 ### Vectors
 
 ```@repl guide
-using PhysicalParticles, UnitfulAstro
+using PhysicalParticles, Unitful, UnitfulAstro
 a = PVector()
 b = PVector(1.0u"m", 2.0u"m", 3.0u"m")
 c = PVector2D(u"m/s")
@@ -65,9 +65,9 @@ Massless2D(uCGS)
 Ball()
 Ball(PVector(0.0u"m", 0.0u"m", 0.0u"m"), PVector(u"m/s"), PVector(u"m/s^2"), 0.0u"kg", 1)
 Star()
-SPHGas()
+Star2D(uAstro)
 a = Star(uAstro)
-b = SPHGas(uAstro)
+b = Star(uAstro)
 distance(a,b)
 ```
 
@@ -110,6 +110,6 @@ maximum_x(p)
 center(p)
 pos_center(p)
 mass_center(p)
-median(p)
+median(p, :Pos)
 extent(p)
 ```
